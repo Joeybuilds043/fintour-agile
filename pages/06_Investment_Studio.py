@@ -1,7 +1,9 @@
 from __future__ import annotations
 import streamlit as st
+from src.ui import apply_intelligence_theme
 from src.investment import accommodation_metrics
-st.set_page_config(page_title="Investment Studio | Horizon",page_icon="💼",layout="wide")
+st.set_page_config(page_title="Investment Studio | Horizon",page_icon=None,layout="wide")
+apply_intelligence_theme()
 st.title("Tourism investment studio")
 st.write("Test an accommodation concept using your own assumptions. This is an early feasibility calculator, not a valuation, lender model or investment recommendation.")
 st.warning("Starting inputs are illustrative placeholders. Replace them with verified land, construction, payroll, utilities, tax, financing and market data.")
