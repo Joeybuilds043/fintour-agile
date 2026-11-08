@@ -95,3 +95,20 @@ def test_curated_pexels_images_keep_photographer_credit():
     assert hunza and hunza["artist"] == "Asad Ali"
     assert "pexels.com/photo/" in hunza["page_url"]
     assert swat and "swat-valley" in swat["page_url"]
+
+
+def test_homepage_featured_destinations_exist_in_catalog():
+    from src.catalog import DESTINATIONS
+    featured = ["Hunza Valley", "Skardu", "Naran–Kaghan Valley", "Lahore", "K2 & Concordia Expedition", "Swat Valley"]
+    assert set(featured) <= set(DESTINATIONS)
+
+
+def test_user_supplied_religious_images_are_mapped_to_their_requested_traditions():
+    from src.services.media import _user_provided_religious_image
+    sikh = _user_provided_religious_image("Nankana Sahib Janam Asthan Sikh pilgrimage")
+    hindu = _user_provided_religious_image("Katas Raj Hindu heritage")
+    islamic = _user_provided_religious_image("Shah Rukn Sufi heritage Multan")
+    assert sikh and "S6mSpVz" in sikh["thumb_url"]
+    assert hindu and "556c2870c7370.jpg" in hindu["thumb_url"]
+    assert islamic and "TjNKYbPE" in islamic["thumb_url"]
+    assert "not independently verified" in sikh["license"]
