@@ -2,11 +2,13 @@ from __future__ import annotations
 import os
 import pandas as pd
 import streamlit as st
+from src.ui import apply_visitor_theme
 from src.catalog import DESTINATIONS
 from src.services.media import get_commons_image
 from src.services.weather import get_weather
 
-st.set_page_config(page_title="Destination Guide | Horizon",page_icon="📍",layout="wide")
+st.set_page_config(page_title="Destination Guide | Horizon",page_icon=None,layout="wide")
+apply_visitor_theme()
 st.title("Destination guides")
 name=st.selectbox("Choose a destination",list(DESTINATIONS))
 d=DESTINATIONS[name]
