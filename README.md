@@ -1,28 +1,28 @@
-# Horizon Tourism — Destination Growth & Investment Studio
+# Horizon Tourism
 
-A Streamlit decision-support application for destination strategy, business-model design, innovation planning and transparent growth scenarios across ten destinations in Pakistan.
+**Pakistan Digital Destination Discovery & Tourism Intelligence Prototype**
 
-## Workspaces
-- Destination portfolio: destination-specific diagnosis, initiatives, innovation concepts and KPIs.
-- Growth scenario planner: editable visitor, spend, execution and growth assumptions; compares baseline and strategy scenarios over 3–10 years.
-- AI strategy advisor: destination-specific business and implementation plans through xAI.
-- Market evidence: official Gilgit-Baltistan monthly domestic inflows for January–June 2026.
-
-## Data limitations
-The growth planner is a scenario model, not a forecast. Default visitor counts, average spend and growth rates are illustrative assumptions and must be replaced with verified local data before investment decisions. The GB panel is partial-year data and must not be annualized. The app does not claim projected growth has already occurred.
+Horizon connects an editorial, experience-led visitor discovery journey with an emerging tourism intelligence and investment workspace.
 
 ## Run locally
 Install requirements, then run: streamlit run app.py
 
-## Configure xAI
-Create .streamlit/secrets.toml locally or configure the same secret in Streamlit Community Cloud:
-GROK_API_KEY = "your_xai_api_key"
+## Workspaces
+Home; Discover Pakistan; destination guides; trip planner; explore map; destination intelligence; investment studio; data observatory; AI travel concierge; AI strategy advisor; growth scenario planner.
 
-Never commit a real API key. AI is optional; the other workspaces work without it.
+## Optional AI configuration
+The AI workspaces use the xAI Chat Completions API. Add GROK_API_KEY to Streamlit Community Cloud Secrets or a local .streamlit/secrets.toml file. Never commit a real key. The visitor and industry workspaces remain usable without AI credentials.
+
+## Data integrity
+Weather forecasts are retrieved from Open-Meteo and cached temporarily. Destination photographs are retrieved from Wikimedia Commons and displayed with file-level creator, licence and source attribution where metadata is available. Destination editorial content and cluster coordinates require review. No hotel availability, live road safety, nationwide verified occupancy or visitor spending is claimed. Financial inputs are illustrative and user-editable. The Gilgit-Baltistan dataset is a static partial-year snapshot from the earlier project and must not be annualised.
 
 ## Sources
-- https://e-tourism.visitgilgitbaltistan.gov.pk/plan-trip/tourist-inflows
-- https://tourism.gov.pk/publications.html
+- Open-Meteo: https://open-meteo.com/en/docs
+- Wikimedia Commons API: https://commons.wikimedia.org/wiki/Commons:API
+- Gilgit-Baltistan tourist inflows: https://e-tourism.visitgilgitbaltistan.gov.pk/plan-trip/tourist-inflows
+- Pakistan Tourism Development Corporation: https://tourism.gov.pk/publications.html
+
+See docs for the product blueprint, strategy and innovation framework, data dictionary, architecture, source register, evaluation plan, impact framework, governance and roadmap.
 
 ## Deployment
-Deploy this repository on Streamlit Community Cloud with app.py as the main file. Add GROK_API_KEY under the app's Secrets settings if AI functionality is required.
+Streamlit Community Cloud can deploy this repository with app.py as the entry point. Review external provider terms and attribution requirements before commercial use.
