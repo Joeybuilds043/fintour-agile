@@ -18,26 +18,26 @@ st.markdown("""
 h1,h2,h3{color:var(--ink)!important}
 h1,.display-title,.section-title{font-family:'Playfair Display',Georgia,serif!important}
 .display-title{font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#183B3B;margin:10px 0 18px}
-.lede{font-size:16px;line-height:1.85;color:#5d7075;max-width:610px}
+.lede{font-size:16px;line-height:1.85;color:#687976;max-width:610px}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#A85F3C;font-weight:700}
 .section-title{font-size:clamp(28px,3vw,38px);line-height:1.12;margin:4px 0 7px}
-.section-copy{color:#6c7c7f;font-size:14px;line-height:1.7;max-width:720px}
-.brandmark{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:.3px;color:#17343c;font-weight:700}
-.brand-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#738287}
+.section-copy{color:#687976;font-size:14px;line-height:1.7;max-width:720px}
+.brandmark{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:.3px;color:#183B3B;font-weight:700}
+.brand-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#687976}
 .soft-panel{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:20px;height:100%}
-.category-tile{background:#fffefa;border:1px solid #E5DED2;border-radius:15px;padding:16px 14px;min-height:105px}
-.category-letter{width:27px;height:27px;border-radius:50%;background:#e2f0ec;color:#183B3B;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
-.category-name{font-weight:700;font-size:14px;color:#203942}
-.category-copy{font-size:11px;color:#748387;line-height:1.5;margin-top:4px}
+.category-tile{background:#FFFCF6;border:1px solid #E5DED2;border-radius:15px;padding:16px 14px;min-height:105px}
+.category-letter{width:27px;height:27px;border-radius:50%;background:#EEE9DF;color:#183B3B;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
+.category-name{font-weight:700;font-size:14px;color:#183B3B}
+.category-copy{font-size:11px;color:#687976;line-height:1.5;margin-top:4px}
 .destination-name{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#1b3940;margin:8px 0 2px}
-.destination-meta{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#718184}
+.destination-meta{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#687976}
 .destination-copy{font-size:13px;line-height:1.65;color:#68797d;min-height:43px}
-.hero-note{border-left:2px solid #b9d8d1;padding:4px 0 4px 13px;color:#718184;font-size:11px;line-height:1.6}
+.hero-note{border-left:2px solid #D9C8B7;padding:4px 0 4px 13px;color:#687976;font-size:11px;line-height:1.6}
 div[data-testid="stImage"] img{border-radius:17px;object-fit:cover;filter:saturate(1.08) contrast(1.035)}
-div[data-testid="stButton"]>button{border-radius:30px;border:1px solid #176b70;background:#176b70;color:white;font-weight:700;min-height:42px;padding:0 20px}
-div[data-testid="stButton"]>button:hover{background:#C47A50;border-color:#10575c;color:white}
+div[data-testid="stButton"]>button{border-radius:30px;border:1px solid #183B3B;background:#183B3B;color:white;font-weight:700;min-height:42px;padding:0 20px}
+div[data-testid="stButton"]>button:hover{background:#C47A50;border-color:#C47A50;color:white}
 div[data-testid="stPageLink"] a{border-radius:30px}
-[data-testid="stMetric"]{background:#fffefa;border:1px solid var(--line);border-radius:14px;padding:12px}
+[data-testid="stMetric"]{background:#FFFCF6;border:1px solid var(--line);border-radius:14px;padding:12px}
 hr{border-color:var(--line)}footer{visibility:hidden}
 @media(max-width:700px){.display-title{font-size:43px}.block-container{padding:1rem 1rem 3rem}.section-title{font-size:29px}}
 </style>
@@ -77,7 +77,7 @@ with right:
         st.image(get_display_image(hero["thumb_url"]) or hero["thumb_url"], use_container_width=True)
         st.caption(f'{hero["title"]} · {hero["artist"]} · {hero["license"]} · [Image source]({hero["page_url"]})' + (' · Illustrative regional reference' if hero.get('illustrative') else ''))
     else:
-        st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#d9e9e5,#b6d0cc)"><div><div class="section-title">The mountains are only the beginning.</div><p>A regional image is not available for this destination yet.</p></div></div>', unsafe_allow_html=True)
+        st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#EEE9DF,#D9C8B7)"><div><div class="section-title">The mountains are only the beginning.</div><p>A regional image is not available for this destination yet.</p></div></div>', unsafe_allow_html=True)
 
 st.write("")
 st.markdown('<div class="kicker">CHOOSE YOUR OWN WAY THROUGH THE COUNTRY</div>', unsafe_allow_html=True)
