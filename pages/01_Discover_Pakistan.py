@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
@@ -10,17 +9,17 @@ st.set_page_config(page_title="Discover Pakistan | Horizon", page_icon=None, lay
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
-.stApp{background:#f7f5ef;font-family:'DM Sans',sans-serif;color:#172f38}
+.stApp{background:#F5F1E8;font-family:'DM Sans',sans-serif;color:#183B3B}
 .block-container{max-width:1480px;padding-top:1.4rem}
-h1,h2,h3{color:#18343c!important;font-family:'Playfair Display',Georgia,serif!important}
-.kicker{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#167f83;font-weight:700}
+h1,h2,h3{color:#183B3B!important;font-family:'Playfair Display',Georgia,serif!important}
+.kicker{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#A85F3C;font-weight:700}
 .lede{font-size:15px;line-height:1.8;color:#687a7e;max-width:800px}
 .card-title{font-family:'Playfair Display',Georgia,serif;font-size:23px;color:#193840;margin:7px 0 2px}
 .card-meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#718184}
 .card-copy{font-size:13px;line-height:1.65;color:#6c7c7f;min-height:42px}
-.card-tags{font-size:11px;color:#176b70;line-height:1.6}
+.card-tags{font-size:11px;color:#183B3B;line-height:1.6}
 div[data-testid="stImage"] img{border-radius:15px;object-fit:cover;filter:saturate(1.08) contrast(1.04)}
-div[data-testid="stVerticalBlockBorderWrapper"]{background:#fffefa;border-color:#e7e2d8;border-radius:18px}
+div[data-testid="stVerticalBlockBorderWrapper"]{background:#FFFCF6;border-color:#E5DED2;border-radius:18px}
 div[data-testid="stButton"]>button{border-radius:30px;background:#176b70;color:white;border:1px solid #176b70}
 @media(max-width:700px){.block-container{padding:1rem}}
 </style>
@@ -67,12 +66,12 @@ else:
         for column, (name, item) in zip(columns, results[start:start + 3]):
             with column:
                 with st.container(border=True):
-                    image = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(item["image_query"])
+                    image = get_commons_image(item["image_query"])
                     if image:
                         st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
-                        st.caption(f'{image["artist"]} · {image["license"]} · [File details & attribution]({image["page_url"]})')
+                        st.caption(f'{image["artist"]} · {image["license"]} · [File details & attribution]({image["page_url"]})' + (' · Illustrative regional reference' if image.get('illustrative') else ''))
                     else:
-                        st.markdown('<div style="height:190px;border-radius:15px;background:linear-gradient(135deg,#dcefeb,#b7d1cc);display:flex;align-items:center;justify-content:center;color:#31545a;font-family:Georgia,serif">Discover this place</div>', unsafe_allow_html=True)
+                        st.markdown('<div style="height:190px;border-radius:15px;background:linear-gradient(135deg,#EEE9DF,#D9C8B7);display:flex;align-items:center;justify-content:center;color:#183B3B;font-family:Georgia,serif">Destination image unavailable</div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="card-meta">{item["region"]}</div><div class="card-title">{name}</div><div class="card-copy">{item["tagline"]}</div><div class="card-tags">{ " · ".join(item["experiences"][:4]) }</div>', unsafe_allow_html=True)
                     if st.button("Open destination", key=f"discover_guide_{name}", use_container_width=True):
                         st.session_state["selected_destination"] = name
