@@ -98,7 +98,7 @@ for start in range(0, len(featured), 3):
     for col, name in zip(cols, featured[start:start+3]):
         item = DESTINATIONS[name]
         with col:
-            image = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(item["image_query"])
+            image = get_commons_image(item["image_query"])
             if image:
                 st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
                 st.caption(f'{image["artist"]} · {image["license"]} · [Image details]({image["page_url"]})' + (' · Illustrative regional reference' if image.get('illustrative') else ''))
