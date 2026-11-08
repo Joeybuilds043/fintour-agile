@@ -74,3 +74,24 @@ def test_upper_swat_lake_destinations_are_individually_mapped():
     assert "Spinkhor Lake & Upper Utror" in DESTINATIONS
     assert DESTINATIONS["Andrab Lake & Anakar Valley"]["sources"]
     assert DESTINATIONS["Izmis Lake & Utror Meadows"]["sources"]
+
+def test_destination_catalog_covers_major_cities_and_k2_expedition():
+    from src.catalog import DESTINATIONS
+    expected = {
+        "Islamabad & Margalla Hills", "Lahore", "Karachi & Makli–Thatta",
+        "Peshawar", "Multan", "Faisalabad", "Hyderabad & Bhit Shah",
+        "Sialkot", "Quetta & Hanna Lake", "Gilgit City & Karakoram Gateway",
+        "K2 & Concordia Expedition", "Naran–Kaghan Valley", "Hunza Valley",
+        "Skardu", "Swat Valley",
+    }
+    assert expected <= set(DESTINATIONS)
+    assert "not a casual sightseeing stop" in DESTINATIONS["K2 & Concordia Expedition"]["overview"]
+
+
+def test_curated_pexels_images_keep_photographer_credit():
+    from src.services.media import _curated_pexels_image
+    hunza = _curated_pexels_image("Hunza Valley Passu Cones Pakistan")
+    swat = _curated_pexels_image("Swat Valley Kalam Pakistan")
+    assert hunza and hunza["artist"] == "Asad Ali"
+    assert "pexels.com/photo/" in hunza["page_url"]
+    assert swat and "swat-valley" in swat["page_url"]

@@ -29,6 +29,9 @@ def apply_visitor_theme() -> None:
       --voyage-line:LINE;--voyage-grid:CHARTGRID;
     }
     .stApp{background:var(--voyage-paper);color:var(--voyage-ink);font-family:'Manrope',sans-serif}
+    .voyage-night-sky{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.82;
+      background-image:radial-gradient(1.2px 1.2px at 8% 16%,rgba(255,255,255,.95) 55%,transparent 70%),radial-gradient(1px 1px at 18% 63%,rgba(210,232,255,.8) 55%,transparent 70%),radial-gradient(1.5px 1.5px at 32% 24%,rgba(255,255,255,.88) 55%,transparent 70%),radial-gradient(1px 1px at 46% 74%,rgba(255,255,255,.7) 55%,transparent 70%),radial-gradient(1.2px 1.2px at 61% 13%,rgba(255,255,255,.9) 55%,transparent 70%),radial-gradient(1px 1px at 73% 49%,rgba(210,232,255,.75) 55%,transparent 70%),radial-gradient(1.4px 1.4px at 86% 21%,rgba(255,255,255,.9) 55%,transparent 70%),radial-gradient(1px 1px at 94% 72%,rgba(255,255,255,.8) 55%,transparent 70%),radial-gradient(1px 1px at 54% 39%,rgba(255,255,255,.65) 55%,transparent 70%);background-size:100% 100%;background-repeat:no-repeat}
+    .voyage-night-sky:after{content:"";position:absolute;top:9vh;right:11vw;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 38% 36%,#F6E9B9 0 44%,transparent 47%);filter:drop-shadow(0 0 18px rgba(244,225,169,.34));opacity:.9}
     .stApp:before{
       content:"";position:fixed;z-index:0;pointer-events:none;left:-12vw;right:-12vw;bottom:-2vh;height:34vh;
       opacity:.075;background:linear-gradient(145deg,#174C36 0%,#347C62 48%,#C7A35B 100%);
@@ -78,6 +81,8 @@ def apply_visitor_theme() -> None:
        .replace("SURFACE",surface).replace("MUTED",muted).replace("LINE",line)
        .replace("CHARTGRID",chart_grid).replace("HEADER",header).replace("SIDEBAR",sidebar),
        unsafe_allow_html=True)
+    if dark:
+        st.markdown("<div class='voyage-night-sky' aria-hidden='true'></div>", unsafe_allow_html=True)
     st.sidebar.markdown(
         '<div class="voyage-brand">VoyagePK</div><div class="voyage-brand-sub">Pakistan Unbound</div>',
         unsafe_allow_html=True,
