@@ -94,7 +94,7 @@ USER_PROVIDED_RELIGIOUS_IMAGES = [
      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSpVz_n-vku6oleiwZTj07bgxbfPopDvHUxpTllsJQ&s", "Sikh pilgrimage"),
     (("katas raj", "hindu", "temple", "chakwal"),
      "https://i.dawn.com/primary/2015/06/556c2870c7370.jpg", "Hindu heritage · Katas Raj reference"),
-    (("multan", "shah rukn", "sufi", "islamic", "muslim", "shrine", "mosque"),
+    (("multan", "shah rukn", "sufi", "islamic", "muslim"),
      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNKYbPE--eiBoUzeIcJaTlg8pvqgV8NGUOKxI0oc5tA&s=10", "Islamic and Sufi heritage"),
 ]
 
