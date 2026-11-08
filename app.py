@@ -4,7 +4,7 @@ import os
 import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
-from src.services.media import get_commons_image
+from src.services.media import get_commons_image, get_display_image
 
 st.set_page_config(page_title="Horizon Tourism | Pakistan, closer than you think", page_icon=None, layout="wide")
 
@@ -75,7 +75,7 @@ with left:
     st.markdown('<div class="hero-note">From the Karakoram to the Arabian Sea · 30+ curated destination clusters · One connected travel atlas</div>', unsafe_allow_html=True)
 with right:
     if hero:
-        st.image(hero["thumb_url"], use_container_width=True)
+        st.image(get_display_image(hero["thumb_url"]) or hero["thumb_url"], use_container_width=True)
         st.caption(f'{hero["title"]} · {hero["artist"]} · {hero["license"]} · [Image source]({hero["page_url"]})')
     else:
         st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#d9e9e5,#b6d0cc)"><div><div class="section-title">The mountains are only the beginning.</div><p>Destination photography is temporarily unavailable.</p></div></div>', unsafe_allow_html=True)
@@ -101,7 +101,7 @@ for start in range(0, len(featured), 3):
         with col:
             image = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(item["image_query"])
             if image:
-                st.image(image["thumb_url"], use_container_width=True)
+                st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
                 st.caption(f'{image["license"]} · [Image details]({image["page_url"]})')
             st.markdown(f'<div class="destination-meta">{item["region"]}</div><div class="destination-name">{name}</div><div class="destination-copy">{item["tagline"]}</div>', unsafe_allow_html=True)
             st.page_link("pages/02_Destination_Guide.py", label="Open field guide")
