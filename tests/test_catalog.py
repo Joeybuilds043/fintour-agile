@@ -37,3 +37,10 @@ def test_each_destination_has_complete_editorial_fields():
         assert set(destination["experiences"]).issubset(
             {item["name"] for item in EXPERIENCE_CATEGORIES}
         ), name
+
+
+def test_k2_concordia_featured_destination_exists():
+    destination = DESTINATIONS.get("K2 & Concordia Expedition")
+    assert destination is not None
+    assert destination["region"] == "Gilgit-Baltistan"
+    assert "Baltoro Glacier trekking corridor" in destination["highlights"]
