@@ -140,9 +140,9 @@ with landmark_a:
     st.markdown("**Passu Cones · Upper Hunza**")
     st.caption("A distinctive Karakoram skyline. Image source and exact focal crop require manual review.")
 with landmark_b:
-    st.image("https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort.jpg?width=1000", use_container_width=True)
+    st.image("https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort%20pakistan.jpg?width=1000", use_container_width=True)
     st.markdown("**Lahore Fort · Walled City**")
-    st.caption("Mughal-era heritage landmark. Verify the selected Commons file and licence before production.")
+    st.caption("Mughal-era heritage landmark. Photo: Riiyan.ch · CC BY-SA 4.0 · Source: https://commons.wikimedia.org/wiki/File:Lahore_Fort_pakistan.jpg")
 st.markdown("### Explore a destination")
 available_names = filtered["name"].tolist() if not filtered.empty else list(DESTINATIONS)
 if available_names:

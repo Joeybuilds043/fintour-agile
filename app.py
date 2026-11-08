@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
@@ -12,10 +13,11 @@ st.set_page_config(page_title="VoyagePK | Pakistan Unbound", page_icon=None, lay
 apply_visitor_theme()
 st.markdown("""
 <style>
-.display-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#173B3A;margin:10px 0 18px}
+.hero-frame{border:8px solid transparent;border-image:linear-gradient(135deg,#477D9B,#2A9D9A,#C3A66B) 1;box-shadow:0 18px 44px rgba(12,34,49,.18)}
+.display-title{color:var(--voyage-ink)!important;font-family:'Playfair Display',Georgia,serif;font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#173B3A;margin:10px 0 18px}
 .lede{font-size:16px;line-height:1.85;color:#657875;max-width:610px}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#98613F;font-weight:700}
-.section-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,3vw,38px);line-height:1.12;margin:4px 0 7px;color:#173B3A}
+.section-title{color:var(--voyage-ink)!important;font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,3vw,38px);line-height:1.12;margin:4px 0 7px;color:#173B3A}
 .section-copy{color:#657875;font-size:14px;line-height:1.7;max-width:720px}
 .soft-panel{background:#FFFCF6;border:1px solid #E4DCCE;border-radius:20px;padding:20px;height:100%}
 .category-tile{background:#FFFCF6;border:1px solid #E4DCCE;border-radius:15px;padding:16px 14px;min-height:105px}
@@ -53,7 +55,11 @@ with st.sidebar:
     st.divider()
     st.caption("Independent destination discovery prototype. Travel thoughtfully and verify local conditions.")
 
-hero = get_commons_image("Hunza Valley Passu Cones Attabad Lake Pakistan")
+with open("assets/manifest.json", encoding="utf-8") as asset_file:
+    asset_manifest = json.load(asset_file)
+active_theme = st.session_state.get("voyage_theme", "Light")
+hero_asset = asset_manifest["assets"]["night_islamabad_cityscape" if active_theme == "Dark" else "daytime_northern_pakistan"]
+hero = {"thumb_url": hero_asset["url"], "title": hero_asset["caption"], "artist": hero_asset.get("author", "Creator listed on source page"), "license": hero_asset.get("license", "See source page"), "page_url": hero_asset["page_url"]}
 st.markdown('<div class="horizon-flow" style="padding:10px 16px;margin:0 0 20px;color:#F4F0E7;font-size:10px;letter-spacing:2px;text-transform:uppercase">A living atlas of landscapes, culture and journeys across Pakistan</div><div class="kicker">PAKISTAN, CLOSER THAN YOU THINK</div>', unsafe_allow_html=True)
 left, right = st.columns([0.92, 1.28], gap="large", vertical_alignment="center")
 with left:

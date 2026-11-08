@@ -11,12 +11,14 @@
       "license_review": "Verify current file-page author and licence before production use"
     },
     "night_islamabad_cityscape": {
-      "provider": "Unsplash",
-      "url": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2200&q=88",
-      "page_url": "https://unsplash.com/",
-      "caption": "Night city skyline mood reference; not verified as Islamabad",
-      "usage": "Dark-mode visual placeholder; replace with a verified Islamabad night photograph",
-      "license_review": "Confirm source image and Unsplash licence before production use"
+      "provider": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Islamabad%20-%20Cityscape.jpg?width=2200",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Islamabad_-_Cityscape.jpg",
+      "caption": "Islamabad cityscape at night, viewed from a hill",
+      "author": "Mohsinkhawar",
+      "license": "CC BY-SA 4.0",
+      "usage": "Dark-mode hero photograph; review crop focal point",
+      "license_review": "Author Mohsinkhawar; CC BY-SA 4.0. Retain attribution and share-alike obligations."
     },
     "passu_cones_landmark": {
       "provider": "Wikimedia Commons",
@@ -25,7 +27,7 @@
     },
     "lahore_fort_landmark": {
       "provider": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort.jpg?width=1400",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort%20pakistan.jpg?width=1400",
       "page_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort.jpg"
     }
   },
