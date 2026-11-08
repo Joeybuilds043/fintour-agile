@@ -103,8 +103,12 @@ for start in range(0, len(featured), 3):
             if image:
                 st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
                 st.caption(f'{image["license"]} · [Image details]({image["page_url"]})')
+            else:
+                st.markdown('<div style="height:190px;border-radius:17px;background:linear-gradient(135deg,#dcefeb,#b7d1cc);display:flex;align-items:center;justify-content:center;color:#31545a;font-family:Georgia,serif">A place worth discovering</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="destination-meta">{item["region"]}</div><div class="destination-name">{name}</div><div class="destination-copy">{item["tagline"]}</div>', unsafe_allow_html=True)
-            st.page_link("pages/02_Destination_Guide.py", label="Open field guide")
+            if st.button("Explore this place", key=f"home_guide_{name}", use_container_width=True):
+                st.session_state["selected_destination"] = name
+                st.switch_page("pages/02_Destination_Guide.py")
 
 st.write("")
 a, b = st.columns([1, 1], gap="large")

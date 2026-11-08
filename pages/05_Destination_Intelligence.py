@@ -8,7 +8,7 @@ st.set_page_config(page_title="Destination Intelligence | Horizon",page_icon=Non
 apply_intelligence_theme()
 st.title("Destination intelligence")
 st.write("The industry workspace will turn fragmented tourism evidence into comparable destination insights. This release prioritises data transparency over unsupported national statistics.")
-st.info("Verified, comparable occupancy, visitor-spending, transport-capacity and operating-cost data are not yet available for all ten destination clusters. Missing data is shown as a gap, not replaced with invented values.")
+st.info("Verified, comparable occupancy, visitor-spending, transport-capacity and operating-cost data are not yet available consistently across the 39 curated destination clusters. Missing data is shown as a gap, not replaced with invented values.")
 rows=[
 ("Visitor demand","Monthly domestic and international arrivals","Official statistics / validated counts","Not yet comparable nationally"),
 ("Accommodation","Room supply, occupancy, ADR and RevPAR","Tourism departments / verified properties","Partner data required"),
