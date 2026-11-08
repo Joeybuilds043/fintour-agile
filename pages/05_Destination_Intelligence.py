@@ -2,10 +2,17 @@ from __future__ import annotations
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from src.ui import apply_intelligence_theme, style_plotly_figure
+from src.ui import apply_visitor_theme
+
+try:
+    from src.ui import style_plotly_figure
+except ImportError:  # Keep these pages usable if an older cached module is loaded.
+    def style_plotly_figure(fig, *, height: int = 390):
+        fig.update_layout(height=height, template="plotly_white")
+        return fig
 
 st.set_page_config(page_title="Destination Intelligence | VoyagePK",page_icon=None,layout="wide")
-apply_intelligence_theme()
+apply_visitor_theme()
 st.title("Destination intelligence")
 st.write("The industry workspace will turn fragmented tourism evidence into comparable destination insights. This release prioritises data transparency over unsupported national statistics.")
 st.info("Verified, comparable occupancy, visitor-spending, transport-capacity and operating-cost data are not yet available consistently across the 39 curated destination clusters. Missing data is shown as a gap, not replaced with invented values.")
