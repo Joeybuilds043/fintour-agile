@@ -98,7 +98,7 @@ def _curated_fallback(query: str) -> dict | None:
     page_name = quote(filename.replace(" ", "_"))
     return {
         "title": filename,
-        "thumb_url": f"https://commons.wikimedia.org/wiki/Special:FilePath/{encoded}?width=1600",
+        "thumb_url": f"https://commons.wikimedia.org/wiki/Special:FilePath/{encoded}?width=2000",
         "page_url": f"https://commons.wikimedia.org/wiki/File:{page_name}",
         "license": licence,
         "license_url": ("https://creativecommons.org/licenses/by-sa/4.0/" if "4.0" in licence else "https://creativecommons.org/licenses/by-sa/3.0/" if "3.0" in licence else f"https://commons.wikimedia.org/wiki/File:{page_name}"),
@@ -125,7 +125,7 @@ def get_commons_image(query: str) -> dict | None:
         "action": "query", "generator": "search",
         "gsrsearch": f"filetype:bitmap {query}", "gsrnamespace": 6,
         "gsrlimit": 40, "prop": "imageinfo",
-        "iiprop": "url|extmetadata", "iiurlwidth": 1600, "format": "json",
+        "iiprop": "url|extmetadata", "iiurlwidth": 2000, "format": "json",
     }
     headers = {
         "User-Agent": "HorizonTourism/1.0 (educational destination guide; contact via GitHub repository)",
@@ -202,11 +202,11 @@ def get_display_image(
         ratio = max(0.2, aspect_ratio[0] / max(aspect_ratio[1], 1))
         if width / max(height, 1) > ratio:
             crop_width = int(height * ratio)
-            left = int((width - crop_width) * min(max(focal_point[0], 0), 1))
+            left = int(width * min(max(focal_point[0], 0), 1) - crop_width / 2)\n            left = min(max(left, 0), width - crop_width)
             image = image.crop((left, 0, left + crop_width, height))
         else:
             crop_height = int(width / ratio)
-            top = int((height - crop_height) * min(max(focal_point[1], 0), 1))
+            top = int(height * min(max(focal_point[1], 0), 1) - crop_height / 2)\n            top = min(max(top, 0), height - crop_height)
             image = image.crop((0, top, width, top + crop_height))
         image.thumbnail((1800, 1100), Image.Resampling.LANCZOS)
         image = ImageOps.autocontrast(image, cutoff=0.35)
