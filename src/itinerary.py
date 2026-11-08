@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from io import BytesIO
 from urllib.parse import quote_plus
+from xml.sax.saxutils import escape
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
@@ -68,10 +69,8 @@ def build_itinerary(destination: str, highlights: list[str], days: int, pace: st
     result, cursor = [], 0
     for day in range(1, days + 1):
         activities = {}
-        for slot in slots:
-            if slot == "Evening" and pace == "Relaxed":
-                activity = "Unstructured time, sunset viewpoint or a short local cultural experience"
-            elif cursor < len(highlights) and (slot != "Evening" or capacity == 3):
+        for slot_index, slot in enumerate(slots):
+            if slot_index < capacity and cursor < len(highlights):
                 activity = highlights[cursor]
                 cursor += 1
             else:
@@ -106,8 +105,8 @@ def build_itinerary_pdf(destination: str, itinerary: list[dict], travellers: int
     story = [
         Paragraph("VOYAGEPK", styles["VoyageSub"]),
         Paragraph("Pakistan Unbound", styles["VoyageTitle"]),
-        Paragraph(f"{destination} · {len(itinerary)} days · {travellers} traveller(s)", styles["VoyageSub"]),
-        Paragraph(f"Planning budget: PKR {budget_pkr:,.0f} · Interests: {', '.join(interests) if interests else 'Open discovery'}", styles["VoyageSub"]),
+        Paragraph(f"{escape(destination)} · {len(itinerary)} days · {travellers} traveller(s)", styles["VoyageSub"]),
+        Paragraph(f"Planning budget: PKR {budget_pkr:,.0f} · Interests: {escape(', '.join(interests) if interests else 'Open discovery')}", styles["VoyageSub"]),
         Spacer(1, 8*mm),
         Paragraph("YOUR JOURNEY", styles["Heading1"]),
         Paragraph("A planning draft, not a verified route or booking. Confirm access, opening hours, weather, permits and provider details before departure.", styles["BodyText"]),
@@ -123,12 +122,12 @@ def build_itinerary_pdf(destination: str, itinerary: list[dict], travellers: int
         qr_img.save(qr_buffer, format="PNG")
         qr_buffer.seek(0)
         from reportlab.platypus import Image as RLImage
-        rows = [[Paragraph(f"DAY {day['day']:02d} — {destination}", styles["DayHead"]), RLImage(qr_buffer, width=22*mm, height=22*mm)]]
+        rows = [[Paragraph(f"DAY {day['day']:02d} — {escape(destination)}", styles["DayHead"]), RLImage(qr_buffer, width=22*mm, height=22*mm)]]
         for slot, detail in day["slots"].items():
             rows.append([Paragraph(
-                f"<b>{slot} · {detail['time']}</b><br/>{detail['activity']}<br/><font color='#2A7778'>Food:</font> {detail['food']}",
+                f"<b>{escape(slot)} · {escape(detail['time'])}</b><br/>{escape(detail['activity'])}<br/><font color='#2A7778'>Food:</font> {escape(detail['food'])}",
                 styles["Slot"]), ""])
-        rows.append([Paragraph(f"<i>Local snack idea: {day['snack']}</i>", styles["Slot"]), ""])
+        rows.append([Paragraph(f"<i>Local snack idea: {escape(day['snack'])}</i>", styles["Slot"]), ""])
         table = Table(rows, colWidths=[150*mm, 25*mm])
         table.setStyle(TableStyle([
             ("SPAN", (1, 1), (1, len(rows)-1)),
