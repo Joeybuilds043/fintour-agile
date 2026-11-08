@@ -80,6 +80,29 @@ CURATED_FILES = [
 ]
 
 
+# Destination-specific Pexels photography, with photographer and source-page credit.
+PEXELS_FILES = [
+    (("hunza", "passu", "attabad", "karimabad"), 35171324, "Asad Ali", "https://www.pexels.com/photo/scenic-autumn-view-of-hunza-valley-pakistan-35171324/"),
+    (("skardu", "kachura", "shangrila", "shigar lake"), 19442074, "Wasif Mehmood", "https://www.pexels.com/photo/village-and-temple-near-lake-and-mountains-19442074/"),
+    (("swat", "kalam", "malam jabba", "ushu"), 37385405, "Abdul Waheed", "https://www.pexels.com/photo/scenic-mountain-landscape-in-swat-valley-37385405/"),
+    (("andrab lake", "andrab"), 38936576, "Amjad ali", "https://www.pexels.com/photo/scenic-andrab-lake-in-swat-valley-pakistan-38936576/"),
+    (("badshahi", "lahore fort", "lahore"), 15839641, "Wasif Mehmood", "https://www.pexels.com/photo/side-wall-and-minaret-of-the-badshahi-mosque-in-lahore-punjab-pakistan-15839641/"),
+]
+
+def _curated_pexels_image(query: str) -> dict | None:
+    q = (query or "").casefold()
+    selected = next((entry for entry in PEXELS_FILES if any(term in q for term in entry[0])), None)
+    if not selected:
+        return None
+    _, photo_id, artist, page_url = selected
+    return {
+        "title": f"Pexels destination photograph {photo_id}",
+        "thumb_url": f"https://images.pexels.com/photos/{photo_id}/pexels-photo-{photo_id}.jpeg?auto=compress&cs=tinysrgb&w=1800",
+        "page_url": page_url, "license": "Pexels License",
+        "license_url": "https://www.pexels.com/license/", "artist": artist,
+        "width": 1800, "height": 1100, "illustrative": False, "provider": "Pexels",
+    }
+
 def _plain(value: str) -> str:
     return unescape(re.sub(r"<[^>]+>", "", value or "")).strip()
 
@@ -116,7 +139,7 @@ def _curated_fallback(query: str) -> dict | None:
 @st.cache_data(ttl=86400, show_spinner=False)
 def get_commons_image(query: str) -> dict | None:
     """Return relevant high-resolution Commons photography, with a curated fallback."""
-    fallback = _curated_fallback(query)
+    pexels = _curated_pexels_image(query)\n    if pexels:\n        return pexels\n    fallback = _curated_fallback(query)
     # Curated destination-specific assets are faster and more predictable than
     # a fresh search request; use live Commons search only for uncovered queries.
     if fallback:
