@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import streamlit as st
+from src.ui import apply_visitor_theme
 from src.catalog import DESTINATIONS
 from src.services.gemini import GeminiAPIError, generate_text, get_api_key
 
-st.set_page_config(page_title="AI Travel Concierge | Horizon", page_icon="💬", layout="wide")
+st.set_page_config(page_title="AI Travel Concierge | Horizon", page_icon=None, layout="wide")
+apply_visitor_theme()
 st.title("AI travel concierge")
 st.write(
     "Ask for destination ideas and itinerary help. Answers are grounded in Horizon's current pilot catalogue, "
