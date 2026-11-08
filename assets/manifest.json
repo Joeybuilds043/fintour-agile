@@ -1,0 +1,40 @@
+{
+  "brand": "VoyagePK: Pakistan Unbound",
+  "version": 1,
+  "assets": {
+    "daytime_northern_pakistan": {
+      "provider": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Passu%20Cones%20and%20the%20Hunza%20River.jpg?width=2200",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
+      "caption": "Passu Cones and the Hunza River",
+      "usage": "Hero image; crop focal point should be curator-reviewed",
+      "license_review": "Verify current file-page author and licence before production use"
+    },
+    "night_islamabad_cityscape": {
+      "provider": "Unsplash",
+      "url": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2200&q=88",
+      "page_url": "https://unsplash.com/",
+      "caption": "Night city skyline mood reference; not verified as Islamabad",
+      "usage": "Dark-mode visual placeholder; replace with a verified Islamabad night photograph",
+      "license_review": "Confirm source image and Unsplash licence before production use"
+    },
+    "passu_cones_landmark": {
+      "provider": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Passu%20Cones%20and%20the%20Hunza%20River.jpg?width=1400",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg"
+    },
+    "lahore_fort_landmark": {
+      "provider": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort.jpg?width=1400",
+      "page_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort.jpg"
+    }
+  },
+  "palette": {
+    "alpine_blue": "#477D9B",
+    "turkish_turquoise": "#2A9D9A",
+    "slate": "#263746",
+    "antique_gold": "#C3A66B",
+    "warm_ivory": "#F5F1E8",
+    "night_ink": "#101D2B"
+  }
+}
