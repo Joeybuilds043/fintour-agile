@@ -32,7 +32,7 @@ with left:
         )
     else:
         st.markdown(
-            '<div style="min-height:300px;border-radius:18px;background:linear-gradient(135deg,#d8e8e4,#a9c9c6);display:flex;align-items:center;justify-content:center;padding:28px;color:#17343c;font-family:Georgia,serif;font-size:28px">Discover the landscape. Respect the place.</div>',
+            '<div style="min-height:300px;border-radius:18px;background:linear-gradient(135deg,#EEE9DF,#D9C8B7);display:flex;align-items:center;justify-content:center;padding:28px;color:#183B3B;font-family:Georgia,serif;font-size:28px">Discover the landscape. Respect the place.</div>',
             unsafe_allow_html=True,
         )
 with right:
