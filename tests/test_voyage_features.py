@@ -63,3 +63,14 @@ def test_upper_kalam_destinations_include_desan_and_gabral():
     assert "Utror & Gabral Valleys" in DESTINATIONS
     assert "Matiltan & Mahodand Lake" in DESTINATIONS
     assert DESTINATIONS["Desan Meadows & Upper Kalam"].get("sources")
+
+
+
+def test_upper_swat_lake_destinations_are_individually_mapped():
+    from src.catalog import DESTINATIONS
+
+    assert "Andrab Lake & Anakar Valley" in DESTINATIONS
+    assert "Izmis Lake & Utror Meadows" in DESTINATIONS
+    assert "Spinkhor Lake & Upper Utror" in DESTINATIONS
+    assert DESTINATIONS["Andrab Lake & Anakar Valley"]["sources"]
+    assert DESTINATIONS["Izmis Lake & Utror Meadows"]["sources"]

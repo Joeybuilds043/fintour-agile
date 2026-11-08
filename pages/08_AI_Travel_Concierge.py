@@ -15,6 +15,13 @@ st.write(
 )
 
 api_key = get_api_key()
+if api_key:
+    st.caption("Gemini connected through app configuration.")
+else:
+    with st.expander("Use your existing Gemini key for this session"):
+        st.text_input("Existing Gemini API key", type="password", key="horizon_gemini_key")
+        st.caption("For a persistent connection, store the same key in Streamlit Secrets as GEMINI_API_KEY or GOOGLE_API_KEY.")
+    api_key = get_api_key()
 
 destination = st.selectbox("Primary destination context", list(DESTINATIONS), key="selected_destination")
 d = DESTINATIONS[destination]
@@ -38,7 +45,7 @@ if st.button("Ask Horizon", type="primary", disabled=not bool(api_key and questi
         "it must be checked with an authoritative provider. Give a practical itinerary with flexible pacing and "
         "responsible local experiences. State assumptions and data gaps. When Google Search grounding is enabled, cite sources and distinguish official sources from travel blogs or user-generated content."
     )
-    with st.spinner("Horizon is preparing your travel guidance..."):
+    with st.spinner("VoyagePK is preparing your travel guidance..."):
         try:
             answer = generate_text(
                 api_key=api_key,
