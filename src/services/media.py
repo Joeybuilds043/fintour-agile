@@ -89,6 +89,30 @@ PEXELS_FILES = [
     (("badshahi", "lahore fort", "lahore"), 15839641, "Wasif Mehmood", "https://www.pexels.com/photo/side-wall-and-minaret-of-the-badshahi-mosque-in-lahore-punjab-pakistan-15839641/"),
 ]
 
+USER_PROVIDED_RELIGIOUS_IMAGES = [
+    (("nankana", "janam asthan", "sikh", "gurdwara", "kartarpur", "panja sahib"),
+     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSpVz_n-vku6oleiwZTj07bgxbfPopDvHUxpTllsJQ&s", "Sikh pilgrimage"),
+    (("katas raj", "hindu", "temple", "chakwal"),
+     "https://i.dawn.com/primary/2015/06/556c2870c7370.jpg", "Hindu heritage · Katas Raj reference"),
+    (("multan", "shah rukn", "sufi", "islamic", "muslim"),
+     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNKYbPE--eiBoUzeIcJaTlg8pvqgV8NGUOKxI0oc5tA&s=10", "Islamic and Sufi heritage"),
+]
+
+
+def _user_provided_religious_image(query: str) -> dict | None:
+    q = (query or "").casefold()
+    selected = next((entry for entry in USER_PROVIDED_RELIGIOUS_IMAGES if any(term in q for term in entry[0])), None)
+    if not selected:
+        return None
+    _, url, label = selected
+    return {
+        "title": label, "thumb_url": url, "page_url": url,
+        "license": "User-provided image · source and reuse rights not independently verified",
+        "license_url": url, "artist": "User-provided", "width": 1600, "height": 900,
+        "illustrative": False, "provider": "User-provided",
+    }
+
+
 def _curated_pexels_image(query: str) -> dict | None:
     q = (query or "").casefold()
     selected = next((entry for entry in PEXELS_FILES if any(term in q for term in entry[0])), None)
@@ -139,6 +163,9 @@ def _curated_fallback(query: str) -> dict | None:
 @st.cache_data(ttl=86400, show_spinner=False)
 def get_commons_image(query: str) -> dict | None:
     """Return relevant high-resolution Commons photography, with a curated fallback."""
+    user_image = _user_provided_religious_image(query)
+    if user_image:
+        return user_image
     pexels = _curated_pexels_image(query)
     if pexels:
         return pexels
