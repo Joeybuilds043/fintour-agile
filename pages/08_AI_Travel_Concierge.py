@@ -20,7 +20,7 @@ if not api_key:
         st.session_state["horizon_gemini_key"] = entered.strip()
         api_key = entered.strip()
 
-destination = st.selectbox("Primary destination context", list(DESTINATIONS))
+destination = st.selectbox("Primary destination context", list(DESTINATIONS), key="selected_destination")
 d = DESTINATIONS[destination]
 question = st.text_area(
     "What kind of trip are you planning?",
