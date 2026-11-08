@@ -4,7 +4,7 @@ import os
 import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
-from src.services.media import get_commons_image
+from src.services.media import get_commons_image, get_display_image
 
 st.set_page_config(page_title="Discover Pakistan | Horizon", page_icon=None, layout="wide")
 st.markdown("""
@@ -69,7 +69,7 @@ else:
                 with st.container(border=True):
                     image = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(item["image_query"])
                     if image:
-                        st.image(image["thumb_url"], use_container_width=True)
+                        st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
                         st.caption(f'{image["artist"]} · {image["license"]} · [File details & attribution]({image["page_url"]})')
                     st.markdown(f'<div class="card-meta">{item["region"]}</div><div class="card-title">{name}</div><div class="card-copy">{item["tagline"]}</div><div class="card-tags">{ " · ".join(item["experiences"][:4]) }</div>', unsafe_allow_html=True)
                     st.page_link("pages/02_Destination_Guide.py", label="Explore field guide")
