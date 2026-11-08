@@ -8,7 +8,7 @@ from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
 from src.services.media import get_commons_image, get_display_image
 from src.ui import apply_visitor_theme
 
-st.set_page_config(page_title="Pakistan Travel Atlas | Horizon", page_icon=None, layout="wide")
+st.set_page_config(page_title="VoyagePK | Illustrated Atlas", page_icon=None, layout="wide")
 apply_visitor_theme()
 
 st.markdown('<div class="kicker">THE HORIZON TRAVEL ATLAS</div>', unsafe_allow_html=True)
@@ -123,9 +123,9 @@ else:
     deck = pdk.Deck(
         layers=layers,
         initial_view_state=pdk.ViewState(
-            latitude=30.6, longitude=69.1, zoom=4.25, pitch=18, bearing=0
+            latitude=30.6, longitude=69.1, zoom=4.25, pitch=42, bearing=-8
         ),
-        map_style="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
+        map_style=("https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json" if st.session_state.get("voyage_theme") == "Dark" else "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"),
         tooltip={
             "html": "<div style='padding:9px'><b>{name}</b><br/>{region}<br/><span>{tagline}</span></div>",
             "style": {"backgroundColor": "#183B3B", "color": "#FFFCF6", "fontSize": "12px"},
@@ -133,6 +133,16 @@ else:
     )
     st.pydeck_chart(deck, use_container_width=True, height=620)
 
+st.markdown("### Landmark story cards")
+landmark_a, landmark_b = st.columns(2, gap="large")
+with landmark_a:
+    st.image("https://commons.wikimedia.org/wiki/Special:FilePath/Passu%20Cones%20and%20the%20Hunza%20River.jpg?width=1000", use_container_width=True)
+    st.markdown("**Passu Cones · Upper Hunza**")
+    st.caption("A distinctive Karakoram skyline. Image source and exact focal crop require manual review.")
+with landmark_b:
+    st.image("https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort.jpg?width=1000", use_container_width=True)
+    st.markdown("**Lahore Fort · Walled City**")
+    st.caption("Mughal-era heritage landmark. Verify the selected Commons file and licence before production.")
 st.markdown("### Explore a destination")
 available_names = filtered["name"].tolist() if not filtered.empty else list(DESTINATIONS)
 if available_names:

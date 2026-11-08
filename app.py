@@ -7,7 +7,7 @@ from src.services.media import get_commons_image, get_display_image
 from src.services.weather import get_weather
 from src.ui import apply_visitor_theme
 
-st.set_page_config(page_title="Horizon Tourism | Pakistan, closer than you think", page_icon=None, layout="wide")
+st.set_page_config(page_title="VoyagePK | Pakistan Unbound", page_icon=None, layout="wide")
 
 apply_visitor_theme()
 st.markdown("""
@@ -34,7 +34,7 @@ st.markdown("""
 
 
 with st.sidebar:
-    st.markdown('<div class="horizon-brand">Horizon</div><div class="horizon-brand-sub">Pakistan travel & tourism intelligence</div>', unsafe_allow_html=True)
+    st.markdown('<div class="voyage-sidebar-note">A considered guide to Pakistan</div>', unsafe_allow_html=True)
     st.divider()
     st.markdown('<div class="horizon-sidebar-kicker">Discover</div>', unsafe_allow_html=True)
     st.page_link("app.py", label="The journey starts here")
@@ -58,7 +58,7 @@ st.markdown('<div class="horizon-flow" style="padding:10px 16px;margin:0 0 20px;
 left, right = st.columns([0.92, 1.28], gap="large", vertical_alignment="center")
 with left:
     st.markdown('<div class="display-title">A country of a thousand journeys.</div>', unsafe_allow_html=True)
-    st.markdown('<div class="lede">Follow the curve of a mountain road. Find a courtyard hidden in an old city. Taste a region through its food. Horizon brings Pakistan’s landscapes, heritage and local experiences into one considered travel guide.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="lede">Follow the curve of a mountain road. Find a courtyard hidden in an old city. Taste a region through its food. VoyagePK brings Pakistan’s landscapes, heritage and local experiences into one considered travel guide.</div>', unsafe_allow_html=True)
     st.write("")
     st.page_link("pages/01_Discover_Pakistan.py", label="Explore Pakistan")
     st.markdown('<div class="hero-note">From the Karakoram to the Arabian Sea · 39 curated destination clusters · One connected travel atlas</div>', unsafe_allow_html=True)
@@ -114,4 +114,4 @@ with b:
     st.markdown('<div class="soft-panel"><div class="kicker">SEE THE BIGGER PICTURE</div><div class="section-title">Travel is also an economy.</div><p>Explore the tourism intelligence workspace: destination evidence, investment scenarios, local value and the data gaps that matter for better decisions.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
 
-st.caption("Horizon is an independent prototype, not an official government tourism service. Destination descriptions and approximate map anchors require local review. Verify travel, safety, access, permits and booking details with responsible local authorities and providers.")
+st.caption("VoyagePK is an independent prototype, not an official government tourism service. Destination descriptions and approximate map anchors require local review. Verify travel, safety, access, permits and booking details with responsible local authorities and providers.")
