@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
@@ -11,23 +10,23 @@ st.set_page_config(page_title="Horizon Tourism | Pakistan, closer than you think
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
-:root{--ink:#142b35;--muted:#62747a;--paper:#f7f5ef;--white:#fffefa;--sea:#167f83;--ice:#dcefeb;--sand:#c99a68;--line:#e7e2d8}
+:root{--ink:#183B3B;--muted:#687976;--paper:#F5F1E8;--white:#FFFCF6;--sea:#C47A50;--ice:#EEE9DF;--sand:#C47A50;--line:#E5DED2}
 .stApp{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
 [data-testid="stHeader"]{background:rgba(247,245,239,.94)}
-[data-testid="stSidebar"]{background:#f0eee7;border-right:1px solid var(--line)}
+[data-testid="stSidebar"]{background:#EEE9DF;border-right:1px solid var(--line)}
 .block-container{max-width:1480px;padding-top:1.15rem;padding-bottom:4rem}
 h1,h2,h3{color:var(--ink)!important}
 h1,.display-title,.section-title{font-family:'Playfair Display',Georgia,serif!important}
-.display-title{font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#17343c;margin:10px 0 18px}
+.display-title{font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#183B3B;margin:10px 0 18px}
 .lede{font-size:16px;line-height:1.85;color:#5d7075;max-width:610px}
-.kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#167f83;font-weight:700}
+.kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#A85F3C;font-weight:700}
 .section-title{font-size:clamp(28px,3vw,38px);line-height:1.12;margin:4px 0 7px}
 .section-copy{color:#6c7c7f;font-size:14px;line-height:1.7;max-width:720px}
 .brandmark{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:.3px;color:#17343c;font-weight:700}
 .brand-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#738287}
 .soft-panel{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:20px;height:100%}
-.category-tile{background:#fffefa;border:1px solid #e7e2d8;border-radius:15px;padding:16px 14px;min-height:105px}
-.category-letter{width:27px;height:27px;border-radius:50%;background:#e2f0ec;color:#176b70;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
+.category-tile{background:#fffefa;border:1px solid #E5DED2;border-radius:15px;padding:16px 14px;min-height:105px}
+.category-letter{width:27px;height:27px;border-radius:50%;background:#e2f0ec;color:#183B3B;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
 .category-name{font-weight:700;font-size:14px;color:#203942}
 .category-copy{font-size:11px;color:#748387;line-height:1.5;margin-top:4px}
 .destination-name{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#1b3940;margin:8px 0 2px}
@@ -36,7 +35,7 @@ h1,.display-title,.section-title{font-family:'Playfair Display',Georgia,serif!im
 .hero-note{border-left:2px solid #b9d8d1;padding:4px 0 4px 13px;color:#718184;font-size:11px;line-height:1.6}
 div[data-testid="stImage"] img{border-radius:17px;object-fit:cover;filter:saturate(1.08) contrast(1.035)}
 div[data-testid="stButton"]>button{border-radius:30px;border:1px solid #176b70;background:#176b70;color:white;font-weight:700;min-height:42px;padding:0 20px}
-div[data-testid="stButton"]>button:hover{background:#10575c;border-color:#10575c;color:white}
+div[data-testid="stButton"]>button:hover{background:#C47A50;border-color:#10575c;color:white}
 div[data-testid="stPageLink"] a{border-radius:30px}
 [data-testid="stMetric"]{background:#fffefa;border:1px solid var(--line);border-radius:14px;padding:12px}
 hr{border-color:var(--line)}footer{visibility:hidden}
@@ -64,7 +63,7 @@ with st.sidebar:
     st.divider()
     st.caption("Independent destination discovery prototype. Travel thoughtfully and verify local conditions.")
 
-hero = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image("Hunza Valley Passu Cones Attabad Lake Pakistan")
+hero = get_commons_image("Hunza Valley Passu Cones Attabad Lake Pakistan")
 st.markdown('<div class="kicker">PAKISTAN, CLOSER THAN YOU THINK</div>', unsafe_allow_html=True)
 left, right = st.columns([0.92, 1.28], gap="large", vertical_alignment="center")
 with left:
@@ -72,13 +71,13 @@ with left:
     st.markdown('<div class="lede">Follow the curve of a mountain road. Find a courtyard hidden in an old city. Taste a region through its food. Horizon brings Pakistan’s landscapes, heritage and local experiences into one considered travel guide.</div>', unsafe_allow_html=True)
     st.write("")
     st.page_link("pages/01_Discover_Pakistan.py", label="Explore Pakistan")
-    st.markdown('<div class="hero-note">From the Karakoram to the Arabian Sea · 30+ curated destination clusters · One connected travel atlas</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-note">From the Karakoram to the Arabian Sea · 39 curated destination clusters · One connected travel atlas</div>', unsafe_allow_html=True)
 with right:
     if hero:
         st.image(get_display_image(hero["thumb_url"]) or hero["thumb_url"], use_container_width=True)
-        st.caption(f'{hero["title"]} · {hero["artist"]} · {hero["license"]} · [Image source]({hero["page_url"]})')
+        st.caption(f'{hero["title"]} · {hero["artist"]} · {hero["license"]} · [Image source]({hero["page_url"]})' + (' · Illustrative regional reference' if hero.get('illustrative') else ''))
     else:
-        st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#d9e9e5,#b6d0cc)"><div><div class="section-title">The mountains are only the beginning.</div><p>Destination photography is temporarily unavailable.</p></div></div>', unsafe_allow_html=True)
+        st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#d9e9e5,#b6d0cc)"><div><div class="section-title">The mountains are only the beginning.</div><p>A regional image is not available for this destination yet.</p></div></div>', unsafe_allow_html=True)
 
 st.write("")
 st.markdown('<div class="kicker">CHOOSE YOUR OWN WAY THROUGH THE COUNTRY</div>', unsafe_allow_html=True)
@@ -102,9 +101,9 @@ for start in range(0, len(featured), 3):
             image = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(item["image_query"])
             if image:
                 st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
-                st.caption(f'{image["license"]} · [Image details]({image["page_url"]})')
+                st.caption(f'{image["artist"]} · {image["license"]} · [Image details]({image["page_url"]})' + (' · Illustrative regional reference' if image.get('illustrative') else ''))
             else:
-                st.markdown('<div style="height:190px;border-radius:17px;background:linear-gradient(135deg,#dcefeb,#b7d1cc);display:flex;align-items:center;justify-content:center;color:#31545a;font-family:Georgia,serif">A place worth discovering</div>', unsafe_allow_html=True)
+                st.markdown('<div style="height:190px;border-radius:17px;background:linear-gradient(135deg,#EEE9DF,#D9C8B7);display:flex;align-items:center;justify-content:center;color:#183B3B;font-family:Georgia,serif">A place worth discovering</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="destination-meta">{item["region"]}</div><div class="destination-name">{name}</div><div class="destination-copy">{item["tagline"]}</div>', unsafe_allow_html=True)
             if st.button("Explore this place", key=f"home_guide_{name}", use_container_width=True):
                 st.session_state["selected_destination"] = name
