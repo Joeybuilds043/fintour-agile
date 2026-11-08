@@ -79,7 +79,7 @@ def _curated_fallback(query: str) -> dict | None:
         "thumb_url": f"https://commons.wikimedia.org/wiki/Special:FilePath/{encoded}?width=1600",
         "page_url": f"https://commons.wikimedia.org/wiki/File:{page_name}",
         "license": licence,
-        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/" if "4.0" in licence else "",
+        "license_url": ("https://creativecommons.org/licenses/by-sa/4.0/" if "4.0" in licence else "https://creativecommons.org/licenses/by-sa/3.0/" if "3.0" in licence else f"https://commons.wikimedia.org/wiki/File:{page_name}"),
         "artist": artist,
         "width": 1600,
         "height": 900,
