@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
@@ -21,11 +20,11 @@ st.markdown(
 )
 
 palette = {
-    "Mountain & nature": [32, 130, 145, 225],
-    "Culture & heritage": [190, 126, 76, 235],
-    "Coastal & marine": [45, 155, 180, 235],
-    "City & food": [119, 111, 166, 235],
-    "Adventure & outdoors": [91, 145, 105, 235],
+    "Mountain & nature": [24, 59, 59, 230],
+    "Culture & heritage": [196, 122, 80, 235],
+    "Coastal & marine": [92, 147, 156, 235],
+    "City & food": [112, 117, 122, 235],
+    "Adventure & outdoors": [164, 137, 105, 235],
 }
 
 def map_theme(item: dict) -> str:
@@ -129,7 +128,7 @@ else:
         map_style="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
         tooltip={
             "html": "<div style='padding:9px'><b>{name}</b><br/>{region}<br/><span>{tagline}</span></div>",
-            "style": {"backgroundColor": "#17343c", "color": "#fffefa", "fontSize": "12px"},
+            "style": {"backgroundColor": "#183B3B", "color": "#FFFCF6", "fontSize": "12px"},
         },
     )
     st.pydeck_chart(deck, use_container_width=True, height=620)
@@ -141,14 +140,14 @@ if available_names:
     item = DESTINATIONS[selected]
     detail_left, detail_right = st.columns([1, 1.2], gap="large", vertical_alignment="center")
     with detail_left:
-        photo = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(item["image_query"])
+        photo = get_commons_image(item["image_query"])
         if photo:
             rendered = get_display_image(photo["thumb_url"])
             st.image(rendered or photo["thumb_url"], use_container_width=True)
-            st.caption(f'{photo["artist"]} · {photo["license"]} · [Image source]({photo["page_url"]})')
+            st.caption(f'{photo["artist"]} · {photo["license"]} · [Image source]({photo["page_url"]})' + (' · Illustrative regional reference' if photo.get('illustrative') else ''))
         else:
             st.markdown(
-                '<div style="height:210px;border-radius:16px;background:linear-gradient(135deg,#dcefeb,#b7d1cc)"></div>',
+                '<div style="height:210px;border-radius:16px;background:linear-gradient(135deg,#EEE9DF,#D9C8B7)"></div>',
                 unsafe_allow_html=True,
             )
     with detail_right:
