@@ -32,7 +32,7 @@ def simulate_project(rooms: int, adr_pkr: float, occupancy_pct: float,
         annual_cash.append(float(np.median(cash)))
         npv += cash / (discount ** year)
     positive = npv > 0
-    roi = (npv + initial) / initial * 100
+    roi = npv / initial * 100
     return {
         "npv_p10": float(np.percentile(npv, 10)),
         "npv_p50": float(np.percentile(npv, 50)),
@@ -46,7 +46,7 @@ def simulate_project(rooms: int, adr_pkr: float, occupancy_pct: float,
             "ADR annual growth": "Normal(7.0%, 3.5% volatility)",
             "Occupancy change": "Normal(+0.5 percentage points, 2.5 points volatility)",
             "Operating cost inflation": "Normal(7.5%, 2.5% volatility)",
-            "Initial capex overrun": "Lognormal, 10% sigma",
+            "Initial capex overrun": "Lognormal, 4% log-mean and 10% sigma",
             "Replacement reserve": "3% of room revenue",
             "Discount rate": f"{discount_rate_pct:.1f}% (user input)",
         },

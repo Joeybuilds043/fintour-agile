@@ -18,16 +18,16 @@ st.markdown("""
 .lede{font-size:16px;line-height:1.85;color:#657875;max-width:610px}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#98613F;font-weight:700}
 .section-title{color:var(--voyage-ink)!important;font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,3vw,38px);line-height:1.12;margin:4px 0 7px;color:#173B3A}
-.section-copy{color:#657875;font-size:14px;line-height:1.7;max-width:720px}
-.soft-panel{background:#FFFCF6;border:1px solid #E4DCCE;border-radius:20px;padding:20px;height:100%}
-.category-tile{background:#FFFCF6;border:1px solid #E4DCCE;border-radius:15px;padding:16px 14px;min-height:105px}
+.section-copy{color:var(--voyage-muted);font-size:14px;line-height:1.7;max-width:720px}
+.soft-panel{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:20px;padding:20px;height:100%}
+.category-tile{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:15px;padding:16px 14px;min-height:105px}
 .category-letter{width:27px;height:27px;border-radius:50%;background:#E8E1D5;color:#173B3A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
-.category-name{font-weight:700;font-size:14px;color:#173B3A}
+.category-name{font-weight:700;font-size:14px;color:var(--voyage-ink)}
 .category-copy{font-size:11px;color:#657875;line-height:1.5;margin-top:4px}
-.destination-name{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#173B3A;margin:8px 0 2px}
+.destination-name{color:var(--voyage-ink);font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#173B3A;margin:8px 0 2px}
 .destination-meta{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#657875}
-.destination-copy{font-size:13px;line-height:1.65;color:#657875;min-height:43px}
-.hero-note{border-left:2px solid #D9A77E;padding:4px 0 4px 13px;color:#657875;font-size:11px;line-height:1.6}
+.destination-copy{font-size:13px;line-height:1.65;color:var(--voyage-muted);min-height:43px}
+.hero-note{border-left:2px solid #D9A77E;padding:4px 0 4px 13px;color:var(--voyage-muted);font-size:11px;line-height:1.6}
 .weather-chip{display:inline-block;margin:6px 0 2px;padding:6px 10px;border-radius:20px;background:#E8F0EA;color:#234D47;font-size:11px;font-weight:600}
 @media(max-width:700px){.display-title{font-size:43px}.section-title{font-size:29px}}
 </style>
