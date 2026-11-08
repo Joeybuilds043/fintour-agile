@@ -21,7 +21,7 @@ st.markdown("""
 div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radius:17px;box-shadow:0 18px 38px rgba(2,16,10,.24)}
 .hero-frame:after{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid rgba(255,255,255,.58);background:linear-gradient(90deg,transparent 61.6%,rgba(255,255,255,.22) 61.8%,transparent 62%),linear-gradient(0deg,transparent 38%,rgba(255,255,255,.18) 38.2%,transparent 38.4%)} 
 .hero-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:61.8% 38.2%;border-radius:12px} 
-.display-title{color:#FFFFFF!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(46px,5.0vw,72px);line-height:1.03;letter-spacing:-.55px;margin:0 0 13px;text-shadow:0 2px 20px rgba(0,0,0,.22)}
+.display-title{color:#FFFFFF!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(40px,4.3vw,62px);line-height:1.08;letter-spacing:-.55px;margin:0 0 13px;text-shadow:0 2px 20px rgba(0,0,0,.22)}
 .hero-copy-panel{background:linear-gradient(145deg,rgba(7,35,25,.97),rgba(17,67,47,.94) 68%,rgba(30,67,72,.94));border:1px solid rgba(199,163,91,.42);border-radius:22px;padding:clamp(22px,3vw,36px);min-height:100%;box-shadow:0 22px 52px rgba(2,16,10,.2)}
 .hero-copy-panel .lede{font-size:15px;line-height:1.78;color:#F0F4EB!important;opacity:1!important;max-width:680px;font-weight:500;letter-spacing:.05px}
 .hero-copy-panel .hero-note{color:#F0E5C8!important}
@@ -40,7 +40,7 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .destination-copy{font-size:13px;line-height:1.65;color:var(--voyage-body-ink)!important;opacity:1!important;min-height:64px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .hero-note{border-left:2px solid #C7A35B;padding:6px 0 6px 14px;color:var(--voyage-body-ink)!important;font-size:11px;line-height:1.8;margin-top:14px;letter-spacing:.25px}.hero-image-caption{display:flex;justify-content:space-between;gap:12px;padding:10px 4px 0;color:var(--voyage-body-ink);font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.8px;font-weight:800}.hero-image-caption span:first-child{color:#C39B50}
 .weather-chip{display:inline-block;margin:6px 0 2px;padding:6px 10px;border-radius:20px;background:rgba(24,89,60,.14);color:var(--voyage-ink);font-size:11px;font-weight:600}
-@media(max-width:700px){.display-title{font-size:48px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
+@media(max-width:700px){.display-title{font-size:43px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
 </style>
 """, unsafe_allow_html=True)
 
