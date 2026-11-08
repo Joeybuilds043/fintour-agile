@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 from src.finance import simulate_project
-from src.ui import apply_intelligence_theme
+from src.ui import apply_intelligence_theme, style_plotly_figure
 
 st.set_page_config(page_title="Investment Studio | VoyagePK", layout="wide")
 apply_intelligence_theme()
@@ -37,9 +37,13 @@ if st.button("Run Monte Carlo simulation", type="primary"):
         st.metric("Median cumulative ROI proxy", f"{result['roi_p50_pct']:.1f}%")
         frame = pd.DataFrame({"Year": list(range(1, years + 1)),
                               "Median annual project cash flow (PKR)": result["annual_median_cashflow"]})
-        st.plotly_chart(px.line(frame, x="Year", y="Median annual project cash flow (PKR)",
-                                markers=True, title=f"{dest}: median annual cash-flow path"),
-                        use_container_width=True)
+        cashflow_fig = px.area(frame, x="Year", y="Median annual project cash flow (PKR)",
+                               markers=True, title=f"{dest}: median annual cash-flow path")
+        cashflow_fig.update_traces(line=dict(color="#D8B66E", width=3.5),
+                                   fillcolor="rgba(48,145,103,.28)",
+                                   marker=dict(size=9, color="#55B99A", line=dict(color="#F7F3E8", width=1.4)),
+                                   hovertemplate="Year %{x}<br>Median cash flow PKR %{y:,.0f}<extra></extra>")
+        st.plotly_chart(style_plotly_figure(cashflow_fig,height=410),use_container_width=True)
         with st.expander("Simulation assumptions and methodology"):
             st.json(result["assumptions"])
             st.write(f"{result['simulations']:,} simulations · deterministic seed 42 · "

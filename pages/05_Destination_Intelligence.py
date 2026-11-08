@@ -2,9 +2,9 @@ from __future__ import annotations
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from src.ui import apply_intelligence_theme
+from src.ui import apply_intelligence_theme, style_plotly_figure
 
-st.set_page_config(page_title="Destination Intelligence | Horizon",page_icon=None,layout="wide")
+st.set_page_config(page_title="Destination Intelligence | VoyagePK",page_icon=None,layout="wide")
 apply_intelligence_theme()
 st.title("Destination intelligence")
 st.write("The industry workspace will turn fragmented tourism evidence into comparable destination insights. This release prioritises data transparency over unsupported national statistics.")
@@ -22,9 +22,10 @@ st.write("The following is a static January–June 2026 snapshot retained from t
 data=pd.read_csv("data/gb_domestic_inflows_2026_h1.csv")
 district=st.selectbox("District",sorted(data["District"].unique()),index=sorted(data["District"].unique()).index("Skardu"))
 series=data[data["District"]==district]
-fig=px.bar(series,x="Month",y="Domestic visitors",title=f"{district} — reported domestic visitor inflows, Jan–Jun 2026")
-fig.update_layout(height=350,margin=dict(l=10,r=10,t=45,b=10),paper_bgcolor="rgba(0,0,0,0)",plot_bgcolor="rgba(0,0,0,0)")
-st.plotly_chart(fig,use_container_width=True)
+fig=px.bar(series,x="Month",y="Domestic visitors",color="Domestic visitors",color_continuous_scale=["#0B3825","#278B63","#D7B96D"],text_auto=".2s",title=f"{district} — reported domestic visitor inflows, Jan–Jun 2026")
+fig.update_traces(marker_line_color="rgba(255,255,255,.42)",marker_line_width=1.2,textposition="outside",textfont=dict(family="Manrope",size=11))
+fig.update_layout(coloraxis_showscale=False)
+st.plotly_chart(style_plotly_figure(fig,height=390),use_container_width=True)
 st.dataframe(series,use_container_width=True,hide_index=True)
 st.markdown("[Open the official Gilgit-Baltistan tourist inflows dashboard](https://e-tourism.visitgilgitbaltistan.gov.pk/plan-trip/tourist-inflows)")
 st.markdown("[Pakistan Tourism Development Corporation publications](https://tourism.gov.pk/publications.html)")
