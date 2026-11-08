@@ -24,7 +24,7 @@ image = get_commons_image(d["image_query"])
 left, right = st.columns([1.35, 1], gap="large", vertical_alignment="center")
 with left:
     if image:
-        display = get_display_image(image["thumb_url"])
+        display = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
         st.image(display or image["thumb_url"], use_container_width=True)
         st.caption(
             f'{image["title"]} · {image["artist"]} · {image["license"]} · '
@@ -88,7 +88,7 @@ if weather:
         })
         st.dataframe(frame, use_container_width=True, hide_index=True)
     st.caption(
-        f'Forecast by Open-Meteo · Model time: {current.get("time", "not supplied")}. '
+        f'Live forecast by Open-Meteo · Last model update: {current.get("time", "not supplied")}. '
         "Forecasts are not road-safety, avalanche or mountaineering advice."
     )
 else:
