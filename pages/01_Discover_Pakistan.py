@@ -26,7 +26,7 @@ for start in range(0,len(results),3):
             image=None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA")=="1" else get_commons_image(item["image_query"])
             if image:
                 st.image(image["thumb_url"],use_container_width=True)
-                st.caption(f'{image["license"]} · {image["artist"]} · [Image source]({image["page_url"]})')
+                st.caption(f'{image["license"]} · {image["artist"]} · [Licence]({image["license_url"]}) · [Image source]({image["page_url"]})')
             st.subheader(name)
             st.caption(item["region"])
             st.write(item["tagline"])

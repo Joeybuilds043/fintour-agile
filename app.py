@@ -37,6 +37,13 @@ with st.sidebar:
     st.page_link("pages/02_Destination_Guide.py", label="Destination guides", icon="📍")
     st.page_link("pages/03_Trip_Planner.py", label="Plan a journey", icon="🗺️")
     st.page_link("pages/04_Explore_Map.py", label="Explore map", icon="🌐")
+    st.divider()
+    st.page_link("pages/05_Destination_Intelligence.py", label="Destination intelligence", icon="📊")
+    st.page_link("pages/06_Investment_Studio.py", label="Investment studio", icon="💼")
+    st.page_link("pages/07_Data_Observatory.py", label="Data observatory", icon="🔎")
+    st.page_link("pages/08_AI_Travel_Concierge.py", label="AI travel concierge", icon="💬")
+    st.page_link("pages/09_AI_Strategy_Advisor.py", label="AI strategy advisor", icon="🧠")
+    st.page_link("pages/10_Growth_Scenario_Planner.py", label="Growth scenarios", icon="📈")
     st.caption("Discover responsibly · Travel thoughtfully · Support local")
 
 hero = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image("Hunza Valley Pakistan mountains lake")
@@ -50,7 +57,7 @@ with left:
 with right:
     if hero:
         st.image(hero["thumb_url"], use_container_width=True)
-        st.caption(f'{hero["title"]} · {hero["license"]} · {hero["artist"]} · [Source]({hero["page_url"]})')
+        st.caption(f'{hero["title"]} · {hero["license"]} · {hero["artist"]} · [Licence]({hero["license_url"]}) · [Source]({hero["page_url"]})')
     else:
         st.markdown('<div style="background:linear-gradient(135deg,#d6e6df,#a9c8bf);border-radius:22px;padding:70px 25px;text-align:center;color:#214c4b"><div style="font-size:54px">🏔️</div><h2>Pakistan, waiting to be explored</h2><p>Destination photography loads from openly licensed Wikimedia Commons media.</p></div>', unsafe_allow_html=True)
 
