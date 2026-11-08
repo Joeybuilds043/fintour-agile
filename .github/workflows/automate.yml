@@ -1,19 +1,15 @@
 name: CI - Horizon Tourism
-
 on:
   push:
-    branches: [main]
+    branches: [main, "horizon/**"]
   pull_request:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 concurrency:
   group: horizon-tourism-ci-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   verify:
     name: Verify application
@@ -32,43 +28,17 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Check dependency consistency
         run: python -m pip check
-      - name: Compile application
-        run: python -m compileall -q app.py
-      - name: Smoke-test imports and destination coverage
-        run: |
-          python - <<'PY'
-          import ast
-          from pathlib import Path
-          import pandas
-          import plotly
-          import requests
-          import streamlit
-          source = Path("app.py").read_text(encoding="utf-8")
-          ast.parse(source)
-          required = ["Hunza Valley", "Skardu", "Naran–Kaghan", "Swat Valley", "Murree", "Neelum Valley", "Chitral & Kalash Valleys", "Lahore", "Taxila", "Gwadar & Hingol Coast"]
-          assert all(name in source for name in required)
-          print("Syntax, imports and destination coverage passed.")
-          PY
-      - name: Start Streamlit and verify health endpoint
-        run: |
-          streamlit run app.py --server.headless true --server.port 8501 > /tmp/horizon-streamlit.log 2>&1 &
-          APP_PID=$!
-          trap 'kill $APP_PID 2>/dev/null || true' EXIT
-          for attempt in $(seq 1 30); do
-            if curl --fail --silent http://127.0.0.1:8501/_stcore/health; then
-              echo "Streamlit application startup passed."
-              exit 0
-            fi
-            sleep 2
-          done
-          cat /tmp/horizon-streamlit.log
-          exit 1
-
-      - name: Execute the default Streamlit page
+      - name: Compile Python files
+        run: python -m compileall -q app.py src pages tests
+      - name: Run unit tests
+        run: pytest -q
+      - name: Execute default Streamlit page
+        env:
+          HORIZON_DISABLE_REMOTE_MEDIA: "1"
         run: |
           python - <<'PY'
           from streamlit.testing.v1 import AppTest
           app = AppTest.from_file("app.py").run(timeout=45)
           assert not app.exception, app.exception
-          print("Default Streamlit page executed without application exceptions.")
+          print("Default Horizon page executed without application exceptions.")
           PY
