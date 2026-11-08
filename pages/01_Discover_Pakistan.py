@@ -71,6 +71,8 @@ else:
                     if image:
                         st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
                         st.caption(f'{image["artist"]} · {image["license"]} · [File details & attribution]({image["page_url"]})')
+                    else:
+                        st.markdown('<div style="height:190px;border-radius:15px;background:linear-gradient(135deg,#dcefeb,#b7d1cc);display:flex;align-items:center;justify-content:center;color:#31545a;font-family:Georgia,serif">Discover this place</div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="card-meta">{item["region"]}</div><div class="card-title">{name}</div><div class="card-copy">{item["tagline"]}</div><div class="card-tags">{ " · ".join(item["experiences"][:4]) }</div>', unsafe_allow_html=True)
                     if st.button("Open destination", key=f"discover_guide_{name}", use_container_width=True):
                         st.session_state["selected_destination"] = name
