@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import pandas as pd
 import streamlit as st
 
@@ -21,7 +20,7 @@ st.title("Destination field guide")
 name = st.selectbox("Choose a destination", names, key="selected_destination")
 d = DESTINATIONS[name]
 
-image = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(d["image_query"])
+image = get_commons_image(d["image_query"])
 left, right = st.columns([1.35, 1], gap="large", vertical_alignment="center")
 with left:
     if image:
@@ -29,11 +28,11 @@ with left:
         st.image(display or image["thumb_url"], use_container_width=True)
         st.caption(
             f'{image["title"]} · {image["artist"]} · {image["license"]} · '
-            f'[Licence]({image["license_url"]}) · [Original file]({image["page_url"]})'
+            f'[Licence]({image["license_url"]}) · [Original file]({image["page_url"]})' + (' · Illustrative regional reference' if image.get('illustrative') else '')
         )
     else:
         st.markdown(
-            '<div style="min-height:300px;border-radius:18px;background:linear-gradient(135deg,#d8e8e4,#a9c9c6);display:flex;align-items:center;justify-content:center;padding:28px;color:#17343c;font-family:Georgia,serif;font-size:28px">Discover the landscape. Respect the place.</div>',
+            '<div style="min-height:300px;border-radius:18px;background:linear-gradient(135deg,#EEE9DF,#D9C8B7);display:flex;align-items:center;justify-content:center;padding:28px;color:#183B3B;font-family:Georgia,serif;font-size:28px">Discover the landscape. Respect the place.</div>',
             unsafe_allow_html=True,
         )
 with right:
