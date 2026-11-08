@@ -92,3 +92,10 @@ def test_get_api_key_reads_google_api_key_environment(monkeypatch):
     monkeypatch.setenv("GOOGLE_API_KEY", "env-google-key")
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     assert gemini.get_api_key() == "env-google-key"
+
+
+def test_get_api_key_reads_google_genai_secret_alias(monkeypatch):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
+    monkeypatch.setenv("GOOGLE_GENAI_API_KEY", "existing-secret-alias")
+    assert gemini.get_api_key() == "existing-secret-alias"
