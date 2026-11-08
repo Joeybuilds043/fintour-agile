@@ -202,11 +202,13 @@ def get_display_image(
         ratio = max(0.2, aspect_ratio[0] / max(aspect_ratio[1], 1))
         if width / max(height, 1) > ratio:
             crop_width = int(height * ratio)
-            left = int(width * min(max(focal_point[0], 0), 1) - crop_width / 2)\n            left = min(max(left, 0), width - crop_width)
+            left = int(width * min(max(focal_point[0], 0), 1) - crop_width / 2)
+            left = min(max(left, 0), width - crop_width)
             image = image.crop((left, 0, left + crop_width, height))
         else:
             crop_height = int(width / ratio)
-            top = int(height * min(max(focal_point[1], 0), 1) - crop_height / 2)\n            top = min(max(top, 0), height - crop_height)
+            top = int(height * min(max(focal_point[1], 0), 1) - crop_height / 2)
+            top = min(max(top, 0), height - crop_height)
             image = image.crop((0, top, width, top + crop_height))
         image.thumbnail((1800, 1100), Image.Resampling.LANCZOS)
         image = ImageOps.autocontrast(image, cutoff=0.35)
