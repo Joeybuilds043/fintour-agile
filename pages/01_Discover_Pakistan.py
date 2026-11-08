@@ -72,7 +72,9 @@ else:
                         st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
                         st.caption(f'{image["artist"]} · {image["license"]} · [File details & attribution]({image["page_url"]})')
                     st.markdown(f'<div class="card-meta">{item["region"]}</div><div class="card-title">{name}</div><div class="card-copy">{item["tagline"]}</div><div class="card-tags">{ " · ".join(item["experiences"][:4]) }</div>', unsafe_allow_html=True)
-                    st.page_link("pages/02_Destination_Guide.py", label="Explore field guide")
+                    if st.button("Open destination", key=f"discover_guide_{name}", use_container_width=True):
+                        st.session_state["selected_destination"] = name
+                        st.switch_page("pages/02_Destination_Guide.py")
 
 st.write("")
 st.markdown("### A note on travelling well")
