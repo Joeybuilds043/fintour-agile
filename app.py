@@ -18,7 +18,7 @@ st.markdown("""
 .voyage-masthead-kicker{font-family:"Cormorant Garamond",Georgia,serif;color:#F6F2E8;font-size:22px;font-weight:700;letter-spacing:2.2px}
 .voyage-masthead-sub{font-family:"Manrope",sans-serif;color:#D8C58F;font-size:9px;letter-spacing:2px;margin-top:5px}.masthead-divider{color:#C7A35B;padding:0 5px}
 .category-photo-fallback{height:170px;border-radius:12px;background:linear-gradient(135deg,#123D2E,#1C4C57,#C2A25E);display:flex;align-items:center;justify-content:center;color:#F6F2E8;font-size:11px;letter-spacing:2px}
-div[data-testid="stImage"] img{border:5px solid #C7A35B;border-radius:17px;box-shadow:0 15px 35px rgba(7,28,21,.2)}
+div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radius:17px;box-shadow:0 18px 38px rgba(2,16,10,.24)}
 .hero-frame:after{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid rgba(255,255,255,.58);background:linear-gradient(90deg,transparent 61.6%,rgba(255,255,255,.22) 61.8%,transparent 62%),linear-gradient(0deg,transparent 38%,rgba(255,255,255,.18) 38.2%,transparent 38.4%)} 
 .hero-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:61.8% 38.2%;border-radius:12px} 
 .display-title{color:var(--voyage-ink)!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(48px,5.4vw,78px);line-height:.98;letter-spacing:-1.2px;margin:10px 0 20px}
@@ -34,7 +34,7 @@ div[data-testid="stImage"] img{border:5px solid #C7A35B;border-radius:17px;box-s
 .destination-name{color:var(--voyage-ink);font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:27px;margin:8px 0 2px}
 .destination-meta{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#657875}
 .destination-copy{font-size:13px;line-height:1.65;color:var(--voyage-muted);min-height:43px}
-.hero-note{border-left:2px solid #C7A35B;padding:6px 0 6px 14px;color:var(--voyage-muted);font-size:11px;line-height:1.7;margin-top:14px;letter-spacing:.25px}.mosaic-label{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:5px 0 0;color:var(--voyage-ink);font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700}.mosaic-label small{font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--voyage-muted);font-weight:600}.mosaic-label-small{font-size:18px}
+.hero-note{border-left:2px solid #C7A35B;padding:6px 0 6px 14px;color:var(--voyage-muted);font-size:11px;line-height:1.7;margin-top:14px;letter-spacing:.25px}.mosaic-label{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:5px 0 0;color:var(--voyage-ink);font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700}.mosaic-label small{font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--voyage-muted);font-weight:600}.mosaic-label-small{font-size:18px}.mosaic-subtitle{font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.3px;text-transform:uppercase;color:var(--voyage-muted);margin:0 0 7px}
 .weather-chip{display:inline-block;margin:6px 0 2px;padding:6px 10px;border-radius:20px;background:rgba(24,89,60,.14);color:var(--voyage-ink);font-size:11px;font-weight:600}
 @media(max-width:700px){.display-title{font-size:48px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.mosaic-label{font-size:19px}}
 </style>
@@ -85,17 +85,20 @@ with left:
 with right:
     main_photo = get_commons_image(hero_photos[0][1])
     side_photos = [get_commons_image(hero_photos[1][1]), get_commons_image(hero_photos[2][1])]
-    if main_photo:
-        rendered = get_display_image(main_photo["thumb_url"], aspect_ratio=(4, 5), focal_point=(0.53, 0.5))
-        st.image(rendered if rendered else main_photo["thumb_url"], use_container_width=True)
-        st.markdown(f'<div class="mosaic-label"><span>{hero_photos[0][0]}</span><small>{hero_photos[0][2]}</small></div>', unsafe_allow_html=True)
-        st.caption(f'{main_photo["artist"]} · {main_photo["license"]} · [Image source]({main_photo["page_url"]})')
-    for asset, meta in zip(side_photos, hero_photos[1:]):
-        if asset:
-            rendered = get_display_image(asset["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.48))
-            st.image(rendered if rendered else asset["thumb_url"], use_container_width=True)
-            st.markdown(f'<div class="mosaic-label mosaic-label-small"><span>{meta[0]}</span><small>{meta[2]}</small></div>', unsafe_allow_html=True)
-            st.caption(f'{asset["artist"]} · {asset["license"]} · [Image source]({asset["page_url"]})')
+    mosaic_main, mosaic_side = st.columns([1.18, 1], gap="small")
+    with mosaic_main:
+        if main_photo:
+            rendered = get_display_image(main_photo["thumb_url"], aspect_ratio=(4, 5), focal_point=(0.53, 0.5))
+            st.image(rendered if rendered else main_photo["thumb_url"], use_container_width=True)
+            st.markdown(f'<div class="mosaic-label"><span>{hero_photos[0][0]}</span></div><div class="mosaic-subtitle">{hero_photos[0][2]}</div>', unsafe_allow_html=True)
+            st.caption(f'{main_photo["artist"]} · {main_photo["license"]} · [Source]({main_photo["page_url"]})')
+    with mosaic_side:
+        for asset, meta in zip(side_photos, hero_photos[1:]):
+            if asset:
+                rendered = get_display_image(asset["thumb_url"], aspect_ratio=(5, 4), focal_point=(0.5, 0.48))
+                st.image(rendered if rendered else asset["thumb_url"], use_container_width=True)
+                st.markdown(f'<div class="mosaic-label mosaic-label-small"><span>{meta[0]}</span></div><div class="mosaic-subtitle">{meta[2]}</div>', unsafe_allow_html=True)
+                st.caption(f'{asset["artist"]} · {asset["license"]} · [Source]({asset["page_url"]})')
 st.markdown('<div class="kicker">EXPLORE THE COUNTRY THROUGH DISTINCTIVE JOURNEYS</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">A richer way to experience Pakistan.</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-copy">Explore the country through mountain environments, spiritual and religious heritage, historic cities and cultural landscapes. Each collection links to destination-level field notes and visitor planning.</div>', unsafe_allow_html=True)
