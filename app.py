@@ -2,168 +2,182 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import requests
-import time
 
-# --- PREMIUM UI/UX CONFIGURATION ---
+# --- SYSTEM METRICS & BRANDING ---
 st.set_page_config(
-    page_title="DestiNation-AI // Muhammad Asad",
+    page_title="EcoRoute-AI // Infrastructure Allocation Platform",
     page_icon="🐼",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# --- CSS INJECTION FOR ELITE EDITORIAL DESIGN ---
+# --- MODERN TECH-TOURISM INTERFACE INJECTION ---
 st.markdown("""
 <style>
     @import url('https://googleapis.com');
     
     html, body, [data-testid="stAppViewContainer"] {
-        background-color: #030712 !important;
-        font-family: 'Space Grotesk', sans-serif !important;
-        color: #F3F4F6 !important;
+        background-color: #020617 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        color: #F8FAFC !important;
     }
     
     [data-testid="stSidebar"] {
-        background-color: #0B0F19 !important;
-        border-right: 1px solid #1F2937 !important;
+        background-color: #0F172A !important;
+        border-right: 1px solid #334155 !important;
     }
     
-    .metric-card {
-        background: rgba(17, 24, 39, 0.7);
-        border: 1px solid rgba(6, 182, 212, 0.2);
-        border-radius: 16px;
-        padding: 24px;
-        text-align: center;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(8px);
-        transition: transform 0.3s ease, border 0.3s ease;
-    }
-    .metric-card:hover {
-        transform: translateY(-5px);
-        border: 1px solid rgba(6, 182, 212, 0.6);
+    .panel-card {
+        background: rgba(30, 41, 59, 0.7);
+        border: 1px solid rgba(6, 182, 212, 0.15);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(12px);
     }
     
-    .neon-text {
-        color: #06B6D4;
+    .status-active {
+        color: #10B981;
         font-weight: 600;
-        text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+        text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
     }
-    
-    #MainMenu, footer, header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
-# --- SIDEBAR NAVIGATION ---
-st.sidebar.markdown("<h2 style='color:#06B6D4; text-align:center;'>🐼 Pandy-AI Console</h2>", unsafe_allow_html=True)
-st.sidebar.markdown("<p style='text-align:center; color:#9CA3AF; font-size:12px;'>MSc Strategy & Innovation Portfolio</p>", unsafe_allow_html=True)
+# --- SIDEBAR DEPLOYMENT STRATEGY ---
+st.sidebar.markdown("<h2 style='color:#06B6D4; text-align:center;'>🐼 EcoRoute Console</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='text-align:center; color:#94A3B8; font-size:12px;'>MSc Strategy & Innovation System Blueprint</p>", unsafe_allow_html=True)
 st.sidebar.write("---")
-page = st.sidebar.radio("Navigate Workspace", ["🚀 DestiNation Engine", "💬 Live Grok Panda Assistant"])
 
-locations = {
-    'Lahore Hub': [31.5204, 74.3587],
-    'Kaghan Ecosystem': [34.5412, 73.3512],
-    'Skardu Node': [35.2974, 75.6322],
-    'Murree Matrix': [33.9070, 73.3943]
+app_mode = st.sidebar.radio("Platform Workspaces", ["🗺️ Strategic Infrastructure Allocator", "💬 Grok Panda Corporate Agent"])
+
+# Geospatial Simulation Matrix
+nodes = {
+    'Supply Core (Lahore)': [31.5204, 74.3587],
+    'Saturated Node (Murree Matrix)': [33.9070, 73.3943],
+    'Overburdened Ecosystem (Kaghan)': [34.5412, 73.3512],
+    'Under-utilized Market (Skardu Link)': [35.2974, 75.6322]
 }
 
-# ---------------- PAGE 1: THE CORE STRUCTURAL ENGINE ----------------
-if page == "🚀 DestiNation Engine":
-    st.markdown("<h1 style='text-align: center; font-weight:300;'>DestiNation-AI</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color:#9CA3AF; font-size:18px;'>Pioneering Autonomous Spatial Tourism Redistribution</p>", unsafe_allow_html=True)
+# ---------------- WORKSPACE 1: THE INFRASTRUCTURE ENGINE ----------------
+if app_mode == "🗺️ Strategic Infrastructure Allocator":
+    st.markdown("<h1 style='font-weight:600; letter-spacing:-1px;'>EcoRoute-AI</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='color:#94A3B8; font-size:16px;'>Deploying Autonomous Allocation Models to Balance Destination Volatility and Supply Chain Bottlenecks</p>", unsafe_allow_html=True)
     st.write("---")
     
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.markdown('<div class="metric-card"><h3>Matriculation</h3><h2 class="neon-text">1010/1100</h2><p style="color:#9CA3AF; font-size:12px;">Govt College (PEEF Scholar)</p></div>', unsafe_allow_html=True)
-    with col2:
-        st.markdown('<div class="metric-card"><h3>Intermediate</h3><h2 class="neon-text">921/1100</h2><p style="color:#9CA3AF; font-size:12px;">Pre-Engineering Base</p></div>', unsafe_allow_html=True)
-    with col3:
-        st.markdown('<div class="metric-card"><h3>BS Tourism</h3><h2 class="neon-text">3.75 / 4.0</h2><p style="color:#9CA3AF; font-size:12px;">Superior University Lahore</p></div>', unsafe_allow_html=True)
-    with col4:
-        st.markdown('<div class="metric-card"><h3>Strategic Elite</h3><h2 class="neon-text">HBS / ALP</h2><p style="color:#9CA3AF; font-size:12px;">Aspire Leaders Alumnus</p></div>', unsafe_allow_html=True)
+    # INDUSTRIAL PROBLEM ANALYSIS CONTAINER
+    st.markdown("""
+    <div class="panel-card">
+        <h4>🚨 The Structural Market Failure:</h4>
+        <p style="color:#CBD5E1; font-size:14px; margin-bottom:0px;">
+            Unregulated traveler distribution strains regional electricity, food supply lines, and waste management infrastructure in target clusters while diverting potential revenue away from emerging micro-economies. 
+            This enterprise application uses multi-agent resource tracking to orchestrate commercial assets dynamically across public-private tourism networks.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.write("##")
+    
+    # CONTROL INTERFACE FOR LOGISTICS CORRIDORS
+    col_map, col_controls = st.columns([2, 1])
+    
+    with col_controls:
+        st.markdown("### ⚙️ Optimization Parameters")
+        target_cluster = st.selectbox("Simulate Regional Logistics Hub Re-routing", list(nodes.keys()))
+        demand_load = st.slider("Simulated Peak Foot-Traffic Saturation (%)", 40, 150, 95)
+        capacity_buffer = st.slider("Local Supply Chain Inventory Margin (%)", 10, 100, 45)
         
-    st.write("##")
-    st.markdown("### 🗺️ Real-Time Spatial Optimization Corridor")
-    selected_node = st.selectbox("Select Target Destination Infrastructure Node", list(locations.keys()))
-    
-    # FIX: Updated go.Scattermapbox to go.Scattermap for compatibility
-    fig = go.Figure()
-    fig.add_trace(go.Scattermap(
-        mode = "markers+lines",
-        lon = [locations['Lahore Hub'][1], locations[selected_node][1]],
-        lat = [locations['Lahore Hub'][0], locations[selected_node][0]],
-        marker = {'size': 12, 'color': '#06B6D4'},
-        line = dict(width = 3, color = '#D4AF37')
-    ))
-    
-    # FIX: Updated layout parameters to match the map object requirements
-    fig.update_layout(
-        map_style="carto-darkmatter",
-        map=dict(center=dict(lat=33.5, lon=74.5), zoom=5.5),
-        margin={"r":0,"t":0,"l":0,"b":0},
-        showlegend=False,
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'
-    )
-    st.plotly_chart(fig, use_container_width=True)
+        # Operational Analytics Processing
+        efficiency_index = round((capacity_buffer / demand_load) * 100, 1)
+        
+        st.write("---")
+        st.markdown(f"**Calculated Operational Efficiency Index:** `{efficiency_index}%`")
+        if efficiency_index < 50:
+            st.markdown("⚠️ **System Status:** <span class='status-active' style='color:#EF4444; text-shadow:0 0 8px rgba(239, 68, 68, 0.3);'>High Saturation Risk</span>", unsafe_allow_html=True)
+        else:
+            st.markdown("✅ **System Status:** <span class='status-active'>Optimal Allocation Corridor</span>", unsafe_allow_html=True)
+            
+    with col_map:
+        # Plotly Spatial Matrix Rendering
+        fig = go.Figure()
+        fig.add_trace(go.Scattermap(
+            mode = "markers+lines",
+            lon = [nodes['Supply Core (Lahore)'], nodes[target_cluster]],
+            lat = [nodes['Supply Core (Lahore)'], nodes[target_cluster]],
+            marker = {'size': 14, 'color': '#06B6D4'},
+            line = dict(width = 4, color = '#F59E0B')
+        ))
+        fig.update_layout(
+            map_style="carto-darkmatter",
+            map=dict(center=dict(lat=33.5, lon=74.5), zoom=5.2),
+            margin={"r":0,"t":0,"l":0,"b":0},
+            showlegend=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
-    # STRATEGIC WORK EXPERIENCE MARQUEE
-    st.write("##")
-    st.markdown("### 💼 Cross-Disciplinary Operational Mastery")
-    exp1, exp2, exp3 = st.columns(3)
-    with exp1:
-        st.markdown("**Tourism Development Corp. of Punjab (TDCP)**  \n*Competitive Strategy Intern*  \nAnalyzed domestic routing networks and structural destination pain points.")
-    with exp2:
-        st.markdown("**Waheed Brothers Coca-Cola Distribution**  \n*Operations Logistics Assistant*  \nManaged enterprise supply chains, scheduling, and asset deployment patterns.")
-    with exp3:
-        st.markdown("**Rahi Travels Portfolio**  \n*Corporate HR & Operations Intern*  \nCoordinated functional frameworks within live operational environments.")
-
-# ---------------- PAGE 2: LIVE GROK INTERFACE ----------------
-elif page == "💬 Live Grok Panda Assistant":
-    st.markdown("<h1 style='text-align: center; font-weight:300;'>Pandy-AI Assistant</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color:#9CA3AF;'>Live Connected xAI Grok Engine for Global Strategy Analytics</p>", unsafe_allow_html=True)
+# ---------------- WORKSPACE 2: THE BUSINESS SOLUTIONS CORE ----------------
+elif app_mode == "💬 Grok Panda Corporate Agent":
+    st.markdown("<h1 style='font-weight:600; letter-spacing:-1px;'>Pandy-AI Corporate Strategy Consultant</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='color:#94A3B8;'>Real-Time Strategic Solutions for Public Governance Nodes and Tourism Logistics Enterprises</p>", unsafe_allow_html=True)
     st.write("---")
     
-    col_img, col_txt = st.columns([1, 5])
+    col_img, col_txt = st.columns([1, 6])
     with col_img:
-        st.image("https://imgur.com", width=100)
+        st.image("https://imgur.com", width=90)
     with col_txt:
-        st.markdown("#### **Autonomous System Node Status: Active**")
-        st.write("Greetings, Admissions Board. I am initialized as a live-compiled multi-agent wrapper connecting xAI's real-time Grok models to analyze tourism networks.")
+        st.markdown("#### **Corporate Advisory Terminal Initialized**")
+        st.write("Welcome to the multi-agent consulting portal. Backed by live xAI Grok computational parameters, I analyze industrial capacity data to resolve supply-chain bottlenecks, evaluate tourism infrastructure risk, and optimize capital distribution.")
 
     st.write("##")
 
     GROK_API_KEY = st.secrets.get("GROK_API_KEY", None)
 
     if not GROK_API_KEY:
-        st.warning("⚠️ Grok API Key Missing: Please insert your secure key inside the Streamlit Cloud Dashboard Secrets panel to activate full live tracking responses.")
-        GROK_API_KEY = st.text_input("Alternatively, paste your temporary xAI Key here for instant evaluation:", type="password")
+        st.warning("🔒 Secure Integration Note: Connect an active xAI Developer Token inside the Secrets control block to unlock real-time streaming strategy analysis.")
+        GROK_API_KEY = st.text_input("Or input temporary Grok API Key directly for session evaluation:", type="password")
 
-    if "messages" not in st.session_state:
-        st.session_state.messages = [
-            {"role": "assistant", "content": "Hello! I am Asad's specialized agent. Ask me how his background in Pakistan's tourism sector, coupled with business strategy analytics, forms a unique profile for the University of Southampton."}
+    if "solution_messages" not in st.session_state:
+        st.session_state.solution_messages = [
+            {"role": "assistant", "content": "System operational. I am configured to address real-world industrial friction. Input your systemic issue, or select a predefined macroeconomic query profile below."}
         ]
 
-    for msg in st.session_state.messages:
-        avatar_img = "🐼" if msg["role"] == "assistant" else None
-        with st.chat_message(msg["role"], avatar=avatar_img):
+    for msg in st.session_state.solution_messages:
+        avatar_design = "🐼" if msg["role"] == "assistant" else None
+        with st.chat_message(msg["role"], avatar=avatar_design):
             st.write(msg["content"])
 
-    if user_query := st.chat_input("Ask a real-time question to Grok..."):
-        st.session_state.messages.append({"role": "user", "content": user_query})
-        with st.chat_message("user"):
-            st.write(user_query)
+    # Strategic Quick Buttons to populate live inquiries without typing
+    quick_col1, quick_col2 = st.columns(2)
+    with quick_col1:
+        q1 = st.button("📊 Strategy for overtourism supply-chain strain in Northern regions?")
+    with quick_col2:
+        q2 = st.button("🚀 How can innovation management models fix localized resource inflation?")
+
+    selected_query = None
+    if q1: selected_query = "Provide a comprehensive business strategy to mitigate overtourism supply-chain strain in high-altitude regional corridors, referencing dynamic asset redistribution."
+    if q2: selected_query = "How can emerging business innovation management frameworks protect rural host communities from hyper-inflation caused by seasonal tourism demand drops?"
+
+    user_input = st.chat_input("Input specific structural bottleneck data for real-time analysis...")
+    active_query = user_input if user_input else selected_query
+
+    if active_query:
+        if not user_input:  # Display selection if triggered via click arrays
+            st.session_state.solution_messages.append({"role": "user", "content": active_query})
+            with st.chat_message("user"):
+                st.write(active_query)
 
         with st.chat_message("assistant", avatar="🐼"):
             if GROK_API_KEY:
-                with st.spinner("Streaming Live Data Arrays via xAI API Pipelines..."):
+                with st.spinner("Executing structural optimization via xAI Grok Core..."):
                     try:
-                        system_prompt = (
-                            "You are Pandy-AI, a specialized strategic assistant built for Muhammad Asad's portfolio. "
-                            "Asad is an elite candidate applying for the MSc Business Strategy and Innovation Management at the University of Southampton "
-                            "and competing for the Commonwealth Master's Scholarship. His metrics: 1010/1100 Matric, 921/1100 Inter, 3.75/4.0 CGPA from Superior University, "
-                            "Harvard ALP Alumnus, and published author on ResearchGate regarding GenAI overtourism. His operations history includes TDCP and Coca-Cola. "
-                            "Always link your answers back to how his rare tech-driven portfolio solves business bottlenecks or fits the Southampton innovation modules."
+                        system_context = (
+                            "You are Pandy-AI, a world-class Corporate Strategy and Innovation Consultant specialized in resolving macroeconomic market failures "
+                            "within emerging tourism and logistics sectors. Your task is to provide highly rigorous, enterprise-grade business strategy advice, "
+                            "risk mitigations, and resource routing blueprints. Address the problems using the vocabulary of the MSc Business Strategy and Innovation Management "
+                            "program at the University of Southampton (e.g., core competencies, asset reconfiguration, platform ecosystems, technology transfer, and agile operations). "
+                            "Do not mention any individual personal portfolios, grades, or personal student bios. Focus entirely on delivering realistic, highly actionable industrial solutions."
                         )
                         
                         headers = {
@@ -174,22 +188,9 @@ elif page == "💬 Live Grok Panda Assistant":
                         payload = {
                             "model": "grok-2-beta",
                             "messages": [
-                                {"role": "system", "content": system_prompt},
-                                {"role": "user", "content": user_query}
+                                {"role": "system", "content": system_context},
+                                {"role": "user", "content": active_query}
                             ],
-                            "temperature": 0.3
+                            "temperature": 0.2
                         }
                         
-                        response = requests.post("https://x.ai", headers=headers, json=payload)
-                        
-                        if response.status_code == 200:
-                            grok_res = response.json()["choices"]["message"]["content"]
-                            st.write(grok_res)
-                            st.session_state.messages.append({"role": "assistant", "content": grok_res})
-                        else:
-                            st.error(f"API connection error code: {response.status_code}. Details: {response.text}")
-                    except Exception as e:
-                        st.error(f"System connection runtime issue: {str(e)}")
-            else:
-                st.info("Simulated Echo Node: Please secure your Grok key via configuration settings to retrieve dynamic cross-platform outputs.")
-
