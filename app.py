@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
@@ -7,25 +8,26 @@ from src.services.media import get_commons_image, get_display_image
 from src.services.weather import get_weather
 from src.ui import apply_visitor_theme
 
-st.set_page_config(page_title="Horizon Tourism | Pakistan, closer than you think", page_icon=None, layout="wide")
+st.set_page_config(page_title="VoyagePK | Pakistan Unbound", page_icon=None, layout="wide")
 
 apply_visitor_theme()
 st.markdown("""
 <style>
-.display-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#173B3A;margin:10px 0 18px}
+.hero-frame{border:8px solid transparent;border-image:linear-gradient(135deg,#477D9B,#2A9D9A,#C3A66B) 1;box-shadow:0 18px 44px rgba(12,34,49,.18)}
+.display-title{color:var(--voyage-ink)!important;font-family:'Playfair Display',Georgia,serif;font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#173B3A;margin:10px 0 18px}
 .lede{font-size:16px;line-height:1.85;color:#657875;max-width:610px}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#98613F;font-weight:700}
-.section-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,3vw,38px);line-height:1.12;margin:4px 0 7px;color:#173B3A}
-.section-copy{color:#657875;font-size:14px;line-height:1.7;max-width:720px}
-.soft-panel{background:#FFFCF6;border:1px solid #E4DCCE;border-radius:20px;padding:20px;height:100%}
-.category-tile{background:#FFFCF6;border:1px solid #E4DCCE;border-radius:15px;padding:16px 14px;min-height:105px}
+.section-title{color:var(--voyage-ink)!important;font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,3vw,38px);line-height:1.12;margin:4px 0 7px;color:#173B3A}
+.section-copy{color:var(--voyage-muted);font-size:14px;line-height:1.7;max-width:720px}
+.soft-panel{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:20px;padding:20px;height:100%}
+.category-tile{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:15px;padding:16px 14px;min-height:105px}
 .category-letter{width:27px;height:27px;border-radius:50%;background:#E8E1D5;color:#173B3A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
-.category-name{font-weight:700;font-size:14px;color:#173B3A}
+.category-name{font-weight:700;font-size:14px;color:var(--voyage-ink)}
 .category-copy{font-size:11px;color:#657875;line-height:1.5;margin-top:4px}
-.destination-name{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#173B3A;margin:8px 0 2px}
+.destination-name{color:var(--voyage-ink);font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#173B3A;margin:8px 0 2px}
 .destination-meta{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#657875}
-.destination-copy{font-size:13px;line-height:1.65;color:#657875;min-height:43px}
-.hero-note{border-left:2px solid #D9A77E;padding:4px 0 4px 13px;color:#657875;font-size:11px;line-height:1.6}
+.destination-copy{font-size:13px;line-height:1.65;color:var(--voyage-muted);min-height:43px}
+.hero-note{border-left:2px solid #D9A77E;padding:4px 0 4px 13px;color:var(--voyage-muted);font-size:11px;line-height:1.6}
 .weather-chip{display:inline-block;margin:6px 0 2px;padding:6px 10px;border-radius:20px;background:#E8F0EA;color:#234D47;font-size:11px;font-weight:600}
 @media(max-width:700px){.display-title{font-size:43px}.section-title{font-size:29px}}
 </style>
@@ -34,7 +36,7 @@ st.markdown("""
 
 
 with st.sidebar:
-    st.markdown('<div class="horizon-brand">Horizon</div><div class="horizon-brand-sub">Pakistan travel & tourism intelligence</div>', unsafe_allow_html=True)
+    st.markdown('<div class="voyage-sidebar-note">A considered guide to Pakistan</div>', unsafe_allow_html=True)
     st.divider()
     st.markdown('<div class="horizon-sidebar-kicker">Discover</div>', unsafe_allow_html=True)
     st.page_link("app.py", label="The journey starts here")
@@ -53,18 +55,22 @@ with st.sidebar:
     st.divider()
     st.caption("Independent destination discovery prototype. Travel thoughtfully and verify local conditions.")
 
-hero = get_commons_image("Hunza Valley Passu Cones Attabad Lake Pakistan")
+with open("assets/manifest.json", encoding="utf-8") as asset_file:
+    asset_manifest = json.load(asset_file)
+active_theme = st.session_state.get("voyage_theme", "Light")
+hero_asset = asset_manifest["assets"]["night_islamabad_cityscape" if active_theme == "Dark" else "daytime_northern_pakistan"]
+hero = {"thumb_url": hero_asset["url"], "title": hero_asset["caption"], "artist": hero_asset.get("author", "Creator listed on source page"), "license": hero_asset.get("license", "See source page"), "page_url": hero_asset["page_url"]}
 st.markdown('<div class="horizon-flow" style="padding:10px 16px;margin:0 0 20px;color:#F4F0E7;font-size:10px;letter-spacing:2px;text-transform:uppercase">A living atlas of landscapes, culture and journeys across Pakistan</div><div class="kicker">PAKISTAN, CLOSER THAN YOU THINK</div>', unsafe_allow_html=True)
 left, right = st.columns([0.92, 1.28], gap="large", vertical_alignment="center")
 with left:
     st.markdown('<div class="display-title">A country of a thousand journeys.</div>', unsafe_allow_html=True)
-    st.markdown('<div class="lede">Follow the curve of a mountain road. Find a courtyard hidden in an old city. Taste a region through its food. Horizon brings Pakistan’s landscapes, heritage and local experiences into one considered travel guide.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="lede">Follow the curve of a mountain road. Find a courtyard hidden in an old city. Taste a region through its food. VoyagePK brings Pakistan’s landscapes, heritage and local experiences into one considered travel guide.</div>', unsafe_allow_html=True)
     st.write("")
     st.page_link("pages/01_Discover_Pakistan.py", label="Explore Pakistan")
     st.markdown('<div class="hero-note">From the Karakoram to the Arabian Sea · 39 curated destination clusters · One connected travel atlas</div>', unsafe_allow_html=True)
 with right:
     if hero:
-        st.image(get_display_image(hero["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.52, 0.48)) or hero["thumb_url"], use_container_width=True)
+        st.markdown(f'<div class="hero-frame"><img src="{hero["thumb_url"]}" alt="{hero["title"]}" /></div>', unsafe_allow_html=True)
         st.caption(f'{hero["title"]} · {hero["artist"]} · {hero["license"]} · [Image source]({hero["page_url"]})' + (' · Illustrative regional reference' if hero.get('illustrative') else ''))
     else:
         st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#EEE9DF,#D9C8B7)"><div><div class="section-title">The mountains are only the beginning.</div><p>A regional image is not available for this destination yet.</p></div></div>', unsafe_allow_html=True)
@@ -114,4 +120,4 @@ with b:
     st.markdown('<div class="soft-panel"><div class="kicker">SEE THE BIGGER PICTURE</div><div class="section-title">Travel is also an economy.</div><p>Explore the tourism intelligence workspace: destination evidence, investment scenarios, local value and the data gaps that matter for better decisions.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
 
-st.caption("Horizon is an independent prototype, not an official government tourism service. Destination descriptions and approximate map anchors require local review. Verify travel, safety, access, permits and booking details with responsible local authorities and providers.")
+st.caption("VoyagePK is an independent prototype, not an official government tourism service. Destination descriptions and approximate map anchors require local review. Verify travel, safety, access, permits and booking details with responsible local authorities and providers.")
