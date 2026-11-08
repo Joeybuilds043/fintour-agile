@@ -1,7 +1,7 @@
 from __future__ import annotations
 import plotly.graph_objects as go
 import streamlit as st
-from src.ui import apply_intelligence_theme
+from src.ui import apply_intelligence_theme, style_plotly_figure
 from src.catalog import DESTINATIONS
 from src.scenarios import project_destination
 
@@ -26,9 +26,10 @@ p.metric(f"Year {years} strategy visitors",f'{int(last["Strategy visitors"]):,}'
 q.metric(f"Year {years} strategy visitor spend",f'PKR {last["Strategy visitor spend (PKR)"]:,.0f}')
 r.metric("Illustrative local value retained",f'PKR {last["Illustrative local value retained (PKR)"]:,.0f}')
 fig=go.Figure()
-fig.add_trace(go.Scatter(x=df["Year"],y=df["Baseline visitors"],mode="lines+markers",name="Baseline"))
-fig.add_trace(go.Scatter(x=df["Year"],y=df["Strategy visitors"],mode="lines+markers",name="Strategy scenario"))
-fig.update_layout(height=380,margin=dict(l=10,r=10,t=30,b=10),paper_bgcolor="rgba(0,0,0,0)",plot_bgcolor="rgba(0,0,0,0)",xaxis_title="Year",yaxis_title="Visitors",legend=dict(orientation="h",y=-0.2))
-st.plotly_chart(fig,use_container_width=True)
+fig.add_trace(go.Scatter(x=df["Year"],y=df["Strategy visitors"],mode="lines",name="Strategy area",line=dict(width=0),fill="tozeroy",fillcolor="rgba(199,163,91,.16)",hoverinfo="skip",showlegend=False))
+fig.add_trace(go.Scatter(x=df["Year"],y=df["Baseline visitors"],mode="lines+markers",name="Baseline",line=dict(color="#55B99A",width=3,dash="dot"),marker=dict(size=8,color="#55B99A",line=dict(color="#F7F3E8",width=1.2)),hovertemplate="Year %{x}<br>Baseline %{y:,.0f} visitors<extra></extra>"))
+fig.add_trace(go.Scatter(x=df["Year"],y=df["Strategy visitors"],mode="lines+markers",name="Strategy scenario",line=dict(color="#D8B66E",width=4),marker=dict(size=10,color="#D8B66E",line=dict(color="#F7F3E8",width=1.4)),hovertemplate="Year %{x}<br>Strategy %{y:,.0f} visitors<extra></extra>"))
+fig.update_layout(xaxis_title="Year",yaxis_title="Visitors",hovermode="x unified")
+st.plotly_chart(style_plotly_figure(fig,height=430),use_container_width=True)
 st.dataframe(df,use_container_width=True,hide_index=True)
 st.warning("The model compounds user-entered growth assumptions. It is not a forecast, observed growth or an investment valuation. Capacity, seasonality, price inflation, leakage, environmental limits and statistical uncertainty are not yet modelled.")
