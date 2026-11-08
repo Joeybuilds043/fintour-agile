@@ -8,19 +8,19 @@ def apply_visitor_theme() -> None:
         st.session_state["voyage_theme"] = "Light"
     mode = st.sidebar.selectbox("Appearance", ["Light", "Dark"], key="voyage_theme")
     dark = mode == "Dark"
-    paper = "#0B1713" if dark else "#F4F2E9"
-    ink = "#EAF1EA" if dark else "#18372C"
-    surface = "rgba(23,43,35,.88)" if dark else "#FFFEF9"
-    muted = "#B6C8BC" if dark else "#5D7166"
-    line = "#2C493B" if dark else "#DDDCCF"
-    sidebar = "linear-gradient(165deg,#061810 0%,#103A2A 58%,#1A4A37 100%)" if dark else "linear-gradient(165deg,#08291D 0%,#104631 58%,#1B6042 100%)"
-    header = "rgba(11,23,19,.96)" if dark else "rgba(244,242,233,.96)"
+    paper = "#07140F" if dark else "#F3F0E5"
+    ink = "#F0F3E9" if dark else "#15392B"
+    surface = "rgba(17,39,29,.92)" if dark else "#FFFEF8"
+    muted = "#B5C6B9" if dark else "#5A6D60"
+    line = "#294737" if dark else "#DCD8C9"
+    sidebar = "linear-gradient(165deg,#030D09 0%,#092218 58%,#103A29 100%)" if dark else "linear-gradient(165deg,#061B12 0%,#0B3825 58%,#165238 100%)"
+    header = "rgba(7,20,15,.97)" if dark else "rgba(243,240,229,.97)"
     accent = "#C7A35B"
     st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap');
     :root{--voyage-paper:PAPER;--voyage-ink:INK;--voyage-accent:ACCENT;--voyage-surface:SURFACE;--voyage-muted:MUTED;--voyage-line:LINE}
-    .stApp{background:var(--voyage-paper);color:var(--voyage-ink);font-family:'DM Sans',sans-serif}
+    .stApp{background:var(--voyage-paper);color:var(--voyage-ink);font-family:'Manrope',sans-serif}
     [data-testid="stHeader"]{background:HEADER}
     [data-testid="stSidebar"]{background:SIDEBAR;border-right:1px solid rgba(199,163,91,.35)}
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,[data-testid="stSidebar"] strong,[data-testid="stSidebar"] label,[data-testid="stSidebar"] .stCaption{color:#EAF1EA!important}
@@ -28,7 +28,7 @@ def apply_visitor_theme() -> None:
     [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{background:rgba(199,163,91,.18);color:#E9D6A7!important;transform:translateX(3px)}
     [data-testid="stSidebar"] hr{border-color:rgba(234,241,234,.18)}
     .block-container{max-width:1440px;padding-top:1.25rem;padding-bottom:4rem}
-    h1,h2,h3{color:var(--voyage-ink)!important;font-family:'Playfair Display',Georgia,serif!important}
+    h1,h2,h3{color:var(--voyage-ink)!important;font-family:'Cormorant Garamond',Georgia,serif!important}
     p,li,label,.stCaption{color:var(--voyage-muted)}
     div[data-testid="stImage"] img{border-radius:17px;object-fit:cover;box-shadow:0 12px 30px rgba(4,24,16,.18);transition:transform .35s ease}
     div[data-testid="stImage"] img:hover{transform:translateY(-2px)}
