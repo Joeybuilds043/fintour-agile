@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import requests
-import json
+import time
 
 # --- PREMIUM UI/UX CONFIGURATION ---
 st.set_page_config(
@@ -86,17 +86,20 @@ if page == "🚀 DestiNation Engine":
     st.markdown("### 🗺️ Real-Time Spatial Optimization Corridor")
     selected_node = st.selectbox("Select Target Destination Infrastructure Node", list(locations.keys()))
     
+    # FIX: Updated go.Scattermapbox to go.Scattermap for compatibility
     fig = go.Figure()
-    fig.add_trace(go.Scattermapbox(
+    fig.add_trace(go.Scattermap(
         mode = "markers+lines",
-        lon = [locations['Lahore Hub'], locations[selected_node]],
-        lat = [locations['Lahore Hub'], locations[selected_node]],
+        lon = [locations['Lahore Hub'][1], locations[selected_node][1]],
+        lat = [locations['Lahore Hub'][0], locations[selected_node][0]],
         marker = {'size': 12, 'color': '#06B6D4'},
         line = dict(width = 3, color = '#D4AF37')
     ))
+    
+    # FIX: Updated layout parameters to match the map object requirements
     fig.update_layout(
-        mapbox_style="carto-darkmatter",
-        mapbox=dict(center=dict(lat=33.5, lon=74.5), zoom=5.5),
+        map_style="carto-darkmatter",
+        map=dict(center=dict(lat=33.5, lon=74.5), zoom=5.5),
         margin={"r":0,"t":0,"l":0,"b":0},
         showlegend=False,
         paper_bgcolor='rgba(0,0,0,0)',
@@ -104,10 +107,21 @@ if page == "🚀 DestiNation Engine":
     )
     st.plotly_chart(fig, use_container_width=True)
 
+    # STRATEGIC WORK EXPERIENCE MARQUEE
+    st.write("##")
+    st.markdown("### 💼 Cross-Disciplinary Operational Mastery")
+    exp1, exp2, exp3 = st.columns(3)
+    with exp1:
+        st.markdown("**Tourism Development Corp. of Punjab (TDCP)**  \n*Competitive Strategy Intern*  \nAnalyzed domestic routing networks and structural destination pain points.")
+    with exp2:
+        st.markdown("**Waheed Brothers Coca-Cola Distribution**  \n*Operations Logistics Assistant*  \nManaged enterprise supply chains, scheduling, and asset deployment patterns.")
+    with exp3:
+        st.markdown("**Rahi Travels Portfolio**  \n*Corporate HR & Operations Intern*  \nCoordinated functional frameworks within live operational environments.")
+
 # ---------------- PAGE 2: LIVE GROK INTERFACE ----------------
 elif page == "💬 Live Grok Panda Assistant":
     st.markdown("<h1 style='text-align: center; font-weight:300;'>Pandy-AI Assistant</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color:#9CA3AF;'>Live Live Connected xAI Grok Engine for Global Strategy Analytics</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color:#9CA3AF;'>Live Connected xAI Grok Engine for Global Strategy Analytics</p>", unsafe_allow_html=True)
     st.write("---")
     
     col_img, col_txt = st.columns([1, 5])
@@ -119,15 +133,12 @@ elif page == "💬 Live Grok Panda Assistant":
 
     st.write("##")
 
-    # Safe API Key Fetching from Streamlit Cloud Secrets Manager
     GROK_API_KEY = st.secrets.get("GROK_API_KEY", None)
 
     if not GROK_API_KEY:
         st.warning("⚠️ Grok API Key Missing: Please insert your secure key inside the Streamlit Cloud Dashboard Secrets panel to activate full live tracking responses.")
-        # Local testing fall-back entry input
         GROK_API_KEY = st.text_input("Alternatively, paste your temporary xAI Key here for instant evaluation:", type="password")
 
-    # Conversational History Instantiation
     if "messages" not in st.session_state:
         st.session_state.messages = [
             {"role": "assistant", "content": "Hello! I am Asad's specialized agent. Ask me how his background in Pakistan's tourism sector, coupled with business strategy analytics, forms a unique profile for the University of Southampton."}
@@ -147,7 +158,6 @@ elif page == "💬 Live Grok Panda Assistant":
             if GROK_API_KEY:
                 with st.spinner("Streaming Live Data Arrays via xAI API Pipelines..."):
                     try:
-                        # Constructing direct context constraints to align Grok with your application profile
                         system_prompt = (
                             "You are Pandy-AI, a specialized strategic assistant built for Muhammad Asad's portfolio. "
                             "Asad is an elite candidate applying for the MSc Business Strategy and Innovation Management at the University of Southampton "
@@ -173,13 +183,13 @@ elif page == "💬 Live Grok Panda Assistant":
                         response = requests.post("https://x.ai", headers=headers, json=payload)
                         
                         if response.status_code == 200:
-                            grok_res = response.json()["choices"][0]["message"]["content"]
+                            grok_res = response.json()["choices"]["message"]["content"]
                             st.write(grok_res)
                             st.session_state.messages.append({"role": "assistant", "content": grok_res})
                         else:
-                            st.error(f"API connection error code: {response.status_code}. Response raw output: {response.text}")
+                            st.error(f"API connection error code: {response.status_code}. Details: {response.text}")
                     except Exception as e:
                         st.error(f"System connection runtime issue: {str(e)}")
             else:
-                # Simulated response if no API key is verified yet
                 st.info("Simulated Echo Node: Please secure your Grok key via configuration settings to retrieve dynamic cross-platform outputs.")
+
