@@ -245,10 +245,10 @@ _add("Harappa & Indus Valley Archaeology", "Punjab", 30.6315, 72.8674,
      ["Harappa archaeological mound", "Harappa Museum", "Urban planning, craft and trade history of the Indus Valley Civilization"],
      "Harappa archaeological site museum Pakistan",
      "Harappa is a major archaeological site associated with the Indus Valley Civilization. Interpret it through archaeological evidence rather than assigning it to a modern religious tradition.")
-_add("Desan Meadows & Upper Kalam", "Khyber Pakhtunkhwa", 35.5000, 72.5800,
+_add("Desan Meadows & Upper Kalam", "Khyber Pakhtunkhwa", 35.46519, 72.51827,
      "A high meadow above Kalam with expansive views across upper Swat.",
      ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism"],
-     ["Desan Meadows, also referred to by some travel creators as Desan Top", "Upper Kalam mountain viewpoints", "Locally guided walking and meadow experiences"],
+     ["Desan Meadows, also referred to by some travel creators as Desan Top", "Godar Lake viewpoint from the Desan ridge (not the lake shore)", "Upper Kalam mountain viewpoints", "Locally guided walking and meadow experiences"],
      "Desan Meadows Desan Top Kalam Swat Pakistan",
      "Travel coverage describes Desan Meadows as a mountainside destination above Kalam. Track conditions, access, exact route and the use of the name Desan Top require local confirmation.")
 _add("Utror & Gabral Valleys", "Khyber Pakhtunkhwa", 35.5450, 72.4900,
@@ -293,3 +293,51 @@ _SOURCE_LINKS = {
 for _name, _sources in _SOURCE_LINKS.items():
     if _name in DESTINATIONS:
         DESTINATIONS[_name]["sources"] = _sources
+
+
+_add("Andrab Lake & Anakar Valley", "Khyber Pakhtunkhwa", 35.6455, 72.5123,
+     "A high glacial lake in the Anakar side valley near Kalam, known locally as Kooh Lake.",
+     ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism"],
+     ["Andrab (Kooh) Lake", "Anakar Valley and alpine meadow landscape", "Glacial lake viewpoints and locally guided trekking"],
+     "Andrab Lake Anakar Valley Kalam Swat Pakistan",
+     "Andrab Lake has historically involved a demanding trek. Recent reporting describes work on a jeepable track, but road access can change after landslides and glacial movement. Confirm the route with local authorities before travel.")
+_add("Izmis Lake & Utror Meadows", "Khyber Pakhtunkhwa", 35.4000, 72.3773,
+     "A high-altitude glacial lake above Utror, named for the natural caves around it.",
+     ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism"],
+     ["Izmis Lake and surrounding caves", "Loypanrghalay approach valley", "Utror forest and alpine meadow landscape"],
+     "Izmis Lake Utror Swat Pakistan",
+     "Travel coverage describes a partial jeep approach followed by a strenuous multi-hour trek. Treat route duration as indicative only; use a local guide and verify conditions before setting out.")
+_add("Spinkhor Lake & Upper Utror", "Khyber Pakhtunkhwa", 35.4337, 72.4520,
+     "A remote lake near Utror in the upper Swat mountain landscape.",
+     ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism"],
+     ["Spinkhor Lake", "Upper Utror alpine landscape", "Nearby Kundol Lake and trekking approaches"],
+     "Spinkhor Lake Utror Swat Pakistan",
+     "Spinkhor is a remote highland lake. Public map data places it near Utror; route conditions, access and trekking difficulty should be checked with local guides.")
+
+if "Utror & Gabral Valleys" in DESTINATIONS:
+    DESTINATIONS["Utror & Gabral Valleys"]["highlights"] += ["Kundol Lake", "Izmis Lake and Spinkhor Lake (separate high-altitude routes)"]
+if "Desan Meadows & Upper Kalam" in DESTINATIONS:
+    DESTINATIONS["Desan Meadows & Upper Kalam"]["sources"] = [
+        {"label":"Explore Pakistan — Desan Meadows: Jeep or Hike Above Kalam","url":"https://explorepakistan.live/destinations/guides/desan-meadows","type":"Travel editorial · published 25 September 2026"},
+        {"label":"Travel Diaries Pakistan — Desan Top and Godar Lake video search","url":"https://www.youtube.com/results?search_query=Travel+Diaries+Pakistan+Desan+Top+Godar+Lake","type":"Creator-video discovery"},
+        {"label":"WildEye by ZR — Desaan Meadows Kalam (October 2026)","url":"https://www.youtube.com/watch?v=3Iisfuar19A","type":"Creator video · recent route footage"},
+        {"label":"Mapcarta / OpenStreetMap — Desan Meadows coordinates","url":"https://mapcarta.com/N6929848785","type":"Open map reference"}
+    ]
+if "Andrab Lake & Anakar Valley" in DESTINATIONS:
+    DESTINATIONS["Andrab Lake & Anakar Valley"]["sources"] = [
+        {"label":"Dawn — Track to Kalam’s Andrab Lake being cleared for tourists (27 May 2026)","url":"https://www.dawn.com/news/amp/2003323","type":"News report with access update"},
+        {"label":"Swat Valley — Andrab / Kooh Lake trek notes","url":"https://swatvalley.pk/2019/07/38590","type":"Travel editorial"},
+        {"label":"Mapcarta / OpenStreetMap — Andrab Lake coordinates","url":"https://mapcarta.com/W70800644","type":"Open map reference"}
+    ]
+if "Izmis Lake & Utror Meadows" in DESTINATIONS:
+    DESTINATIONS["Izmis Lake & Utror Meadows"]["sources"] = [
+        {"label":"Dawn — Izmis Lake in Utror valley (20 June 2019)","url":"https://www.dawn.com/news/1489357/in-pictures-mirror-like-izmis-glacial-lake-draws-tourists-to-utror-valley","type":"News / travel report"},
+        {"label":"Explore Pakistan — Treks in Swat","url":"https://explorepakistan.live/destinations/guides/treks-in-swat","type":"Travel editorial"},
+        {"label":"Mapcarta / OpenStreetMap — Izmis Lake coordinates","url":"https://mapcarta.com/W923585943","type":"Open map reference"}
+    ]
+if "Spinkhor Lake & Upper Utror" in DESTINATIONS:
+    DESTINATIONS["Spinkhor Lake & Upper Utror"]["sources"] = [
+        {"label":"Explore Pakistan — Treks in Swat","url":"https://explorepakistan.live/destinations/guides/treks-in-swat","type":"Travel editorial"},
+        {"label":"Mapcarta / OpenStreetMap — Spinkhor Lake coordinates","url":"https://mapcarta.com/W446742842","type":"Open map reference"},
+        {"label":"Government of Pakistan — Swat tourism map and booklet","url":"https://tourism.gov.pk/publications/Swat%20Booklet.pdf","type":"Official publication"}
+    ]
