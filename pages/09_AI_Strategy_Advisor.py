@@ -84,5 +84,5 @@ if st.button("Generate strategy brief", type="primary", disabled=not bool(api_ke
             st.error(str(exc))
 
 if not api_key:
-    st.info("Gemini key not detected. In Streamlit Community Cloud → this app → Settings → Secrets, set GEMINI_API_KEY = \"your key\" (or GOOGLE_API_KEY). Save and reboot this app. If the key is already present, check that it is saved on this exact deployment under one of those names; do not create a second key.")
+    st.info("No AI key detected. In Streamlit Community Cloud → this app → Settings → Secrets, set GEMINI_API_KEY = \"your key\" or GROQ_API_KEY = \"your key\". Save and reboot this app.")
 st.caption("This is strategic brainstorming, not professional investment, legal, engineering or safety advice.")
