@@ -193,4 +193,3 @@ elif app_mode == "💬 Grok Panda Corporate Agent":
                             ],
                             "temperature": 0.2
                         }
-                        
