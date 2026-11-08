@@ -63,3 +63,12 @@ jobs:
           done
           cat /tmp/horizon-streamlit.log
           exit 1
+
+      - name: Execute the default Streamlit page
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+          app = AppTest.from_file("app.py").run(timeout=45)
+          assert not app.exception, app.exception
+          print("Default Streamlit page executed without application exceptions.")
+          PY
