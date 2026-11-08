@@ -13,6 +13,13 @@ st.write(
 )
 
 api_key = get_api_key()
+if api_key:
+    st.caption("Gemini connected through app configuration.")
+else:
+    with st.expander("Use your existing Gemini key for this session"):
+        st.text_input("Existing Gemini API key", type="password", key="horizon_gemini_key")
+        st.caption("For a persistent connection, store the same key in Streamlit Secrets as GEMINI_API_KEY or GOOGLE_API_KEY.")
+    api_key = get_api_key()
 
 name = st.selectbox("Destination", list(DESTINATIONS), key="selected_destination")
 d = DESTINATIONS[name]

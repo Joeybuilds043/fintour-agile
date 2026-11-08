@@ -20,7 +20,7 @@ def get_api_key() -> str:
     candidates = [os.getenv("GEMINI_API_KEY", ""), os.getenv("GOOGLE_API_KEY", "")]
     try:
         secrets = st.secrets
-        candidates.extend([secrets.get("GEMINI_API_KEY", ""), secrets.get("GOOGLE_API_KEY", "")])
+        candidates.extend([secrets.get("GEMINI_API_KEY", ""), secrets.get("GOOGLE_API_KEY", ""), secrets.get("gemini_api_key", ""), secrets.get("google_api_key", "")])
         for section_name in ("google", "gemini"):
             section = secrets.get(section_name, {})
             if hasattr(section, "get"):
