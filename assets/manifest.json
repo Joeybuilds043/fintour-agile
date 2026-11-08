@@ -4,21 +4,29 @@
   "assets": {
     "daytime_northern_pakistan": {
       "provider": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Passu%20Cones%20and%20the%20Hunza%20River.jpg?width=2200",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Passu_Cones_and_the_Hunza_River.jpg/1280px-Passu_Cones_and_the_Hunza_River.jpg",
       "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
       "caption": "Passu Cones and the Hunza River",
-      "usage": "Hero image; crop focal point should be curator-reviewed",
-      "license_review": "Verify current file-page author and licence before production use"
+      "author": "Aly Ahmad1991",
+      "license": "CC BY-SA 4.0",
+      "focal_point": [
+        0.618,
+        0.382
+      ],
+      "usage": "Light-mode homepage hero"
     },
     "night_islamabad_cityscape": {
       "provider": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Islamabad%20-%20Cityscape.jpg?width=2200",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Islamabad_-_Cityscape.jpg/1280px-Islamabad_-_Cityscape.jpg",
       "page_url": "https://commons.wikimedia.org/wiki/File:Islamabad_-_Cityscape.jpg",
-      "caption": "Islamabad cityscape at night, viewed from a hill",
+      "caption": "Islamabad cityscape at night",
       "author": "Mohsinkhawar",
       "license": "CC BY-SA 4.0",
-      "usage": "Dark-mode hero photograph; review crop focal point",
-      "license_review": "Author Mohsinkhawar; CC BY-SA 4.0. Retain attribution and share-alike obligations."
+      "focal_point": [
+        0.52,
+        0.72
+      ],
+      "usage": "Dark-mode homepage hero"
     },
     "passu_cones_landmark": {
       "provider": "Wikimedia Commons",
@@ -32,11 +40,93 @@
     }
   },
   "palette": {
-    "alpine_blue": "#477D9B",
-    "turkish_turquoise": "#2A9D9A",
+    "primary_evergreen": "#123D2D",
+    "deep_evergreen": "#0B2B20",
     "slate": "#263746",
-    "antique_gold": "#C3A66B",
-    "warm_ivory": "#F5F1E8",
-    "night_ink": "#101D2B"
-  }
+    "antique_gold": "#C7A35B",
+    "turkish_turquoise": "#2A9D9A",
+    "alpine_blue": "#477D9B",
+    "warm_ivory": "#F4F2E9",
+    "night_ink": "#0B1713"
+  },
+  "experience_collections": [
+    {
+      "title": "Northern landscapes",
+      "category": "Mountain destinations",
+      "description": "Karakoram valleys, alpine lakes and highland journeys",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Passu_Cones_and_the_Hunza_River.jpg/1280px-Passu_Cones_and_the_Hunza_River.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
+      "author": "Aly Ahmad1991",
+      "license": "CC BY-SA 4.0",
+      "focal_point": [
+        0.618,
+        0.382
+      ]
+    },
+    {
+      "title": "Islamic & Sufi heritage",
+      "category": "Islamic & Sufi heritage",
+      "description": "Mosques, shrines, sacred architecture and living traditions",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Shrine%20of%20Shah%20Rukn-e-Alam%20Multan.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Shrine_of_Shah_Rukn-e-Alam_Multan.jpg",
+      "author": "Mhtoori",
+      "license": "CC BY-SA 4.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "title": "Sikh pilgrimage",
+      "category": "Sikh pilgrimage",
+      "description": "Gurdwaras and places associated with Guru Nanak",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gurdwara%20Nankana%20Sahib%20Janam%20Asthan.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Gurdwara_Nankana_Sahib_Janam_Asthan.jpg",
+      "author": "Harvinder Chandigarh",
+      "license": "CC BY 4.0",
+      "focal_point": [
+        0.5,
+        0.45
+      ]
+    },
+    {
+      "title": "Buddhist heritage",
+      "category": "Buddhist heritage",
+      "description": "Gandharan monasteries, stupas and archaeological landscapes",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmarajika%20stupa%2CTaxila.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Dharmarajika_stupa,Taxila.jpg",
+      "author": "Sasha Isachenko",
+      "license": "CC BY-SA 3.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "title": "Hindu heritage",
+      "category": "Hindu heritage",
+      "description": "Historic temples, sacred landscapes and pilgrimage routes",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Katas%20Raj%20Temple%20Pakistan.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Katas_Raj_Temple_Pakistan.jpg",
+      "author": "Asham Shahzad",
+      "license": "CC BY-SA 4.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "title": "Ancient civilizations",
+      "category": "Archaeology & ancient civilizations",
+      "description": "Indus Valley archaeology and the material history of place",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Archaeological%20site%20of%20Harappa.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Archaeological_site_of_Harappa.jpg",
+      "author": "M.sohailtariq",
+      "license": "CC BY-SA 3.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
+    }
+  ]
 }

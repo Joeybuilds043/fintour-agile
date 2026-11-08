@@ -41,3 +41,25 @@ def test_pdf_escapes_ampersands_in_destination_and_interests():
     )
     assert pdf.startswith(b"%PDF")
     assert len(pdf) > 1000
+
+
+
+def test_religious_tourism_is_separated_by_tradition():
+    from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
+
+    categories = {item["name"] for item in EXPERIENCE_CATEGORIES}
+    assert {"Islamic & Sufi heritage", "Sikh pilgrimage", "Buddhist heritage", "Hindu heritage"} <= categories
+    assert "Nankana Sahib & Sikh Heritage" in DESTINATIONS
+    assert "Swat Buddhist Heritage Circuit" in DESTINATIONS
+    assert "Katas Raj Temples & Salt Range" in DESTINATIONS
+    assert "Harappa & Indus Valley Archaeology" in DESTINATIONS
+    assert "Hindu heritage" not in DESTINATIONS["Harappa & Indus Valley Archaeology"]["experiences"]
+
+
+def test_upper_kalam_destinations_include_desan_and_gabral():
+    from src.catalog import DESTINATIONS
+
+    assert "Desan Meadows & Upper Kalam" in DESTINATIONS
+    assert "Utror & Gabral Valleys" in DESTINATIONS
+    assert "Matiltan & Mahodand Lake" in DESTINATIONS
+    assert DESTINATIONS["Desan Meadows & Upper Kalam"].get("sources")

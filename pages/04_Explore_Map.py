@@ -1,17 +1,19 @@
 from __future__ import annotations
 
+from urllib.parse import quote_plus
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
 from src.services.media import get_commons_image, get_display_image
+from src.services.weather import get_weather
 from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="VoyagePK | Illustrated Atlas", page_icon=None, layout="wide")
 apply_visitor_theme()
 
-st.markdown('<div class="kicker">THE HORIZON TRAVEL ATLAS</div>', unsafe_allow_html=True)
+st.markdown('<div class="kicker">THE VOYAGEPK DESTINATION ATLAS</div>', unsafe_allow_html=True)
 st.title("Pakistan, mapped by experience.")
 st.markdown(
     '<div class="lede">Move from the Karakoram to the Arabian Sea. Explore mountain regions, heritage cities, '
@@ -25,12 +27,15 @@ palette = {
     "Coastal & marine": [92, 147, 156, 235],
     "City & food": [112, 117, 122, 235],
     "Adventure & outdoors": [164, 137, 105, 235],
+    "Sacred heritage": [199, 163, 91, 245],
 }
 
 def map_theme(item: dict) -> str:
     experiences = set(item["experiences"])
     if "Coastal & marine" in experiences:
         return "Coastal & marine"
+    if any(category in experiences for category in ["Religious & archaeology", "Islamic & Sufi heritage", "Sikh pilgrimage", "Buddhist heritage", "Hindu heritage"]):
+        return "Sacred heritage"
     if "Religious & archaeology" in experiences or (
         "Culture & heritage" in experiences and "Food & gastronomy" in experiences
     ):
@@ -165,6 +170,23 @@ if available_names:
         st.subheader(selected)
         st.write(item["tagline"])
         st.caption(" · ".join(item["experiences"][:4]))
+        map_url = "https://www.google.com/maps/search/?api=1&query=" + quote_plus(selected + ", Pakistan")
+        st.markdown(f"[Open this destination in Google Maps]({map_url})")
+        unit = st.radio("Forecast temperature", ["°C", "°F"], horizontal=True, key="atlas_weather_unit")
+        forecast = get_weather(item["lat"], item["lon"], temperature_unit="fahrenheit" if unit == "°F" else "celsius")
+        if forecast and forecast.get("current"):
+            current = forecast["current"]
+            wx, wy, wz = st.columns(3)
+            wx.metric("Current temperature", f'{current.get("temperature_2m", "—")} {unit}')
+            wy.metric("Feels like", f'{current.get("apparent_temperature", "—")} {unit}')
+            wz.metric("Wind", f'{current.get("wind_speed_10m", "—")} km/h')
+            daily = forecast.get("daily", {})
+            if daily.get("time"):
+                weather_frame = pd.DataFrame({"Date": daily["time"], f"High {unit}": daily.get("temperature_2m_max", []), f"Low {unit}": daily.get("temperature_2m_min", []), "Rain chance %": daily.get("precipitation_probability_max", [])})
+                st.dataframe(weather_frame, use_container_width=True, hide_index=True)
+            st.caption("Open-Meteo model forecast · Not a road, avalanche or mountain-safety advisory.")
+        else:
+            st.caption("Weather forecast temporarily unavailable.")
         if st.button("Open destination field guide", type="primary", key="open_atlas_guide"):
             st.session_state["selected_destination"] = selected
             st.switch_page("pages/02_Destination_Guide.py")
