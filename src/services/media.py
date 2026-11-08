@@ -42,6 +42,12 @@ CURATED_FILES = [
      "Sohail Gate - Rohtas Fort by Hassan.jpg", "Hassantahir6009", "CC BY-SA 4.0", False),
     (("katas raj", "salt range", "chakwal"),
      "Katas Raj Temple 2.jpg", "Dowdoo14", "CC BY-SA 4.0", False),
+    (("multan", "shah rukn", "bahauddin zakariya"),
+     "Shrine of Shah Rukn-e-Alam Multan.jpg", "Mhtoori", "CC BY-SA 4.0", False),
+    (("hingol", "kund malir", "gwadar", "makran", "balochistan coast"),
+     "Kund Malir Beach, Hingol National Park, Balochistan.jpg", "Wikimedia Commons contributor", "See file page", False),
+    (("faisalabad", "clock tower", "ghanta ghar"),
+     "Clock Tower Faisalabad by Usman Nadeem.jpg", "Usman Nadeem", "See file page", False),
     # Regional visual references: never represented as photographs of the exact destination.
     (("mountain", "valley", "forest", "naran", "kaghan", "murree", "chitral", "kalash"),
      "Autumn color in Hunza Valley.jpg", "Ghazi Ghulamraza", "CC BY-SA 3.0", True),
