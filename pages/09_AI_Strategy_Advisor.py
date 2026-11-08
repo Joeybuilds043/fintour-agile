@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import streamlit as st
-from src.ui import apply_intelligence_theme
+from src.ui import apply_visitor_theme
 from src.catalog import DESTINATIONS
 from src.services.gemini import GeminiAPIError, generate_text, get_api_key
 
 st.set_page_config(page_title="AI Strategy Advisor | VoyagePK", page_icon=None, layout="wide")
-apply_intelligence_theme()
+apply_visitor_theme()
 st.title("AI tourism strategy advisor")
 st.write(
     "A destination-management and business-strategy assistant for tourism entrepreneurs, operators and public-sector planners."
