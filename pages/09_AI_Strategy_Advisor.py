@@ -19,7 +19,7 @@ if not api_key:
         st.session_state["horizon_gemini_key"] = entered.strip()
         api_key = entered.strip()
 
-name = st.selectbox("Destination", list(DESTINATIONS))
+name = st.selectbox("Destination", list(DESTINATIONS), key="selected_destination")
 d = DESTINATIONS[name]
 focus = st.selectbox(
     "Analysis focus",
