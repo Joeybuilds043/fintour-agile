@@ -139,7 +139,10 @@ def _curated_fallback(query: str) -> dict | None:
 @st.cache_data(ttl=86400, show_spinner=False)
 def get_commons_image(query: str) -> dict | None:
     """Return relevant high-resolution Commons photography, with a curated fallback."""
-    pexels = _curated_pexels_image(query)\n    if pexels:\n        return pexels\n    fallback = _curated_fallback(query)
+    pexels = _curated_pexels_image(query)
+    if pexels:
+        return pexels
+    fallback = _curated_fallback(query)
     # Curated destination-specific assets are faster and more predictable than
     # a fresh search request; use live Commons search only for uncovered queries.
     if fallback:
