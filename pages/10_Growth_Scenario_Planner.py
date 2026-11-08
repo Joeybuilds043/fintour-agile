@@ -1,12 +1,19 @@
 from __future__ import annotations
 import plotly.graph_objects as go
 import streamlit as st
-from src.ui import apply_intelligence_theme, style_plotly_figure
+from src.ui import apply_visitor_theme
+
+try:
+    from src.ui import style_plotly_figure
+except ImportError:  # Keep these pages usable if an older cached module is loaded.
+    def style_plotly_figure(fig, *, height: int = 390):
+        fig.update_layout(height=height, template="plotly_white")
+        return fig
 from src.catalog import DESTINATIONS
 from src.scenarios import project_destination
 
 st.set_page_config(page_title="Growth Scenario Planner | Horizon",page_icon=None,layout="wide")
-apply_intelligence_theme()
+apply_visitor_theme()
 st.title("Destination growth scenario planner")
 st.write("Compare an illustrative baseline with a strategy-led scenario. Inputs are assumptions, not official visitor forecasts.")
 name=st.selectbox("Destination",list(DESTINATIONS))

@@ -3,10 +3,17 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 from src.finance import simulate_project
-from src.ui import apply_intelligence_theme, style_plotly_figure
+from src.ui import apply_visitor_theme
+
+try:
+    from src.ui import style_plotly_figure
+except ImportError:  # Keep these pages usable if an older cached module is loaded.
+    def style_plotly_figure(fig, *, height: int = 390):
+        fig.update_layout(height=height, template="plotly_white")
+        return fig
 
 st.set_page_config(page_title="Investment Studio | VoyagePK", layout="wide")
-apply_intelligence_theme()
+apply_visitor_theme()
 st.title("Tourism investment & risk studio")
 st.write("Model a small accommodation project in a Northern Areas or cultural destination. Inputs are assumptions; outputs are scenario distributions, not forecasts or investment advice.")
 st.info("This is an assumption-led scenario model. Enter locally validated rates, occupancy, costs and capital expenditure; do not interpret model outputs as observed market data.")
