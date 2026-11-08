@@ -13,7 +13,9 @@ st.set_page_config(page_title="VoyagePK | Pakistan Unbound", page_icon=None, lay
 apply_visitor_theme()
 st.markdown("""
 <style>
-.hero-frame{border:8px solid transparent;border-image:linear-gradient(135deg,#477D9B,#2A9D9A,#C3A66B) 1;box-shadow:0 18px 44px rgba(12,34,49,.18)}
+.hero-frame{position:relative;overflow:hidden;border:8px solid transparent;border-image:linear-gradient(135deg,#477D9B,#2A9D9A,#C3A66B) 1;box-shadow:0 18px 44px rgba(12,34,49,.18)}
+.hero-frame:after{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid rgba(255,255,255,.58);background:linear-gradient(90deg,transparent 61.6%,rgba(255,255,255,.22) 61.8%,transparent 62%),linear-gradient(0deg,transparent 38%,rgba(255,255,255,.18) 38.2%,transparent 38.4%)} 
+.hero-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:61.8% 38.2%;border-radius:12px} 
 .display-title{color:var(--voyage-ink)!important;font-family:'Playfair Display',Georgia,serif;font-size:clamp(43px,5.6vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#173B3A;margin:10px 0 18px}
 .lede{font-size:16px;line-height:1.85;color:#657875;max-width:610px}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#98613F;font-weight:700}

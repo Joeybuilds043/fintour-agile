@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pandas as pd
 import streamlit as st
 from src.catalog import DESTINATIONS
 from src.itinerary import build_itinerary, build_itinerary_pdf
@@ -35,6 +36,16 @@ if weather and weather.get("current"):
                f"Feels like {current.get('apparent_temperature', '—')}{weather_unit} · "
                f"Wind {current.get('wind_speed_10m', '—')} km/h · "
                f"Forecast updated {weather.get('current', {}).get('time', 'time not supplied')}")
+    daily = weather.get("daily", {})
+    if daily.get("time"):
+        forecast_frame = pd.DataFrame({
+            "Date": daily.get("time", []),
+            f"High ({weather_unit})": daily.get("temperature_2m_max", []),
+            f"Low ({weather_unit})": daily.get("temperature_2m_min", []),
+            "Rain probability (%)": daily.get("precipitation_probability_max", []),
+        })
+        st.dataframe(forecast_frame, use_container_width=True, hide_index=True)
+
 else:
     st.caption("Live forecast unavailable. Check a trusted local forecast close to departure.")
 
@@ -46,11 +57,24 @@ packing = {
     "Autumn (Sep–Nov)": ["Layered clothing", "Closed walking shoes", "Light insulated jacket", "Rain shell"],
     "Winter (Dec–Feb)": ["Insulated jacket", "Thermal base layers", "Warm socks and gloves", "Water-resistant footwear"],
 }
-if "Mountain" in DESTINATIONS[destination]["region"] or destination in ["Hunza Valley", "Skardu"]:
+if "Gilgit-Baltistan" in DESTINATIONS[destination]["region"] or destination in ["Hunza Valley", "Skardu"]:
     packing[month] = packing[month] + ["Extra warm layer for altitude", "Check snow/road conditions and traction needs"]
+if weather and weather.get("daily"):
+    lows = weather["daily"].get("temperature_2m_min", [])
+    rain = weather["daily"].get("precipitation_probability_max", [])
+    cold_limit = 41 if weather_unit == "°F" else 5
+    cool_limit = 50 if weather_unit == "°F" else 10
+    if lows and min(lows) <= cold_limit:
+        packing[month] += ["Insulated outer layer based on the 7-day low forecast", "Warm hat and gloves"]
+    elif lows and min(lows) <= cool_limit:
+        packing[month] += ["Mid-layer for cooler mornings and evenings"]
+    if rain and max(rain) >= 40:
+        packing[month] += ["Waterproof shell and bag cover based on forecast rain probability"]
+if weather and weather.get("current", {}).get("wind_speed_10m", 0) >= 25:
+    packing[month] += ["Wind-resistant outer layer for exposed viewpoints"]
 with st.expander("Climate-adaptive packing notes", expanded=True):
     st.write(" · ".join(packing[month]))
-    st.caption("Seasonal guidance is a checklist, not a live hazard assessment. Altitude and local microclimates can change conditions substantially.")
+    st.caption("Packing combines the selected season with the available 7-day model forecast. It is not a live hazard or road-safety assessment; mountain microclimates can change conditions rapidly.")
 
 if st.button("Generate day-by-day itinerary", type="primary"):
     st.session_state["voyage_itinerary"] = build_itinerary(
