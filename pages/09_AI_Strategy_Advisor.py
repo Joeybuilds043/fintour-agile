@@ -3,7 +3,7 @@ from __future__ import annotations
 import streamlit as st
 from src.ui import apply_visitor_theme
 from src.catalog import DESTINATIONS
-from src.services.gemini import GeminiAPIError, generate_text, get_api_key
+from src.services.gemini import GeminiAPIError, generate_text, get_api_key, get_provider_name
 
 st.set_page_config(page_title="AI Strategy Advisor | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
@@ -14,7 +14,7 @@ st.write(
 
 api_key = get_api_key()
 if api_key:
-    st.caption("Gemini connected through app configuration.")
+    st.caption(f"{get_provider_name(api_key)} connected through app configuration.")
 else:
     with st.expander("Use your existing Gemini key for this session"):
         st.text_input("Existing Gemini API key", type="password", key="horizon_gemini_key")
@@ -34,7 +34,15 @@ focus = st.selectbox(
         "Local value retention and community enterprise",
     ],
 )
-ground_search = st.checkbox("Ground market and policy research with Google Search", value=False, help="Google Search grounding may add Gemini API usage charges.")
+provider_name = get_provider_name(api_key)
+ground_search = st.checkbox(
+    "Ground market and policy research with Google Search",
+    value=False,
+    disabled=(provider_name == "Groq"),
+    help="Google Search grounding is supported here only through Gemini.",
+)
+if provider_name == "Groq":
+    st.caption("Groq is active. Add GEMINI_API_KEY as well to enable Google Search grounding and automatic Gemini-first routing.")
 question = st.text_area(
     "Specific strategic question",
     placeholder="What decision are you trying to make? Include any known budget, capacity or operating constraints.",
