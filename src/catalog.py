@@ -290,4 +290,6 @@ _SOURCE_LINKS = {
 "Utror & Gabral Valleys":[{"label":"Explore Pakistan — Places to Visit in Swat","url":"https://explorepakistan.live/destinations/guides/places-to-visit-in-swat","type":"Travel editorial"},{"label":"Discover Swat — Kalam to Gabral guide","url":"https://discoverswat.com/blog/kalam-to-gabral-scenic-drive-guide/","type":"Travel editorial"}],
 "Matiltan & Mahodand Lake":[{"label":"Explore Pakistan — Places to Visit in Kalam","url":"https://explorepakistan.live/destinations/guides/places-to-visit-in-kalam","type":"Travel editorial"},{"label":"Government of Pakistan — Swat travel booklet","url":"https://tourism.gov.pk/publications/Swat%20Booklet.pdf","type":"Official publication"}]
 }
-for (const [name, sources] of Object.entries(_SOURCE_LINKS)) if (DESTINATIONS[name]) DESTINATIONS[name]["sources"] = sources
+for _name, _sources in _SOURCE_LINKS.items():
+    if _name in DESTINATIONS:
+        DESTINATIONS[_name]["sources"] = _sources
