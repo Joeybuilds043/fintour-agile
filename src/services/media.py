@@ -62,6 +62,8 @@ CURATED_FILES = [
      "Mohenjodaro - view of the stupa mound.JPG", "Saqib Qayyum", "CC BY-SA 3.0", False),
     (("peshawar", "bala hisar", "balahisar"),
      "Bala Hisar-Peshawar.JPG", "Ammad Malik-101", "CC BY-SA 3.0", False),
+    (("rawalakot", "banjosa"),
+     "Banjosa Lake 2.jpg", "Khawaja Zarrar Waheed", "CC BY-SA 4.0", False),
     (("thatta", "makli", "shah jahan mosque"),
      "Gate ways from Courtyard - Shah Jahan Mosque.jpg", "Saba Qayoom", "CC BY-SA 4.0", False),
     # Regional visual references: never represented as photographs of the exact destination.
@@ -107,8 +109,12 @@ def _curated_fallback(query: str) -> dict | None:
 def get_commons_image(query: str) -> dict | None:
     """Return relevant high-resolution Commons photography, with a curated fallback."""
     fallback = _curated_fallback(query)
-    if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1":
+    # Curated destination-specific assets are faster and more predictable than
+    # a fresh search request; use live Commons search only for uncovered queries.
+    if fallback:
         return fallback
+    if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1":
+        return None
 
     terms = _tokens(query)
     params = {
