@@ -5,7 +5,7 @@ from src.ui import apply_intelligence_theme
 from src.catalog import DESTINATIONS
 from src.services.gemini import GeminiAPIError, generate_text, get_api_key
 
-st.set_page_config(page_title="AI Strategy Advisor | Horizon", page_icon=None, layout="wide")
+st.set_page_config(page_title="AI Strategy Advisor | VoyagePK", page_icon=None, layout="wide")
 apply_intelligence_theme()
 st.title("AI tourism strategy advisor")
 st.write(
@@ -13,11 +13,6 @@ st.write(
 )
 
 api_key = get_api_key()
-if not api_key:
-    entered = st.text_input("Optional Gemini API key for this session", type="password")
-    if entered:
-        st.session_state["horizon_gemini_key"] = entered.strip()
-        api_key = entered.strip()
 
 name = st.selectbox("Destination", list(DESTINATIONS), key="selected_destination")
 d = DESTINATIONS[name]
@@ -32,6 +27,7 @@ focus = st.selectbox(
         "Local value retention and community enterprise",
     ],
 )
+ground_search = st.checkbox("Ground market and policy research with Google Search", value=False, help="Google Search grounding may add Gemini API usage charges.")
 question = st.text_area(
     "Specific strategic question",
     placeholder="What decision are you trying to make? Include any known budget, capacity or operating constraints.",
@@ -60,6 +56,7 @@ if st.button("Generate strategy brief", type="primary", disabled=not bool(api_ke
                 temperature=0.2,
                 max_output_tokens=1600,
                 timeout=(10, 75),
+                google_search=ground_search,
             )
             st.markdown(answer)
             st.download_button(
@@ -72,5 +69,5 @@ if st.button("Generate strategy brief", type="primary", disabled=not bool(api_ke
             st.error(str(exc))
 
 if not api_key:
-    st.info("AI is optional. Add GEMINI_API_KEY in Streamlit Community Cloud Secrets to enable this workspace.")
+    st.info("Gemini key not detected. In Streamlit Community Cloud → this app → Settings → Secrets, set GEMINI_API_KEY = \"your key\" (or GOOGLE_API_KEY). Save and reboot this app. If the key is already present, check that it is saved on this exact deployment under one of those names; do not create a second key.")
 st.caption("This is strategic brainstorming, not professional investment, legal, engineering or safety advice.")
