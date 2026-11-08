@@ -4,6 +4,7 @@ import streamlit as st
 
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
 from src.services.media import get_commons_image, get_display_image
+from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="Discover Pakistan | Horizon", page_icon=None, layout="wide")
 st.markdown("""
@@ -24,6 +25,8 @@ div[data-testid="stButton"]>button{border-radius:30px;background:#183B3B;color:w
 @media(max-width:700px){.block-container{padding:1rem}}
 </style>
 """, unsafe_allow_html=True)
+
+apply_visitor_theme()
 
 st.markdown('<div class="kicker">THE HORIZON DESTINATION COLLECTION</div>', unsafe_allow_html=True)
 st.title("Find the Pakistan you want to experience.")
@@ -68,7 +71,7 @@ else:
                 with st.container(border=True):
                     image = get_commons_image(item["image_query"])
                     if image:
-                        st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
+                        st.image(get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5)) or image["thumb_url"], use_container_width=True)
                         st.caption(f'{image["artist"]} · {image["license"]} · [File details & attribution]({image["page_url"]})' + (' · Illustrative regional reference' if image.get('illustrative') else ''))
                     else:
                         st.markdown('<div style="height:190px;border-radius:15px;background:linear-gradient(135deg,#EEE9DF,#D9C8B7);display:flex;align-items:center;justify-content:center;color:#183B3B;font-family:Georgia,serif">Destination image unavailable</div>', unsafe_allow_html=True)

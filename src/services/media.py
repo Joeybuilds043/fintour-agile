@@ -14,7 +14,7 @@ from urllib.parse import quote
 
 import requests
 import streamlit as st
-from PIL import Image, ImageEnhance, ImageOps
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 
 STOP_WORDS = {"pakistan", "the", "and", "with", "from", "view", "photo", "image", "file"}
@@ -98,7 +98,7 @@ def _curated_fallback(query: str) -> dict | None:
     page_name = quote(filename.replace(" ", "_"))
     return {
         "title": filename,
-        "thumb_url": f"https://commons.wikimedia.org/wiki/Special:FilePath/{encoded}?width=1600",
+        "thumb_url": f"https://commons.wikimedia.org/wiki/Special:FilePath/{encoded}?width=2000",
         "page_url": f"https://commons.wikimedia.org/wiki/File:{page_name}",
         "license": licence,
         "license_url": ("https://creativecommons.org/licenses/by-sa/4.0/" if "4.0" in licence else "https://creativecommons.org/licenses/by-sa/3.0/" if "3.0" in licence else f"https://commons.wikimedia.org/wiki/File:{page_name}"),
@@ -125,7 +125,7 @@ def get_commons_image(query: str) -> dict | None:
         "action": "query", "generator": "search",
         "gsrsearch": f"filetype:bitmap {query}", "gsrnamespace": 6,
         "gsrlimit": 40, "prop": "imageinfo",
-        "iiprop": "url|extmetadata", "iiurlwidth": 1600, "format": "json",
+        "iiprop": "url|extmetadata", "iiurlwidth": 2000, "format": "json",
     }
     headers = {
         "User-Agent": "HorizonTourism/1.0 (educational destination guide; contact via GitHub repository)",
@@ -153,17 +153,17 @@ def get_commons_image(query: str) -> dict | None:
         artist = _plain(meta.get("Artist", {}).get("value", "")) or "Attribution not supplied"
         width, height = int(info.get("width", 0) or 0), int(info.get("height", 0) or 0)
         mime = info.get("mime", "")
-        if not (description_url and thumb_url and licence and width >= 1000 and height >= 600):
+        if not (description_url and thumb_url and licence and width >= 1400 and height >= 800):
             continue
         if mime not in {"image/jpeg", "image/png", "image/webp"}:
             continue
         ratio = width / max(height, 1)
-        if not 1.08 <= ratio <= 2.6:
+        if not 1.2 <= ratio <= 2.2:
             continue
         overlap = len(terms & _tokens(title))
         if overlap == 0:
             continue
-        score = overlap * 10 + (2 if 1.25 <= ratio <= 1.9 else 0) + (1 if width >= 1800 else 0)
+        score = overlap * 10 + (2 if 1.4 <= ratio <= 1.9 else 0) + (1 if width >= 1800 else 0)
         if any(word in title.lower() for word in ("map", "logo", "flag", "diagram", "coat of arms")):
             score -= 30
         candidates.append((score, {
@@ -179,8 +179,16 @@ def get_commons_image(query: str) -> dict | None:
 
 
 @st.cache_data(ttl=86400, show_spinner=False)
-def get_display_image(image_url: str) -> bytes | None:
-    """Apply restrained colour, contrast and sharpness correction for display."""
+def get_display_image(
+    image_url: str,
+    aspect_ratio: tuple[int, int] = (16, 9),
+    focal_point: tuple[float, float] = (0.5, 0.5),
+) -> bytes | None:
+    """Crop consistently for editorial cards and apply restrained photo finishing.
+
+    focal_point uses normalized (x, y) coordinates from 0 to 1 so a curator can
+    position the crop around a subject instead of relying on arbitrary CSS.
+    """
     if not image_url or os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1":
         return None
     try:
@@ -190,13 +198,26 @@ def get_display_image(image_url: str) -> bytes | None:
         )
         response.raise_for_status()
         image = ImageOps.exif_transpose(Image.open(BytesIO(response.content))).convert("RGB")
-        image.thumbnail((1800, 1200), Image.Resampling.LANCZOS)
-        image = ImageEnhance.Color(image).enhance(1.07)
-        image = ImageEnhance.Contrast(image).enhance(1.045)
-        image = ImageEnhance.Brightness(image).enhance(1.01)
-        image = ImageEnhance.Sharpness(image).enhance(1.06)
+        width, height = image.size
+        ratio = max(0.2, aspect_ratio[0] / max(aspect_ratio[1], 1))
+        if width / max(height, 1) > ratio:
+            crop_width = int(height * ratio)
+            left = int(width * min(max(focal_point[0], 0), 1) - crop_width / 2)
+            left = min(max(left, 0), width - crop_width)
+            image = image.crop((left, 0, left + crop_width, height))
+        else:
+            crop_height = int(width / ratio)
+            top = int(height * min(max(focal_point[1], 0), 1) - crop_height / 2)
+            top = min(max(top, 0), height - crop_height)
+            image = image.crop((0, top, width, top + crop_height))
+        image.thumbnail((1800, 1100), Image.Resampling.LANCZOS)
+        image = ImageOps.autocontrast(image, cutoff=0.35)
+        image = ImageEnhance.Color(image).enhance(1.045)
+        image = ImageEnhance.Contrast(image).enhance(1.035)
+        image = ImageEnhance.Brightness(image).enhance(1.005)
+        image = image.filter(ImageFilter.UnsharpMask(radius=1.1, percent=105, threshold=3))
         output = BytesIO()
-        image.save(output, format="JPEG", quality=90, optimize=True, progressive=True)
+        image.save(output, format="JPEG", quality=92, optimize=True, progressive=True)
         return output.getvalue()
     except (requests.RequestException, OSError, ValueError):
         return None
