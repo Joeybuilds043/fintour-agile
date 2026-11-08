@@ -7,7 +7,7 @@ import requests
 import streamlit as st
 
 
-DEFAULT_MODEL = os.getenv("HORIZON_GEMINI_MODEL", "gemini-3.6-flash")
+DEFAULT_MODEL = os.getenv("HORIZON_GEMINI_MODEL", "gemini-3.8-flash")
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
 
@@ -17,14 +17,19 @@ class GeminiAPIError(RuntimeError):
 
 def get_api_key() -> str:
     """Read the key from Streamlit Secrets, with an optional session-only fallback."""
-    candidates = [os.getenv("GEMINI_API_KEY", ""), os.getenv("GOOGLE_API_KEY", "")]
+    secret_names = ("GEMINI_API_KEY", "GOOGLE_API_KEY", "GOOGLE_GENAI_API_KEY", "GOOGLE_AI_API_KEY", "gemini_api_key", "google_api_key", "google_genai_api_key", "api_key")
+    candidates = [os.getenv(name, "") for name in secret_names]
     try:
         secrets = st.secrets
-        candidates.extend([secrets.get("GEMINI_API_KEY", ""), secrets.get("GOOGLE_API_KEY", ""), secrets.get("gemini_api_key", ""), secrets.get("google_api_key", "")])
-        for section_name in ("google", "gemini"):
+        candidates.extend(secrets.get(name, "") for name in secret_names)
+        for section_name in ("google", "gemini", "genai"):
             section = secrets.get(section_name, {})
             if hasattr(section, "get"):
-                candidates.extend([section.get("api_key", ""), section.get("GEMINI_API_KEY", "")])
+                candidates.extend(section.get(name, "") for name in secret_names)
+        # Accept case variants in Streamlit Secrets without exposing their values.
+        for key, value in secrets.items():
+            if str(key).casefold() in {name.casefold() for name in secret_names}:
+                candidates.append(value)
     except Exception:
         pass
     candidates.append(st.session_state.get("horizon_gemini_key", ""))
