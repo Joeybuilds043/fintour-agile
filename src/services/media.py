@@ -69,7 +69,10 @@ def get_commons_image(query: str) -> dict | None:
         if not 1.08 <= ratio <= 2.6:
             continue
         title_tokens = _tokens(title)
-        score = len(terms & title_tokens) * 10
+        overlap = len(terms & title_tokens)
+        if overlap == 0:
+            continue
+        score = overlap * 10
         score += 2 if 1.25 <= ratio <= 1.9 else 0
         score += 1 if width >= 1800 else 0
         if any(word in title.lower() for word in ("map", "logo", "flag", "diagram", "coat of arms", "location map")):
