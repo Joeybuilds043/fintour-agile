@@ -13,14 +13,14 @@ st.markdown("""
 .block-container{max-width:1480px;padding-top:1.4rem}
 h1,h2,h3{color:#183B3B!important;font-family:'Playfair Display',Georgia,serif!important}
 .kicker{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#A85F3C;font-weight:700}
-.lede{font-size:15px;line-height:1.8;color:#687a7e;max-width:800px}
-.card-title{font-family:'Playfair Display',Georgia,serif;font-size:23px;color:#193840;margin:7px 0 2px}
-.card-meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#718184}
-.card-copy{font-size:13px;line-height:1.65;color:#6c7c7f;min-height:42px}
+.lede{font-size:15px;line-height:1.8;color:#687976;max-width:800px}
+.card-title{font-family:'Playfair Display',Georgia,serif;font-size:23px;color:#183B3B;margin:7px 0 2px}
+.card-meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#687976}
+.card-copy{font-size:13px;line-height:1.65;color:#687976;min-height:42px}
 .card-tags{font-size:11px;color:#183B3B;line-height:1.6}
 div[data-testid="stImage"] img{border-radius:15px;object-fit:cover;filter:saturate(1.08) contrast(1.04)}
 div[data-testid="stVerticalBlockBorderWrapper"]{background:#FFFCF6;border-color:#E5DED2;border-radius:18px}
-div[data-testid="stButton"]>button{border-radius:30px;background:#176b70;color:white;border:1px solid #176b70}
+div[data-testid="stButton"]>button{border-radius:30px;background:#183B3B;color:white;border:1px solid #183B3B}
 @media(max-width:700px){.block-container{padding:1rem}}
 </style>
 """, unsafe_allow_html=True)
