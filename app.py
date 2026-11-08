@@ -1,880 +1,291 @@
+from __future__ import annotations
 
-import streamlit as st
+from typing import Any
+import pandas as pd
 import plotly.graph_objects as go
 import requests
+import streamlit as st
 
-# =========================================================
-# 1. APPLICATION CONFIGURATION
-# =========================================================
-
-st.set_page_config(
-    page_title="EcoRoute AI | Infrastructure Intelligence",
-    page_icon="🐼",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-APP_NAME = "EcoRoute AI"
-XAI_ENDPOINT = "https://api.x.ai/v1/chat/completions"
+st.set_page_config(page_title="Horizon Tourism | Destination Growth Studio", page_icon="H", layout="wide", initial_sidebar_state="expanded")
+APP_NAME = "Horizon Tourism"
+XAI_URL = "https://api.x.ai/v1/chat/completions"
 XAI_MODEL = "latest"
 
-NODES = {
-    "Supply Core — Lahore": {
-        "lat": 31.5204,
-        "lon": 74.3587,
-        "type": "Supply Core"
-    },
-    "Saturated Node — Murree": {
-        "lat": 33.9070,
-        "lon": 73.3943,
-        "type": "High Demand"
-    },
-    "Overburdened Ecosystem — Kaghan": {
-        "lat": 34.5412,
-        "lon": 73.3512,
-        "type": "High Demand"
-    },
-    "Under-utilized Market — Skardu": {
-        "lat": 35.2974,
-        "lon": 75.6322,
-        "type": "Growth Opportunity"
-    }
+DESTINATIONS: dict[str, dict[str, Any]] = {
+    "Hunza Valley": {"region":"Gilgit-Baltistan","type":"Mountain / culture","lat":36.3167,"lon":74.6500,"season":"April–October; shoulder-season potential","baseline_visitors":180000,"avg_spend":26000,"local_capture":48,"opportunity":7.0,"risk":"Road disruption, water stress, waste pressure and seasonal concentration.","strategy":"Increase visitor value and extend the season rather than maximizing peak-season arrivals.","initiatives":["Village-owned homestay and experience network with common quality standards","Spring and autumn culture, food and orchard itineraries to spread demand","Digital booking inventory for guides, transport, stays and community experiences","Waste-return incentives, refill stations and local-produce procurement agreements"],"innovation":"A destination marketplace bundling verified local experiences, transport and stays with transparent community revenue sharing.","kpis":"Average spend per visitor, shoulder-season occupancy, local procurement share, waste collected per visitor."},
+    "Skardu": {"region":"Gilgit-Baltistan","type":"Adventure / mountain","lat":35.2971,"lon":75.6333,"season":"May–October; winter products need careful readiness","baseline_visitors":220000,"avg_spend":34000,"local_capture":42,"opportunity":8.0,"risk":"Access disruption, emergency-response gaps, fragile landscapes and high peak-season loads.","strategy":"Build a higher-yield, safer adventure destination with longer itineraries and stronger local supplier capacity.","initiatives":["Integrated trekking, lake and heritage passes with licensed guide allocation","Porter welfare, guide certification, rescue coordination and safety protocols","Pre-booked transport and visitor-flow management for high-pressure sites","Local food, equipment rental and repair partnerships that retain visitor spend"],"innovation":"A digital adventure operations platform linking permits, weather alerts, verified guides, emergency contacts and responsible operator capacity.","kpis":"Average trip length, spend per visitor, licensed-guide participation, incident response time, local supplier share."},
+    "Naran–Kaghan": {"region":"Khyber Pakhtunkhwa","type":"Alpine valley / road trip","lat":34.9090,"lon":73.6500,"season":"May–September","baseline_visitors":450000,"avg_spend":14500,"local_capture":38,"opportunity":6.5,"risk":"Traffic congestion, waste accumulation, road closures and unplanned construction.","strategy":"Manage peak demand through mobility, site capacity and a more organized visitor economy.","initiatives":["Park-and-ride hubs with scheduled electric or low-emission shuttles","Timed parking and digital occupancy information for high-demand access points","Trail, lake and village circuits that distribute spending beyond the main bazaar","Operator standards for waste handling, water use and visitor safety"],"innovation":"A live mobility and crowd-management layer using parking reservations, shuttle dispatch and visitor information.","kpis":"Average road delay, shuttle share, visitor spend outside the main hub, waste collection coverage."},
+    "Swat Valley": {"region":"Khyber Pakhtunkhwa","type":"Nature / heritage / family","lat":35.2220,"lon":72.4258,"season":"March–November","baseline_visitors":520000,"avg_spend":12500,"local_capture":44,"opportunity":7.0,"risk":"River safety, flood exposure, uneven service quality and concentration around a few resorts.","strategy":"Position Swat as a year-round valley destination connecting nature, heritage, food and community experiences.","initiatives":["Curated heritage, archaeology, craft and food routes with local guides","Quality accreditation for family stays, restaurants and adventure operators","River-safety information, marked access zones and emergency response partnerships","Community-led farm, craft and cultural experiences outside peak resort clusters"],"innovation":"A verified valley pass and itinerary planner linking attractions, transport, stays and local experiences.","kpis":"Non-peak occupancy, visitor satisfaction, certified business share, average length of stay."},
+    "Murree": {"region":"Punjab","type":"Hill station / short break","lat":33.9070,"lon":73.3943,"season":"Year-round; strongest holiday and summer peaks","baseline_visitors":1600000,"avg_spend":10500,"local_capture":52,"opportunity":5.5,"risk":"Severe peak congestion, parking constraints, waste, service inflation and weather disruption.","strategy":"Shift from volume-led day trips toward managed access, longer stays and higher-quality visitor services.","initiatives":["Pre-booked parking and park-and-ride with clear peak-day access information","Dispersal itineraries connecting Patriata, nearby villages and nature trails","Transparent hotel and restaurant standards with digital complaint resolution","Off-peak events and packaged two-night stays to improve weekday utilization"],"innovation":"A demand-management system combining parking reservations, shuttle capacity and visitor alerts.","kpis":"Peak travel time, average length of stay, weekday occupancy, visitor complaints per 1,000 trips."},
+    "Neelum Valley": {"region":"Azad Jammu & Kashmir","type":"River / mountain / eco-tourism","lat":34.5850,"lon":73.9070,"season":"April–October","baseline_visitors":260000,"avg_spend":16000,"local_capture":50,"opportunity":7.5,"risk":"Road access vulnerability, landslides, river hazards and limited waste services.","strategy":"Develop low-impact community tourism with reliable safety information and distributed local enterprise.","initiatives":["Community-owned accommodation clusters with minimum environmental standards","River and trail safety protocols, trained local responders and clear hazard notices","Local guide, transport and food directories with bookable itineraries","Visitor contributions ring-fenced for waste, trail maintenance and conservation"],"innovation":"A community destination cooperative coordinating bookings, standards and shared infrastructure investment.","kpis":"Community revenue share, certified stays, safety incidents, waste recovery rate."},
+    "Chitral & Kalash Valleys": {"region":"Khyber Pakhtunkhwa","type":"Culture / mountain / heritage","lat":35.8510,"lon":71.7864,"season":"May–October; festival periods require advance planning","baseline_visitors":135000,"avg_spend":22000,"local_capture":58,"opportunity":8.0,"risk":"Cultural commodification, access constraints, fragile heritage and uneven local benefit.","strategy":"Protect cultural integrity while increasing locally retained value through small-group, experience-led tourism.","initiatives":["Community-approved visitor protocols and consent-led cultural interpretation","Small-group guided heritage, craft, food and landscape experiences","Festival capacity plans and advance accommodation coordination","Local artisan marketplace with fair pricing and transparent commissions"],"innovation":"A community-governed cultural tourism charter and booking network with local control over experiences and capacity.","kpis":"Local revenue retention, community satisfaction, small-group participation, heritage compliance."},
+    "Lahore": {"region":"Punjab","type":"Urban / food / heritage","lat":31.5204,"lon":74.3587,"season":"October–March; indoor and evening products year-round","baseline_visitors":1200000,"avg_spend":18000,"local_capture":62,"opportunity":8.0,"risk":"Fragmented visitor information, congestion at heritage cores and inconsistent interpretation.","strategy":"Convert Lahore's heritage and food assets into bookable, higher-value multi-day visitor journeys.","initiatives":["Integrated heritage, food and craft passes across the Walled City and major museums","Evening walking tours and curated food trails with licensed local guides","Multilingual interpretation, digital ticketing and accessible visitor information","Hotel, restaurant and attraction bundles that encourage longer stays"],"innovation":"A city tourism pass with timed entry, audio interpretation, route discovery and partner revenue settlement.","kpis":"Attraction conversion, spend per visitor, average stay, digital pass usage, local guide earnings."},
+    "Taxila": {"region":"Punjab","type":"Archaeology / education / heritage","lat":33.7460,"lon":72.8390,"season":"October–April; school and university calendar opportunities","baseline_visitors":90000,"avg_spend":9500,"local_capture":45,"opportunity":7.0,"risk":"Low dwell time, limited interpretation, conservation funding and fragmented site experiences.","strategy":"Build a connected heritage-learning destination that increases dwell time without compromising conservation.","initiatives":["Combined museum and archaeological-site passes with trained interpretation","University, school and specialist research itineraries","Digital storytelling and site interpretation in multiple languages","Local craft, food and guide partnerships with a conservation contribution"],"innovation":"A digital heritage layer with audio guides, learning trails, timed visits and conservation-linked ticketing.","kpis":"Average dwell time, guided-tour uptake, education-group visits, conservation contribution."},
+    "Gwadar & Hingol Coast": {"region":"Balochistan","type":"Coastal / desert / nature","lat":25.1260,"lon":62.3220,"season":"October–March","baseline_visitors":80000,"avg_spend":24000,"local_capture":46,"opportunity":8.5,"risk":"Remote access, water scarcity, environmental sensitivity, safety and limited visitor services.","strategy":"Create a carefully managed coastal circuit with local operators, safety standards and environmental safeguards.","initiatives":["Small-group coastal and desert circuits with licensed local operators","Water-aware accommodation and waste-backhaul requirements","Boat, road and weather safety protocols with verified operator information","Local seafood, crafts and community experiences integrated into itineraries"],"innovation":"A low-impact coastal circuit marketplace linking verified operators, safety updates and conservation fees.","kpis":"Local operator earnings, water use per guest, safety compliance, waste removed, visitor spend."},
 }
 
-SYSTEM_CONTEXT = """
-You are Pandy AI, an enterprise-grade Corporate Strategy,
-Infrastructure and Innovation Consultant.
-
-Your expertise includes:
-- Tourism infrastructure and destination management
-- Supply chain optimization
-- Regional resource allocation
-- Public-private partnerships
-- Innovation management
-- Sustainable economic development
-- Operational risk management
-- Capital allocation
-
-Provide commercially realistic, evidence-conscious and actionable
-recommendations.
-
-Structure substantial answers using:
-1. Executive Assessment
-2. Root Cause Analysis
-3. Strategic Recommendations
-4. Implementation Roadmap
-5. Risks and Mitigations
-6. Performance Indicators
-
-Distinguish supplied facts from assumptions.
-Never fabricate statistics, research findings or live market data.
-Use professional business language.
-"""
-
-# =========================================================
-# 2. CUSTOM ENTERPRISE DESIGN SYSTEM
-# =========================================================
+GB_MONTHS = ["Jan","Feb","Mar","Apr","May","Jun"]
+GB_2026 = {
+    "Skardu":[1890,4072,7412,20312,25460,38542],"Gilgit":[1762,3054,4581,16521,19520,31290],
+    "Astore":[860,912,1027,13266,15690,32310],"Hunza":[1840,3821,5780,18241,20313,36980],
+    "Diamer":[10275,12560,13675,18932,19870,51732],"Nagar":[618,924,1036,1027,1183,1178],
+    "Ghanche":[109,245,374,1269,1494,2002],"Ghizer":[822,923,1287,752,1263,2364],
+    "Shigar":[203,378,402,2001,2965,3652],"Kharmang":[21,46,51,328,570,630],
+}
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
-:root {
-    --bg: #080D18;
-    --surface: #101A2B;
-    --surface-2: #142137;
-    --border: #24344B;
-    --text: #E8EEF8;
-    --muted: #91A2BA;
-    --blue: #38BDF8;
-    --cyan: #67E8F9;
-    --amber: #FBBF24;
-    --red: #FB7185;
-}
-
-html, body, [data-testid="stAppViewContainer"] {
-    background: var(--bg) !important;
-    color: var(--text) !important;
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-}
-
-[data-testid="stHeader"] {
-    background: transparent !important;
-}
-
-[data-testid="stSidebar"] {
-    background: #0B1423 !important;
-    border-right: 1px solid var(--border);
-}
-
-[data-testid="stSidebar"] * {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.block-container {
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-    max-width: 1550px;
-}
-
-h1, h2, h3, h4 {
-    color: var(--text) !important;
-    letter-spacing: -0.6px;
-}
-
-p, label {
-    color: var(--muted);
-}
-
-.eyebrow {
-    color: var(--blue);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 10px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.hero-title {
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    color: #F1F5F9;
-    margin-bottom: 5px;
-}
-
-.hero-subtitle {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-}
-
-.panel-card {
-    background: linear-gradient(145deg, #142137, #101A2B);
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 21px;
-    margin-bottom: 14px;
-}
-
-.panel-label {
-    color: var(--muted);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.1px;
-    font-weight: 700;
-}
-
-.panel-value {
-    color: var(--text);
-    font-size: 27px;
-    font-weight: 800;
-    margin-top: 9px;
-}
-
-.panel-note {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 5px;
-}
-
-.status-pill {
-    display: inline-block;
-    padding: 6px 11px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    margin-top: 10px;
-}
-
-.status-good {
-    color: #67E8C1;
-    background: rgba(16,185,129,0.12);
-}
-
-.status-warning {
-    color: #FCD34D;
-    background: rgba(245,158,11,0.12);
-}
-
-.status-critical {
-    color: #FDA4AF;
-    background: rgba(244,63,94,0.12);
-}
-
-.brand-mark {
-    font-size: 22px;
-    font-weight: 800;
-    color: #67E8F9;
-    letter-spacing: -1px;
-}
-
-.brand-subtitle {
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 4px;
-}
-
-.section-heading {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
-}
-
-div[data-testid="stButton"] > button {
-    background: #14243B;
-    color: #DCEBFA;
-    border: 1px solid #30445F;
-    border-radius: 9px;
-    min-height: 43px;
-    font-weight: 600;
-    transition: all .2s ease;
-}
-
-div[data-testid="stButton"] > button:hover {
-    background: #1C3654;
-    border-color: var(--blue);
-    color: white;
-}
-
-div[data-testid="stChatInput"] {
-    border-color: #30445F !important;
-}
-
-[data-testid="stMetric"] {
-    background: #101A2B;
-    padding: 15px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
-[data-testid="stMetricLabel"] {
-    color: var(--muted) !important;
-}
-
-[data-testid="stMetricValue"] {
-    color: var(--text) !important;
-}
-
-div[data-baseweb="select"] > div,
-div[data-baseweb="input"] > div {
-    background: #101A2B;
-    border-color: #30445F;
-}
-
-hr {
-    border-color: var(--border);
-}
-
-footer {
-    visibility: hidden;
-}
-
-@media(max-width: 768px) {
-    .hero-title {
-        font-size: 27px;
-    }
-    .block-container {
-        padding-top: 1rem;
-    }
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+:root{--bg:#0b1220;--panel:#111d30;--line:#263750;--ink:#edf3fb;--muted:#98a9bf;--blue:#62b5e5}
+html,body,[data-testid="stAppViewContainer"]{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}
+[data-testid="stHeader"]{background:transparent}[data-testid="stSidebar"]{background:#0d1728;border-right:1px solid var(--line)}
+.block-container{max-width:1500px;padding-top:2rem;padding-bottom:3rem}
+h1,h2,h3,h4{color:var(--ink)!important;letter-spacing:-.5px}p,label{color:var(--muted)}
+.hero{font-size:34px;font-weight:800;letter-spacing:-1.5px;color:var(--ink);margin:2px 0 4px}
+.subhero{font-size:13px;color:var(--muted);line-height:1.7}.eyebrow{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;font-weight:800;color:var(--blue);margin-bottom:7px}
+.panel{background:linear-gradient(145deg,#16243a,#111d30);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700}.kpi-value{font-size:25px;font-weight:800;color:var(--ink);margin-top:7px}.kpi-note{font-size:11px;color:var(--muted);margin-top:3px}
+.tag{display:inline-block;border:1px solid #38506d;border-radius:20px;padding:4px 9px;color:#b9d9ef;font-size:10px;margin:3px 4px 3px 0}
+div[data-testid="stButton"]>button{background:#172a42;color:#e9f2fb;border:1px solid #344b68;border-radius:9px;min-height:40px;font-weight:600}
+div[data-testid="stButton"]>button:hover{background:#203b59;border-color:var(--blue);color:white}
+[data-testid="stMetric"]{background:#111d30;border:1px solid var(--line);border-radius:12px;padding:13px}
+[data-testid="stMetricLabel"]{color:var(--muted)!important}[data-testid="stMetricValue"]{color:var(--ink)!important}
+hr{border-color:var(--line)}footer{visibility:hidden}
+@media(max-width:768px){.hero{font-size:27px}.block-container{padding-top:1rem}}
 </style>
 """, unsafe_allow_html=True)
 
 
-# =========================================================
-# 3. HELPER FUNCTIONS
-# =========================================================
-
-def get_api_key():
-    """Read the xAI key from Streamlit Secrets."""
-    try:
-        key = st.secrets.get("GROK_API_KEY", "")
-        if key:
-            return key
-    except Exception:
-        pass
-
-    return st.session_state.get("temporary_api_key", "")
+def money_pkr(value: float) -> str:
+    if value >= 1_000_000_000:
+        return f"PKR {value / 1_000_000_000:,.2f}bn"
+    if value >= 1_000_000:
+        return f"PKR {value / 1_000_000:,.1f}m"
+    return f"PKR {value:,.0f}"
 
 
-def get_efficiency_status(index):
-    """Return a transparent simulation status."""
-    if index < 50:
-        return "Critical Capacity Gap", "status-critical"
+def scenario_projection(visitors: int, spend: int, base_growth: float, strategy_uplift: float, execution: int, local_capture: int, years: int = 5) -> pd.DataFrame:
+    """Illustrative scenario model, not an observed forecast."""
+    rows = []
+    for year in range(years + 1):
+        baseline = visitors * ((1 + base_growth / 100) ** year)
+        strategy = visitors * ((1 + (base_growth + strategy_uplift * execution / 100) / 100) ** year)
+        rows.append({
+            "Year": year, "Baseline visitors": round(baseline), "Strategy visitors": round(strategy),
+            "Baseline spend (PKR bn)": baseline * spend / 1_000_000_000,
+            "Strategy spend (PKR bn)": strategy * spend / 1_000_000_000,
+            "Local value retained (PKR bn)": strategy * spend * local_capture / 100 / 1_000_000_000,
+        })
+    return pd.DataFrame(rows)
 
-    if index < 80:
-        return "Elevated Capacity Risk", "status-warning"
 
-    return "Adequate Capacity Coverage", "status-good"
-
-
-def create_allocation_map(target):
-    """Create a regional infrastructure allocation map."""
-
-    supply = NODES["Supply Core — Lahore"]
-    destination = NODES[target]
-
+def make_projection_chart(df: pd.DataFrame, metric: str, title: str) -> go.Figure:
+    is_visitors = metric == "visitors"
+    columns = [("Baseline visitors","Baseline / no new programme"),("Strategy visitors","With strategy programme")] if is_visitors else [("Baseline spend (PKR bn)","Baseline / no new programme"),("Strategy spend (PKR bn)","With strategy programme")]
     fig = go.Figure()
-
-    # Connection corridor
-    fig.add_trace(go.Scattermap(
-        lat=[supply["lat"], destination["lat"]],
-        lon=[supply["lon"], destination["lon"]],
-        mode="lines",
-        line=dict(color="#FBBF24", width=3),
-        hoverinfo="skip",
-        showlegend=False
-    ))
-
-    # All regional nodes
-    for name, node in NODES.items():
-
-        is_selected = name == target
-        is_supply = name == "Supply Core — Lahore"
-
-        color = (
-            "#67E8F9" if is_supply
-            else "#FBBF24" if is_selected
-            else "#64748B"
-        )
-
-        fig.add_trace(go.Scattermap(
-            lat=[node["lat"]],
-            lon=[node["lon"]],
-            mode="markers+text",
-            text=[name.split("—")[-1].strip()],
-            textposition="top right",
-            marker=dict(
-                size=17 if is_selected or is_supply else 11,
-                color=color
-            ),
-            name=name,
-            hovertemplate=f"<b>{name}</b><extra></extra>"
-        ))
-
-    fig.update_layout(
-        map=dict(
-            style="carto-darkmatter",
-            center=dict(lat=33.5, lon=74.5),
-            zoom=5.2
-        ),
-        height=440,
-        margin=dict(l=0, r=0, t=5, b=0),
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#DCEBFA"),
-        showlegend=False
-    )
-
+    for column,label in columns:
+        fig.add_trace(go.Scatter(x=df["Year"],y=df[column],mode="lines+markers",name=label,line=dict(width=3),marker=dict(size=7)))
+    fig.update_layout(title=dict(text=title,font=dict(size=15)),height=340,margin=dict(l=12,r=12,t=48,b=12),paper_bgcolor="rgba(0,0,0,0)",plot_bgcolor="rgba(0,0,0,0)",font=dict(color="#dce7f4",family="DM Sans"),xaxis=dict(title="Year from programme start",gridcolor="#263750",dtick=1),yaxis=dict(gridcolor="#263750",zeroline=False),legend=dict(orientation="h",y=-0.23),hovermode="x unified")
     return fig
 
 
-def request_grok(api_key, conversation):
-    """Submit the conversation to xAI and validate the response."""
+def get_api_key() -> str:
+    try:
+        key = st.secrets.get("GROK_API_KEY", "")
+        if key:
+            return str(key).strip()
+    except Exception:
+        pass
+    return st.session_state.get("temporary_api_key", "")
 
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
 
-    # Limit conversation history to control token usage.
-    recent_messages = conversation[-12:]
-
-    payload = {
-        "model": XAI_MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_CONTEXT},
-            *recent_messages
-        ],
-        "temperature": 0.2,
-        "max_tokens": 1800
-    }
-
-    response = requests.post(
-        XAI_ENDPOINT,
-        headers=headers,
-        json=payload,
-        timeout=(10, 90)
+def ask_grok(api_key: str, destination: str, question: str, context: str) -> str:
+    system = (
+        "You are Horizon Tourism's senior tourism investment and destination-management advisor. "
+        "Advise destination management organizations, operators, investors and local government. "
+        "Be commercially rigorous and specific. Prioritize local value capture, carrying capacity, service quality, "
+        "seasonality, climate resilience, community consent, conservation and measurable unit economics. "
+        "Never invent visitor statistics, market sizes, government approvals or research citations. "
+        "Clearly label assumptions and distinguish recommendations from verified facts. State what data is missing. "
+        "Use headings: Diagnosis, Strategic moves, Business model, 12-month execution, KPIs, Risks and investment logic."
     )
-
+    messages = [
+        {"role":"system","content":system},
+        {"role":"user","content":f"Destination: {destination}\nContext: {context}\nRequest: {question}\nQuantify only where assumptions are explicit."},
+    ]
+    response = requests.post(XAI_URL,headers={"Authorization":f"Bearer {api_key}","Content-Type":"application/json"},json={"model":XAI_MODEL,"messages":messages,"temperature":0.2,"max_tokens":1600},timeout=(10,90))
     if response.status_code != 200:
-        raise RuntimeError(
-            f"xAI API returned HTTP {response.status_code}: "
-            f"{response.text[:500]}"
-        )
-
-    data = response.json()
-
-    choices = data.get("choices", [])
-
-    if not choices:
-        raise RuntimeError("The AI provider returned no response choices.")
-
-    answer = choices[0].get("message", {}).get("content")
-
-    if not isinstance(answer, str) or not answer.strip():
-        raise RuntimeError("The AI provider returned an empty response.")
-
+        raise RuntimeError(f"xAI API error {response.status_code}: {response.text[:350].replace(chr(10),' ')}")
+    choices = response.json().get("choices") or []
+    answer = choices[0].get("message",{}).get("content") if choices else None
+    if not isinstance(answer,str) or not answer.strip():
+        raise RuntimeError("The AI provider returned an empty answer.")
     return answer.strip()
 
 
-# =========================================================
-# 4. SESSION STATE
-# =========================================================
+def style_chart(fig: go.Figure, height: int = 340) -> go.Figure:
+    fig.update_layout(height=height,margin=dict(l=10,r=10,t=45,b=10),paper_bgcolor="rgba(0,0,0,0)",plot_bgcolor="rgba(0,0,0,0)",font=dict(color="#dce7f4",family="DM Sans"),xaxis=dict(gridcolor="#263750"),yaxis=dict(gridcolor="#263750"),legend=dict(orientation="h",y=-0.25))
+    return fig
 
-if "solution_messages" not in st.session_state:
-    st.session_state.solution_messages = [
-        {
-            "role": "assistant",
-            "content": (
-                "Welcome to the EcoRoute AI advisory terminal. "
-                "I can help evaluate infrastructure bottlenecks, "
-                "regional resource allocation and tourism strategy. "
-                "What would you like to analyze?"
-            )
-        }
-    ]
 
 if "temporary_api_key" not in st.session_state:
     st.session_state.temporary_api_key = ""
-
-
-# =========================================================
-# 5. SIDEBAR NAVIGATION
-# =========================================================
+if "last_advisor_result" not in st.session_state:
+    st.session_state.last_advisor_result = ""
 
 with st.sidebar:
-
-    st.markdown(
-        """
-        <div style="padding:10px 0 22px;">
-            <div class="brand-mark">🐼 EcoRoute AI</div>
-            <div class="brand-subtitle">Infrastructure Intelligence</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
+    st.markdown('<div style="font-size:22px;font-weight:800;color:#eaf3fb">HORIZON</div><div style="font-size:10px;letter-spacing:1.7px;color:#8da6bf">TOURISM GROWTH STUDIO</div>',unsafe_allow_html=True)
     st.divider()
-
-    st.markdown("##### WORKSPACE")
-
-    app_mode = st.radio(
-        "Select workspace",
-        [
-            "Infrastructure Dashboard",
-            "Corporate AI Advisor"
-        ],
-        label_visibility="collapsed"
-    )
-
+    workspace = st.radio("WORKSPACE",["Destination portfolio","Growth scenario planner","AI strategy advisor","Market evidence"])
     st.divider()
-
-    st.markdown("##### SYSTEM INFORMATION")
-
-    st.caption("Platform: EcoRoute AI")
-    st.caption("Environment: Simulation")
-    st.caption("Region: Northern Pakistan")
-
+    st.caption("COVERAGE")
+    st.markdown("**10 destinations**")
+    st.caption("Pakistan · Destination strategy · Investment scenarios")
     st.divider()
+    st.success("AI connection configured") if get_api_key() else st.warning("AI key not configured")
+    with st.expander("Configure AI connection"):
+        st.caption("Use Streamlit Secrets for deployment. A temporary key stays only in this session.")
+        key_input = st.text_input("xAI API key",type="password",key="key_entry")
+        if st.button("Save session key",use_container_width=True):
+            if key_input.strip():
+                st.session_state.temporary_api_key = key_input.strip()
+                st.rerun()
+            else:
+                st.warning("Enter an API key first.")
+    st.caption("Scenario outputs are illustrative, not forecasts.")
 
-    st.markdown("##### AI CONNECTION")
+selected = st.session_state.get("selected_destination","Hunza Valley")
+if selected not in DESTINATIONS:
+    selected = "Hunza Valley"
 
-    if get_api_key():
-        st.markdown(
-            '<span class="status-pill status-good">● API KEY CONFIGURED</span>',
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            '<span class="status-pill status-warning">● API KEY REQUIRED</span>',
-            unsafe_allow_html=True
-        )
+st.markdown('<div class="eyebrow">PAKISTAN DESTINATION DEVELOPMENT</div>',unsafe_allow_html=True)
+st.markdown('<div class="hero">Horizon Tourism</div>',unsafe_allow_html=True)
+st.markdown('<div class="subhero">Destination Growth & Investment Studio · Turn tourism assets into resilient, locally valuable businesses.</div>',unsafe_allow_html=True)
+st.write("")
 
-    st.caption("xAI API usage may incur charges.")
+if workspace == "Destination portfolio":
+    st.markdown("### Destination portfolio")
+    st.caption("Strategy-led view of ten priority destinations. Opportunity ratings are qualitative assessments, not official rankings.")
+    chosen = st.selectbox("Select destination",list(DESTINATIONS),index=list(DESTINATIONS).index(selected))
+    st.session_state.selected_destination = chosen
+    d = DESTINATIONS[chosen]
+    cols = st.columns(4)
+    cards = [("Region",d["region"],d["type"]),("Illustrative annual visitors",f'{d["baseline_visitors"]:,}',"Editable planning assumption"),("Average visitor spend",money_pkr(d["avg_spend"]),"Illustrative PKR per trip"),("Opportunity score",f'{d["opportunity"]:.1f}/10',"Qualitative prioritization")]
+    for col,(label,value,note) in zip(cols,cards):
+        with col:
+            st.markdown(f'<div class="panel"><div class="kpi-label">{label}</div><div class="kpi-value" style="font-size:19px">{value}</div><div class="kpi-note">{note}</div></div>',unsafe_allow_html=True)
+    left,right = st.columns([1.05,1.2],gap="large")
+    with left:
+        st.markdown("#### Strategic diagnosis")
+        st.write(d["risk"])
+        st.markdown("#### Recommended strategic direction")
+        st.write(d["strategy"])
+        st.markdown("#### Best-fit innovation")
+        st.info(d["innovation"])
+    with right:
+        st.markdown("#### Business strategy & initiatives")
+        for i,item in enumerate(d["initiatives"],1):
+            st.markdown(f"**{i}.** {item}")
+        st.markdown("#### Performance scorecard")
+        st.write(d["kpis"])
+        st.markdown(f'<span class="tag">{d["season"]}</span><span class="tag">{d["region"]}</span>',unsafe_allow_html=True)
+    st.markdown("---")
+    st.markdown("#### Pakistan destination map")
+    mdf = pd.DataFrame([{"Destination":name,"Region":v["region"],"lat":v["lat"],"lon":v["lon"]} for name,v in DESTINATIONS.items()])
+    map_fig = go.Figure(go.Scattermap(lat=mdf["lat"],lon=mdf["lon"],mode="markers+text",text=mdf["Destination"],textposition="top right",marker=dict(size=12,color="#62b5e5"),customdata=mdf[["Region"]],hovertemplate="<b>%{text}</b><br>%{customdata[0]}<extra></extra>"))
+    map_fig.update_layout(map=dict(style="carto-darkmatter",center=dict(lat=31.8,lon=72.8),zoom=4.4),height=490,margin=dict(l=0,r=0,t=0,b=0),paper_bgcolor="rgba(0,0,0,0)",font=dict(color="#dce7f4"))
+    st.plotly_chart(map_fig,use_container_width=True,config={"displayModeBar":False})
 
+elif workspace == "Growth scenario planner":
+    st.markdown("### Growth scenario planner")
+    st.caption("Compare a baseline trajectory with a strategy-led scenario. Starting values and growth rates are editable assumptions.")
+    chosen = st.selectbox("Destination",list(DESTINATIONS),index=list(DESTINATIONS).index(selected),key="planner_destination")
+    st.session_state.selected_destination = chosen
+    d = DESTINATIONS[chosen]
+    a,b,c = st.columns(3)
+    with a:
+        visitors = st.number_input("Current annual visitors (assumption)",min_value=1000,max_value=20000000,value=int(d["baseline_visitors"]),step=5000)
+    with b:
+        spend = st.number_input("Average spend per visitor (PKR)",min_value=500,max_value=1000000,value=int(d["avg_spend"]),step=500)
+    with c:
+        local_capture = st.slider("Local value retained (%)",10,90,int(d["local_capture"]))
+    x,y,z = st.columns(3)
+    with x:
+        base_growth = st.slider("Baseline annual growth (%)",0.0,12.0,2.0,0.5)
+    with y:
+        uplift = st.slider("Strategy growth uplift at full execution (%)",0.0,15.0,float(d["opportunity"]),0.5)
+    with z:
+        execution = st.slider("Strategy execution level (%)",0,100,70,5)
+    years = st.select_slider("Projection horizon",options=[3,4,5,6,7,8,9,10],value=5)
+    df = scenario_projection(int(visitors),int(spend),base_growth,uplift,execution,local_capture,years)
+    end = df.iloc[-1]
+    base_rev = float(end["Baseline spend (PKR bn)"])
+    strategy_rev = float(end["Strategy spend (PKR bn)"])
+    delta = (strategy_rev/base_rev-1)*100 if base_rev else 0
+    k1,k2,k3,k4 = st.columns(4)
+    k1.metric(f"Year {years} visitors",f'{int(end["Strategy visitors"]):,}')
+    k2.metric(f"Year {years} visitor spend",money_pkr(strategy_rev*1_000_000_000),f"{delta:+.1f}% vs baseline")
+    k3.metric("Local value retained",money_pkr(float(end["Local value retained (PKR bn)"])*1_000_000_000))
+    k4.metric("Execution level",f"{execution}%")
+    p1,p2 = st.columns(2)
+    with p1:
+        st.plotly_chart(make_projection_chart(df,"visitors","Visitor volume: baseline vs strategy"),use_container_width=True)
+    with p2:
+        st.plotly_chart(make_projection_chart(df,"spend","Estimated direct visitor spend (PKR bn)"),use_container_width=True)
+    st.markdown("#### Scenario detail")
+    st.dataframe(df.style.format({"Baseline visitors":"{:,.0f}","Strategy visitors":"{:,.0f}","Baseline spend (PKR bn)":"{:,.2f}","Strategy spend (PKR bn)":"{:,.2f}","Local value retained (PKR bn)":"{:,.2f}"}),use_container_width=True,hide_index=True)
+    st.warning("These are scenario outputs from your inputs, not observed growth, official forecasts or guaranteed outcomes. Validate baseline visitors, spend, leakage and capacity before investment decisions.")
 
-# =========================================================
-# 6. WORKSPACE ONE: INFRASTRUCTURE DASHBOARD
-# =========================================================
-
-if app_mode == "Infrastructure Dashboard":
-
-    st.markdown(
-        '<div class="eyebrow">STRATEGIC INFRASTRUCTURE INTELLIGENCE</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="hero-title">Regional Allocation Dashboard</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="hero-subtitle">'
-        'Monitor simulated regional capacity, evaluate demand pressure '
-        'and explore infrastructure redistribution opportunities.'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    st.write("")
-
-    # Problem statement
-    st.markdown("""
-    <div class="panel-card">
-        <div class="eyebrow">THE BUSINESS CHALLENGE</div>
-        <div class="section-heading">Uneven Regional Resource Distribution</div>
-        <p style="font-size:13px;line-height:1.8;margin-bottom:0;">
-        Seasonal tourism demand can create pressure on electricity,
-        food distribution, waste management and transportation.
-        EcoRoute AI provides a simulation environment to explore
-        more balanced infrastructure and resource allocation.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Optimization controls
-    st.markdown(
-        '<div class="section-heading">Optimization Parameters</div>',
-        unsafe_allow_html=True
-    )
-
-    col_controls, col_map = st.columns([0.85, 1.5], gap="large")
-
-    with col_controls:
-
-        st.markdown("##### Regional Configuration")
-
-        target_cluster = st.selectbox(
-            "Target regional node",
-            list(NODES.keys())[1:]
-        )
-
-        demand_load = st.slider(
-            "Simulated demand pressure",
-            min_value=40,
-            max_value=150,
-            value=95,
-            help="Relative demand index. This is a simulation input."
-        )
-
-        capacity_buffer = st.slider(
-            "Available supply capacity",
-            min_value=10,
-            max_value=100,
-            value=80,
-            help="Relative supply capacity index. This is a simulation input."
-        )
-
-        # Transparent ratio rather than an unvalidated efficiency claim
-        coverage_ratio = round(
-            (capacity_buffer / demand_load) * 100, 1
-        )
-
-        status, status_class = get_efficiency_status(coverage_ratio)
-
-        st.markdown("---")
-
-        st.markdown("##### Capacity Coverage")
-
-        st.markdown(
-            f'<div class="panel-value">{coverage_ratio}%</div>'
-            f'<div class="panel-note">Supply capacity / demand index</div>'
-            f'<span class="status-pill {status_class}">{status}</span>',
-            unsafe_allow_html=True
-        )
-
-        st.progress(min(coverage_ratio / 100, 1.0))
-
-        st.caption(
-            "A ratio below 100% indicates that simulated supply "
-            "capacity is below simulated demand."
-        )
-
-    with col_map:
-
-        st.markdown(
-            '<div class="section-heading">Regional Allocation Network</div>',
-            unsafe_allow_html=True
-        )
-
-        st.caption("Lahore supply core → Selected regional destination")
-
-        try:
-            map_fig = create_allocation_map(target_cluster)
-
-            st.plotly_chart(
-                map_fig,
-                use_container_width=True,
-                config={"displayModeBar": False}
-            )
-
-        except Exception as error:
-            st.error(f"Map rendering error: {error}")
-
-    # KPI section
-    st.markdown("##### Operational Overview")
-
-    k1, k2, k3 = st.columns(3)
-
-    k1.metric("Regional Nodes", len(NODES))
-    k2.metric("Demand Pressure", f"{demand_load}/150")
-    k3.metric("Supply Capacity", f"{capacity_buffer}/100")
-
-    st.caption(
-        "All dashboard values are simulated. They are not verified "
-        "regional infrastructure measurements or live traffic data."
-    )
-
-
-# =========================================================
-# 7. WORKSPACE TWO: CORPORATE AI ADVISOR
-# =========================================================
-
-elif app_mode == "Corporate AI Advisor":
-
-    st.markdown(
-        '<div class="eyebrow">ENTERPRISE ADVISORY TERMINAL</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="hero-title">Pandy AI</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="hero-subtitle">'
-        'Corporate strategy, infrastructure planning and innovation advisory.'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    st.write("")
-
-    # API configuration
+elif workspace == "AI strategy advisor":
+    st.markdown("### AI strategy advisor")
+    st.caption("Destination-specific business models, investment sequencing, innovation and implementation.")
+    chosen = st.selectbox("Destination",list(DESTINATIONS),index=list(DESTINATIONS).index(selected),key="advisor_destination")
+    st.session_state.selected_destination = chosen
+    d = DESTINATIONS[chosen]
+    context = f"Region: {d['region']}; type: {d['type']}; season: {d['season']}; visitor planning assumption: {d['baseline_visitors']:,}; spend assumption: PKR {d['avg_spend']:,}; local value capture assumption: {d['local_capture']}%. Risk: {d['risk']} Strategy: {d['strategy']} Initiatives: {'; '.join(d['initiatives'])} Innovation: {d['innovation']} KPIs: {d['kpis']}"
+    with st.expander("Destination context sent to AI"):
+        st.write(context)
+    analysis_type = st.selectbox("Analysis type",["Build a 12-month destination business strategy","Design a commercially viable tourism business model","Prioritize investment opportunities and partnership structure","Create a digital innovation roadmap","Develop a sustainable visitor and carrying-capacity plan","Assess risks and implementation barriers"])
+    question = st.text_area("Specific requirements",placeholder="Example: Design a three-year business model for community-owned stays, including revenue streams, costs, partners and KPIs.",height=105)
     api_key = get_api_key()
-
     if not api_key:
-
-        with st.expander("Configure xAI API connection", expanded=True):
-
-            st.info(
-                "Add GROK_API_KEY to Streamlit Secrets for deployment, "
-                "or enter a temporary key for this session."
-            )
-
-            temporary_key = st.text_input(
-                "xAI API Key",
-                type="password",
-                placeholder="Enter your xAI API key",
-                key="api_key_input"
-            )
-
-            if st.button("Connect API", use_container_width=True):
-
-                if temporary_key.strip():
-                    st.session_state.temporary_api_key = temporary_key.strip()
-                    st.success("API key saved for this session.")
-                    st.rerun()
-                else:
-                    st.warning("Enter a valid API key.")
-
-            api_key = get_api_key()
-
-    else:
-
-        st.markdown(
-            '<span class="status-pill status-good">● AI CONNECTION CONFIGURED</span>',
-            unsafe_allow_html=True
-        )
-
-    st.write("")
-
-    # Quick prompts
-    st.markdown("##### Suggested Strategy Queries")
-
-    quick_col1, quick_col2 = st.columns(2)
-
-    selected_query = None
-
-    with quick_col1:
-        if st.button(
-            "Overtourism & Supply Chains",
-            use_container_width=True
-        ):
-            selected_query = (
-                "Develop a comprehensive strategy to mitigate "
-                "overtourism-related supply chain pressure in "
-                "Northern Pakistan. Include resource redistribution, "
-                "stakeholder coordination and implementation KPIs."
-            )
-
-    with quick_col2:
-        if st.button(
-            "Regional Economic Development",
-            use_container_width=True
-        ):
-            selected_query = (
-                "How can innovation management and public-private "
-                "partnerships reduce seasonal economic volatility "
-                "and localized resource inflation in tourism-dependent "
-                "rural communities?"
-            )
-
-    # Conversation display
-    st.markdown("---")
-    st.markdown("##### Advisory Conversation")
-
-    for message in st.session_state.solution_messages:
-
-        avatar = "🐼" if message["role"] == "assistant" else "👤"
-
-        with st.chat_message(
-            message["role"],
-            avatar=avatar
-        ):
-            st.markdown(message["content"])
-
-    # Chat input
-    user_input = st.chat_input(
-        "Describe a business problem or infrastructure bottleneck..."
-    )
-
-    active_query = user_input or selected_query
-
-    if active_query:
-
-        # Prevent requests without API credentials
-        if not api_key:
-
-            st.warning(
-                "Configure your xAI API key before submitting a query."
-            )
-
-        else:
-
-            # Save user message
-            st.session_state.solution_messages.append(
-                {
-                    "role": "user",
-                    "content": active_query
-                }
-            )
-
-            with st.chat_message("user", avatar="👤"):
-                st.markdown(active_query)
-
-            # Generate AI response
-            with st.chat_message("assistant", avatar="🐼"):
-
-                with st.spinner(
-                    "Analyzing the business problem..."
-                ):
-
-                    try:
-
-                        answer = request_grok(
-                            api_key,
-                            st.session_state.solution_messages
-                        )
-
-                        st.markdown(answer)
-
-                        st.session_state.solution_messages.append(
-                            {
-                                "role": "assistant",
-                                "content": answer
-                            }
-                        )
-
-                    except requests.exceptions.Timeout:
-
-                        st.error(
-                            "The xAI request timed out. "
-                            "Please retry with a shorter query."
-                        )
-
-                        st.session_state.solution_messages.pop()
-
-                    except requests.exceptions.RequestException as error:
-
-                        st.error(f"Network connection error: {error}")
-
-                        st.session_state.solution_messages.pop()
-
-                    except ValueError:
-
-                        st.error(
-                            "The API returned an invalid response format."
-                        )
-
-                        st.session_state.solution_messages.pop()
-
-                    except RuntimeError as error:
-
-                        st.error(str(error))
-
-                        st.session_state.solution_messages.pop()
-
-                    except Exception as error:
-
-                        st.error(
-                            f"Unexpected application error: {error}"
-                        )
-
-                        st.session_state.solution_messages.pop()
-
-    # Conversation controls
-    st.markdown("---")
-
-    clear_col, info_col = st.columns([1, 2])
-
-    with clear_col:
-
-        if st.button("Clear Conversation"):
-
-            st.session_state.solution_messages = [
-                {
-                    "role": "assistant",
-                    "content": "Conversation reset. What would you like to analyze?"
-                }
-            ]
-
+        st.info("Configure your xAI API key in the sidebar. The other workspaces work without an API key.")
+    if st.button("Generate destination strategy",type="primary",disabled=not bool(api_key),use_container_width=True):
+        prompt = analysis_type if not question.strip() else f"{analysis_type}\nAdditional requirements: {question.strip()}"
+        with st.spinner("Preparing destination-specific strategy..."):
+            try:
+                result = ask_grok(api_key,chosen,prompt,context)
+                st.session_state.last_advisor_result = result
+            except requests.exceptions.Timeout:
+                st.error("The AI request timed out. Retry with a shorter question.")
+            except requests.exceptions.RequestException as exc:
+                st.error(f"Network error: {exc}")
+            except (ValueError,RuntimeError) as exc:
+                st.error(str(exc))
+    if st.session_state.last_advisor_result:
+        st.markdown("---")
+        st.markdown("#### Strategy output")
+        st.markdown(st.session_state.last_advisor_result)
+        st.download_button("Download strategy brief",st.session_state.last_advisor_result,file_name=f"{chosen.lower().replace(' ','-')}-strategy-brief.md",mime="text/markdown")
+        if st.button("Clear strategy output"):
+            st.session_state.last_advisor_result = ""
             st.rerun()
 
-    with info_col:
+elif workspace == "Market evidence":
+    st.markdown("### Tourism market evidence")
+    st.caption("Official Gilgit-Baltistan monthly domestic visitor inflows for January–June 2026. Partial-year data only.")
+    district = st.selectbox("District",list(GB_2026),index=list(GB_2026).index("Skardu"))
+    series = pd.DataFrame({"Month":GB_MONTHS,"Domestic visitors":GB_2026[district]})
+    fig = go.Figure(go.Bar(x=series["Month"],y=series["Domestic visitors"],marker=dict(color="#62b5e5"),hovertemplate="%{x}: %{y:,} visitors<extra></extra>"))
+    style_chart(fig,330)
+    fig.update_layout(title=f"{district} · monthly domestic inflows (Jan–Jun 2026)",yaxis_title="Reported visitors")
+    st.plotly_chart(fig,use_container_width=True)
+    st.dataframe(series,use_container_width=True,hide_index=True)
+    st.caption("Source: Government of Gilgit-Baltistan Tourism Department, Tourist Inflows dashboard. The published table lists monthly domestic flow through June 2026. No foreign-inflow records appeared in the retrieved table. Do not annualize this partial-year series.")
+    st.markdown("[Open official GB tourist inflow dashboard](https://e-tourism.visitgilgitbaltistan.gov.pk/plan-trip/tourist-inflows)")
+    st.markdown("[Open Pakistan Tourism Development Corporation publications](https://tourism.gov.pk/publications.html)")
+    st.warning("Visitor, occupancy, spend and seasonality data are not consistently published for every province. The remaining destination baselines are editable assumptions, not official statistics.")
 
-        st.caption(
-            "AI recommendations are generated from your supplied "
-            "information and are not verified live economic research."
-        )
-
-
-# =========================================================
-# 8. APPLICATION FOOTER
-# =========================================================
-
-st.markdown("---")
-
-st.markdown(
-    """
-    <div style="text-align:center;padding:12px 0;">
-        <div style="color:#67E8F9;font-size:12px;font-weight:700;">
-            ECOROUTE AI
-        </div>
-        <div style="color:#64748B;font-size:10px;margin-top:5px;">
-            Infrastructure Intelligence • Strategic Resource Allocation
-        </div>
-        <div style="color:#475569;font-size:10px;margin-top:5px;">
-            Decision-support simulation platform
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.divider()
+st.markdown('<div style="text-align:center;color:#71849c;font-size:10px;letter-spacing:1.2px">HORIZON TOURISM · DESTINATION GROWTH & INVESTMENT STUDIO</div>',unsafe_allow_html=True)
+st.markdown('<div style="text-align:center;color:#53677f;font-size:10px;margin-top:4px">Decision-support tool · Validate scenario assumptions before capital allocation</div>',unsafe_allow_html=True)
