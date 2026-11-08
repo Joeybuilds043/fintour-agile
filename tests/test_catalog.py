@@ -1,19 +1,39 @@
 from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
 
-def test_destination_catalog_has_ten_pilot_clusters():
-    assert len(DESTINATIONS) == 10
+
+def test_destination_catalog_has_broad_pakistan_coverage():
+    assert len(DESTINATIONS) >= 30
+    assert "Multan" in DESTINATIONS
+    assert "Faisalabad" in DESTINATIONS
+    assert "Neelum Valley" in DESTINATIONS
+    assert "Mohenjo-daro" in DESTINATIONS
+    assert "Hingol & Gwadar Coast" in DESTINATIONS
+
 
 def test_destination_coordinates_are_valid():
-    for destination in DESTINATIONS.values():
-        assert -90 <= destination["lat"] <= 90
-        assert -180 <= destination["lon"] <= 180
+    for name, destination in DESTINATIONS.items():
+        assert -90 <= destination["lat"] <= 90, name
+        assert -180 <= destination["lon"] <= 180, name
 
-def test_experience_taxonomy_is_unique():
+
+def test_experience_taxonomy_is_unique_and_complete():
     names = [item["name"] for item in EXPERIENCE_CATEGORIES]
     assert len(names) == len(set(names))
     assert len(names) >= 10
+    assert all(item.get("symbol") and not item.get("icon") for item in EXPERIENCE_CATEGORIES)
 
-def test_each_destination_has_experiences_and_image_query():
-    for destination in DESTINATIONS.values():
-        assert destination["experiences"]
-        assert destination["image_query"]
+
+def test_each_destination_has_complete_editorial_fields():
+    required = {
+        "region", "lat", "lon", "tagline", "overview", "culture",
+        "experiences", "highlights", "season", "access", "responsible",
+        "image_query",
+    }
+    for name, destination in DESTINATIONS.items():
+        assert required.issubset(destination), name
+        assert destination["experiences"], name
+        assert destination["highlights"], name
+        assert destination["image_query"], name
+        assert set(destination["experiences"]).issubset(
+            {item["name"] for item in EXPERIENCE_CATEGORIES}
+        ), name

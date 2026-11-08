@@ -1,7 +1,9 @@
 from __future__ import annotations
 import pandas as pd
 import streamlit as st
-st.set_page_config(page_title="Data Observatory | Horizon",page_icon="🔎",layout="wide")
+from src.ui import apply_intelligence_theme
+st.set_page_config(page_title="Data Observatory | Horizon",page_icon=None,layout="wide")
+apply_intelligence_theme()
 st.title("Tourism data observatory")
 st.write("A transparent register of sources and limitations.")
 sources=[

@@ -1,35 +1,79 @@
 from __future__ import annotations
+
 import os
 import streamlit as st
-from src.catalog import DESTINATIONS,EXPERIENCE_CATEGORIES
-from src.services.media import get_commons_image
 
-st.set_page_config(page_title="Discover Pakistan | Horizon",page_icon="🧭",layout="wide")
-st.title("Discover Pakistan")
-st.write("Find a destination through the experience you want — not just by looking at a list of cities.")
-choices=["All experiences"]+[x["name"] for x in EXPERIENCE_CATEGORIES]
-selected=st.selectbox("What would you like to experience?",choices)
-region=st.selectbox("Explore by region",["All regions"]+sorted({d["region"] for d in DESTINATIONS.values()}))
-query=st.text_input("Search destinations",placeholder="Try Hunza, heritage, coast or mountains")
-results=[]
-for name,item in DESTINATIONS.items():
-    haystack=" ".join([name,item["region"],item["tagline"],item["overview"]," ".join(item["experiences"])]).lower()
-    if selected!="All experiences" and selected not in item["experiences"]: continue
-    if region!="All regions" and region!=item["region"]: continue
-    if query.strip() and query.strip().lower() not in haystack: continue
-    results.append((name,item))
-st.caption(f"{len(results)} destination clusters match your selection. This is a curated pilot collection, not a national ranking.")
-for start in range(0,len(results),3):
-    cols=st.columns(3)
-    for col,(name,item) in zip(cols,results[start:start+3]):
-        with col:
-            image=None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA")=="1" else get_commons_image(item["image_query"])
-            if image:
-                st.image(image["thumb_url"],use_container_width=True)
-                st.caption(f'{image["license"]} · {image["artist"]} · [Licence]({image["license_url"]}) · [Image source]({image["page_url"]})')
-            st.subheader(name)
-            st.caption(item["region"])
-            st.write(item["tagline"])
-            st.markdown(" · ".join(item["experiences"][:4]))
-            st.page_link("pages/02_Destination_Guide.py",label="Open destination guide →")
-if not results: st.info("No destination matches those filters. Try a broader search.")
+from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
+from src.services.media import get_commons_image, get_display_image
+
+st.set_page_config(page_title="Discover Pakistan | Horizon", page_icon=None, layout="wide")
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+.stApp{background:#f7f5ef;font-family:'DM Sans',sans-serif;color:#172f38}
+.block-container{max-width:1480px;padding-top:1.4rem}
+h1,h2,h3{color:#18343c!important;font-family:'Playfair Display',Georgia,serif!important}
+.kicker{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#167f83;font-weight:700}
+.lede{font-size:15px;line-height:1.8;color:#687a7e;max-width:800px}
+.card-title{font-family:'Playfair Display',Georgia,serif;font-size:23px;color:#193840;margin:7px 0 2px}
+.card-meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#718184}
+.card-copy{font-size:13px;line-height:1.65;color:#6c7c7f;min-height:42px}
+.card-tags{font-size:11px;color:#176b70;line-height:1.6}
+div[data-testid="stImage"] img{border-radius:15px;object-fit:cover;filter:saturate(1.08) contrast(1.04)}
+div[data-testid="stVerticalBlockBorderWrapper"]{background:#fffefa;border-color:#e7e2d8;border-radius:18px}
+div[data-testid="stButton"]>button{border-radius:30px;background:#176b70;color:white;border:1px solid #176b70}
+@media(max-width:700px){.block-container{padding:1rem}}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="kicker">THE HORIZON DESTINATION COLLECTION</div>', unsafe_allow_html=True)
+st.title("Find the Pakistan you want to experience.")
+st.markdown('<div class="lede">Explore mountain valleys, living heritage, desert landscapes, coastal communities and cities shaped by food and culture. Filter by the kind of journey you have in mind, then open a field guide for context before you travel.</div>', unsafe_allow_html=True)
+st.write("")
+
+with st.container(border=True):
+    f1, f2, f3 = st.columns([1.1, 1.1, 1.5], gap="medium")
+    with f1:
+        experience = st.selectbox("Travel experience", ["All experiences"] + [x["name"] for x in EXPERIENCE_CATEGORIES])
+    with f2:
+        regions = ["All regions"] + sorted({d["region"] for d in DESTINATIONS.values()})
+        region = st.selectbox("Region", regions)
+    with f3:
+        query = st.text_input("Search places and experiences", placeholder="Try Multan, beaches, forts, trekking or food")
+
+results = []
+for name, item in DESTINATIONS.items():
+    searchable = " ".join([
+        name, item["region"], item["tagline"], item["overview"],
+        item["culture"], " ".join(item["experiences"]),
+        " ".join(item["highlights"]),
+    ]).casefold()
+    if experience != "All experiences" and experience not in item["experiences"]:
+        continue
+    if region != "All regions" and region != item["region"]:
+        continue
+    if query.strip() and query.strip().casefold() not in searchable:
+        continue
+    results.append((name, item))
+
+results.sort(key=lambda pair: pair[0])
+st.markdown(f"**{len(results)} destinations**  ·  {len({d['region'] for _, d in results})} regions represented")
+st.caption("An expanding editorial collection of destination clusters, not an official exhaustive gazetteer or ranking. Map pins are approximate area anchors.")
+if not results:
+    st.info("No destination matches those filters. Try a broader place name or experience.")
+else:
+    for start in range(0, len(results), 3):
+        columns = st.columns(3, gap="large")
+        for column, (name, item) in zip(columns, results[start:start + 3]):
+            with column:
+                with st.container(border=True):
+                    image = None if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1" else get_commons_image(item["image_query"])
+                    if image:
+                        st.image(get_display_image(image["thumb_url"]) or image["thumb_url"], use_container_width=True)
+                        st.caption(f'{image["artist"]} · {image["license"]} · [File details & attribution]({image["page_url"]})')
+                    st.markdown(f'<div class="card-meta">{item["region"]}</div><div class="card-title">{name}</div><div class="card-copy">{item["tagline"]}</div><div class="card-tags">{ " · ".join(item["experiences"][:4]) }</div>', unsafe_allow_html=True)
+                    st.page_link("pages/02_Destination_Guide.py", label="Explore field guide")
+
+st.write("")
+st.markdown("### A note on travelling well")
+st.markdown("Pakistan’s destinations are not interchangeable backdrops. Local customs, seasonal access, environmental limits and community priorities differ by place. Read the destination notes, verify current conditions with local sources and choose experiences that create value for local communities.")

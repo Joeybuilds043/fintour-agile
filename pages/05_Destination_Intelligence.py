@@ -2,8 +2,10 @@ from __future__ import annotations
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from src.ui import apply_intelligence_theme
 
-st.set_page_config(page_title="Destination Intelligence | Horizon",page_icon="📊",layout="wide")
+st.set_page_config(page_title="Destination Intelligence | Horizon",page_icon=None,layout="wide")
+apply_intelligence_theme()
 st.title("Destination intelligence")
 st.write("The industry workspace will turn fragmented tourism evidence into comparable destination insights. This release prioritises data transparency over unsupported national statistics.")
 st.info("Verified, comparable occupancy, visitor-spending, transport-capacity and operating-cost data are not yet available for all ten destination clusters. Missing data is shown as a gap, not replaced with invented values.")

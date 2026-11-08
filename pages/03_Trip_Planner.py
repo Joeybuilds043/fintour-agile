@@ -1,9 +1,11 @@
 from __future__ import annotations
 import pandas as pd
 import streamlit as st
+from src.ui import apply_visitor_theme
 from src.catalog import DESTINATIONS
 
-st.set_page_config(page_title="Trip Planner | Horizon",page_icon="🗺️",layout="wide")
+st.set_page_config(page_title="Trip Planner | Horizon",page_icon=None,layout="wide")
+apply_visitor_theme()
 st.title("Plan your journey")
 st.write("Build a starting itinerary around your interests, time and own budget. This is a planning aid, not a booking confirmation.")
 a,b,c=st.columns(3)

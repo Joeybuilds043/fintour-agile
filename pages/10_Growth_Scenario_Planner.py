@@ -1,10 +1,12 @@
 from __future__ import annotations
 import plotly.graph_objects as go
 import streamlit as st
+from src.ui import apply_intelligence_theme
 from src.catalog import DESTINATIONS
 from src.scenarios import project_destination
 
-st.set_page_config(page_title="Growth Scenario Planner | Horizon",page_icon="📈",layout="wide")
+st.set_page_config(page_title="Growth Scenario Planner | Horizon",page_icon=None,layout="wide")
+apply_intelligence_theme()
 st.title("Destination growth scenario planner")
 st.write("Compare an illustrative baseline with a strategy-led scenario. Inputs are assumptions, not official visitor forecasts.")
 name=st.selectbox("Destination",list(DESTINATIONS))
