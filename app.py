@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-import time
+import requests
+import json
 
-# --- PURE PREMIUM UI/UX CONFIGURATION ---
+# --- PREMIUM UI/UX CONFIGURATION ---
 st.set_page_config(
     page_title="DestiNation-AI // Muhammad Asad",
     page_icon="🐼",
@@ -16,20 +17,17 @@ st.markdown("""
 <style>
     @import url('https://googleapis.com');
     
-    /* Root Theme Overrides */
     html, body, [data-testid="stAppViewContainer"] {
         background-color: #030712 !important;
         font-family: 'Space Grotesk', sans-serif !important;
         color: #F3F4F6 !important;
     }
     
-    /* Clean Sidebar Styling */
     [data-testid="stSidebar"] {
         background-color: #0B0F19 !important;
         border-right: 1px solid #1F2937 !important;
     }
     
-    /* Glowing Glassmorphic Cards */
     .metric-card {
         background: rgba(17, 24, 39, 0.7);
         border: 1px solid rgba(6, 182, 212, 0.2);
@@ -45,14 +43,12 @@ st.markdown("""
         border: 1px solid rgba(6, 182, 212, 0.6);
     }
     
-    /* Neon Text Accents */
     .neon-text {
         color: #06B6D4;
         font-weight: 600;
         text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
     }
     
-    /* Premium Hide Elements */
     #MainMenu, footer, header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
@@ -61,9 +57,8 @@ st.markdown("""
 st.sidebar.markdown("<h2 style='color:#06B6D4; text-align:center;'>🐼 Pandy-AI Console</h2>", unsafe_allow_html=True)
 st.sidebar.markdown("<p style='text-align:center; color:#9CA3AF; font-size:12px;'>MSc Strategy & Innovation Portfolio</p>", unsafe_allow_html=True)
 st.sidebar.write("---")
-page = st.sidebar.radio("Navigate Workspace", ["🚀 DestiNation Engine", "💬 Grok AI Panda Assistant"])
+page = st.sidebar.radio("Navigate Workspace", ["🚀 DestiNation Engine", "💬 Live Grok Panda Assistant"])
 
-# --- DATA GENERATION (RESEARCH BACKED) ---
 locations = {
     'Lahore Hub': [31.5204, 74.3587],
     'Kaghan Ecosystem': [34.5412, 73.3512],
@@ -77,7 +72,6 @@ if page == "🚀 DestiNation Engine":
     st.markdown("<p style='text-align: center; color:#9CA3AF; font-size:18px;'>Pioneering Autonomous Spatial Tourism Redistribution</p>", unsafe_allow_html=True)
     st.write("---")
     
-    # PREMIUM METRICS GRID
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.markdown('<div class="metric-card"><h3>Matriculation</h3><h2 class="neon-text">1010/1100</h2><p style="color:#9CA3AF; font-size:12px;">Govt College (PEEF Scholar)</p></div>', unsafe_allow_html=True)
@@ -89,93 +83,103 @@ if page == "🚀 DestiNation Engine":
         st.markdown('<div class="metric-card"><h3>Strategic Elite</h3><h2 class="neon-text">HBS / ALP</h2><p style="color:#9CA3AF; font-size:12px;">Aspire Leaders Alumnus</p></div>', unsafe_allow_html=True)
         
     st.write("##")
-    
-    # CORE INTERACTIVE SIMULATION PANEL
     st.markdown("### 🗺️ Real-Time Spatial Optimization Corridor")
-    st.write("Simulating the operational distribution paradigms established via active research parameters to mitigate overtourism bottlenecks within Northern Pakistan circuits.")
-    
-    # Interactive selection box
     selected_node = st.selectbox("Select Target Destination Infrastructure Node", list(locations.keys()))
     
-    # Interactive Map Generation using Plotly
     fig = go.Figure()
-    
-    # Core Base Line
     fig.add_trace(go.Scattermapbox(
         mode = "markers+lines",
-        lon = [locations['Lahore Hub'][1], locations[selected_node][1]],
-        lat = [locations['Lahore Hub'][0], locations[selected_node][0]],
+        lon = [locations['Lahore Hub'], locations[selected_node]],
+        lat = [locations['Lahore Hub'], locations[selected_node]],
         marker = {'size': 12, 'color': '#06B6D4'},
         line = dict(width = 3, color = '#D4AF37')
     ))
-    
-    # Layout Strategy
     fig.update_layout(
         mapbox_style="carto-darkmatter",
-        mapbox=dict(
-            center=dict(lat=33.5, lon=74.5),
-            zoom=5.5
-        ),
+        mapbox=dict(center=dict(lat=33.5, lon=74.5), zoom=5.5),
         margin={"r":0,"t":0,"l":0,"b":0},
         showlegend=False,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)'
     )
-    
     st.plotly_chart(fig, use_container_width=True)
-    
-    # STRATEGIC WORK EXPERIENCE MARQUEE
-    st.write("##")
-    st.markdown("### 💼 Cross-Disciplinary Operational Mastery")
-    exp1, exp2, exp3 = st.columns(3)
-    with exp1:
-        st.markdown("**Tourism Development Corp. of Punjab (TDCP)**  \n*Competitive Strategy Intern*  \nAnalyzed domestic routing networks and structural destination pain points.")
-    with exp2:
-        st.markdown("**Waheed Brothers Coca-Cola Distribution**  \n*Operations Logistics Assistant*  \nManaged enterprise supply chains, scheduling, and asset deployment patterns.")
-    with exp3:
-        st.markdown("**Rahi Travels Portfolio**  \n*Corporate HR & Operations Intern*  \nCoordinated functional frameworks within live operational environments.")
 
-# ---------------- PAGE 2: GROK AI PANDA INTERFACE ----------------
-elif page == "💬 Grok AI Panda Assistant":
+# ---------------- PAGE 2: LIVE GROK INTERFACE ----------------
+elif page == "💬 Live Grok Panda Assistant":
     st.markdown("<h1 style='text-align: center; font-weight:300;'>Pandy-AI Assistant</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color:#9CA3AF;'>Powered by Grok API Frameworks for Modern Service Strategy</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color:#9CA3AF;'>Live Live Connected xAI Grok Engine for Global Strategy Analytics</p>", unsafe_allow_html=True)
     st.write("---")
     
-    # Visual Panda Identification Row
-    col_img, col_txt = st.columns([1, 4])
+    col_img, col_txt = st.columns([1, 5])
     with col_img:
-        # Displaying the designated tech panda profile indicator
-        st.image("https://imgur.com", width=120)
+        st.image("https://imgur.com", width=100)
     with col_txt:
-        st.markdown("#### **System Node Operational**")
-        st.write("Greetings Asad. I am your custom Grok-configured multi-agent core. I bridge field level data with the strategic objectives of the MSc Business Strategy and Innovation Management program at Southampton.")
+        st.markdown("#### **Autonomous System Node Status: Active**")
+        st.write("Greetings, Admissions Board. I am initialized as a live-compiled multi-agent wrapper connecting xAI's real-time Grok models to analyze tourism networks.")
 
     st.write("##")
-    
-    # Live Chat Workspace Simulated Deployment Window
-    user_query = st.chat_input("Ask Pandy-AI about tourism optimization or Southampton alignment...")
-    
-    # Seed Conversational Framework for Admissions Board Viewers
-    if not user_query:
-        with st.chat_message("assistant", avatar="🐼"):
-            st.markdown("""
-            **System Prompt Initialized:** Hello! Ask me how Muhammad Asad merges his public sector experience at TDCP and Coca-Cola with advanced AI algorithms to solve global overtourism challenges. 
-            
-            *Suggested exploration inputs:*
-            *   "How does your research on spatial distribution connect to the MSc at Southampton?"
-            *   "Explain the logistics infrastructure behind your route optimization code."
-            """)
-            
-    if user_query:
+
+    # Safe API Key Fetching from Streamlit Cloud Secrets Manager
+    GROK_API_KEY = st.secrets.get("GROK_API_KEY", None)
+
+    if not GROK_API_KEY:
+        st.warning("⚠️ Grok API Key Missing: Please insert your secure key inside the Streamlit Cloud Dashboard Secrets panel to activate full live tracking responses.")
+        # Local testing fall-back entry input
+        GROK_API_KEY = st.text_input("Alternatively, paste your temporary xAI Key here for instant evaluation:", type="password")
+
+    # Conversational History Instantiation
+    if "messages" not in st.session_state:
+        st.session_state.messages = [
+            {"role": "assistant", "content": "Hello! I am Asad's specialized agent. Ask me how his background in Pakistan's tourism sector, coupled with business strategy analytics, forms a unique profile for the University of Southampton."}
+        ]
+
+    for msg in st.session_state.messages:
+        avatar_img = "🐼" if msg["role"] == "assistant" else None
+        with st.chat_message(msg["role"], avatar=avatar_img):
+            st.write(msg["content"])
+
+    if user_query := st.chat_input("Ask a real-time question to Grok..."):
+        st.session_state.messages.append({"role": "user", "content": user_query})
         with st.chat_message("user"):
             st.write(user_query)
-            
+
         with st.chat_message("assistant", avatar="🐼"):
-            with st.spinner("Processing routing arrays via Grok Engine..."):
-                time.sleep(1)
-                if "southampton" in user_query.lower() or "msc" in user_query.lower():
-                    st.write("Asad’s background aligns directly with Southampton's 'Innovation and Technology Transfer' curriculum. By scaling automated systems like this mapping tool, he transitions from operational hospitality into enterprise asset valuation.")
-                elif "research" in user_query.lower() or "spatial" in user_query.lower():
-                    st.write("His ResearchGate publications show that overtourism isn't an capacity problem—it's a tracking problem. This application uses multi-agent software pipelines to track traffic patterns and dynamically reroute tourism capital into under-utilized eco-corridors.")
-                else:
-                    st.write("System online. By combining your operational work history at Coca-Cola and TDCP with automated neural infrastructure, we create high-yield, sustainable models built for global deployment.")
+            if GROK_API_KEY:
+                with st.spinner("Streaming Live Data Arrays via xAI API Pipelines..."):
+                    try:
+                        # Constructing direct context constraints to align Grok with your application profile
+                        system_prompt = (
+                            "You are Pandy-AI, a specialized strategic assistant built for Muhammad Asad's portfolio. "
+                            "Asad is an elite candidate applying for the MSc Business Strategy and Innovation Management at the University of Southampton "
+                            "and competing for the Commonwealth Master's Scholarship. His metrics: 1010/1100 Matric, 921/1100 Inter, 3.75/4.0 CGPA from Superior University, "
+                            "Harvard ALP Alumnus, and published author on ResearchGate regarding GenAI overtourism. His operations history includes TDCP and Coca-Cola. "
+                            "Always link your answers back to how his rare tech-driven portfolio solves business bottlenecks or fits the Southampton innovation modules."
+                        )
+                        
+                        headers = {
+                            "Authorization": f"Bearer {GROK_API_KEY}",
+                            "Content-Type": "application/json"
+                        }
+                        
+                        payload = {
+                            "model": "grok-2-beta",
+                            "messages": [
+                                {"role": "system", "content": system_prompt},
+                                {"role": "user", "content": user_query}
+                            ],
+                            "temperature": 0.3
+                        }
+                        
+                        response = requests.post("https://x.ai", headers=headers, json=payload)
+                        
+                        if response.status_code == 200:
+                            grok_res = response.json()["choices"][0]["message"]["content"]
+                            st.write(grok_res)
+                            st.session_state.messages.append({"role": "assistant", "content": grok_res})
+                        else:
+                            st.error(f"API connection error code: {response.status_code}. Response raw output: {response.text}")
+                    except Exception as e:
+                        st.error(f"System connection runtime issue: {str(e)}")
+            else:
+                # Simulated response if no API key is verified yet
+                st.info("Simulated Echo Node: Please secure your Grok key via configuration settings to retrieve dynamic cross-platform outputs.")
