@@ -8,14 +8,14 @@ from src.services.media import get_commons_image, get_display_image
 from src.services.weather import get_weather
 from src.ui import apply_visitor_theme
 
-st.set_page_config(page_title="Destination Field Guide | Horizon", page_icon=None, layout="wide")
+st.set_page_config(page_title="Destination Field Guide | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
 
 names = list(DESTINATIONS)
 if st.session_state.get("selected_destination") not in DESTINATIONS:
     st.session_state["selected_destination"] = names[0]
 
-st.markdown('<div class="kicker">HORIZON FIELD NOTES · PAKISTAN</div>', unsafe_allow_html=True)
+st.markdown('<div class="kicker">VOYAGEPK FIELD NOTES · PAKISTAN</div>', unsafe_allow_html=True)
 st.title("Destination field guide")
 name = st.selectbox("Choose a destination", names, key="selected_destination")
 d = DESTINATIONS[name]
@@ -64,6 +64,11 @@ with st.container(border=True):
     st.subheader("Travel thoughtfully")
     st.write(d["responsible"])
     st.caption("Respect local customs, community consent, protected landscapes and current local guidance.")
+if d.get("sources"):
+    st.subheader("Research and reference sources")
+    st.caption("Official heritage records are prioritised for historical and site information. Travel-editorial and creator sources support discovery only; they do not establish current access or safety.")
+    for source in d["sources"]:
+        st.markdown(f'- [{source["label"]}]({source["url"]}) · {source["type"]}')
 
 st.subheader("Find the destination area")
 st.map(pd.DataFrame([{"lat": d["lat"], "lon": d["lon"]}]), zoom=7)

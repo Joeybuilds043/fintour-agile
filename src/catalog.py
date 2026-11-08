@@ -11,6 +11,11 @@ EXPERIENCE_CATEGORIES = [
     {"name": "Ecotourism", "symbol": "E", "short": "Conservation-led and community-based travel"},
     {"name": "Food & gastronomy", "symbol": "F", "short": "Regional food, markets and culinary routes"},
     {"name": "Religious & archaeology", "symbol": "R", "short": "Sacred places, archaeology and learning"},
+    {"name": "Islamic & Sufi heritage", "symbol": "I", "short": "Mosques, shrines, Sufi centres and sacred architecture"},
+    {"name": "Sikh pilgrimage", "symbol": "S", "short": "Gurdwaras and places associated with Sikh history"},
+    {"name": "Buddhist heritage", "symbol": "B", "short": "Gandharan stupas, monasteries and Buddhist landscapes"},
+    {"name": "Hindu heritage", "symbol": "H", "short": "Temples, sacred landscapes and Hindu pilgrimage"},
+    {"name": "Archaeology & ancient civilizations", "symbol": "A", "short": "Indus Valley archaeology and historic settlements"},
     {"name": "Coastal & marine", "symbol": "S", "short": "Beaches, marine landscapes and coastal culture"},
     {"name": "Winter & seasonal", "symbol": "W", "short": "Snow, seasonal festivals and changing landscapes"},
     {"name": "Rural & creative", "symbol": "L", "short": "Crafts, farms, villages and local enterprise"},
@@ -189,3 +194,100 @@ _add("Kundian & Chashma Wetlands", "Punjab / Khyber Pakhtunkhwa", 32.4500, 71.45
      ["Nature & wildlife","Ecotourism","Camping & outdoors"],
      ["Chashma Barrage surroundings","Wetland birdlife from permitted viewing areas","Indus river landscapes"],
      "Chashma Barrage wetlands Pakistan birdwatching", "A nature-oriented cluster for responsible birdwatching and wetland interpretation.")
+
+
+# Dedicated religious-heritage and archaeological destination collections.
+_add("Nankana Sahib & Sikh Heritage", "Punjab", 31.4504, 73.7065,
+     "A major Sikh pilgrimage landscape centred on the birthplace of Guru Nanak.",
+     ["Sikh pilgrimage", "Culture & heritage", "Religious & archaeology"],
+     ["Gurdwara Janam Asthan", "Gurdwara Sacha Sauda at Farooqabad", "Historic gurdwaras associated with Guru Nanak"],
+     "Gurdwara Janam Asthan Nankana Sahib Pakistan",
+     "Nankana Sahib is an important Sikh pilgrimage destination. Plan around current site protocols, religious calendars and guidance from the responsible authorities.")
+_add("Kartarpur Sahib & Narowal", "Punjab", 32.1036, 75.0265,
+     "A sacred Sikh destination connected with the later life of Guru Nanak.",
+     ["Sikh pilgrimage", "Culture & heritage", "Religious & archaeology"],
+     ["Gurdwara Darbar Sahib Kartarpur", "Kartarpur Corridor visitor facilities", "Local heritage and community context"],
+     "Gurdwara Darbar Sahib Kartarpur Pakistan",
+     "Kartarpur is a major Sikh pilgrimage destination. Access arrangements, permits, visiting hours and cross-border procedures can change and must be confirmed through official channels.")
+_add("Hasan Abdal & Panja Sahib", "Punjab", 33.8204, 72.6890,
+     "A historic Sikh pilgrimage site in the foothills near Hasan Abdal.",
+     ["Sikh pilgrimage", "Culture & heritage", "Religious & archaeology"],
+     ["Gurdwara Panja Sahib", "Historic town of Hasan Abdal", "Regional heritage and pilgrimage context"],
+     "Gurdwara Panja Sahib Hasan Abdal Pakistan",
+     "Hasan Abdal is associated with Gurdwara Panja Sahib, a significant Sikh place of pilgrimage. Visitors should follow site protocols and verify access arrangements.")
+_add("Swat Buddhist Heritage Circuit", "Khyber Pakhtunkhwa", 34.7657, 72.3679,
+     "A concentrated archaeological landscape of Buddhist stupas and monastic remains.",
+     ["Buddhist heritage", "Religious & archaeology", "Culture & heritage", "Archaeology & ancient civilizations"],
+     ["Butkara-I Stupa and monastic remains", "Shingardar Stupa near Barikot", "Amluk Dara Stupa", "Saidu Sharif archaeological and museum context", "Udegram heritage landscape"],
+     "Butkara Stupa Swat Buddhist archaeology Pakistan",
+     "Swat preserves significant Buddhist archaeological remains associated with the Gandharan cultural sphere. Site condition and visitor access vary; consult official archaeology information and do not disturb protected remains.")
+_add("Takht-i-Bahi & Sahr-i-Bahlol", "Khyber Pakhtunkhwa", 34.3350, 71.9430,
+     "A UNESCO World Heritage monastic complex in the Gandhara region.",
+     ["Buddhist heritage", "Religious & archaeology", "Culture & heritage", "Archaeology & ancient civilizations"],
+     ["Main stupa court and votive stupas", "Monastic quadrangle and meditation cells", "Neighbouring fortified settlement of Sahr-i-Bahlol"],
+     "Takht i Bahi Buddhist monastery Pakistan",
+     "Takht-i-Bahi is an extensive Buddhist monastic complex with associated remains at Sahr-i-Bahlol. It is a protected heritage property; follow conservation and visitor rules.")
+_add("Katas Raj Temples & Salt Range", "Punjab", 32.7167, 72.9990,
+     "A historic Hindu temple complex around a sacred pond in the Salt Range.",
+     ["Hindu heritage", "Religious & archaeology", "Culture & heritage"],
+     ["Katas Raj temple complex", "Shiva, Hanuman and Ramachandra temple precincts", "Historic pond and surrounding Salt Range landscape"],
+     "Katas Raj Temples Chakwal Pakistan",
+     "Katas Raj is a significant Hindu heritage and pilgrimage complex. Respect active religious use, conservation requirements and local protocols.")
+_add("Hinglaj Mata & Hingol", "Balochistan", 25.5010, 65.5140,
+     "A Hindu pilgrimage landscape within the dramatic terrain of Hingol.",
+     ["Hindu heritage", "Religious & archaeology", "Coastal & marine", "Nature & wildlife"],
+     ["Hinglaj Mata temple and pilgrimage landscape", "Hingol National Park scenery", "Makran coastal and desert geology"],
+     "Hinglaj Mata temple Hingol Balochistan Pakistan",
+     "Hinglaj Mata is a major Hindu pilgrimage destination in a remote landscape. Travel requires current route, security, weather and local-organiser checks.")
+_add("Harappa & Indus Valley Archaeology", "Punjab", 30.6315, 72.8674,
+     "An archaeological landscape associated with the Indus Valley Civilization.",
+     ["Archaeology & ancient civilizations", "Religious & archaeology", "Culture & heritage"],
+     ["Harappa archaeological mound", "Harappa Museum", "Urban planning, craft and trade history of the Indus Valley Civilization"],
+     "Harappa archaeological site museum Pakistan",
+     "Harappa is a major archaeological site associated with the Indus Valley Civilization. Interpret it through archaeological evidence rather than assigning it to a modern religious tradition.")
+_add("Desan Meadows & Upper Kalam", "Khyber Pakhtunkhwa", 35.5000, 72.5800,
+     "A high meadow above Kalam with expansive views across upper Swat.",
+     ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism"],
+     ["Desan Meadows, also referred to by some travel creators as Desan Top", "Upper Kalam mountain viewpoints", "Locally guided walking and meadow experiences"],
+     "Desan Meadows Desan Top Kalam Swat Pakistan",
+     "Travel coverage describes Desan Meadows as a mountainside destination above Kalam. Track conditions, access, exact route and the use of the name Desan Top require local confirmation.")
+_add("Utror & Gabral Valleys", "Khyber Pakhtunkhwa", 35.5450, 72.4900,
+     "Quieter upper-Swat valleys beyond Kalam, shaped by rivers and forested slopes.",
+     ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism", "Rural & creative"],
+     ["Utror village and valley", "Gabral Valley and river landscapes", "Kundol Lake approach via locally guided routes"],
+     "Utror Gabral Valley Kalam Swat Pakistan",
+     "Utror and Gabral are upper-Swat valley destinations reached beyond Kalam. Road surfaces and access vary; confirm local conditions and use experienced local operators.")
+_add("Matiltan & Mahodand Lake", "Khyber Pakhtunkhwa", 35.5000, 72.6400,
+     "A forest-and-lake corridor in the upper Ushu Valley.",
+     ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism"],
+     ["Matiltan valley landscapes", "Mahodand Lake", "Ushu Forest corridor", "Mountain viewpoints and seasonal outdoor activities"],
+     "Matiltan Mahodand Lake Kalam Swat Pakistan",
+     "The route beyond Kalam leads through Ushu and Matiltan toward Mahodand Lake. Terrain and seasonal conditions can make a local 4x4 and experienced driver necessary; verify before travel.")
+
+if "Lahore" in DESTINATIONS:
+    DESTINATIONS["Lahore"]["experiences"] = list(dict.fromkeys(DESTINATIONS["Lahore"]["experiences"] + ["Islamic & Sufi heritage", "Sikh pilgrimage"]))
+    DESTINATIONS["Lahore"]["highlights"] += ["Wazir Khan Mosque and Data Darbar", "Gurdwara Dera Sahib and Samadhi of Ranjit Singh"]
+for _name in ("Taxila", "Swat Valley"):
+    if _name in DESTINATIONS:
+        DESTINATIONS[_name]["experiences"] = list(dict.fromkeys(DESTINATIONS[_name]["experiences"] + ["Buddhist heritage", "Archaeology & ancient civilizations"]))
+if "Swat Valley" in DESTINATIONS:
+    DESTINATIONS["Swat Valley"]["highlights"] += ["Butkara-I, Shingardar and Amluk Dara Buddhist archaeological sites"]
+if "Multan" in DESTINATIONS:
+    DESTINATIONS["Multan"]["experiences"] = list(dict.fromkeys(DESTINATIONS["Multan"]["experiences"] + ["Islamic & Sufi heritage"]))
+if "Uch Sharif & Bahawalpur Heritage" in DESTINATIONS:
+    DESTINATIONS["Uch Sharif & Bahawalpur Heritage"]["experiences"] = list(dict.fromkeys(DESTINATIONS["Uch Sharif & Bahawalpur Heritage"]["experiences"] + ["Islamic & Sufi heritage"]))
+
+_SOURCE_LINKS = {
+"Nankana Sahib & Sikh Heritage":[{"label":"Punjab Government — Religious Monuments","url":"https://punjab.gov.pk/religious-monuments","type":"Official"},{"label":"TDCP — Punjab, the Land of Sacred Gurus","url":"https://webapi.tdcp.gop.pk/uploads/1769507590777-461675896.pdf","type":"Official"}],
+"Kartarpur Sahib & Narowal":[{"label":"Ministry of Religious Affairs — Kartarpur Corridor","url":"https://www.mora.gov.pk/","type":"Official"}],
+"Hasan Abdal & Panja Sahib":[{"label":"Punjab Government — Religious Monuments","url":"https://punjab.gov.pk/religious-monuments","type":"Official"}],
+"Swat Buddhist Heritage Circuit":[{"label":"DOAM — Butkara-I","url":"https://doam.gov.pk/public/sites/3304","type":"Official archaeology record"},{"label":"DOAM — Shingardar Stupa","url":"https://doam.gov.pk/public/sites/3323","type":"Official archaeology record"},{"label":"DOAM — Amluk Dara Stupa","url":"https://doam.gov.pk/public/sites/3298","type":"Official archaeology record"},{"label":"Government of Pakistan — Swat travel booklet","url":"https://tourism.gov.pk/publications/Swat%20Booklet.pdf","type":"Official publication"}],
+"Takht-i-Bahi & Sahr-i-Bahlol":[{"label":"DOAM — Takht-i-Bahi World Heritage Site","url":"https://doam.gov.pk/public/world-heritage-sites/23","type":"Official heritage record"}],
+"Katas Raj Temples & Salt Range":[{"label":"Punjab Government — Archaeological Sites","url":"https://punjab.gov.pk/archeological-sites","type":"Official"},{"label":"DOAM — Heritage of Pakistan","url":"https://doam.gov.pk/public/heritage-sites","type":"Official heritage inventory"}],
+"Hinglaj Mata & Hingol":[{"label":"DOAM — Heritage of Pakistan","url":"https://doam.gov.pk/public/heritage-sites","type":"Official heritage inventory"}],
+"Harappa & Indus Valley Archaeology":[{"label":"Punjab Government — Archaeological Sites","url":"https://punjab.gov.pk/archeological-sites","type":"Official"},{"label":"DOAM — Heritage of Pakistan","url":"https://doam.gov.pk/public/heritage-sites","type":"Official heritage inventory"}],
+"Desan Meadows & Upper Kalam":[{"label":"Explore Pakistan — Places to Visit in Kalam","url":"https://explorepakistan.live/destinations/guides/places-to-visit-in-kalam","type":"Travel editorial"},{"label":"My Travelogues — Desan Top video (2022)","url":"https://www.youtube.com/watch?v=AqdMW9pxPTo","type":"Creator video; route details need rechecking"},{"label":"Discover Swat — Kalam to Gabral guide","url":"https://discoverswat.com/blog/kalam-to-gabral-scenic-drive-guide/","type":"Travel editorial"}],
+"Utror & Gabral Valleys":[{"label":"Explore Pakistan — Places to Visit in Swat","url":"https://explorepakistan.live/destinations/guides/places-to-visit-in-swat","type":"Travel editorial"},{"label":"Discover Swat — Kalam to Gabral guide","url":"https://discoverswat.com/blog/kalam-to-gabral-scenic-drive-guide/","type":"Travel editorial"}],
+"Matiltan & Mahodand Lake":[{"label":"Explore Pakistan — Places to Visit in Kalam","url":"https://explorepakistan.live/destinations/guides/places-to-visit-in-kalam","type":"Travel editorial"},{"label":"Government of Pakistan — Swat travel booklet","url":"https://tourism.gov.pk/publications/Swat%20Booklet.pdf","type":"Official publication"}]
+}
+for (const [name, sources] of Object.entries(_SOURCE_LINKS)) if (DESTINATIONS[name]) DESTINATIONS[name]["sources"] = sources
