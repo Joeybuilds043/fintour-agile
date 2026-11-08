@@ -70,7 +70,7 @@ with left:
     st.markdown('<div class="hero-note">From the Karakoram to the Arabian Sea · 39 curated destination clusters · One connected travel atlas</div>', unsafe_allow_html=True)
 with right:
     if hero:
-        st.image(get_display_image(hero["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.52, 0.48)) or hero["thumb_url"], use_container_width=True)
+        st.markdown(f'<div class="hero-frame"><img src="{hero["thumb_url"]}" alt="{hero["title"]}" /></div>', unsafe_allow_html=True)
         st.caption(f'{hero["title"]} · {hero["artist"]} · {hero["license"]} · [Image source]({hero["page_url"]})' + (' · Illustrative regional reference' if hero.get('illustrative') else ''))
     else:
         st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#EEE9DF,#D9C8B7)"><div><div class="section-title">The mountains are only the beginning.</div><p>A regional image is not available for this destination yet.</p></div></div>', unsafe_allow_html=True)

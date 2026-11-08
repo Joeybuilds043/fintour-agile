@@ -8,6 +8,7 @@ from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="Plan a Journey | VoyagePK", layout="wide")
 apply_visitor_theme()
+st.markdown("<style>div[data-testid='stDownloadButton']{position:fixed;right:26px;bottom:22px;z-index:9999;filter:drop-shadow(0 8px 18px rgba(18,35,48,.25))}div[data-testid='stDownloadButton'] button{border-radius:28px;padding:0.8rem 1.25rem}</style>", unsafe_allow_html=True)
 st.markdown('<div class="kicker">A JOURNEY, SHAPED AROUND YOU</div>', unsafe_allow_html=True)
 st.title("Build your Pakistan itinerary")
 st.markdown("Plan morning, afternoon and evening experiences, with regional food suggestions and a print-ready PDF.")
