@@ -21,8 +21,8 @@ st.markdown("""
 div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radius:17px;box-shadow:0 18px 38px rgba(2,16,10,.24)}
 .hero-frame:after{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid rgba(255,255,255,.58);background:linear-gradient(90deg,transparent 61.6%,rgba(255,255,255,.22) 61.8%,transparent 62%),linear-gradient(0deg,transparent 38%,rgba(255,255,255,.18) 38.2%,transparent 38.4%)} 
 .hero-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:61.8% 38.2%;border-radius:12px} 
-.display-title{color:var(--voyage-ink)!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(48px,5.4vw,78px);line-height:.98;letter-spacing:-1.2px;margin:10px 0 20px}
-.lede{font-size:16px;line-height:1.9;color:var(--voyage-body-ink)!important;opacity:1!important;max-width:680px;font-weight:500;letter-spacing:.05px}
+.display-title{color:#FFFFFF!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(48px,5.2vw,74px);line-height:1.01;letter-spacing:-.55px;margin:0 0 13px;text-shadow:0 2px 20px rgba(0,0,0,.22)}
+.hero-copy-panel{background:linear-gradient(145deg,rgba(7,35,25,.97),rgba(17,67,47,.94) 68%,rgba(30,67,72,.94));border:1px solid rgba(199,163,91,.42);border-radius:22px;padding:clamp(22px,3vw,36px);box-shadow:0 22px 52px rgba(2,16,10,.2)}\n.hero-copy-panel .lede{font-size:15px;line-height:1.78;color:#F0F4EB!important;opacity:1!important;max-width:680px;font-weight:500;letter-spacing:.05px}\n.hero-copy-panel .hero-note{color:#F0E5C8!important}\n.voyage-masthead-kicker{color:#FFFFFF!important;font-size:24px;letter-spacing:2px}\n.voyage-masthead-sub{color:#FFFFFF!important;font-size:10px;letter-spacing:1.7px;font-weight:700}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#C7A35B;font-weight:700}
 .section-title{color:var(--voyage-ink)!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(32px,3.2vw,44px);line-height:1.02;margin:4px 0 9px}
 .section-copy{color:var(--voyage-body-ink)!important;opacity:1!important;font-size:14px;line-height:1.8;max-width:720px}
@@ -78,11 +78,10 @@ st.markdown(
 )
 left, right = st.columns([0.92, 1.28], gap="large", vertical_alignment="center")
 with left:
-    st.markdown('<div class="display-title">A country of peaks, pathways and living heritage.</div>', unsafe_allow_html=True)
-    st.markdown('<div class="lede">From the high Karakoram to historic cities and the Arabian Sea, Pakistan rewards the curious traveller with extraordinary landscapes, layered histories and cultures rooted in place. VoyagePK brings considered destination guides, practical journey planning and tourism insight together in one editorial travel atlas.</div>', unsafe_allow_html=True)
+    st.markdown("""<div class='hero-copy-panel'><div class='display-title'>A country of peaks, pathways and living heritage.</div><div class='lede'>From the high Karakoram to historic cities and the Arabian Sea, Pakistan rewards the curious traveller with extraordinary landscapes, layered histories and cultures rooted in place. VoyagePK brings considered destination guides, practical journey planning and tourism insight together in one editorial travel atlas.</div><div class='hero-note'>Karakoram to coast · Ancient cities to living culture · Travel with context</div></div>""", unsafe_allow_html=True)
     st.write("")
     st.page_link("pages/01_Discover_Pakistan.py", label="Explore Pakistan")
-    st.markdown('<div class="hero-note">Karakoram to coast · Sacred places to ancient cities · Travel with context</div>', unsafe_allow_html=True)
+
 with right:
     hero_rendered = get_display_image(hero_image, aspect_ratio=(16, 10), focal_point=(0.5, 0.48))
     st.image(hero_rendered if hero_rendered else hero_image, use_container_width=True)
@@ -108,7 +107,7 @@ st.write("")
 st.markdown('<div class="kicker">EDITORIAL DESTINATION SELECTION</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Journeys worth discovering</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-copy">A cross-section of Pakistan’s mountain, coastal, cultural and urban experiences. This is an editorial selection, not a popularity ranking.</div>', unsafe_allow_html=True)
-featured = ["Hunza Valley", "Lahore", "Nankana Sahib & Sikh Heritage", "Swat Buddhist Heritage Circuit", "Desan Meadows & Upper Kalam", "Skardu"]
+featured = ["Hunza Valley", "Skardu", "Naran–Kaghan Valley", "Lahore", "K2 & Concordia Expedition", "Swat Valley"]
 for start in range(0, len(featured), 3):
     cols = st.columns(3, gap="large")
     for col, name in zip(cols, featured[start:start+3]):
