@@ -79,7 +79,7 @@ if app_mode == "🗺️ Strategic Infrastructure Allocator":
     st.write("##")
     
     # CONTROL INTERFACE FOR LOGISTICS CORRIDORS
-    col_map, col_controls = st.columns([2, 1])
+    col_map, col_controls = st.columns()
     
     with col_controls:
         st.markdown("### ⚙️ Optimization Parameters")
@@ -123,7 +123,7 @@ elif app_mode == "💬 Grok Panda Corporate Agent":
     st.markdown("<p style='color:#94A3B8;'>Real-Time Strategic Solutions for Public Governance Nodes and Tourism Logistics Enterprises</p>", unsafe_allow_html=True)
     st.write("---")
     
-    col_img, col_txt = st.columns([1, 6])
+    col_img, col_txt = st.columns()
     with col_img:
         st.image("https://imgur.com", width=90)
     with col_txt:
