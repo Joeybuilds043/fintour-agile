@@ -83,14 +83,31 @@ with right:
         st.markdown('<div class="soft-panel" style="min-height:390px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#EEE9DF,#D9C8B7)"><div><div class="section-title">The mountains are only the beginning.</div><p>A regional image is not available for this destination yet.</p></div></div>', unsafe_allow_html=True)
 
 st.write("")
-st.markdown('<div class="kicker">CHOOSE YOUR OWN WAY THROUGH THE COUNTRY</div>', unsafe_allow_html=True)
-st.markdown('<div class="section-title">What does travel look like to you?</div>', unsafe_allow_html=True)
-st.markdown('<div class="section-copy">A place can be many things at once. Explore by the experience you want, then discover the destinations that bring it to life.</div>', unsafe_allow_html=True)
-cols = st.columns(5, gap="small")
-for i, category in enumerate(EXPERIENCE_CATEGORIES):
-    with cols[i % 5]:
-        st.markdown(f'<div class="category-tile"><div class="category-letter">{category["symbol"]}</div><div class="category-name">{category["name"]}</div><div class="category-copy">{category["short"]}</div></div>', unsafe_allow_html=True)
-
+st.markdown('<div class="kicker">EXPLORE THE COUNTRY THROUGH DISTINCTIVE JOURNEYS</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">A richer way to experience Pakistan.</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-copy">Explore the country through mountain environments, spiritual and religious heritage, historic cities and cultural landscapes. Each collection links to destination-level field notes and visitor planning.</div>', unsafe_allow_html=True)
+photo_collections = [
+    ("Northern landscapes", "Passu", "Karakoram valleys, alpine lakes and highland journeys", "Mountain destinations"),
+    ("Islamic & Sufi heritage", "Multan", "Mosques, shrines, sacred architecture and living traditions", "Islamic & Sufi heritage"),
+    ("Sikh pilgrimage", "Nankana Sahib", "Gurdwaras and places associated with Guru Nanak", "Sikh pilgrimage"),
+    ("Buddhist heritage", "Taxila", "Gandharan monasteries, stupas and archaeological landscapes", "Buddhist heritage"),
+    ("Hindu heritage", "Katas Raj", "Historic temples, sacred landscapes and pilgrimage routes", "Hindu heritage"),
+    ("Ancient civilizations", "Harappa", "Indus Valley archaeology and the material history of place", "Archaeology & ancient civilizations"),
+]
+for start_index in range(0, len(photo_collections), 3):
+    cols = st.columns(3, gap="large")
+    for col, (title, query, description, category) in zip(cols, photo_collections[start_index:start_index + 3]):
+        with col:
+            image = get_commons_image(query)
+            with st.container(border=True):
+                if image:
+                    rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.48))
+                    st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
+                    st.caption(f'{image["artist"]} · {image["license"]} · [Image source]({image["page_url"]})')
+                else:
+                    st.markdown('<div class="category-photo-fallback">VOYAGEPK · PLACE COLLECTION</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="destination-name">{title}</div><div class="destination-copy">{description}</div>', unsafe_allow_html=True)
+                st.page_link("pages/01_Discover_Pakistan.py", label=f"Explore {category}")
 st.write("")
 st.markdown('<div class="kicker">EDITORIAL DESTINATION SELECTION</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Journeys worth discovering</div>', unsafe_allow_html=True)
