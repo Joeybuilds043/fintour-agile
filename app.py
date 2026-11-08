@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import streamlit as st
 
-from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
+from src.catalog import DESTINATIONS
 from src.services.media import get_commons_image, get_display_image
 from src.services.weather import get_weather
 from src.ui import apply_visitor_theme
@@ -22,10 +22,10 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .hero-frame:after{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid rgba(255,255,255,.58);background:linear-gradient(90deg,transparent 61.6%,rgba(255,255,255,.22) 61.8%,transparent 62%),linear-gradient(0deg,transparent 38%,rgba(255,255,255,.18) 38.2%,transparent 38.4%)} 
 .hero-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:61.8% 38.2%;border-radius:12px} 
 .display-title{color:var(--voyage-ink)!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(48px,5.4vw,78px);line-height:.98;letter-spacing:-1.2px;margin:10px 0 20px}
-.lede{font-size:16px;line-height:1.85;color:var(--voyage-muted);max-width:680px}
+.lede{font-size:16px;line-height:1.9;color:var(--voyage-body-ink)!important;opacity:1!important;max-width:680px;font-weight:500;letter-spacing:.05px}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#C7A35B;font-weight:700}
 .section-title{color:var(--voyage-ink)!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(32px,3.2vw,44px);line-height:1.02;margin:4px 0 9px}
-.section-copy{color:var(--voyage-muted);font-size:14px;line-height:1.7;max-width:720px}
+.section-copy{color:var(--voyage-body-ink)!important;opacity:1!important;font-size:14px;line-height:1.8;max-width:720px}
 .soft-panel{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:20px;padding:20px;height:100%}
 .category-tile{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:15px;padding:16px 14px;min-height:105px}
 .category-letter{width:27px;height:27px;border-radius:50%;background:#E8E1D5;color:#173B3A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
@@ -33,10 +33,10 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .category-copy{font-size:11px;color:#657875;line-height:1.5;margin-top:4px}
 .destination-name{color:var(--voyage-ink);font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:27px;margin:8px 0 2px}
 .destination-meta{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#657875}
-.destination-copy{font-size:13px;line-height:1.65;color:var(--voyage-muted);min-height:43px}
-.hero-note{border-left:2px solid #C7A35B;padding:6px 0 6px 14px;color:var(--voyage-muted);font-size:11px;line-height:1.7;margin-top:14px;letter-spacing:.25px}.mosaic-label{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:5px 0 0;color:var(--voyage-ink);font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700}.mosaic-label small{font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--voyage-muted);font-weight:600}.mosaic-label-small{font-size:18px}.mosaic-subtitle{font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.3px;text-transform:uppercase;color:var(--voyage-muted);margin:0 0 7px}
+.destination-copy{font-size:13px;line-height:1.7;color:var(--voyage-body-ink)!important;opacity:1!important;min-height:43px}
+.hero-note{border-left:2px solid #C7A35B;padding:6px 0 6px 14px;color:var(--voyage-body-ink)!important;font-size:11px;line-height:1.8;margin-top:14px;letter-spacing:.25px}.hero-image-caption{display:flex;justify-content:space-between;gap:12px;padding:10px 4px 0;color:var(--voyage-body-ink);font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.8px;font-weight:800}.hero-image-caption span:first-child{color:#C39B50}
 .weather-chip{display:inline-block;margin:6px 0 2px;padding:6px 10px;border-radius:20px;background:rgba(24,89,60,.14);color:var(--voyage-ink);font-size:11px;font-weight:600}
-@media(max-width:700px){.display-title{font-size:48px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.mosaic-label{font-size:19px}}
+@media(max-width:700px){.display-title{font-size:48px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -63,42 +63,33 @@ with st.sidebar:
 
 with open("assets/manifest.json", encoding="utf-8") as asset_file:
     asset_manifest = json.load(asset_file)
-# The homepage hero is an editorial destination collage in both appearance modes.
-# Avoid the former Islamabad night skyline: the first impression should sell Pakistan's
-# landscape and cultural variety, not read as a generic city-at-night banner.
-hero_photos = [
-    ("Passu Cones · Hunza", "Passu Hunza", "Karakoram landscapes"),
-    ("Badshahi Mosque · Lahore", "Badshahi Mosque Lahore", "Living heritage"),
-    ("Kund Malir · Balochistan", "Kund Malir Beach Hingol", "Arabian Sea coast"),
-]
+# The homepage uses the two exact image URLs supplied by the site owner.
+# Appearance mode selects one image; no collage or Islamabad skyline is used here.
+dark_mode = st.session_state.get("voyage_theme", "Light") == "Dark"
+hero_image = (
+    "https://images.pexels.com/photos/4154216/pexels-photo-4154216.jpeg"
+    if dark_mode else
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTODDtDNaCRAnw_D0isBagsj8NzDdkGMKVyn1vIoORU47uEhSxlZASlqQVA&s=10"
+)
+hero_edition = "NIGHT EDITION" if dark_mode else "DAY EDITION"
 st.markdown(
-    '<div class="voyage-masthead"><svg viewBox="0 0 92 56" role="img" aria-label="Flag of Pakistan" class="pakistan-flag"><rect width="92" height="56" rx="4" fill="#01411C"/><rect width="20" height="56" fill="#FFFFFF"/><circle cx="57" cy="27" r="17" fill="#FFFFFF"/><circle cx="63" cy="22" r="14" fill="#01411C"/><path d="M70 7l3.2 7.4 8 .7-6.1 5.2 1.8 7.8-6.9-4.1-6.9 4.1 1.8-7.8-6.1-5.2 8-.7z" fill="#FFFFFF"/></svg><div><div class="voyage-masthead-kicker">VOYAGEPK <span class="masthead-divider">/</span> PAKISTAN UNBOUND</div><div class="voyage-masthead-sub">LANDSCAPES · LIVING CULTURES · HERITAGE · PLACE-BASED TRAVEL</div></div></div><div class="kicker">THE COUNTRY, IN ALL ITS CONTRASTS</div>',
+    '<div class="voyage-masthead"><svg viewBox="0 0 92 56" role="img" aria-label="Flag of Pakistan" class="pakistan-flag"><rect width="92" height="56" rx="4" fill="#01411C"/><rect width="20" height="56" fill="#FFFFFF"/><circle cx="57" cy="27" r="17" fill="#FFFFFF"/><circle cx="63" cy="22" r="14" fill="#01411C"/><path d="M70 7l3.2 7.4 8 .7-6.1 5.2 1.8 7.8-6.9-4.1-6.9 4.1 1.8-7.8-6.1-5.2 8-.7z" fill="#FFFFFF"/></svg><div><div class="voyage-masthead-kicker">VOYAGEPK <span class="masthead-divider">/</span> PAKISTAN UNBOUND</div><div class="voyage-masthead-sub">LANDSCAPES · LIVING CULTURES · HERITAGE · PLACE-BASED TRAVEL</div></div></div><div class="kicker">A FIELD GUIDE TO THE EXTRAORDINARY</div>',
     unsafe_allow_html=True,
 )
-left, right = st.columns([0.88, 1.32], gap="large", vertical_alignment="center")
+left, right = st.columns([0.92, 1.28], gap="large", vertical_alignment="center")
 with left:
-    st.markdown('<div class="display-title">Pakistan is more than a destination. It is a world of journeys.</div>', unsafe_allow_html=True)
-    st.markdown('<div class="lede">From the high Karakoram to historic cities and the Arabian Sea, discover a country shaped by extraordinary landscapes, living cultures and layered histories. VoyagePK brings destination guides, thoughtful trip planning and tourism intelligence into one considered travel experience — grounded in place, context and responsible exploration.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="display-title">A country of peaks, pathways and living heritage.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="lede">From the high Karakoram to historic cities and the Arabian Sea, Pakistan rewards the curious traveller with extraordinary landscapes, layered histories and cultures rooted in place. VoyagePK brings considered destination guides, practical journey planning and tourism insight together in one editorial travel atlas.</div>', unsafe_allow_html=True)
     st.write("")
     st.page_link("pages/01_Discover_Pakistan.py", label="Explore Pakistan")
-    st.markdown('<div class="hero-note">Karakoram to coast · Sacred places to ancient cities · One connected travel atlas</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-note">Karakoram to coast · Sacred places to ancient cities · Travel with context</div>', unsafe_allow_html=True)
 with right:
-    main_photo = get_commons_image(hero_photos[0][1])
-    side_photos = [get_commons_image(hero_photos[1][1]), get_commons_image(hero_photos[2][1])]
-    mosaic_main, mosaic_side = st.columns([1.18, 1], gap="small")
-    with mosaic_main:
-        if main_photo:
-            rendered = get_display_image(main_photo["thumb_url"], aspect_ratio=(4, 5), focal_point=(0.53, 0.5))
-            st.image(rendered if rendered else main_photo["thumb_url"], use_container_width=True)
-            st.markdown(f'<div class="mosaic-label"><span>{hero_photos[0][0]}</span></div><div class="mosaic-subtitle">{hero_photos[0][2]}</div>', unsafe_allow_html=True)
-            st.caption(f'{main_photo["artist"]} · {main_photo["license"]} · [Source]({main_photo["page_url"]})')
-    with mosaic_side:
-        for asset, meta in zip(side_photos, hero_photos[1:]):
-            if asset:
-                rendered = get_display_image(asset["thumb_url"], aspect_ratio=(5, 4), focal_point=(0.5, 0.48))
-                st.image(rendered if rendered else asset["thumb_url"], use_container_width=True)
-                st.markdown(f'<div class="mosaic-label mosaic-label-small"><span>{meta[0]}</span></div><div class="mosaic-subtitle">{meta[2]}</div>', unsafe_allow_html=True)
-                st.caption(f'{asset["artist"]} · {asset["license"]} · [Source]({asset["page_url"]})')
+    hero_rendered = get_display_image(hero_image, aspect_ratio=(16, 10), focal_point=(0.5, 0.48))
+    st.image(hero_rendered if hero_rendered else hero_image, use_container_width=True)
+    st.markdown(
+        f'<div class="hero-image-caption"><span>{hero_edition}</span><span>PAKISTAN · UNBOUND</span></div>',
+        unsafe_allow_html=True,
+    )
 st.markdown('<div class="kicker">EXPLORE THE COUNTRY THROUGH DISTINCTIVE JOURNEYS</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">A richer way to experience Pakistan.</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-copy">Explore the country through mountain environments, spiritual and religious heritage, historic cities and cultural landscapes. Each collection links to destination-level field notes and visitor planning.</div>', unsafe_allow_html=True)
