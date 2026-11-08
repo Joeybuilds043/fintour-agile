@@ -52,33 +52,81 @@
   "experience_collections": [
     {
       "title": "Northern landscapes",
-      "query": "Passu",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg"
+      "category": "Mountain destinations",
+      "description": "Karakoram valleys, alpine lakes and highland journeys",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Passu_Cones_and_the_Hunza_River.jpg/1280px-Passu_Cones_and_the_Hunza_River.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
+      "author": "Aly Ahmad1991",
+      "license": "CC BY-SA 4.0",
+      "focal_point": [
+        0.618,
+        0.382
+      ]
     },
     {
-      "title": "Islamic and Sufi heritage",
-      "query": "Multan",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Shrine_of_Shah_Rukn-e-Alam_Multan.jpg"
+      "title": "Islamic & Sufi heritage",
+      "category": "Islamic & Sufi heritage",
+      "description": "Mosques, shrines, sacred architecture and living traditions",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Shrine%20of%20Shah%20Rukn-e-Alam%20Multan.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Shrine_of_Shah_Rukn-e-Alam_Multan.jpg",
+      "author": "Mhtoori",
+      "license": "CC BY-SA 4.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
     },
     {
       "title": "Sikh pilgrimage",
-      "query": "Gurdwara Janam Asthan Nankana Sahib Pakistan",
-      "page_url": "https://punjab.gov.pk/religious-monuments"
+      "category": "Sikh pilgrimage",
+      "description": "Gurdwaras and places associated with Guru Nanak",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gurdwara%20Nankana%20Sahib%20Janam%20Asthan.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Gurdwara_Nankana_Sahib_Janam_Asthan.jpg",
+      "author": "Harvinder Chandigarh",
+      "license": "CC BY 4.0",
+      "focal_point": [
+        0.5,
+        0.45
+      ]
     },
     {
       "title": "Buddhist heritage",
-      "query": "Taxila Dharmarajika Stupa Gandhara Pakistan",
-      "page_url": "https://doam.gov.pk/public/sites/3304"
+      "category": "Buddhist heritage",
+      "description": "Gandharan monasteries, stupas and archaeological landscapes",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmarajika%20stupa%2CTaxila.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Dharmarajika_stupa,Taxila.jpg",
+      "author": "Sasha Isachenko",
+      "license": "CC BY-SA 3.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
     },
     {
       "title": "Hindu heritage",
-      "query": "Katas Raj Temples Chakwal Pakistan",
-      "page_url": "https://punjab.gov.pk/archeological-sites"
+      "category": "Hindu heritage",
+      "description": "Historic temples, sacred landscapes and pilgrimage routes",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Katas%20Raj%20Temple%20Pakistan.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Katas_Raj_Temple_Pakistan.jpg",
+      "author": "Asham Shahzad",
+      "license": "CC BY-SA 4.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
     },
     {
       "title": "Ancient civilizations",
-      "query": "Harappa archaeological site Pakistan",
-      "page_url": "https://punjab.gov.pk/archeological-sites"
+      "category": "Archaeology & ancient civilizations",
+      "description": "Indus Valley archaeology and the material history of place",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Archaeological%20site%20of%20Harappa.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Archaeological_site_of_Harappa.jpg",
+      "author": "M.sohailtariq",
+      "license": "CC BY-SA 3.0",
+      "focal_point": [
+        0.5,
+        0.5
+      ]
     }
   ]
 }

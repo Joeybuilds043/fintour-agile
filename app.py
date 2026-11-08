@@ -86,28 +86,17 @@ st.write("")
 st.markdown('<div class="kicker">EXPLORE THE COUNTRY THROUGH DISTINCTIVE JOURNEYS</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">A richer way to experience Pakistan.</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-copy">Explore the country through mountain environments, spiritual and religious heritage, historic cities and cultural landscapes. Each collection links to destination-level field notes and visitor planning.</div>', unsafe_allow_html=True)
-photo_collections = [
-    ("Northern landscapes", "Passu", "Karakoram valleys, alpine lakes and highland journeys", "Mountain destinations"),
-    ("Islamic & Sufi heritage", "Multan", "Mosques, shrines, sacred architecture and living traditions", "Islamic & Sufi heritage"),
-    ("Sikh pilgrimage", "Nankana Sahib", "Gurdwaras and places associated with Guru Nanak", "Sikh pilgrimage"),
-    ("Buddhist heritage", "Taxila", "Gandharan monasteries, stupas and archaeological landscapes", "Buddhist heritage"),
-    ("Hindu heritage", "Katas Raj", "Historic temples, sacred landscapes and pilgrimage routes", "Hindu heritage"),
-    ("Ancient civilizations", "Harappa", "Indus Valley archaeology and the material history of place", "Archaeology & ancient civilizations"),
-]
+photo_collections = asset_manifest["experience_collections"]
 for start_index in range(0, len(photo_collections), 3):
     cols = st.columns(3, gap="large")
-    for col, (title, query, description, category) in zip(cols, photo_collections[start_index:start_index + 3]):
+    for col, asset in zip(cols, photo_collections[start_index:start_index + 3]):
         with col:
-            image = get_commons_image(query)
             with st.container(border=True):
-                if image:
-                    rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.48))
-                    st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
-                    st.caption(f'{image["artist"]} · {image["license"]} · [Image source]({image["page_url"]})')
-                else:
-                    st.markdown('<div class="category-photo-fallback">VOYAGEPK · PLACE COLLECTION</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="destination-name">{title}</div><div class="destination-copy">{description}</div>', unsafe_allow_html=True)
-                st.page_link("pages/01_Discover_Pakistan.py", label=f"Explore {category}")
+                rendered = get_display_image(asset["url"], aspect_ratio=(16, 9), focal_point=tuple(asset.get("focal_point", [0.5, 0.48])))
+                st.image(rendered if rendered else asset["url"], use_container_width=True)
+                st.caption(f'{asset["author"]} · {asset["license"]} · [Image source]({asset["page_url"]})')
+                st.markdown(f'<div class="destination-name">{asset["title"]}</div><div class="destination-copy">{asset["description"]}</div>', unsafe_allow_html=True)
+                st.page_link("pages/01_Discover_Pakistan.py", label=f'Explore {asset["category"]}')
 st.write("")
 st.markdown('<div class="kicker">EDITORIAL DESTINATION SELECTION</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Journeys worth discovering</div>', unsafe_allow_html=True)
