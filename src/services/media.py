@@ -153,17 +153,17 @@ def get_commons_image(query: str) -> dict | None:
         artist = _plain(meta.get("Artist", {}).get("value", "")) or "Attribution not supplied"
         width, height = int(info.get("width", 0) or 0), int(info.get("height", 0) or 0)
         mime = info.get("mime", "")
-        if not (description_url and thumb_url and licence and width >= 1000 and height >= 600):
+        if not (description_url and thumb_url and licence and width >= 1400 and height >= 800):
             continue
         if mime not in {"image/jpeg", "image/png", "image/webp"}:
             continue
         ratio = width / max(height, 1)
-        if not 1.08 <= ratio <= 2.6:
+        if not 1.2 <= ratio <= 2.2:
             continue
         overlap = len(terms & _tokens(title))
         if overlap == 0:
             continue
-        score = overlap * 10 + (2 if 1.25 <= ratio <= 1.9 else 0) + (1 if width >= 1800 else 0)
+        score = overlap * 10 + (2 if 1.4 <= ratio <= 1.9 else 0) + (1 if width >= 1800 else 0)
         if any(word in title.lower() for word in ("map", "logo", "flag", "diagram", "coat of arms")):
             score -= 30
         candidates.append((score, {
