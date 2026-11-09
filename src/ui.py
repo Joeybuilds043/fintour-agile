@@ -113,6 +113,30 @@ def apply_visitor_theme() -> None:
         .stApp a{color:#FFFFFF!important}
         </style>
         """, unsafe_allow_html=True)
+    st.markdown("""
+    <style>
+    /* Readability layer: keep editorial display fonts, strengthen body hierarchy. */
+    .stApp, .stApp input, .stApp textarea, .stApp button, .stApp select,
+    .stApp [data-testid="stMarkdownContainer"] {font-family:'Manrope',sans-serif}
+    .stApp p,.stApp li,.stApp label,.stApp [data-testid="stCaptionContainer"] p{
+      font-size:15px;line-height:1.72
+    }
+    .stApp [data-testid="stCaptionContainer"] p{font-size:12px;line-height:1.55}
+    .stApp [data-testid="stWidgetLabel"] p,.stApp [data-testid="stWidgetLabel"]{
+      font-size:14px;font-weight:650
+    }
+    .stApp input,.stApp textarea,.stApp [data-baseweb="select"]{font-size:14px}
+    .stApp [data-testid="stMetricLabel"]{font-size:12px}
+    .stApp [data-testid="stMetricValue"]{font-size:26px}
+    .stApp button{font-size:14px;font-weight:700}
+    .stApp a{font-weight:650;text-underline-offset:3px}
+    .stApp [data-testid="stExpander"] summary p{font-size:14px;font-weight:700}
+    @media(max-width:700px){
+      .stApp p,.stApp li,.stApp label{font-size:14px;line-height:1.68}
+      .stApp [data-testid="stMetricValue"]{font-size:22px}
+    }
+    </style>
+    """, unsafe_allow_html=True)
     st.sidebar.markdown(
         '<div class="voyage-brand">VoyagePK</div><div class="voyage-brand-sub">Pakistan Unbound</div>',
         unsafe_allow_html=True,
