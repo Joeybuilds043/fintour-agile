@@ -110,7 +110,14 @@ def apply_visitor_theme() -> None:
             border:1px solid #FFFFFF!important
         }
         .stApp [data-testid="stButton"]>button:hover{background:#219653!important;color:#FFFFFF!important}
-        .stApp a{color:#45C477!important}\n        .stApp [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{background:rgba(69,196,119,.16)!important;color:#FFFFFF!important}\n        .stApp input,.stApp textarea,.stApp [data-baseweb="select"]>div,.stApp [data-baseweb="popover"]{background:#080D09!important;color:#FFFFFF!important;border-color:#26372C!important}\n        .stApp [data-testid="stExpander"],.stApp [data-testid="stMetric"],.stApp [data-testid="stTabs"] [role="tab"]{background:#050505!important;color:#FFFFFF!important;border-color:#26372C!important}\n        .stApp [data-testid="stMetricLabel"],.stApp [data-testid="stMetricValue"],.stApp [data-testid="stWidgetLabel"]{color:#FFFFFF!important}\n        .stApp [data-baseweb="select"] span,.stApp [data-baseweb="select"] input{color:#FFFFFF!important}\n        .stApp [data-testid="stAlert"]{background:#080808!important;color:#FFFFFF!important;border:1px solid #45C477!important}\n        .stApp hr{border-color:#292929!important}
+        .stApp a{color:#45C477!important}
+        .stApp [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{background:rgba(69,196,119,.16)!important;color:#FFFFFF!important}
+        .stApp input,.stApp textarea,.stApp [data-baseweb="select"]>div,.stApp [data-baseweb="popover"]{background:#080D09!important;color:#FFFFFF!important;border-color:#26372C!important}
+        .stApp [data-testid="stExpander"],.stApp [data-testid="stMetric"],.stApp [data-testid="stTabs"] [role="tab"]{background:#050505!important;color:#FFFFFF!important;border-color:#26372C!important}
+        .stApp [data-testid="stMetricLabel"],.stApp [data-testid="stMetricValue"],.stApp [data-testid="stWidgetLabel"]{color:#FFFFFF!important}
+        .stApp [data-baseweb="select"] span,.stApp [data-baseweb="select"] input{color:#FFFFFF!important}
+        .stApp [data-testid="stAlert"]{background:#080808!important;color:#FFFFFF!important;border:1px solid #45C477!important}
+        .stApp hr{border-color:#292929!important}
         </style>
         """, unsafe_allow_html=True)
     st.markdown("""
