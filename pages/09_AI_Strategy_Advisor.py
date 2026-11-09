@@ -3,7 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS
-from src.services.grok import GroqAPIError, generate_text, get_api_key
+from src.services.groq import GroqAPIError, generate_text, get_api_key
 from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="AI Strategy Advisor | VoyagePK", page_icon=None, layout="wide")
@@ -66,7 +66,7 @@ if st.button("Generate strategy brief", type="primary", disabled=not bool(api_ke
                 user_prompt=f"{context}\nFocus: {focus}\nQuestion: {question}",
                 temperature=0.5,
                 max_output_tokens=1800,
-                timeout=(10, 180),
+                timeout=180,
             )
             st.markdown(answer)
             st.download_button(
