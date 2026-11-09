@@ -103,7 +103,9 @@ for start_index in range(0, len(photo_collections), 3):
                 st.image(rendered if rendered else asset["url"], use_container_width=True)
                 st.caption(f'{asset["author"]} · {asset["license"]} · [Image source]({asset["page_url"]})')
                 st.markdown(f'<div class="destination-name">{asset["title"]}</div><div class="destination-copy">{asset["description"]}</div>', unsafe_allow_html=True)
-                st.page_link("pages/01_Discover_Pakistan.py", label=f'Explore {asset["category"]}')
+                if st.button(f'Explore {asset["title"]}', key=f'collection_{asset["key"]}', use_container_width=True):
+                    st.session_state["selected_experience_collection"] = asset["key"]
+                    st.switch_page("pages/11_Experience_Collection.py")
 st.write("")
 st.markdown('<div class="kicker">EDITORIAL DESTINATION SELECTION</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Journeys worth discovering</div>', unsafe_allow_html=True)
