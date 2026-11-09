@@ -43,7 +43,7 @@ st.markdown(
 TOURISM_TYPES = [
     {"name": "Nature Tourism", "icon": "🌿", "description": "Valleys, lakes, forests, wildlife and landscapes", "tags": {"Nature & wildlife"}},
     {"name": "Adventure Tourism", "icon": "🥾", "description": "Trekking, climbing, rafting and mountain challenges", "tags": {"Adventure"}},
-    {"name": "Religious & Pilgrimage Tourism", "icon": "🕌", "description": "Sacred places, pilgrimage routes and religious heritage", "tags": {"Religious & archaeology", "Islamic & Sufi heritage", "Sikh pilgrimage", "Buddhist heritage", "Hindu heritage"}},
+    {"name": "Religious & Pilgrimage Tourism", "icon": "🕌", "description": "Sacred places, pilgrimage routes and religious heritage", "tags": {"Religious & archaeology", "Islamic & Sufi heritage", "Sikh pilgrimage", "Buddhist heritage", "Hinduism heritage"}},
     {"name": "Cultural & Heritage Tourism", "icon": "🏛️", "description": "Historic cities, architecture, archaeology, arts and traditions", "tags": {"Culture & heritage", "Archaeology & ancient civilizations"}},
     {"name": "Ecotourism", "icon": "🌱", "description": "Conservation, low-impact travel and community benefit", "tags": {"Ecotourism"}},
     {"name": "Food & Culinary Tourism", "icon": "🍲", "description": "Regional cuisine, food streets, markets and local flavours", "tags": {"Food & gastronomy"}},
@@ -200,7 +200,7 @@ traditions = {
     "Islamic & Sufi heritage": "Mosques, shrines, Sufi centres and sacred architecture",
     "Sikh pilgrimage": "Gurdwaras and places associated with Sikh history",
     "Buddhist heritage": "Gandharan monasteries, stupas and Buddhist landscapes",
-    "Hindu heritage": "Temples, sacred landscapes and Hindu pilgrimage",
+    "Hinduism heritage": "Temples, sacred landscapes and Hindu pilgrimage",
 }
 tradition_cols = st.columns(4, gap="medium")
 for col, (tradition, description) in zip(tradition_cols, traditions.items()):
