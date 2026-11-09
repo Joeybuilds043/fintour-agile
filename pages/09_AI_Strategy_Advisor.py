@@ -19,28 +19,26 @@ if not api_key:
         "Streamlit Community Cloud → App settings → Secrets. Visitors do not enter or manage API keys."
     )
 
-with st.form("voyage_strategy_form", clear_on_submit=False):
-    name = st.selectbox("Destination", list(DESTINATIONS), key="selected_destination")
-    d = DESTINATIONS[name]
-    focus = st.selectbox(
-        "Analysis focus",
-        [
-            "Destination competitiveness and positioning",
-            "Tourism business model and revenue streams",
-            "Investment opportunity screening",
-            "Sustainable visitor management",
-            "Digital innovation roadmap",
-            "Local value retention and community enterprise",
-        ],
-    )
-    question = st.text_area(
-        "Specific strategic question",
-        placeholder="What decision are you trying to make? Include any known budget, capacity or operating constraints.",
-        height=120,
-        help="Press Ctrl+Enter to submit this form.",
-    )
-    st.caption("Press Ctrl+Enter or select Generate strategy brief to submit.")
-    submitted = st.form_submit_button("Generate strategy brief", type="primary", use_container_width=True)
+name = st.selectbox("Destination", list(DESTINATIONS), key="selected_destination")
+d = DESTINATIONS[name]
+focus = st.selectbox(
+    "Analysis focus",
+    [
+        "Destination competitiveness and positioning",
+        "Tourism business model and revenue streams",
+        "Investment opportunity screening",
+        "Sustainable visitor management",
+        "Digital innovation roadmap",
+        "Local value retention and community enterprise",
+    ],
+)
+question = st.text_area(
+    "Specific strategic question",
+    placeholder="What decision are you trying to make? Include any known budget, capacity or operating constraints.",
+    height=120,
+    key="strategy_question",
+)
+submitted = st.button("Generate strategy brief", type="primary", use_container_width=True, key="generate_strategy")
 
 if submitted:
     if not question.strip():
@@ -49,7 +47,7 @@ if submitted:
         st.error("VoyagePK AI is unavailable because the app owner has not configured GROQ_API_KEY.")
     else:
         context = (
-            f"Destination: {name}; Province/territory: {d.get('province', d['region'])}; "
+            f"Destination: {name}; Province/territory: {d.get('administrative_region') or d.get('province', d['region'])}; "
             f"Region: {d['region']}; Overview: {d['overview']}; "
             f"Experiences: {', '.join(d['experiences'])}; Current editorial risk/season/access notes: "
             f"{d['season']} {d['access']} {d['responsible']}"
@@ -66,17 +64,13 @@ if submitted:
         with st.spinner("Preparing your destination strategy brief..."):
             try:
                 answer = generate_text(
-                    api_key=api_key,
-                    system_instruction=system,
-                    user_prompt=f"{context}\nFocus: {focus}\nQuestion: {question}",
-                    temperature=0.5,
-                    max_output_tokens=1800,
-                    timeout=180,
+                    api_key=api_key, system_instruction=system,
+                    user_prompt=f"{context}\\nFocus: {focus}\\nQuestion: {question}",
+                    temperature=0.5, max_output_tokens=1800, timeout=180,
                 )
                 st.markdown(answer)
                 st.download_button(
-                    "Download strategy brief",
-                    answer,
+                    "Download strategy brief", answer,
                     file_name=f"{name.lower().replace(' ', '-')}-strategy.md",
                     mime="text/markdown",
                 )
