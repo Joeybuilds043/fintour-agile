@@ -82,6 +82,17 @@ IMAGE_CANDIDATES = [
     {"id":"IMG-ICT-001","subject":"Faisal Mosque at dusk","region":"Islamabad Capital Territory","page":"https://commons.wikimedia.org/wiki/File:Faisal_Mosque_in_dusk.jpg"},
     {"id":"IMG-ICT-002","subject":"Pakistan Monument","region":"Islamabad Capital Territory","page":"https://commons.wikimedia.org/wiki/File:Pakistan_Monument,_Islamabad_01.jpg"},
     {"id":"IMG-ICT-003","subject":"Saidpur Village temple and streets","region":"Islamabad Capital Territory","page":"https://commons.wikimedia.org/wiki/File:Saidpur_Village_Islamabad_Temple.jpg"},
+    {"id":None,"intake_ref":"Batch 3 / destination image 1","subject":"Takht-i-Bahi monastery","region":"Khyber Pakhtunkhwa","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 3 / destination image 2","subject":"Kalash Valleys and traditional village architecture","region":"Khyber Pakhtunkhwa","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 3 / destination image 3","subject":"Kumrat Valley forest and river landscape","region":"Khyber Pakhtunkhwa","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 3 / destination image 4","subject":"Mahodand Lake","region":"Khyber Pakhtunkhwa","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 3 / destination image 5","subject":"Shandur Pass landscape","region":"Khyber Pakhtunkhwa / Gilgit-Baltistan","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 3 / event image 1","subject":"Shandur Polo Festival","region":"Khyber Pakhtunkhwa / Gilgit-Baltistan","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 3 / event image 2","subject":"Chilam Joshi Festival","region":"Khyber Pakhtunkhwa","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 3 / event image 3","subject":"Kalam Summer Festival","region":"Khyber Pakhtunkhwa","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 6 / image 1","subject":"Ratti Gali Lake","region":"Azad Jammu & Kashmir","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 6 / image 2","subject":"Arang Kel","region":"Azad Jammu & Kashmir","page":None,"note":"Original image source metadata not retained in the structured import."},
+    {"id":None,"intake_ref":"Batch 6 / image 3","subject":"Pir Chinasi shrine","region":"Azad Jammu & Kashmir","page":None,"note":"Original image source metadata not retained in the structured import."},
 ]
 
 DISCOVERY_LEADS = {
