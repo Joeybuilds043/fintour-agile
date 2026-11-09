@@ -138,8 +138,12 @@ with tab_images:
                 st.caption("Creator recorded: " + item["creator"])
             if item.get("licence"):
                 st.caption("Licence note: " + item["licence"])
-            st.link_button("Review source page", item["page"])
-    st.caption("The earlier research intake counted 27 image candidates. The repository currently retains source-page metadata for only the candidates listed above; remaining image records must be restored from the original batch content before they can be represented accurately.")
+            if item.get("page"):
+                st.link_button("Review source page", item["page"])
+            else:
+                st.warning(item.get("note", "Original source metadata is missing; this candidate is retained but not cleared for use."))
+                st.caption(item.get("intake_ref", "Original batch candidate"))
+    st.caption("All 27 image candidates from the retained batch count are represented. Where original file-page metadata was not recoverable, the subject remains listed without an invented URL, creator or licence.")
 
 with tab_leads:
     st.subheader("Additional destination discovery leads")
