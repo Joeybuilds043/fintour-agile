@@ -59,8 +59,11 @@ def show_photo(query: str, allow_lookup: bool = True):
         st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">VOYAGEPK · PAKISTAN</div></div>', unsafe_allow_html=True)
 
 def render_destination_card(record, index: int, detailed: bool = True):
-    catalog = find_catalog_record(record) if detailed else None
-    image_query = catalog[1].get("image_query") if catalog else record.get("name", "Pakistan destination")
+    if detailed:
+        catalog = find_catalog_record(record)
+        image_query = catalog[1].get("image_query") if catalog else record.get("name", "Pakistan destination")
+    else:
+        image_query = record[1].get("image_query") or record[0]
     with st.container(border=True):
         show_photo(image_query or record.get("name", "Pakistan destination"), allow_lookup=index < 9)
         if detailed:
