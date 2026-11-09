@@ -137,7 +137,7 @@ def generate_text(
     """Generate with Gemini, using Groq automatically when Gemini is quota-limited."""
     if not api_key:
         raise GeminiAPIError(
-            "No AI API key found. Add GEMINI_API_KEY or GROQ_API_KEY in Streamlit Secrets."
+            "API key is missing. Add GEMINI_API_KEY or GROQ_API_KEY in Streamlit Secrets."
         )
 
     groq_key = get_groq_api_key()
