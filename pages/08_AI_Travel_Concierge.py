@@ -3,34 +3,29 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS
-from src.services.grok import GrokAPIError, generate_text, get_api_key
+from src.services.grok import GroqAPIError, generate_text, get_api_key
 from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="AI Travel Concierge | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
 st.title("AI travel concierge")
-st.markdown("Plan with destination context, local culture and current web research when needed.")
+st.markdown("Plan with destination context, local culture using the selected destination context.")
 st.write(
     "Ask for destination ideas and itinerary help. Answers use VoyagePK's destination catalogue "
-    "and, when enabled, live web research. This is not a live booking or road-information service."
+    "This is not a live booking or road-information service."
 )
 
 api_key = get_api_key()
 if api_key:
-    st.caption("Grok is connected through secure app configuration.")
+    st.caption("Groq is connected through secure app configuration.")
 else:
     st.info(
-        "Grok is not configured yet. The app owner must add XAI_API_KEY in "
+        "Groq is not configured yet. The app owner must add GROQ_API_KEY in "
         "Streamlit Community Cloud → App settings → Secrets. Visitors do not enter or manage API keys."
     )
 
 destination = st.selectbox("Primary destination context", list(DESTINATIONS), key="selected_destination")
 d = DESTINATIONS[destination]
-web_search = st.checkbox(
-    "Use live web research for current details",
-    value=False,
-    help="Grok web search can add separate tool-usage charges in addition to model tokens.",
-)
 question = st.text_area(
     "What kind of trip are you planning?",
     placeholder="Example: I have four days, prefer nature and local food, and want a moderate walking itinerary.",
@@ -62,13 +57,12 @@ if st.button("Ask VoyagePK", type="primary", disabled=not bool(api_key and quest
                 temperature=0.7,
                 max_output_tokens=1500,
                 timeout=(10, 180),
-                web_search=web_search,
             )
             st.markdown(answer)
-        except GrokAPIError as exc:
+        except GroqAPIError as exc:
             st.error(str(exc))
 
 st.caption(
     "AI-generated plans are suggestions. Verify access, weather, permits, prices, safety and bookings "
-    "independently. Grok API usage may incur charges."
+    "independently. Groq API usage may incur charges."
 )
