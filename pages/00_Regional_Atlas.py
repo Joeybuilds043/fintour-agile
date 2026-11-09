@@ -37,6 +37,27 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 </style>
 """, unsafe_allow_html=True)
 
+
+if st.session_state.get("voyage_theme", "Light") == "Dark":
+    st.markdown("""
+    <style>
+    .stApp .atlas-eyebrow,.stApp .atlas-lede,.stApp .atlas-heading,
+    .stApp .atlas-subheading,.stApp .atlas-stat strong,.stApp .atlas-stat span,
+    .stApp .atlas-card-meta,.stApp .atlas-card-title,.stApp .atlas-card-copy,
+    .stApp .atlas-tag,.stApp .atlas-credit,.stApp .atlas-record-note{
+        color:#FFFFFF!important
+    }
+    .stApp .atlas-stat,.stApp .atlas-card,.stApp .atlas-record-note,
+    .stApp [data-testid="stVerticalBlockBorderWrapper"]{
+        background:#050505!important;border-color:#292929!important;box-shadow:none!important
+    }
+    .stApp .atlas-photo-frame{background:#000000!important;border:1px solid #FFFFFF!important}
+    .stApp .atlas-photo-placeholder{background:#080808!important;color:#FFFFFF!important;border:1px solid #FFFFFF!important}
+    .stApp .atlas-tag{border-color:#FFFFFF!important}
+    .stApp .atlas-record-note{border-left-color:#FFFFFF!important}
+    </style>
+    """, unsafe_allow_html=True)
+
 # Match detailed records to the existing catalogue so imagery and cluster names stay consistent.
 catalog_by_name = {name.casefold(): (name, item) for name, item in DESTINATIONS.items()}
 
