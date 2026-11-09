@@ -10,20 +10,20 @@ def apply_visitor_theme() -> None:
     mode = st.sidebar.selectbox("Appearance", ["Light", "Dark"], key="voyage_theme")
     dark = mode == "Dark"
 
-    paper = "#080808" if dark else "#F4F1E7"
-    ink = "#F5F5F5" if dark else "#153A2A"
-    body_ink = "#D0D0D0" if dark else "#174D34"
-    surface = "rgba(25,25,25,.97)" if dark else "#FFFEF9"
-    muted = "#AFAFAF" if dark else "#3F654D"
-    line = "#424242" if dark else "#D8D4C6"
-    sidebar = "linear-gradient(165deg,#050505 0%,#111111 58%,#1D1D1D 100%)" if dark else "linear-gradient(165deg,#061B12 0%,#0B3825 58%,#165238 100%)"
-    header = "rgba(8,8,8,.98)" if dark else "rgba(244,241,231,.97)"
+    paper = "#000000" if dark else "#F4F1E7"
+    ink = "#FFFFFF" if dark else "#153A2A"
+    body_ink = "#E6E6E6" if dark else "#174D34"
+    surface = "#080808" if dark else "#FFFEF9"
+    muted = "#C8C8C8" if dark else "#3F654D"
+    line = "#292929" if dark else "#D8D4C6"
+    sidebar = "#000000" if dark else "linear-gradient(165deg,#061B12 0%,#0B3825 58%,#165238 100%)"
+    header = "rgba(0,0,0,.99)" if dark else "rgba(244,241,231,.97)"
     chart_grid = "rgba(255,255,255,.13)" if dark else "rgba(25,68,45,.12)"
     accent = "#FFFFFF" if dark else "#C7A35B"
-    mountain = "linear-gradient(145deg,#454545 0%,#858585 48%,#262626 100%)" if dark else "linear-gradient(145deg,#174C36 0%,#347C62 48%,#C7A35B 100%)"
-    button_bg = "#F2F2F2" if dark else "#14583B"
+    mountain = "linear-gradient(145deg,#050505 0%,#111111 48%,#000000 100%)" if dark else "linear-gradient(145deg,#174C36 0%,#347C62 48%,#C7A35B 100%)"
+    button_bg = "#FFFFFF" if dark else "#14583B"
     button_ink = "#080808" if dark else "#FFFFFF"
-    button_hover = "#D0D0D0" if dark else "#1C7049"
+    button_hover = "#E6E6E6" if dark else "#1C7049"
     image_filter = "grayscale(1) contrast(1.04)" if dark else "none"
 
     st.markdown("""
@@ -47,7 +47,7 @@ def apply_visitor_theme() -> None:
     @keyframes alpine-drift{0%{transform:translate3d(-2.5%,0,0) scale(1)}100%{transform:translate3d(2.5%,-2.2%,0) scale(1.035)}}
     .stApp [data-testid="stAppViewContainer"],.stApp [data-testid="stSidebar"],.stApp header{position:relative;z-index:1}
     [data-testid="stHeader"]{background:HEADER}
-    [data-testid="stSidebar"]{background:SIDEBAR;border-right:1px solid rgba(199,163,91,.35)}
+    [data-testid="stSidebar"]{background:SIDEBAR;border-right:1px solid rgba(255,255,255,.14)}
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
     [data-testid="stSidebar"] strong,[data-testid="stSidebar"] label,
     [data-testid="stSidebar"] .stCaption{color:#F0F3EA!important;opacity:1!important}
@@ -56,7 +56,7 @@ def apply_visitor_theme() -> None:
       font-family:'Manrope',sans-serif;font-size:13px;transition:all .22s ease
     }
     [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{
-      background:rgba(199,163,91,.18);color:#F3DDA9!important;transform:translateX(3px)
+      background:rgba(255,255,255,.10);color:#FFFFFF!important;transform:translateX(3px)
     }
     [data-testid="stSidebar"] hr{border-color:rgba(234,241,234,.18)}
     .block-container{max-width:1440px;padding-top:1.45rem;padding-bottom:4rem}
@@ -97,20 +97,20 @@ def apply_visitor_theme() -> None:
         .stApp .voyage-masthead,.stApp .hero-copy-panel,.stApp .horizon-flow,
         .stApp .soft-panel,.stApp .category-tile,.stApp .category-letter,
         .stApp .weather-chip,.stApp .category-photo-fallback{
-            background:#151515!important;color:#F5F5F5!important;
-            border-color:#555!important;box-shadow:none!important
+            background:#080808!important;color:#FFFFFF!important;
+            border-color:#FFFFFF!important;box-shadow:none!important
         }
         .stApp .hero-copy-panel .lede,.stApp .hero-copy-panel .hero-note,
         .stApp .voyage-masthead-kicker,.stApp .voyage-masthead-sub,
         .stApp .kicker,.stApp .section-copy,.stApp .destination-copy,
         .stApp .destination-meta,.stApp .hero-image-caption,
-        .stApp .category-name,.stApp .category-copy{color:#E0E0E0!important}
+        .stApp .category-name,.stApp .category-copy{color:#E6E6E6!important}
         .stApp [data-testid="stButton"]>button{
-            background:#F2F2F2!important;color:#080808!important;
+            background:#FFFFFF!important;color:#000000!important;
             border:1px solid #FFFFFF!important
         }
-        .stApp [data-testid="stButton"]>button:hover{background:#D0D0D0!important;color:#080808!important}
-        .stApp a{color:#FFFFFF!important}
+        .stApp [data-testid="stButton"]>button:hover{background:#E6E6E6!important;color:#000000!important}
+        .stApp a{color:#FFFFFF!important}\n        .stApp [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{background:#111111!important;color:#FFFFFF!important}\n        .stApp input,.stApp textarea,.stApp [data-baseweb="select"]>div,.stApp [data-baseweb="popover"]{background:#050505!important;color:#FFFFFF!important;border-color:#FFFFFF!important}\n        .stApp [data-testid="stExpander"],.stApp [data-testid="stMetric"],.stApp [data-testid="stTabs"] [role="tab"]{background:#050505!important;color:#FFFFFF!important;border-color:#292929!important}\n        .stApp [data-testid="stMetricLabel"],.stApp [data-testid="stMetricValue"],.stApp [data-testid="stWidgetLabel"]{color:#FFFFFF!important}\n        .stApp [data-baseweb="select"] span,.stApp [data-baseweb="select"] input{color:#FFFFFF!important}\n        .stApp [data-testid="stAlert"]{background:#080808!important;color:#FFFFFF!important;border:1px solid #FFFFFF!important}\n        .stApp hr{border-color:#292929!important}
         </style>
         """, unsafe_allow_html=True)
     st.markdown("""
