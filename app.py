@@ -70,7 +70,7 @@ with open("assets/manifest.json", encoding="utf-8") as asset_file:
 # The homepage uses the two exact image URLs supplied by the site owner.
 # Appearance mode selects one image; no collage or Islamabad skyline is used here.
 dark_mode = st.session_state.get("voyage_theme", "Light") == "Dark"
-hero_asset = asset_manifest["assets"]["night_islamabad_cityscape"]
+hero_asset = asset_manifest["assets"]["night_islamabad_cityscape"] if dark_mode else asset_manifest["assets"]["daytime_northern_pakistan"]
 hero_image = hero_asset["url"]
 hero_edition = "NIGHT EDITION" if dark_mode else "CITY EDITION"
 st.markdown(
