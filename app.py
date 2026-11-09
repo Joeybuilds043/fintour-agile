@@ -50,6 +50,7 @@ with st.sidebar:
     st.markdown('<div class="voyage-sidebar-note">A considered guide to Pakistan</div>', unsafe_allow_html=True)
     st.divider()
     st.markdown('<div class="horizon-sidebar-kicker">THE DESTINATION ATLAS</div>', unsafe_allow_html=True)
+    st.page_link("pages/00_Regional_Atlas.py", label="Regional Atlas")
     st.page_link("app.py", label="National destination atlas")
     st.page_link("pages/01_Discover_Pakistan.py", label="Explore destinations")
     st.page_link("pages/02_Destination_Guide.py", label="Destination field guides")
@@ -143,7 +144,7 @@ with a:
     st.page_link("pages/03_Trip_Planner.py", label="Build a trip plan")
 with b:
     st.markdown('<div class="soft-panel"><div class="kicker">REGIONAL DISCOVERY</div><div class="section-title">Explore the full atlas.</div><p>Search detailed attractions, regional destination clusters, festivals, image sources and the next places being researched.</p></div>', unsafe_allow_html=True)
-    st.page_link("pages/12_Regional_Atlas.py", label="Open regional atlas")
+    st.page_link("pages/00_Regional_Atlas.py", label="Open regional atlas")
 with c:
     st.markdown('<div class="soft-panel"><div class="kicker">SEE THE BIGGER PICTURE</div><div class="section-title">Travel is also an economy.</div><p>Explore the tourism intelligence workspace: destination evidence, investment scenarios, local value and the data gaps that matter for better decisions.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
