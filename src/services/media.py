@@ -22,6 +22,8 @@ STOP_WORDS = {"pakistan", "the", "and", "with", "from", "view", "photo", "image"
 # Verified Wikimedia Commons file pages and author/licence metadata.
 # The first group is destination-specific; the second is clearly labelled illustrative.
 CURATED_FILES = [
+    (("kumrat", "jahaz banda", "katora lake", "upper dir"),
+     "Kumrat valley upper dir, kyberpakhtunkhwa, pakistan.jpg", "Shah faisal zeb", "CC BY-SA 4.0", False),
     (("passu", "hunza", "attabad", "karimabad", "altit", "baltit"),
      "Passu Cones and the Hunza River.jpg", "Aly Ahmad1991", "CC BY-SA 4.0", False),
     (("skardu",),
@@ -160,20 +162,36 @@ def _curated_fallback(query: str) -> dict | None:
     }
 
 
-@st.cache_data(ttl=86400, show_spinner=False)
 def get_commons_image(query: str) -> dict | None:
-    """Return relevant high-resolution Commons photography, with a curated fallback."""
-    user_image = _user_provided_religious_image(query)
-    if user_image:
-        return user_image
-    pexels = _curated_pexels_image(query)
-    if pexels:
-        return pexels
+    """Return relevant photography without reusing another destination image in this session."""
+    normalized_query = re.sub(r"\\s+", " ", (query or "").strip().casefold())
+    assignments = st.session_state.setdefault("voyage_image_assignments", {})
+    if normalized_query in assignments:
+        return assignments[normalized_query]
+    used_urls = {
+        value.get("thumb_url") for value in assignments.values()
+        if isinstance(value, dict) and value.get("thumb_url")
+    }
+
+    def claim(candidate):
+        if not candidate or candidate.get("thumb_url") in used_urls:
+            return None
+        assignments[normalized_query] = candidate
+        return candidate
+
+    selected = claim(_user_provided_religious_image(query))
+    if selected:
+        return selected
+    selected = claim(_curated_pexels_image(query))
+    if selected:
+        return selected
     fallback = _curated_fallback(query)
+    if fallback and fallback.get("thumb_url") in used_urls:
+        fallback = None
     # Curated destination-specific assets are faster and more predictable than
     # a fresh search request; use live Commons search only for uncovered queries.
     if fallback:
-        return fallback
+        return claim(fallback)
     if os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1":
         return None
 
@@ -218,7 +236,7 @@ def get_commons_image(query: str) -> dict | None:
         if not 1.2 <= ratio <= 2.2:
             continue
         overlap = len(terms & _tokens(title))
-        if overlap == 0:
+        if overlap == 0 or thumb_url in used_urls:
             continue
         score = overlap * 10 + (2 if 1.4 <= ratio <= 1.9 else 0) + (1 if width >= 1800 else 0)
         if any(word in title.lower() for word in ("map", "logo", "flag", "diagram", "coat of arms")):
@@ -230,9 +248,9 @@ def get_commons_image(query: str) -> dict | None:
         }))
 
     if not candidates:
-        return fallback
+        return None
     candidates.sort(key=lambda item: item[0], reverse=True)
-    return candidates[0][1]
+    return claim(candidates[0][1])
 
 
 @st.cache_data(ttl=86400, show_spinner=False)
