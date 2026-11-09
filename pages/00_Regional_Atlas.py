@@ -22,7 +22,7 @@ st.markdown("""
 .atlas-stat span{display:block;margin-top:5px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--voyage-muted);font-weight:750}
 .atlas-card{height:100%;padding:12px;border:1px solid var(--voyage-line);border-radius:17px;background:var(--voyage-surface);box-shadow:0 8px 22px rgba(8,25,20,.055)}
 .atlas-photo-frame{padding:5px;border:1px solid rgba(199,163,91,.55);border-radius:14px;background:linear-gradient(145deg,rgba(199,163,91,.13),rgba(255,255,255,.35))}
-.atlas-photo-frame img{display:block;width:100%;height:178px;object-fit:cover;border-radius:9px}
+.atlas-photo-frame img{display:block;width:100%;height:210px;object-fit:contain;border-radius:10px;background:linear-gradient(135deg,#E9D9B6 0%,#D7E7DE 48%,#C9DFE5 100%);padding:10px}
 div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padding:4px;border:1px solid rgba(199,163,91,.7);border-radius:14px;background:rgba(199,163,91,.10);box-shadow:0 10px 24px rgba(8,25,20,.12)}
 .atlas-photo-placeholder{height:178px;border-radius:9px;background:linear-gradient(135deg,#123D2D,#355D62 62%,#C7A35B);display:flex;align-items:center;justify-content:center;color:#F6F2E8;font-size:10px;font-weight:800;letter-spacing:2px}
 .atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--voyage-muted);font-weight:850}
@@ -32,7 +32,12 @@ div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padd
 .atlas-credit{font-size:9px;line-height:1.45;color:var(--voyage-muted);margin:5px 2px 8px}
 .atlas-record-note{padding:10px 12px;border-left:2px solid #C7A35B;background:var(--voyage-surface);border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;color:var(--voyage-muted)}
 div[data-testid="stVerticalBlockBorderWrapper"]{border-color:var(--voyage-line);border-radius:17px}
-div[data-testid="stImage"] img{border-radius:10px;object-fit:cover;box-shadow:0 8px 20px rgba(8,25,20,.10)}
+div[data-testid="stImage"] img{border-radius:10px;object-fit:contain;box-shadow:0 8px 20px rgba(8,25,20,.10)}
+.st-key-batch-gallery-card{height:100%;min-height:330px;padding:13px!important;border:1px solid rgba(23,92,67,.22)!important;border-radius:18px!important;background:linear-gradient(145deg,#F3E8D0 0%,#E5F0E8 52%,#DCEAF0 100%)!important;box-shadow:0 12px 30px rgba(13,55,42,.09)!important}
+.st-key-batch-gallery-card [data-testid="stImage"]{height:224px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:13px;background:linear-gradient(135deg,#D7C59F,#C8E0D5 55%,#B8D6DF);padding:7px}
+.st-key-batch-gallery-card [data-testid="stImage"] img{width:100%;height:210px;object-fit:contain!important;object-position:center;background:transparent;border:0!important;border-radius:9px;box-shadow:none!important}
+.st-key-batch-gallery-card .atlas-card-title{min-height:54px;margin-top:12px}
+.st-key-batch-gallery-card [data-testid="stCaptionContainer"]{min-height:34px}
 div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height:39px}
 @media(max-width:700px){.atlas-card-title{font-size:21px}.atlas-lede{font-size:14px}.atlas-photo-frame img,.atlas-photo-placeholder{height:150px}}
 </style>
@@ -52,7 +57,10 @@ if st.session_state.get("voyage_theme", "Light") == "Dark":
     .stApp [data-testid="stVerticalBlockBorderWrapper"]{
         background:#080D09!important;border-color:#26372C!important;box-shadow:none!important
     }
-    .stApp .atlas-photo-frame{background:#050705!important;border:1px solid #45C477!important}
+    .stApp .atlas-photo-frame{background:#080D09!important;border:1px solid #45C477!important}
+    .stApp .st-key-batch-gallery-card{background:linear-gradient(145deg,#10251B 0%,#142D2D 52%,#182A3B 100%)!important;border-color:rgba(69,196,119,.45)!important;box-shadow:0 14px 34px rgba(0,0,0,.32)!important}
+    .stApp .st-key-batch-gallery-card [data-testid="stImage"]{background:linear-gradient(135deg,#173D2D,#234A4C 58%,#273A4C)!important;border:1px solid rgba(69,196,119,.48)!important}
+    .stApp .st-key-batch-gallery-card [data-testid="stImage"] img{background:transparent!important;border:0!important}
     .stApp .atlas-photo-placeholder{background:#080D09!important;color:#FFFFFF!important;border:1px solid #45C477!important}
     .stApp .atlas-tag{border-color:#45C477!important;color:#BFE8CD!important}
     .stApp .atlas-record-note{border-left-color:#45C477!important}
@@ -69,7 +77,7 @@ def find_catalog_record(record):
 
 def show_photo(query: str, allow_lookup: bool = True):
     # Only the first few cards in each section trigger remote image discovery.
-    image = get_destination_gallery_image(query) or (get_commons_image(query) if allow_lookup else None)
+    image = get_commons_image(query) if allow_lookup else None
     if image and image.get("thumb_url"):
         rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
         st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
@@ -210,12 +218,12 @@ for batch_name, batch_images in DESTINATION_IMAGE_BATCHES.items():
     st.markdown(f'<div class="atlas-card-meta">{batch_name}</div>', unsafe_allow_html=True)
     for start in range(0, len(batch_images), 3):
         row = st.columns(3, gap="medium")
-        for col, image_record in zip(row, batch_images[start:start + 3]):
+        for offset, (col, image_record) in enumerate(zip(row, batch_images[start:start + 3])):
             with col:
-                with st.container(border=True):
+                with st.container(border=False, key=f"batch-gallery-card-{batch_name}-{start + offset}"):
                     st.image(image_record["image_url"], use_container_width=True)
                     st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
-                    st.caption("Supplied image URL · original link preserved")
+                    st.caption("Original supplied photograph · full frame preserved")
                     st.link_button("Open original image", image_record["image_url"])
 
 st.divider()
