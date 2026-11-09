@@ -203,7 +203,7 @@ def get_commons_image(query: str) -> dict | None:
         "iiprop": "url|extmetadata", "iiurlwidth": 2000, "format": "json",
     }
     headers = {
-        "User-Agent": "HorizonTourism/1.0 (educational destination guide; contact via GitHub repository)",
+        "User-Agent": "VoyagePK/1.0 (educational destination guide; contact via GitHub repository)",
         "Accept": "application/json",
     }
     try:
