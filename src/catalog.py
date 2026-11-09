@@ -354,3 +354,38 @@ _add("Sialkot", "Punjab", 32.4945, 74.5229, "A historic city known for craft, in
 _add("Gujranwala", "Punjab", 32.1877, 74.1945, "A food-led city with Punjabi history and energetic market culture.", ["Food & gastronomy","Culture & heritage","Rural & creative"], ["Historic city centre","Local food streets and traditional restaurants","Nearby rural and craft experiences"], "Gujranwala Pakistan food street", "A major Punjab city whose visitor proposition is strongest around food, markets and regional culture.")
 _add("Quetta & Hanna Lake", "Balochistan", 30.1798, 66.9750, "A highland city framed by rugged ranges and Balochistan culture.", ["Culture & heritage","Nature & wildlife","Food & gastronomy"], ["Hanna Lake","Quetta bazaars","Regional food and craft markets","Nearby mountain viewpoints, subject to current advice"], "Quetta Hanna Lake Pakistan", "A highland urban destination. Check current official security advice and local access before considering travel.")
 _add("Sukkur & Rohri", "Sindh", 27.7052, 68.8574, "Indus River landscapes, historic bridges and upper Sindh heritage.", ["Culture & heritage","Nature & wildlife","Food & gastronomy","Religious & archaeology"], ["Lansdowne Bridge and Sukkur Barrage viewpoints","Sadh Belo island shrine","Rohri old town","Indus riverfront"], "Sukkur barrage Lansdowne Bridge Pakistan", "A river-city destination with historic infrastructure and heritage sites.")
+
+
+# Kumrat Valley — Upper Dir, Khyber Pakhtunkhwa.
+_add(
+    "Kumrat Valley", "Khyber Pakhtunkhwa", 35.5310, 72.2160,
+    "A forested mountain valley of rivers, meadows and cedar landscapes in Upper Dir.",
+    ["Nature & wildlife", "Adventure", "Camping & outdoors", "Ecotourism", "Rural & creative"],
+    ["Kumrat Valley forest and Panjkora River landscapes", "Thal village and its historic wooden mosque", "Jahaz Banda meadows and alpine approach (separate route)", "Katora Lake trek (high-altitude route requiring local guidance)"],
+    "Kumrat Valley Upper Dir Khyber Pakhtunkhwa Pakistan forest river",
+    "Kumrat is a mountain valley in Upper Dir, Khyber Pakhtunkhwa, known for forested slopes, river scenery and highland meadows. Jahaz Banda and Katora Lake are demanding onward journeys, not casual roadside stops."
+)
+
+# Add a province/territory label for consistent browsing across the atlas.
+def _province_label(region):
+    if "Punjab" in region and "Khyber Pakhtunkhwa" in region:
+        return "Punjab & Khyber Pakhtunkhwa"
+    if "Islamabad" in region:
+        return "Islamabad Capital Territory"
+    if "Gilgit-Baltistan" in region:
+        return "Gilgit-Baltistan"
+    if "Azad Jammu & Kashmir" in region:
+        return "Azad Jammu & Kashmir"
+    for province in ("Khyber Pakhtunkhwa", "Punjab", "Sindh", "Balochistan"):
+        if province in region:
+            return province
+    return region
+
+for _destination in DESTINATIONS.values():
+    _destination["province"] = _province_label(_destination["region"])
+
+PROVINCE_ORDER = [
+    "Balochistan", "Gilgit-Baltistan", "Islamabad Capital Territory",
+    "Khyber Pakhtunkhwa", "Punjab", "Punjab & Khyber Pakhtunkhwa",
+    "Sindh", "Azad Jammu & Kashmir",
+]
