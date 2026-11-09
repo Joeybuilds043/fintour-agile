@@ -69,8 +69,8 @@ def apply_visitor_theme() -> None:
     div[data-testid="stImage"] img{filter:IMAGEFILTER;border-radius:17px;object-fit:cover;box-shadow:0 15px 38px rgba(2,16,10,.2);transition:transform .4s ease,filter .4s ease}
     div[data-testid="stImage"] img:hover{transform:translateY(-3px);filter:saturate(1.06)}
     div[data-testid="stVerticalBlockBorderWrapper"]{background:var(--voyage-surface);border-color:var(--voyage-line);border-radius:18px;backdrop-filter:blur(14px)}
-    div[data-testid="stButton"]>button{border-radius:28px;background:BUTTONBG;color:BUTTONINK;border:1px solid ACCENT;font-weight:750;min-height:44px;letter-spacing:.15px}
-    div[data-testid="stButton"]>button:hover{background:#219653;border-color:#45C477;color:#fff}
+    div[data-testid="stButton"]>button,div[data-testid="stFormSubmitButton"]>button{border-radius:28px;background:BUTTONBG;color:BUTTONINK;border:1px solid ACCENT;font-weight:750;min-height:46px;letter-spacing:.15px;position:relative;z-index:2}
+    div[data-testid="stButton"]>button:hover,div[data-testid="stFormSubmitButton"]>button:hover{background:#219653;border-color:#45C477;color:#fff}
     [data-testid="stMetric"]{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:14px;padding:13px;backdrop-filter:blur(14px)}
     [data-testid="stMetricLabel"]{color:var(--voyage-muted)!important;font-family:'Manrope',sans-serif}
     [data-testid="stMetricValue"]{color:var(--voyage-ink)!important;font-family:'Manrope',sans-serif;font-weight:800}
@@ -111,11 +111,11 @@ def apply_visitor_theme() -> None:
         .stApp .kicker,.stApp .section-copy,.stApp .destination-copy,
         .stApp .destination-meta,.stApp .hero-image-caption,
         .stApp .category-name,.stApp .category-copy{color:#E6E6E6!important}
-        .stApp [data-testid="stButton"]>button{
+        .stApp [data-testid="stButton"]>button,.stApp [data-testid="stFormSubmitButton"]>button{
             background:#FFFFFF!important;color:#000000!important;
             border:1px solid #FFFFFF!important
         }
-        .stApp [data-testid="stButton"]>button:hover{background:#219653!important;color:#FFFFFF!important}
+        .stApp [data-testid="stButton"]>button:hover,.stApp [data-testid="stFormSubmitButton"]>button:hover{background:#219653!important;color:#FFFFFF!important}
         .stApp a{color:#45C477!important}
         .stApp [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{background:rgba(69,196,119,.16)!important;color:#FFFFFF!important}
         .stApp input,.stApp textarea,.stApp [data-baseweb="select"]>div,.stApp [data-baseweb="popover"]{background:#080D09!important;color:#FFFFFF!important;border-color:#26372C!important}

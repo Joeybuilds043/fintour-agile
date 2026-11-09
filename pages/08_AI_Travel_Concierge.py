@@ -11,7 +11,6 @@ st.set_page_config(page_title="AI Travel Concierge | VoyagePK", page_icon=None, 
 apply_visitor_theme()
 st.markdown('<div class="voyage-chart-kicker">TRAVEL PLANNING · DESTINATION INSIGHTS</div>', unsafe_allow_html=True)
 st.title("AI travel concierge")
-render_catalogue_visuals(DESTINATIONS, key_prefix="concierge_catalogue")
 
 api_key = get_api_key()
 if not api_key:
@@ -20,45 +19,56 @@ if not api_key:
         "Streamlit Community Cloud → App settings → Secrets. Visitors do not enter or manage API keys."
     )
 
-destination = st.selectbox("Primary destination context", list(DESTINATIONS), key="selected_destination")
-d = DESTINATIONS[destination]
-question = st.text_area(
-    "What kind of trip are you planning?",
-    placeholder="Example: I have four days, prefer nature and local food, and want a moderate walking itinerary.",
-    height=130,
-)
+with st.form("voyage_concierge_form", clear_on_submit=False):
+    destination = st.selectbox("Primary destination context", list(DESTINATIONS), key="selected_destination")
+    d = DESTINATIONS[destination]
+    question = st.text_area(
+        "What kind of trip are you planning?",
+        placeholder="Example: I have four days, prefer nature and local food, and want a moderate walking itinerary.",
+        height=130,
+        help="Press Ctrl+Enter to submit this form.",
+    )
+    st.caption("Press Ctrl+Enter or select Ask VoyagePK to submit.")
+    submitted = st.form_submit_button("Ask VoyagePK", type="primary", use_container_width=True)
 
-if st.button("Ask VoyagePK", type="primary", disabled=not bool(api_key and question.strip())):
-    context = (
-        f"Destination: {destination}. Province/territory: {d.get('province', d['region'])}. "
-        f"Region: {d['region']}. Overview: {d['overview']}. "
-        f"Experiences: {', '.join(d['experiences'])}. Highlights: {', '.join(d['highlights'])}. "
-        f"Season: {d['season']}. Access: {d['access']}. Responsible travel: {d['responsible']}."
-    )
-    system = (
-        "You are VoyagePK's Pakistan travel concierge. Be practical, precise and locally respectful. "
-        "Use supplied destination context for catalogue facts. Do not invent prices, hotel availability, "
-        "road status, opening hours, permits, safety conditions or exact journey times. This model call "
-        "does not perform live web research, so identify current facts that travellers must verify "
-        "with official authorities. "
-        "State assumptions and data gaps. Provide a useful itinerary with realistic pacing and responsible "
-        "local experiences. Never imply that a destination listing confirms it is safe or open today."
-    )
-    with st.spinner("VoyagePK is preparing your travel guidance..."):
-        try:
-            answer = generate_text(
-                api_key=api_key,
-                system_instruction=system,
-                user_prompt=f"{context}\nVisitor request: {question}",
-                temperature=0.7,
-                max_output_tokens=1500,
-                timeout=180,
-            )
-            st.markdown(answer)
-        except GroqAPIError as exc:
-            st.error(str(exc))
+if submitted:
+    if not question.strip():
+        st.warning("Enter your travel question before submitting.")
+    elif not api_key:
+        st.error("VoyagePK AI is unavailable because the app owner has not configured GROQ_API_KEY.")
+    else:
+        context = (
+            f"Destination: {destination}. Province/territory: {d.get('province', d['region'])}. "
+            f"Region: {d['region']}. Overview: {d['overview']}. "
+            f"Experiences: {', '.join(d['experiences'])}. Highlights: {', '.join(d['highlights'])}. "
+            f"Season: {d['season']}. Access: {d['access']}. Responsible travel: {d['responsible']}."
+        )
+        system = (
+            "You are VoyagePK's Pakistan travel concierge. Be practical, precise and locally respectful. "
+            "Use supplied destination context for catalogue facts. Do not invent prices, hotel availability, "
+            "road status, opening hours, permits, safety conditions or exact journey times. This model call "
+            "does not perform live web research, so identify current facts that travellers must verify "
+            "with official authorities. State assumptions and data gaps. Provide a useful itinerary with "
+            "realistic pacing and responsible local experiences. Never imply that a destination listing "
+            "confirms it is safe or open today."
+        )
+        with st.spinner("VoyagePK is preparing your travel guidance..."):
+            try:
+                answer = generate_text(
+                    api_key=api_key,
+                    system_instruction=system,
+                    user_prompt=f"{context}\nVisitor request: {question}",
+                    temperature=0.7,
+                    max_output_tokens=1500,
+                    timeout=180,
+                )
+                st.markdown(answer)
+            except GroqAPIError as exc:
+                st.error(str(exc))
 
 st.caption(
     "AI-generated plans are suggestions. Verify access, weather, permits, prices, safety and bookings "
     "independently. Groq API usage may incur charges."
 )
+
+render_catalogue_visuals(DESTINATIONS, key_prefix="concierge_catalogue")
