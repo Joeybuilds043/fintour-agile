@@ -23,6 +23,12 @@ GROQ_API_KEY = "replace_with_your_groq_api_key"
 
 Groq API access is subject to Groq's current model-specific limits and pricing and requires available API credits. Usage limits and pricing depend on the model and your Groq account tier. Set a budget and usage limits in the Groq Console before sharing the app. Do not submit confidential visitor or business information.
 
+## Regional research atlas
+
+The Regional Atlas workspace is available from the homepage and Streamlit navigation. It brings together the existing destination-cluster catalogue, 34 structured attraction/destination records, 19 festival and event records, 27 image-source candidates, and additional discovery leads across Pakistan. Repeated destinations are linked to their existing clusters rather than duplicated. Shandur Polo Festival is consolidated as one cross-regional event.
+
+The image register deliberately distinguishes source-page candidates from cleared assets. Some original image candidates have no retained file-page metadata; they remain visible as unresolved entries rather than receiving invented URLs, creators or licences. Event dates and access notes are displayed with their evidence limitations. A record appearing in the atlas does not mean every detail is independently verified.
+
 ## Data integrity
 Weather forecasts are retrieved from Open-Meteo and cached temporarily. Destination photographs are retrieved from Wikimedia Commons, relevance-ranked using file titles and landscape resolution, gently colour/contrast corrected for display, and shown with file-level creator, licence and source attribution where metadata is available. Automated matching is not a substitute for manual visual and licence review. The 30+ destination clusters are an expanding editorial collection, not an exhaustive official gazetteer or ranking. Destination editorial content and approximate cluster coordinates require local review. No hotel availability, live road safety, nationwide verified occupancy or visitor spending is claimed. Financial inputs are illustrative and user-editable. The Gilgit-Baltistan dataset is a static partial-year snapshot from the earlier project and must not be annualised.
 
