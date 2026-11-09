@@ -19,7 +19,7 @@ Example Streamlit Secrets entry:
 XAI_API_KEY = "replace_with_your_xai_api_key"
 ```
 
-The free tier has model-specific rate limits and Google may use free-tier submitted content to improve its products. Do not submit confidential visitor or business information. Check current quotas and terms in Google AI Studio before production use.
+Grok API access is billed by xAI and requires available API credits. Model tokens and optional web-search tool calls can incur separate charges. Set a budget and usage limits in the xAI Console before sharing the app. Do not submit confidential visitor or business information.
 
 ## Data integrity
 Weather forecasts are retrieved from Open-Meteo and cached temporarily. Destination photographs are retrieved from Wikimedia Commons, relevance-ranked using file titles and landscape resolution, gently colour/contrast corrected for display, and shown with file-level creator, licence and source attribution where metadata is available. Automated matching is not a substitute for manual visual and licence review. The 30+ destination clusters are an expanding editorial collection, not an exhaustive official gazetteer or ranking. Destination editorial content and approximate cluster coordinates require local review. No hotel availability, live road safety, nationwide verified occupancy or visitor spending is claimed. Financial inputs are illustrative and user-editable. The Gilgit-Baltistan dataset is a static partial-year snapshot from the earlier project and must not be annualised.
