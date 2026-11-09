@@ -132,7 +132,8 @@ with tab_images:
     st.caption(f"{len(image_matches)} image-source candidates currently have enough retained metadata to list on this page.")
     for item in image_matches:
         with st.container(border=True):
-            st.markdown(f'<div class="record-meta">{item["region"]} · {item["id"]}</div>', unsafe_allow_html=True)
+            asset_ref = item.get("id") or item.get("intake_ref", "Unassigned source candidate")
+            st.markdown(f'<div class="record-meta">{item["region"]} · {asset_ref}</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="record-title">{item["subject"]}</div>', unsafe_allow_html=True)
             if item.get("creator"):
                 st.caption("Creator recorded: " + item["creator"])
