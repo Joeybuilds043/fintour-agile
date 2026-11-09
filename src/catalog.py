@@ -14,7 +14,7 @@ EXPERIENCE_CATEGORIES = [
     {"name": "Islamic & Sufi heritage", "symbol": "I", "short": "Mosques, shrines, Sufi centres and sacred architecture"},
     {"name": "Sikh pilgrimage", "symbol": "S", "short": "Gurdwaras and places associated with Sikh history"},
     {"name": "Buddhist heritage", "symbol": "B", "short": "Gandharan stupas, monasteries and Buddhist landscapes"},
-    {"name": "Hindu heritage", "symbol": "H", "short": "Temples, sacred landscapes and Hindu pilgrimage"},
+    {"name": "Hinduism heritage", "symbol": "H", "short": "Temples, sacred landscapes and Hindu pilgrimage"},
     {"name": "Archaeology & ancient civilizations", "symbol": "A", "short": "Indus Valley archaeology and historic settlements"},
     {"name": "Coastal & marine", "symbol": "S", "short": "Beaches, marine landscapes and coastal culture"},
     {"name": "Winter & seasonal", "symbol": "W", "short": "Snow, seasonal festivals and changing landscapes"},
@@ -229,13 +229,13 @@ _add("Takht-i-Bahi & Sahr-i-Bahlol", "Khyber Pakhtunkhwa", 34.3350, 71.9430,
      "Takht-i-Bahi is an extensive Buddhist monastic complex with associated remains at Sahr-i-Bahlol. It is a protected heritage property; follow conservation and visitor rules.")
 _add("Katas Raj Temples & Salt Range", "Punjab", 32.7167, 72.9990,
      "A historic Hindu temple complex around a sacred pond in the Salt Range.",
-     ["Hindu heritage", "Religious & archaeology", "Culture & heritage"],
+     ["Hinduism heritage", "Religious & archaeology", "Culture & heritage"],
      ["Katas Raj temple complex", "Shiva, Hanuman and Ramachandra temple precincts", "Historic pond and surrounding Salt Range landscape"],
      "Katas Raj Temples Chakwal Pakistan",
-     "Katas Raj is a significant Hindu heritage and pilgrimage complex. Respect active religious use, conservation requirements and local protocols.")
+     "Katas Raj is a significant Hinduism heritage and pilgrimage complex. Respect active religious use, conservation requirements and local protocols.")
 _add("Hinglaj Mata & Hingol", "Balochistan", 25.5010, 65.5140,
      "A Hindu pilgrimage landscape within the dramatic terrain of Hingol.",
-     ["Hindu heritage", "Religious & archaeology", "Coastal & marine", "Nature & wildlife"],
+     ["Hinduism heritage", "Religious & archaeology", "Coastal & marine", "Nature & wildlife"],
      ["Hinglaj Mata temple and pilgrimage landscape", "Hingol National Park scenery", "Makran coastal and desert geology"],
      "Hinglaj Mata temple Hingol Balochistan Pakistan",
      "Hinglaj Mata is a major Hindu pilgrimage destination in a remote landscape. Travel requires current route, security, weather and local-organiser checks.")
