@@ -137,11 +137,14 @@ for start in range(0, len(featured), 3):
                 st.switch_page("pages/02_Destination_Guide.py")
 
 st.write("")
-a, b = st.columns([1, 1], gap="large")
+a, b, c = st.columns([1, 1, 1], gap="large")
 with a:
     st.markdown('<div class="soft-panel"><div class="kicker">PLAN WITH CONTEXT</div><div class="section-title">Make the journey yours.</div><p>Shape a trip around your time, interests and budget. Use destination guides to understand seasons, access and responsible travel considerations before you go.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/03_Trip_Planner.py", label="Build a trip plan")
 with b:
+    st.markdown('<div class="soft-panel"><div class="kicker">REGIONAL DISCOVERY</div><div class="section-title">Explore the full atlas.</div><p>Search detailed attractions, regional destination clusters, festivals, image sources and the next places being researched.</p></div>', unsafe_allow_html=True)
+    st.page_link("pages/12_Regional_Atlas.py", label="Open regional atlas")
+with c:
     st.markdown('<div class="soft-panel"><div class="kicker">SEE THE BIGGER PICTURE</div><div class="section-title">Travel is also an economy.</div><p>Explore the tourism intelligence workspace: destination evidence, investment scenarios, local value and the data gaps that matter for better decisions.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
 
