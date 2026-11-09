@@ -50,6 +50,8 @@ def generate_text(
         "model": DEFAULT_MODEL,
         "input": [{"role": "user", "content": prompt}],
         "max_output_tokens": max_output_tokens,
+        "temperature": temperature,
+        "top_p": 0.95,
         "reasoning": {"effort": "low"},
         "store": False,
     }
