@@ -5,20 +5,16 @@ import streamlit as st
 from src.catalog import DESTINATIONS
 from src.services.groq import GroqAPIError, generate_text, get_api_key
 from src.ui import apply_visitor_theme
+from src.visuals import render_catalogue_visuals
 
 st.set_page_config(page_title="AI Travel Concierge | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
+st.markdown('<div class="voyage-chart-kicker">TRAVEL PLANNING · DESTINATION INSIGHTS</div>', unsafe_allow_html=True)
 st.title("AI travel concierge")
-st.markdown("Plan with destination context and local knowledge.")
-st.write(
-    "Ask for destination ideas and itinerary help using VoyagePK's destination catalogue. "
-    "This is not a live booking or road-information service."
-)
+render_catalogue_visuals(DESTINATIONS, key_prefix="concierge_catalogue")
 
 api_key = get_api_key()
-if api_key:
-    st.caption("Groq is connected through secure app configuration.")
-else:
+if not api_key:
     st.info(
         "Groq is not configured yet. The app owner must add GROQ_API_KEY in "
         "Streamlit Community Cloud → App settings → Secrets. Visitors do not enter or manage API keys."

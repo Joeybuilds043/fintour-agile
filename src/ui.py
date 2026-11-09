@@ -80,6 +80,12 @@ def apply_visitor_theme() -> None:
     .voyage-brand-sub{font-family:'Manrope',sans-serif;font-size:9px;letter-spacing:2.1px;text-transform:uppercase;color:#E4CD95;margin-top:3px}
     .horizon-flow{position:relative;overflow:hidden;border-radius:18px;background:linear-gradient(115deg,#0B2E23,#14583B 42%,#1D5B5B 72%,#263746);background-size:220% 220%;animation:horizon-current 18s ease-in-out infinite}
     @keyframes horizon-current{0%,100%{background-position:0% 45%}50%{background-position:100% 55%}}
+    .voyage-chart-kicker{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--voyage-accent);font-weight:800;margin:4px 0 7px}
+    .voyage-chart-note{font-size:11px;line-height:1.55;color:var(--voyage-muted);margin:0 0 8px}
+    div[data-testid="stPlotlyChart"]{animation:voyage-chart-rise .72s cubic-bezier(.2,.75,.25,1) both;transform-origin:50% 80%}
+    @keyframes voyage-chart-rise{from{opacity:0;transform:translateY(13px) scale(.992);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+    div[data-testid="stVerticalBlockBorderWrapper"]:has(.voyage-chart-kicker){border-color:var(--voyage-line);border-radius:18px;background:var(--voyage-surface);box-shadow:0 12px 28px rgba(5,25,15,.055);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    div[data-testid="stVerticalBlockBorderWrapper"]:has(.voyage-chart-kicker):hover{transform:translateY(-3px);border-color:var(--voyage-accent);box-shadow:0 16px 34px rgba(5,25,15,.10)}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
     @media(max-width:700px){.block-container{padding:1rem 1rem 3rem}}
     </style>

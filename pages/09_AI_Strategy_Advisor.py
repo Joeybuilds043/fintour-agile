@@ -5,20 +5,16 @@ import streamlit as st
 from src.catalog import DESTINATIONS
 from src.services.groq import GroqAPIError, generate_text, get_api_key
 from src.ui import apply_visitor_theme
+from src.visuals import render_catalogue_visuals
 
 st.set_page_config(page_title="AI Strategy Advisor | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
+st.markdown('<div class="voyage-chart-kicker">TOURISM STRATEGY · DESTINATION INSIGHTS</div>', unsafe_allow_html=True)
 st.title("AI tourism strategy advisor")
-st.write(
-    "A destination-management and business-strategy assistant for tourism entrepreneurs, "
-    "operators and public-sector planners. Answers use the selected destination context; "
-    "the selected Llama model does not perform live web research."
-)
+render_catalogue_visuals(DESTINATIONS, key_prefix="strategy_catalogue")
 
 api_key = get_api_key()
-if api_key:
-    st.caption("Groq is connected through secure app configuration.")
-else:
+if not api_key:
     st.info(
         "Groq is not configured yet. The app owner must add GROQ_API_KEY in "
         "Streamlit Community Cloud → App settings → Secrets. Visitors do not enter or manage API keys."
