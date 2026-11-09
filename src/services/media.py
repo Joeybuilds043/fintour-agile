@@ -22,6 +22,8 @@ STOP_WORDS = {"pakistan", "the", "and", "with", "from", "view", "photo", "image"
 # Verified Wikimedia Commons file pages and author/licence metadata.
 # The first group is destination-specific; the second is clearly labelled illustrative.
 CURATED_FILES = [
+    (("k2", "concordia", "baltoro", "k2 base camp"),
+     "K2 from Concordia.png", "Arsalan Majid", "CC BY-SA 4.0", False),
     (("kumrat", "jahaz banda", "katora lake", "upper dir"),
      "Kumrat valley upper dir, kyberpakhtunkhwa, pakistan.jpg", "Shah faisal zeb", "CC BY-SA 4.0", False),
     (("passu", "hunza", "attabad", "karimabad", "altit", "baltit"),
