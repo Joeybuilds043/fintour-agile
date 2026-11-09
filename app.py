@@ -76,19 +76,19 @@ if dark_mode:
     <style>
     .stApp .voyage-masthead,.stApp .hero-copy-panel,.stApp .soft-panel,
     .stApp .category-tile,.stApp .category-letter,.stApp .weather-chip{
-        background:#050505!important;color:#FFFFFF!important;border:1px solid #292929!important;box-shadow:none!important
+        background:#080D09!important;color:#FFFFFF!important;border:1px solid #26372C!important;box-shadow:none!important
     }
     .stApp .hero-copy-panel .lede,.stApp .hero-copy-panel .hero-note,
     .stApp .voyage-masthead-kicker,.stApp .voyage-masthead-sub,
     .stApp .kicker,.stApp .section-title,.stApp .section-copy,
     .stApp .destination-name,.stApp .destination-copy,.stApp .destination-meta,
     .stApp .hero-image-caption,.stApp .category-name,.stApp .category-copy{
-        color:#FFFFFF!important
+        color:#E6EEE8!important
     }
-    .stApp .masthead-divider,.stApp .hero-image-caption span:first-child{color:#FFFFFF!important}
-    .stApp .category-letter{background:#FFFFFF!important;color:#000000!important}
-    .stApp .hero-note{border-left-color:#FFFFFF!important}
-    .stApp [data-testid="stImage"] img{border-color:#FFFFFF!important}
+    .stApp .masthead-divider,.stApp .hero-image-caption span:first-child{color:#45C477!important}
+    .stApp .category-letter{background:#167A43!important;color:#FFFFFF!important;border-color:#45C477!important}
+    .stApp .hero-note{border-left-color:#45C477!important}
+    .stApp [data-testid="stImage"] img{border-color:#45C477!important}
     </style>
     """, unsafe_allow_html=True)
 
