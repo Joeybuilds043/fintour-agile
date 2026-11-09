@@ -3,7 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS
-from src.services.grok import GrokAPIError, generate_text, get_api_key
+from src.services.grok import GroqAPIError, generate_text, get_api_key
 from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="AI Strategy Advisor | VoyagePK", page_icon=None, layout="wide")
@@ -11,15 +11,16 @@ apply_visitor_theme()
 st.title("AI tourism strategy advisor")
 st.write(
     "A destination-management and business-strategy assistant for tourism entrepreneurs, "
-    "operators and public-sector planners."
+    "operators and public-sector planners. Answers use the selected destination context; "
+    "the selected Llama model does not perform live web research."
 )
 
 api_key = get_api_key()
 if api_key:
-    st.caption("Grok is connected through secure app configuration.")
+    st.caption("Groq is connected through secure app configuration.")
 else:
     st.info(
-        "Grok is not configured yet. The app owner must add XAI_API_KEY in "
+        "Groq is not configured yet. The app owner must add GROQ_API_KEY in "
         "Streamlit Community Cloud → App settings → Secrets. Visitors do not enter or manage API keys."
     )
 
@@ -35,11 +36,6 @@ focus = st.selectbox(
         "Digital innovation roadmap",
         "Local value retention and community enterprise",
     ],
-)
-web_search = st.checkbox(
-    "Use live web research for market and policy context",
-    value=False,
-    help="Grok web search can add separate tool-usage charges in addition to model tokens.",
 )
 question = st.text_area(
     "Specific strategic question",
@@ -60,8 +56,7 @@ if st.button("Generate strategy brief", type="primary", disabled=not bool(api_ke
         "approvals or citations. Separate verified information, user assumptions and research gaps. "
         "Evaluate demand, service quality, seasonality, local supplier participation, ecological constraints, "
         "governance and implementation. Return: Diagnosis; strategic options; business model; implementation "
-        "roadmap; KPIs; risks; data required before investment. If live web research is enabled, cite sources "
-        "and prioritise official statistics, government and reputable research."
+        "roadmap; KPIs; risks; data required before investment. Do not fabricate citations or claim live verification; identify facts that require current official research."
     )
     with st.spinner("Preparing your destination strategy brief..."):
         try:
@@ -72,7 +67,6 @@ if st.button("Generate strategy brief", type="primary", disabled=not bool(api_ke
                 temperature=0.5,
                 max_output_tokens=1800,
                 timeout=(10, 180),
-                web_search=web_search,
             )
             st.markdown(answer)
             st.download_button(
@@ -81,10 +75,10 @@ if st.button("Generate strategy brief", type="primary", disabled=not bool(api_ke
                 file_name=f"{name.lower().replace(' ', '-')}-strategy.md",
                 mime="text/markdown",
             )
-        except GrokAPIError as exc:
+        except GroqAPIError as exc:
             st.error(str(exc))
 
 st.caption(
     "This is strategic brainstorming, not professional investment, legal, engineering or safety advice. "
-    "Grok API usage may incur charges."
+    "Groq API usage may incur charges."
 )
