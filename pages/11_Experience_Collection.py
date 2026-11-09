@@ -206,4 +206,13 @@ if key == "northern_landscapes":
                         st.session_state["selected_destination"] = name
                         st.switch_page("pages/02_Destination_Guide.py")
 
+st.divider()
+st.subheader("Reference sources")
+st.markdown(
+    "- [Punjab Auqaf Department — shrine directory](https://auqaf.punjab.gov.pk/shrines)\n"
+    "- [Punjab Portal — religious monuments and gurdwaras](https://punjab.gov.pk/religious-monuments)\n"
+    "- [Department of Archaeology & Museums — Katas Raj Temples](https://doam.gov.pk/public/sites/6750)\n"
+    "- [Government of Pakistan — Raiwind Tablighi Ijtima reference](https://pid.gov.pk/site/press_detail/27048)\n"
+    "- [TDCP — Sikh pilgrimage guide](https://webapi.tdcp.gop.pk/uploads/1769507590777-461675896.pdf)"
+)
 st.caption("This is a curated editorial collection, not an exhaustive gazetteer. Verify current access, permits, opening arrangements, safety and local guidance before travelling.")
