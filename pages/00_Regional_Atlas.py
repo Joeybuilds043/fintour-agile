@@ -45,16 +45,17 @@ if st.session_state.get("voyage_theme", "Light") == "Dark":
     .stApp .atlas-subheading,.stApp .atlas-stat strong,.stApp .atlas-stat span,
     .stApp .atlas-card-meta,.stApp .atlas-card-title,.stApp .atlas-card-copy,
     .stApp .atlas-tag,.stApp .atlas-credit,.stApp .atlas-record-note{
-        color:#FFFFFF!important
+        color:#E6EEE8!important
     }
     .stApp .atlas-stat,.stApp .atlas-card,.stApp .atlas-record-note,
     .stApp [data-testid="stVerticalBlockBorderWrapper"]{
-        background:#050505!important;border-color:#292929!important;box-shadow:none!important
+        background:#080D09!important;border-color:#26372C!important;box-shadow:none!important
     }
-    .stApp .atlas-photo-frame{background:#000000!important;border:1px solid #FFFFFF!important}
-    .stApp .atlas-photo-placeholder{background:#080808!important;color:#FFFFFF!important;border:1px solid #FFFFFF!important}
-    .stApp .atlas-tag{border-color:#FFFFFF!important}
-    .stApp .atlas-record-note{border-left-color:#FFFFFF!important}
+    .stApp .atlas-photo-frame{background:#050705!important;border:1px solid #45C477!important}
+    .stApp .atlas-photo-placeholder{background:#080D09!important;color:#FFFFFF!important;border:1px solid #45C477!important}
+    .stApp .atlas-tag{border-color:#45C477!important;color:#BFE8CD!important}
+    .stApp .atlas-record-note{border-left-color:#45C477!important}
+    .stApp .atlas-eyebrow{color:#45C477!important}
     </style>
     """, unsafe_allow_html=True)
 
