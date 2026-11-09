@@ -22,6 +22,7 @@ st.markdown("""
 .atlas-card{height:100%;padding:12px;border:1px solid var(--voyage-line);border-radius:17px;background:var(--voyage-surface);box-shadow:0 8px 22px rgba(8,25,20,.055)}
 .atlas-photo-frame{padding:5px;border:1px solid rgba(199,163,91,.55);border-radius:14px;background:linear-gradient(145deg,rgba(199,163,91,.13),rgba(255,255,255,.35))}
 .atlas-photo-frame img{display:block;width:100%;height:178px;object-fit:cover;border-radius:9px}
+div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padding:4px;border:1px solid rgba(199,163,91,.7);border-radius:14px;background:rgba(199,163,91,.10);box-shadow:0 10px 24px rgba(8,25,20,.12)}
 .atlas-photo-placeholder{height:178px;border-radius:9px;background:linear-gradient(135deg,#123D2D,#355D62 62%,#C7A35B);display:flex;align-items:center;justify-content:center;color:#F6F2E8;font-size:10px;font-weight:800;letter-spacing:2px}
 .atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--voyage-muted);font-weight:850}
 .atlas-card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;line-height:1.08;font-weight:700;color:var(--voyage-ink);margin:5px 0 7px;min-height:48px}
@@ -30,7 +31,7 @@ st.markdown("""
 .atlas-credit{font-size:9px;line-height:1.45;color:var(--voyage-muted);margin:5px 2px 8px}
 .atlas-record-note{padding:10px 12px;border-left:2px solid #C7A35B;background:var(--voyage-surface);border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;color:var(--voyage-muted)}
 div[data-testid="stVerticalBlockBorderWrapper"]{border-color:var(--voyage-line);border-radius:17px}
-div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.48);border-radius:11px;box-shadow:0 8px 20px rgba(8,25,20,.10)}
+div[data-testid="stImage"] img{border-radius:10px;object-fit:cover;box-shadow:0 8px 20px rgba(8,25,20,.10)}
 div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height:39px}
 @media(max-width:700px){.atlas-card-title{font-size:21px}.atlas-lede{font-size:14px}.atlas-photo-frame img,.atlas-photo-placeholder{height:150px}}
 </style>
@@ -47,9 +48,7 @@ def show_photo(query: str, height: int = 178):
     image = get_commons_image(query)
     if image and image.get("thumb_url"):
         rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
-        st.markdown('<div class="atlas-photo-frame">', unsafe_allow_html=True)
         st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
         credit = f'{image.get("artist", "Creator not listed")} · {image.get("license", "Licence not listed")}'
         if image.get("page_url"):
             st.markdown(f'<div class="atlas-credit"><a href="{image["page_url"]}" target="_blank">Image source</a> · {credit}</div>', unsafe_allow_html=True)
