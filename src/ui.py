@@ -10,21 +10,21 @@ def apply_visitor_theme() -> None:
     mode = st.sidebar.selectbox("Appearance", ["Light", "Dark"], key="voyage_theme")
     dark = mode == "Dark"
 
-    paper = "#000000" if dark else "#F4F1E7"
-    ink = "#FFFFFF" if dark else "#153A2A"
-    body_ink = "#E6E6E6" if dark else "#174D34"
-    surface = "#080808" if dark else "#FFFEF9"
-    muted = "#C8C8C8" if dark else "#3F654D"
-    line = "#292929" if dark else "#D8D4C6"
-    sidebar = "#000000" if dark else "linear-gradient(165deg,#061B12 0%,#0B3825 58%,#165238 100%)"
-    header = "rgba(0,0,0,.99)" if dark else "rgba(244,241,231,.97)"
-    chart_grid = "rgba(255,255,255,.13)" if dark else "rgba(25,68,45,.12)"
-    accent = "#FFFFFF" if dark else "#C7A35B"
-    mountain = "linear-gradient(145deg,#050505 0%,#111111 48%,#000000 100%)" if dark else "linear-gradient(145deg,#174C36 0%,#347C62 48%,#C7A35B 100%)"
-    button_bg = "#FFFFFF" if dark else "#14583B"
-    button_ink = "#080808" if dark else "#FFFFFF"
-    button_hover = "#E6E6E6" if dark else "#1C7049"
-    image_filter = "grayscale(1) contrast(1.04)" if dark else "none"
+    paper = "#050705" if dark else "#F4F1E7"
+    ink = "#F7FAF7" if dark else "#153A2A"
+    body_ink = "#DCE5DE" if dark else "#174D34"
+    surface = "#0B100D" if dark else "#FFFEF9"
+    muted = "#AAB9AE" if dark else "#3F654D"
+    line = "#26372C" if dark else "#D8D4C6"
+    sidebar = "linear-gradient(165deg,#000000 0%,#07130C 62%,#0B2415 100%)" if dark else "linear-gradient(165deg,#061B12 0%,#0B3825 58%,#165238 100%)"
+    header = "rgba(3,7,4,.99)" if dark else "rgba(244,241,231,.97)"
+    chart_grid = "rgba(116,220,155,.18)" if dark else "rgba(25,68,45,.12)"
+    accent = "#45C477" if dark else "#C7A35B"
+    mountain = "linear-gradient(145deg,#06140B 0%,#0D2A18 48%,#000000 100%)" if dark else "linear-gradient(145deg,#174C36 0%,#347C62 48%,#C7A35B 100%)"
+    button_bg = "#167A43" if dark else "#14583B"
+    button_ink = "#FFFFFF" if dark else "#FFFFFF"
+    button_hover = "#219653" if dark else "#1C7049"
+    image_filter = "none" if dark else "none"
 
     st.markdown("""
     <style>
@@ -47,7 +47,7 @@ def apply_visitor_theme() -> None:
     @keyframes alpine-drift{0%{transform:translate3d(-2.5%,0,0) scale(1)}100%{transform:translate3d(2.5%,-2.2%,0) scale(1.035)}}
     .stApp [data-testid="stAppViewContainer"],.stApp [data-testid="stSidebar"],.stApp header{position:relative;z-index:1}
     [data-testid="stHeader"]{background:HEADER}
-    [data-testid="stSidebar"]{background:SIDEBAR;border-right:1px solid rgba(255,255,255,.14)}
+    [data-testid="stSidebar"]{background:SIDEBAR;border-right:1px solid rgba(69,196,119,.24)}
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
     [data-testid="stSidebar"] strong,[data-testid="stSidebar"] label,
     [data-testid="stSidebar"] .stCaption{color:#F0F3EA!important;opacity:1!important}
@@ -56,7 +56,7 @@ def apply_visitor_theme() -> None:
       font-family:'Manrope',sans-serif;font-size:13px;transition:all .22s ease
     }
     [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{
-      background:rgba(255,255,255,.10);color:#FFFFFF!important;transform:translateX(3px)
+      background:rgba(69,196,119,.16);color:#FFFFFF!important;transform:translateX(3px)
     }
     [data-testid="stSidebar"] hr{border-color:rgba(234,241,234,.18)}
     .block-container{max-width:1440px;padding-top:1.45rem;padding-bottom:4rem}
@@ -70,7 +70,7 @@ def apply_visitor_theme() -> None:
     div[data-testid="stImage"] img:hover{transform:translateY(-3px);filter:saturate(1.06)}
     div[data-testid="stVerticalBlockBorderWrapper"]{background:var(--voyage-surface);border-color:var(--voyage-line);border-radius:18px;backdrop-filter:blur(14px)}
     div[data-testid="stButton"]>button{border-radius:28px;background:BUTTONBG;color:BUTTONINK;border:1px solid ACCENT;font-weight:750;min-height:44px;letter-spacing:.15px}
-    div[data-testid="stButton"]>button:hover{background:#1C7049;border-color:#E1C47C;color:#fff}
+    div[data-testid="stButton"]>button:hover{background:#219653;border-color:#45C477;color:#fff}
     [data-testid="stMetric"]{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:14px;padding:13px;backdrop-filter:blur(14px)}
     [data-testid="stMetricLabel"]{color:var(--voyage-muted)!important;font-family:'Manrope',sans-serif}
     [data-testid="stMetricValue"]{color:var(--voyage-ink)!important;font-family:'Manrope',sans-serif;font-weight:800}
@@ -109,8 +109,8 @@ def apply_visitor_theme() -> None:
             background:#FFFFFF!important;color:#000000!important;
             border:1px solid #FFFFFF!important
         }
-        .stApp [data-testid="stButton"]>button:hover{background:#E6E6E6!important;color:#000000!important}
-        .stApp a{color:#FFFFFF!important}\n        .stApp [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{background:#111111!important;color:#FFFFFF!important}\n        .stApp input,.stApp textarea,.stApp [data-baseweb="select"]>div,.stApp [data-baseweb="popover"]{background:#050505!important;color:#FFFFFF!important;border-color:#FFFFFF!important}\n        .stApp [data-testid="stExpander"],.stApp [data-testid="stMetric"],.stApp [data-testid="stTabs"] [role="tab"]{background:#050505!important;color:#FFFFFF!important;border-color:#292929!important}\n        .stApp [data-testid="stMetricLabel"],.stApp [data-testid="stMetricValue"],.stApp [data-testid="stWidgetLabel"]{color:#FFFFFF!important}\n        .stApp [data-baseweb="select"] span,.stApp [data-baseweb="select"] input{color:#FFFFFF!important}\n        .stApp [data-testid="stAlert"]{background:#080808!important;color:#FFFFFF!important;border:1px solid #FFFFFF!important}\n        .stApp hr{border-color:#292929!important}
+        .stApp [data-testid="stButton"]>button:hover{background:#219653!important;color:#FFFFFF!important}
+        .stApp a{color:#45C477!important}\n        .stApp [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover{background:rgba(69,196,119,.16)!important;color:#FFFFFF!important}\n        .stApp input,.stApp textarea,.stApp [data-baseweb="select"]>div,.stApp [data-baseweb="popover"]{background:#080D09!important;color:#FFFFFF!important;border-color:#26372C!important}\n        .stApp [data-testid="stExpander"],.stApp [data-testid="stMetric"],.stApp [data-testid="stTabs"] [role="tab"]{background:#050505!important;color:#FFFFFF!important;border-color:#26372C!important}\n        .stApp [data-testid="stMetricLabel"],.stApp [data-testid="stMetricValue"],.stApp [data-testid="stWidgetLabel"]{color:#FFFFFF!important}\n        .stApp [data-baseweb="select"] span,.stApp [data-baseweb="select"] input{color:#FFFFFF!important}\n        .stApp [data-testid="stAlert"]{background:#080808!important;color:#FFFFFF!important;border:1px solid #45C477!important}\n        .stApp hr{border-color:#292929!important}
         </style>
         """, unsafe_allow_html=True)
     st.markdown("""
@@ -147,10 +147,10 @@ def apply_visitor_theme() -> None:
 def style_plotly_figure(fig, *, height: int = 390):
     """Apply the same high-contrast editorial chart language in both themes."""
     dark = st.session_state.get("voyage_theme", "Light") == "Dark"
-    ink = "#F0F3E9" if dark else "#173B2B"
-    muted = "#C0D2C5" if dark else "#4B6855"
-    grid = "rgba(215,231,218,.14)" if dark else "rgba(25,68,45,.13)"
-    palette = ["#FFFFFF", "#CFCFCF", "#A6A6A6", "#777777", "#4D4D4D"] if dark else ["#55B99A", "#D8B66E", "#63AFC0", "#B6D28C", "#D98F6D"]
+    ink = "#F7FAF7" if dark else "#173B2B"
+    muted = "#AAB9AE" if dark else "#4B6855"
+    grid = "rgba(69,196,119,.18)" if dark else "rgba(25,68,45,.13)"
+    palette = ["#45C477", "#FFFFFF", "#8ED9A9", "#AAB9AE", "#277A4A"] if dark else ["#55B99A", "#D8B66E", "#63AFC0", "#B6D28C", "#D98F6D"]
     fig.update_layout(
         height=height,
         margin=dict(l=14, r=18, t=64, b=28),
@@ -159,7 +159,7 @@ def style_plotly_figure(fig, *, height: int = 390):
         font=dict(family="Manrope, sans-serif", color=ink, size=12),
         title=dict(font=dict(family="Cormorant Garamond, Georgia, serif", size=25, color=ink), x=0.015, xanchor="left"),
         colorway=palette,
-        hoverlabel=dict(bgcolor="#151515" if dark else "#173B2B", bordercolor="#FFFFFF" if dark else "#C7A35B", font=dict(family="Manrope, sans-serif", color="#F7F3E8", size=12)),
+        hoverlabel=dict(bgcolor="#0B100D" if dark else "#173B2B", bordercolor="#45C477" if dark else "#C7A35B", font=dict(family="Manrope, sans-serif", color="#F7F3E8", size=12)),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0, bgcolor="rgba(0,0,0,0)", font=dict(color=muted)),
     )
     fig.update_xaxes(showgrid=False, zeroline=False, showline=True, linecolor=grid, tickfont=dict(color=muted), title_font=dict(color=muted))
