@@ -4,16 +4,16 @@
   "assets": {
     "daytime_northern_pakistan": {
       "provider": "Wikimedia Commons",
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Passu_Cones_and_the_Hunza_River.jpg/1280px-Passu_Cones_and_the_Hunza_River.jpg",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
-      "caption": "Passu Cones and the Hunza River",
-      "author": "Aly Ahmad1991",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Islamabad_-_Cityscape.jpg/1280px-Islamabad_-_Cityscape.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Islamabad_-_Cityscape.jpg",
+      "caption": "Islamabad cityscape",
+      "author": "Mohsinkhawar",
       "license": "CC BY-SA 4.0",
       "focal_point": [
-        0.618,
-        0.382
+        0.52,
+        0.72
       ],
-      "usage": "Light-mode homepage hero"
+      "usage": "Homepage hero, all appearance modes; distinct from destination collection photography"
     },
     "night_islamabad_cityscape": {
       "provider": "Wikimedia Commons",
@@ -129,4 +129,4 @@
       ]
     }
   ]
-}
+}\n
