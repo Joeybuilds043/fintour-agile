@@ -3,30 +3,30 @@
   "version": 1,
   "assets": {
     "daytime_northern_pakistan": {
-      "provider": "Wikimedia Commons",
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Passu_Cones_and_the_Hunza_River.jpg/1280px-Passu_Cones_and_the_Hunza_River.jpg",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
-      "caption": "Passu Cones and Hunza River",
-      "author": "Aly Ahmad1991",
-      "license": "CC BY-SA 4.0",
-      "focal_point": [
-        0.618,
-        0.382
-      ],
-      "usage": "Homepage daytime hero; northern landscape photograph"
-    },
-    "night_islamabad_cityscape": {
-      "provider": "Wikimedia Commons",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Islamabad_-_Cityscape.jpg/1280px-Islamabad_-_Cityscape.jpg",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Islamabad_-_Cityscape.jpg",
-      "caption": "Islamabad cityscape at night",
-      "author": "Mohsinkhawar",
-      "license": "CC BY-SA 4.0",
+      "provider": "Pexels",
+      "url": "https://images.pexels.com/photos/35171324/pexels-photo-35171324.jpeg?auto=compress&cs=tinysrgb&w=2000",
+      "page_url": "https://www.pexels.com/photo/scenic-autumn-view-of-hunza-valley-pakistan-35171324/",
+      "caption": "Autumn landscape in Hunza Valley, Pakistan",
+      "author": "Asad Ali",
+      "license": "Pexels License",
       "focal_point": [
         0.52,
-        0.72
+        0.48
       ],
-      "usage": "Legacy metadata retained; night appearance is now monochrome."
+      "usage": "Homepage daytime hero; wide landscape composition selected for destination-led travel discovery."
+    },
+    "night_islamabad_cityscape": {
+      "provider": "Pexels",
+      "url": "https://images.pexels.com/photos/5487986/pexels-photo-5487986.jpeg?auto=compress&cs=tinysrgb&w=2000",
+      "page_url": "https://www.pexels.com/photo/scenic-view-of-mosque-during-nighttime-5487986/",
+      "caption": "Badshahi Mosque illuminated at night, Lahore",
+      "author": "Aitizaz Naqvi",
+      "license": "Pexels License",
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "usage": "Homepage dark-theme hero; actual Pakistan night-tourism photography."
     },
     "passu_cones_landmark": {
       "provider": "Wikimedia Commons",
