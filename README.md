@@ -8,7 +8,7 @@ VoyagePK connects an editorial, experience-led visitor discovery journey with an
 Install requirements, then run: streamlit run app.py
 
 ## Workspaces
-Home; 30+ destination discovery collection; destination field guides; trip planner; interactive Pakistan travel atlas; destination intelligence; investment studio; data observatory; AI travel concierge; AI strategy advisor; growth scenario planner.
+Home; 60+ destination discovery collection; destination field guides; regional atlas with detailed attraction records and festival calendar; trip planner; interactive Pakistan travel atlas; destination intelligence; investment studio; data observatory; AI travel concierge; AI strategy advisor; growth scenario planner.
 
 ## Optional AI configuration
 The visitor interface uses an editorial travel-magazine design system; tourism intelligence and investment pages use a separate restrained analytical design system. The travel atlas uses a custom PyDeck map with CARTO basemap styling and thematic destination markers.
