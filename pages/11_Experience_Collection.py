@@ -158,7 +158,10 @@ for section_title, places in collection["sections"]:
     for index, place in enumerate(places):
         with cols[index % 2]:
             with st.container(border=True):
-                name, location, detail = place
+                if key == "northern_landscapes":
+                    name, detail, location = place
+                else:
+                    name, location, detail = place
                 st.markdown(f"**{name}**")
                 st.caption(location)
                 st.write(detail)
