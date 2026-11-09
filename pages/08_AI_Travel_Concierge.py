@@ -1,49 +1,57 @@
 from __future__ import annotations
 
 import streamlit as st
-from src.ui import apply_visitor_theme
+
 from src.catalog import DESTINATIONS
-from src.services.gemini import GeminiAPIError, generate_text, get_api_key
+from src.services.grok import GrokAPIError, generate_text, get_api_key
+from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="AI Travel Concierge | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
 st.title("AI travel concierge")
 st.markdown("Plan with destination context, local culture and current web research when needed.")
 st.write(
-    "Ask for destination ideas and itinerary help. Answers are grounded in Horizon's current pilot catalogue, "
-    "not a live booking or road-information service."
+    "Ask for destination ideas and itinerary help. Answers use VoyagePK's destination catalogue "
+    "and, when enabled, live web research. This is not a live booking or road-information service."
 )
 
 api_key = get_api_key()
 if api_key:
-    st.caption("Gemini connected through app configuration.")
+    st.caption("Grok is connected through secure app configuration.")
 else:
-    with st.expander("Use your existing Gemini key for this session"):
-        st.text_input("Existing Gemini API key", type="password", key="horizon_gemini_key")
-        st.caption("For a persistent connection, store the same key in Streamlit Secrets as GEMINI_API_KEY or GOOGLE_API_KEY.")
-    api_key = get_api_key()
+    st.info(
+        "Grok is not configured yet. The app owner must add XAI_API_KEY in "
+        "Streamlit Community Cloud → App settings → Secrets. Visitors do not enter or manage API keys."
+    )
 
 destination = st.selectbox("Primary destination context", list(DESTINATIONS), key="selected_destination")
 d = DESTINATIONS[destination]
-ground_search = st.checkbox("Ground current details with Google Search", value=False, help="Google Search grounding may add Gemini API usage charges.")
+web_search = st.checkbox(
+    "Use live web research for current details",
+    value=False,
+    help="Grok web search can add separate tool-usage charges in addition to model tokens.",
+)
 question = st.text_area(
     "What kind of trip are you planning?",
     placeholder="Example: I have four days, prefer nature and local food, and want a moderate walking itinerary.",
     height=130,
 )
 
-if st.button("Ask Horizon", type="primary", disabled=not bool(api_key and question.strip())):
+if st.button("Ask VoyagePK", type="primary", disabled=not bool(api_key and question.strip())):
     context = (
-        f"Destination: {destination}. Region: {d['region']}. Overview: {d['overview']}. "
+        f"Destination: {destination}. Province/territory: {d.get('province', d['region'])}. "
+        f"Region: {d['region']}. Overview: {d['overview']}. "
         f"Experiences: {', '.join(d['experiences'])}. Highlights: {', '.join(d['highlights'])}. "
         f"Season: {d['season']}. Access: {d['access']}. Responsible travel: {d['responsible']}."
     )
     system = (
-        "You are Horizon's visitor travel concierge for Pakistan. Use only the supplied destination context "
-        "for factual destination claims. Do not invent prices, hotel availability, road status, opening hours, "
-        "permits, safety conditions or exact journey times. If the user asks for missing live information, say "
-        "it must be checked with an authoritative provider. Give a practical itinerary with flexible pacing and "
-        "responsible local experiences. State assumptions and data gaps. When Google Search grounding is enabled, cite sources and distinguish official sources from travel blogs or user-generated content."
+        "You are VoyagePK's Pakistan travel concierge. Be practical, precise and locally respectful. "
+        "Use supplied destination context for catalogue facts. Do not invent prices, hotel availability, "
+        "road status, opening hours, permits, safety conditions or exact journey times. If live research "
+        "is enabled, use it for current facts and cite sources, prioritising official authorities and "
+        "clearly distinguishing official information from travel blogs or user-generated content. "
+        "State assumptions and data gaps. Provide a useful itinerary with realistic pacing and responsible "
+        "local experiences. Never imply that a destination listing confirms it is safe or open today."
     )
     with st.spinner("VoyagePK is preparing your travel guidance..."):
         try:
@@ -51,15 +59,16 @@ if st.button("Ask Horizon", type="primary", disabled=not bool(api_key and questi
                 api_key=api_key,
                 system_instruction=system,
                 user_prompt=f"{context}\nVisitor request: {question}",
-                temperature=0.3,
-                max_output_tokens=1200,
-                timeout=(10, 60),
-                google_search=ground_search,
+                temperature=0.7,
+                max_output_tokens=1500,
+                timeout=(10, 180),
+                web_search=web_search,
             )
             st.markdown(answer)
-        except GeminiAPIError as exc:
+        except GrokAPIError as exc:
             st.error(str(exc))
 
-if not api_key:
-    st.info("Gemini key not detected. In Streamlit Community Cloud → this app → Settings → Secrets, set GEMINI_API_KEY = \"your key\" (or GOOGLE_API_KEY). Save and reboot this app. If the key is already present, check that it is saved on this exact deployment under one of those names; do not create a second key.")
-st.caption("AI-generated plans are suggestions. Verify access, weather, permits, prices, safety and bookings independently.")
+st.caption(
+    "AI-generated plans are suggestions. Verify access, weather, permits, prices, safety and bookings "
+    "independently. Grok API usage may incur charges."
+)
