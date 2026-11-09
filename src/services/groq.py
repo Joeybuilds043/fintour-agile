@@ -13,7 +13,7 @@ from openai import (
 )
 
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
-DEFAULT_MODEL = os.getenv("VOYAGEPK_GROQ_MODEL", "llama-3.1-8b-instant")
+DEFAULT_MODEL = os.getenv("VOYAGEPK_GROQ_MODEL", "openai/gpt-oss-20b")
 
 
 class GroqAPIError(RuntimeError):
