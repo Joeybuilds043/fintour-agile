@@ -166,7 +166,7 @@ def _curated_fallback(query: str) -> dict | None:
 
 def get_commons_image(query: str) -> dict | None:
     """Return relevant photography without reusing another destination image in this session."""
-    normalized_query = re.sub(r"\\s+", " ", (query or "").strip().casefold())
+    normalized_query = " ".join((query or "").casefold().split())
     assignments = st.session_state.setdefault("voyage_image_assignments", {})
     if normalized_query in assignments:
         return assignments[normalized_query]
