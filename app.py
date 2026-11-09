@@ -21,7 +21,7 @@ st.markdown("""
 div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radius:17px;box-shadow:0 18px 38px rgba(2,16,10,.24)}
 .hero-frame:after{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid rgba(255,255,255,.58);background:linear-gradient(90deg,transparent 61.6%,rgba(255,255,255,.22) 61.8%,transparent 62%),linear-gradient(0deg,transparent 38%,rgba(255,255,255,.18) 38.2%,transparent 38.4%)} 
 .hero-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:61.8% 38.2%;border-radius:12px} 
-.display-title{color:#FFFFFF!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(40px,4.3vw,62px);line-height:1.08;letter-spacing:-.55px;margin:0 0 13px;text-shadow:0 2px 20px rgba(0,0,0,.22)}
+.display-title{color:#FFFFFF!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(34px,3.2vw,44px);line-height:1.08;letter-spacing:-.55px;margin:0 0 13px;text-shadow:0 2px 20px rgba(0,0,0,.22)}
 .hero-copy-panel{background:linear-gradient(145deg,rgba(7,35,25,.97),rgba(17,67,47,.94) 68%,rgba(30,67,72,.94));border:1px solid rgba(199,163,91,.42);border-radius:22px;padding:clamp(22px,3vw,36px);min-height:100%;box-shadow:0 22px 52px rgba(2,16,10,.2)}
 .hero-copy-panel .lede{font-size:15px;line-height:1.78;color:#F0F4EB!important;opacity:1!important;max-width:680px;font-weight:500;letter-spacing:.05px}
 .hero-copy-panel .hero-note{color:#F0E5C8!important}
@@ -40,7 +40,7 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .destination-copy{font-size:13px;line-height:1.65;color:var(--voyage-body-ink)!important;opacity:1!important;min-height:64px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .hero-note{border-left:2px solid #C7A35B;padding:6px 0 6px 14px;color:var(--voyage-body-ink)!important;font-size:11px;line-height:1.8;margin-top:14px;letter-spacing:.25px}.hero-image-caption{display:flex;justify-content:space-between;gap:12px;padding:10px 4px 0;color:var(--voyage-body-ink);font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.8px;font-weight:800}.hero-image-caption span:first-child{color:#C39B50}
 .weather-chip{display:inline-block;margin:6px 0 2px;padding:6px 10px;border-radius:20px;background:rgba(24,89,60,.14);color:var(--voyage-ink);font-size:11px;font-weight:600}
-@media(max-width:700px){.display-title{font-size:43px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
+@media(max-width:700px){.display-title{font-size:36px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -70,24 +70,21 @@ with open("assets/manifest.json", encoding="utf-8") as asset_file:
 # The homepage uses the two exact image URLs supplied by the site owner.
 # Appearance mode selects one image; no collage or Islamabad skyline is used here.
 dark_mode = st.session_state.get("voyage_theme", "Light") == "Dark"
-hero_image = (
-    "https://images.pexels.com/photos/4154216/pexels-photo-4154216.jpeg"
-    if dark_mode else
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTODDtDNaCRAnw_D0isBagsj8NzDdkGMKVyn1vIoORU47uEhSxlZASlqQVA&s=10"
-)
-hero_edition = "NIGHT EDITION" if dark_mode else "DAY EDITION"
+hero_asset = asset_manifest["assets"]["night_islamabad_cityscape"]
+hero_image = hero_asset["url"]
+hero_edition = "NIGHT EDITION" if dark_mode else "CITY EDITION"
 st.markdown(
     '<div class="voyage-masthead"><svg viewBox="0 0 92 56" role="img" aria-label="Flag of Pakistan" class="pakistan-flag"><rect width="92" height="56" rx="4" fill="#01411C"/><rect width="20" height="56" fill="#FFFFFF"/><circle cx="57" cy="27" r="17" fill="#FFFFFF"/><circle cx="63" cy="22" r="14" fill="#01411C"/><path d="M70 7l3.2 7.4 8 .7-6.1 5.2 1.8 7.8-6.9-4.1-6.9 4.1 1.8-7.8-6.1-5.2 8-.7z" fill="#FFFFFF"/></svg><div><div class="voyage-masthead-kicker">VOYAGEPK <span class="masthead-divider">/</span> PAKISTAN UNBOUND</div><div class="voyage-masthead-sub">LANDSCAPES · LIVING CULTURES · HERITAGE · PLACE-BASED TRAVEL</div></div></div><div class="kicker">A FIELD GUIDE TO THE EXTRAORDINARY</div>',
     unsafe_allow_html=True,
 )
-left, right = st.columns([0.92, 1.28], gap="large", vertical_alignment="center")
+left, right = st.columns([1, 1], gap="large", vertical_alignment="center")
 with left:
     st.markdown("""<div class='hero-copy-panel'><div class='display-title'>A country of peaks, pathways and living heritage.</div><div class='lede'>From the high Karakoram to historic cities and the Arabian Sea, Pakistan rewards the curious traveller with extraordinary landscapes, layered histories and cultures rooted in place. VoyagePK brings considered destination guides, practical journey planning and tourism insight together in one editorial travel atlas.</div><div class='hero-note'>Karakoram to coast · Ancient cities to living culture · Travel with context</div></div>""", unsafe_allow_html=True)
     st.write("")
     st.page_link("pages/01_Discover_Pakistan.py", label="Explore Pakistan")
 
 with right:
-    hero_rendered = get_display_image(hero_image, aspect_ratio=(16, 10), focal_point=(0.5, 0.48))
+    hero_rendered = get_display_image(hero_image, aspect_ratio=(16, 10), focal_point=tuple(hero_asset.get("focal_point", [0.52, 0.72])))
     st.image(hero_rendered if hero_rendered else hero_image, use_container_width=True)
     st.markdown(
         f'<div class="hero-image-caption"><span>{hero_edition}</span><span>PAKISTAN · UNBOUND</span></div>',
