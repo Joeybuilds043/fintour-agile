@@ -28,7 +28,7 @@ def test_groq_uses_openai_responses_client_and_extracts_text(monkeypatch):
     assert answer == "A useful answer."
     assert captured["client"]["api_key"] == "test-groq-key"
     assert captured["client"]["base_url"] == "https://api.groq.com/openai/v1"
-    assert captured["model"] == "llama-3.1-8b-instant"
+    assert captured["model"] == groq.DEFAULT_MODEL
     assert captured["instructions"] == "Be accurate."
     assert captured["input"] == "Suggest a Kumrat itinerary."
     assert captured["temperature"] == 0.4
