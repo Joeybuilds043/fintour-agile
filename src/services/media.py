@@ -69,7 +69,7 @@ CURATED_FILES = [
     (("chitral", "garam chashma", "kalash"),
      "GaramChashma.jpg", "Fariskhan93", "CC BY-SA 4.0", True),
     (("makli", "thatta", "shah jahan mosque"),
-     "Gate ways from Courtyard - Shah Jahan Mosque.jpg", "Saba Qayoom", "CC BY-SA 4.0", True),
+     "Gate ways from Courtyard - Shah Jahan Mosque.jpg", "Saba Qayoom", "CC BY-SA 4.0", False),
     (("karachi", "mazar e quaid", "quaid e azam mausoleum"),
      "Mazar-e-Quaid Karachi.jpg", "Furqanlw", "CC BY-SA 4.0", False),
     (("mohenjo", "mohenjo-daro", "moenjodaro"),
