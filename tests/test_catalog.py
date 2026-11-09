@@ -44,3 +44,17 @@ def test_k2_concordia_featured_destination_exists():
     assert destination is not None
     assert destination["region"] == "Gilgit-Baltistan"
     assert "Baltoro Glacier trekking corridor" in destination["highlights"]
+
+
+def test_kumrat_valley_is_catalogued_under_khyber_pakhtunkhwa():
+    destination = DESTINATIONS["Kumrat Valley"]
+    assert destination["region"] == "Khyber Pakhtunkhwa"
+    assert destination["province"] == "Khyber Pakhtunkhwa"
+    assert "Katora Lake trek (high-altitude route requiring local guidance)" in destination["highlights"]
+
+
+def test_province_taxonomy_covers_all_destinations():
+    from src.catalog import PROVINCE_ORDER
+
+    assert "Khyber Pakhtunkhwa" in PROVINCE_ORDER
+    assert all(destination.get("province") in PROVINCE_ORDER for destination in DESTINATIONS.values())
