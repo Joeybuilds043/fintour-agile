@@ -181,9 +181,7 @@ def get_commons_image(query: str) -> dict | None:
         assignments[normalized_query] = candidate
         return candidate
 
-    selected = claim(_user_provided_religious_image(query))
-    if selected:
-        return selected
+    # Prefer curated, place-specific Commons files over legacy thumbnail URLs.
     selected = claim(_curated_pexels_image(query))
     if selected:
         return selected
