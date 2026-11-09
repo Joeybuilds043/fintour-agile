@@ -1,8 +1,6 @@
 from types import SimpleNamespace
 
 import pytest
-from openai import APIConnectionError, APITimeoutError, AuthenticationError, RateLimitError
-
 from src.services import groq
 
 
