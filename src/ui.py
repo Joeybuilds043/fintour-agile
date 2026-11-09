@@ -82,10 +82,25 @@ def apply_visitor_theme() -> None:
     @keyframes horizon-current{0%,100%{background-position:0% 45%}50%{background-position:100% 55%}}
     .voyage-chart-kicker{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--voyage-accent);font-weight:800;margin:4px 0 7px}
     .voyage-chart-note{font-size:11px;line-height:1.55;color:var(--voyage-muted);margin:0 0 8px}
-    div[data-testid="stPlotlyChart"]{animation:voyage-chart-rise .72s cubic-bezier(.2,.75,.25,1) both;transform-origin:50% 80%}
-    @keyframes voyage-chart-rise{from{opacity:0;transform:translateY(13px) scale(.992);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-    div[data-testid="stVerticalBlockBorderWrapper"]:has(.voyage-chart-kicker){border-color:var(--voyage-line);border-radius:18px;background:var(--voyage-surface);box-shadow:0 12px 28px rgba(5,25,15,.055);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-    div[data-testid="stVerticalBlockBorderWrapper"]:has(.voyage-chart-kicker):hover{transform:translateY(-3px);border-color:var(--voyage-accent);box-shadow:0 16px 34px rgba(5,25,15,.10)}
+    /* Keep Plotly's interactive canvas free of transforms and animated filters. */
+    div[data-testid="stPlotlyChart"]{width:100%;min-width:0}
+    div[data-testid="stVerticalBlockBorderWrapper"]:has(.voyage-chart-kicker){border-color:var(--voyage-line);border-radius:18px;background:var(--voyage-surface);box-shadow:0 12px 28px rgba(5,25,15,.055)}
+    .voyage-page-lede{font-size:17px;max-width:760px;color:var(--voyage-muted);margin-top:-8px;margin-bottom:24px}
+    .voyage-destination-card{height:100%;min-height:300px;padding:25px;border:1px solid var(--voyage-line);border-radius:20px;background:linear-gradient(145deg,var(--voyage-surface),rgba(69,196,119,.055));box-shadow:0 14px 34px rgba(5,25,15,.06)}
+    .voyage-card-eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:800;color:var(--voyage-accent);margin-bottom:10px}
+    .voyage-destination-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:31px;line-height:1.08;font-weight:700;color:var(--voyage-ink);margin-bottom:4px}
+    .voyage-destination-region{font-size:12px;color:var(--voyage-muted);font-weight:700;margin-bottom:16px}
+    .voyage-destination-summary{font-size:14px;line-height:1.7;color:var(--voyage-body-ink)}
+    .voyage-card-divider{height:1px;background:var(--voyage-line);margin:19px 0}
+    .voyage-tag-row{display:flex;flex-wrap:wrap;gap:7px}
+    .voyage-tag{display:inline-block;padding:6px 10px;border-radius:20px;background:rgba(69,196,119,.10);border:1px solid rgba(69,196,119,.28);font-size:11px;font-weight:700;color:var(--voyage-body-ink)}
+    .voyage-section-eyebrow{margin:8px 0 14px}
+    .voyage-highlight-row{display:flex;align-items:flex-start;gap:13px;padding:13px 0;border-bottom:1px solid var(--voyage-line);font-size:14px;line-height:1.5;color:var(--voyage-body-ink)}
+    .voyage-highlight-number{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--voyage-accent);padding-top:2px}
+    .voyage-planning-note{margin-top:17px;padding:15px 17px;border-radius:14px;background:rgba(69,196,119,.075);border:1px solid rgba(69,196,119,.20);font-size:13px;line-height:1.65;color:var(--voyage-body-ink)}
+    .voyage-section-copy{font-size:14px;color:var(--voyage-muted);margin-top:-5px;margin-bottom:10px}
+    .voyage-concierge-footnote{margin-top:24px;padding:12px 15px;border-top:1px solid var(--voyage-line);font-size:11px;line-height:1.6;color:var(--voyage-muted)}
+    @media(max-width:850px){.voyage-destination-card{min-height:0}.voyage-destination-name{font-size:27px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
     @media(max-width:700px){.block-container{padding:1rem 1rem 3rem}}
     </style>
