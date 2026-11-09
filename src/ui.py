@@ -92,6 +92,27 @@ def apply_visitor_theme() -> None:
        unsafe_allow_html=True)
     if dark:
         st.markdown("<div class='voyage-night-sky' aria-hidden='true'></div>", unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        .stApp .voyage-masthead,.stApp .hero-copy-panel,.stApp .horizon-flow,
+        .stApp .soft-panel,.stApp .category-tile,.stApp .category-letter,
+        .stApp .weather-chip,.stApp .category-photo-fallback{
+            background:#151515!important;color:#F5F5F5!important;
+            border-color:#555!important;box-shadow:none!important
+        }
+        .stApp .hero-copy-panel .lede,.stApp .hero-copy-panel .hero-note,
+        .stApp .voyage-masthead-kicker,.stApp .voyage-masthead-sub,
+        .stApp .kicker,.stApp .section-copy,.stApp .destination-copy,
+        .stApp .destination-meta,.stApp .hero-image-caption,
+        .stApp .category-name,.stApp .category-copy{color:#E0E0E0!important}
+        .stApp [data-testid="stButton"]>button{
+            background:#F2F2F2!important;color:#080808!important;
+            border:1px solid #FFFFFF!important
+        }
+        .stApp [data-testid="stButton"]>button:hover{background:#D0D0D0!important;color:#080808!important}
+        .stApp a{color:#FFFFFF!important}
+        </style>
+        """, unsafe_allow_html=True)
     st.sidebar.markdown(
         '<div class="voyage-brand">VoyagePK</div><div class="voyage-brand-sub">Pakistan Unbound</div>',
         unsafe_allow_html=True,
