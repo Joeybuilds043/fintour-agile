@@ -249,7 +249,7 @@ for start in range(0, len(image_matches), 3):
                     st.caption(item.get("note", "Original source-page details were not retained."))
 
 st.divider()
-st.markdown('<div class="atlas-eyebrow">05 · THE NEXT DISCOVERIES</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-eyebrow">06 · THE NEXT DISCOVERIES</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">More places to explore.</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-subheading">A region-by-region discovery queue of additional sites and experiences. These are kept visible for future expansion of the atlas.</div>', unsafe_allow_html=True)
 lead_regions = list(DISCOVERY_LEADS.keys())
