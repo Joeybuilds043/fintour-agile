@@ -24,6 +24,7 @@ def apply_visitor_theme() -> None:
     button_bg = "#F2F2F2" if dark else "#14583B"
     button_ink = "#080808" if dark else "#FFFFFF"
     button_hover = "#D0D0D0" if dark else "#1C7049"
+    image_filter = "grayscale(1) contrast(1.04)" if dark else "none"
 
     st.markdown("""
     <style>
@@ -65,7 +66,7 @@ def apply_visitor_theme() -> None:
     h3{font-size:1.65rem!important}
     p,li,label,[data-testid="stCaptionContainer"] p{color:var(--voyage-body-ink)!important;opacity:1!important}
     .stMarkdown,.stMarkdown p,.stMarkdown li{line-height:1.78}
-    div[data-testid="stImage"] img{border-radius:17px;object-fit:cover;box-shadow:0 15px 38px rgba(2,16,10,.2);transition:transform .4s ease,filter .4s ease}
+    div[data-testid="stImage"] img{filter:IMAGEFILTER;border-radius:17px;object-fit:cover;box-shadow:0 15px 38px rgba(2,16,10,.2);transition:transform .4s ease,filter .4s ease}
     div[data-testid="stImage"] img:hover{transform:translateY(-3px);filter:saturate(1.06)}
     div[data-testid="stVerticalBlockBorderWrapper"]{background:var(--voyage-surface);border-color:var(--voyage-line);border-radius:18px;backdrop-filter:blur(14px)}
     div[data-testid="stButton"]>button{border-radius:28px;background:BUTTONBG;color:BUTTONINK;border:1px solid ACCENT;font-weight:750;min-height:44px;letter-spacing:.15px}
@@ -86,7 +87,8 @@ def apply_visitor_theme() -> None:
        .replace("SURFACE",surface).replace("MUTED",muted).replace("LINE",line)
        .replace("CHARTGRID",chart_grid).replace("HEADER",header).replace("SIDEBAR",sidebar)
        .replace("ACCENT",accent).replace("MOUNTAIN",mountain).replace("BUTTONBG",button_bg)
-       .replace("BUTTONINK",button_ink).replace("BUTTONHOVER",button_hover),
+       .replace("BUTTONINK",button_ink).replace("BUTTONHOVER",button_hover)
+       .replace("IMAGEFILTER",image_filter),
        unsafe_allow_html=True)
     if dark:
         st.markdown("<div class='voyage-night-sky' aria-hidden='true'></div>", unsafe_allow_html=True)
