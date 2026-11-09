@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import streamlit as st
+import requests
 
 from src.catalog import DESTINATIONS, PROVINCE_ORDER
 from src.destination_gallery import DESTINATION_IMAGE_BATCHES
@@ -10,6 +11,23 @@ from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="Regional Atlas | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def fetch_gallery_image(url: str):
+    """Fetch supplied remote images server-side so the gallery does not depend on browser hotlinking."""
+    try:
+        response = requests.get(
+            url,
+            headers={"User-Agent": "VoyagePK/1.0 (destination image gallery)"},
+            timeout=18,
+        )
+        response.raise_for_status()
+        if not response.headers.get("content-type", "").lower().startswith("image/"):
+            return None
+        return response.content
+    except requests.RequestException:
+        return None
 
 st.markdown("""
 <style>
@@ -221,7 +239,11 @@ for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCH
         for offset, (col, image_record) in enumerate(zip(row, batch_images[start:start + 3])):
             with col:
                 with st.container(border=False, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
-                    st.image(image_record["image_url"], use_container_width=True)
+                    gallery_image = fetch_gallery_image(image_record["image_url"])
+                    if gallery_image:
+                        st.image(gallery_image, use_container_width=True)
+                    else:
+                        st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE TEMPORARILY UNAVAILABLE</div></div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
                     st.caption("Original supplied photograph · full frame preserved")
                     st.link_button("Open original image", image_record["image_url"])
