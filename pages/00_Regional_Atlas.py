@@ -44,13 +44,10 @@ def find_catalog_record(record):
     cluster = record.get("cluster", "")
     return catalog_by_name.get(cluster.casefold())
 
-def show_photo(query: str, section: str, limit: int = 9):
-    # Keep remote image discovery bounded so the atlas remains responsive.
-    counter_key = f"atlas_photo_count_{section}"
-    used = st.session_state.get(counter_key, 0)
-    image = get_commons_image(query) if used < limit else None
+def show_photo(query: str, allow_lookup: bool = True):
+    # Only the first few cards in each section trigger remote image discovery.
+    image = get_commons_image(query) if allow_lookup else None
     if image and image.get("thumb_url"):
-        st.session_state[counter_key] = used + 1
         rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
         st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
         credit = f'{image.get("artist", "Creator not listed")} · {image.get("license", "Licence not listed")}'
@@ -61,11 +58,11 @@ def show_photo(query: str, section: str, limit: int = 9):
     else:
         st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">VOYAGEPK · PAKISTAN</div></div>', unsafe_allow_html=True)
 
-def render_destination_card(record, index: int, detailed: bool = True, section: str = "destinations"):
+def render_destination_card(record, index: int, detailed: bool = True):
     catalog = find_catalog_record(record) if detailed else None
     image_query = catalog[1].get("image_query") if catalog else record.get("name", "Pakistan destination")
     with st.container(border=True):
-        show_photo(image_query or record.get("name", "Pakistan destination"), section)
+        show_photo(image_query or record.get("name", "Pakistan destination"), allow_lookup=index < 9)
         if detailed:
             st.markdown(f'<div class="atlas-card-meta">{record.get("region","")} · {record.get("type","")}</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="atlas-card-title">{record.get("name","")}</div>', unsafe_allow_html=True)
@@ -129,9 +126,9 @@ for record in RESEARCH_DESTINATIONS:
 st.caption(f"{len(destination_matches)} detailed records match your search.")
 for start in range(0, len(destination_matches), 3):
     row = st.columns(3, gap="medium")
-    for col, record in zip(row, destination_matches[start:start + 3]):
+    for offset, (col, record) in enumerate(zip(row, destination_matches[start:start + 3])):
         with col:
-            render_destination_card(record, start, section="detailed")
+            render_destination_card(record, start + offset)
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">02 · THE NATIONAL COLLECTION</div>', unsafe_allow_html=True)
@@ -148,9 +145,9 @@ for name, item in DESTINATIONS.items():
 st.caption(f"{len(cluster_matches)} destination clusters.")
 for start in range(0, len(cluster_matches), 3):
     row = st.columns(3, gap="medium")
-    for col, record in zip(row, cluster_matches[start:start + 3]):
+    for offset, (col, record) in enumerate(zip(row, cluster_matches[start:start + 3])):
         with col:
-            render_destination_card(record, start, detailed=False, section="clusters")
+            render_destination_card(record, start + offset, detailed=False)
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">03 · FESTIVAL SEASONS</div>', unsafe_allow_html=True)
@@ -166,10 +163,10 @@ event_matches = [
 st.caption(f"{len(event_matches)} event records.")
 for start in range(0, len(event_matches), 2):
     row = st.columns(2, gap="medium")
-    for col, event in zip(row, event_matches[start:start + 2]):
+    for offset, (col, event) in enumerate(zip(row, event_matches[start:start + 2])):
         with col:
             with st.container(border=True):
-                show_photo(event.get("name", "Pakistan festival"), "events", limit=6)
+                show_photo(event.get("name", "Pakistan festival"), allow_lookup=start + offset < 6)
                 st.markdown(f'<div class="atlas-card-meta">{event.get("region","")} · {event.get("id","")}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-copy">{event.get("location","")} · {event.get("date","")}</div>', unsafe_allow_html=True)
@@ -191,11 +188,11 @@ image_matches = [
 st.caption(f"{len(image_matches)} image candidates.")
 for start in range(0, len(image_matches), 3):
     row = st.columns(3, gap="medium")
-    for col, item in zip(row, image_matches[start:start + 3]):
+    for offset, (col, item) in enumerate(zip(row, image_matches[start:start + 3])):
         with col:
             with st.container(border=True):
-                if item.get("page"):
-                    show_photo(item["subject"], "image_register", limit=6)
+                if item.get("page") and start + offset < 6:
+                    show_photo(item["subject"])
                 else:
                     st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE SOURCE PENDING</div></div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-meta">{item.get("region","")} · {item.get("id") or item.get("intake_ref","Candidate")}</div>', unsafe_allow_html=True)
