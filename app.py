@@ -71,6 +71,27 @@ with open("assets/manifest.json", encoding="utf-8") as asset_file:
 # The homepage uses the two exact image URLs supplied by the site owner.
 # Appearance mode selects one image; no collage or Islamabad skyline is used here.
 dark_mode = st.session_state.get("voyage_theme", "Light") == "Dark"
+if dark_mode:
+    st.markdown("""
+    <style>
+    .stApp .voyage-masthead,.stApp .hero-copy-panel,.stApp .soft-panel,
+    .stApp .category-tile,.stApp .category-letter,.stApp .weather-chip{
+        background:#050505!important;color:#FFFFFF!important;border:1px solid #292929!important;box-shadow:none!important
+    }
+    .stApp .hero-copy-panel .lede,.stApp .hero-copy-panel .hero-note,
+    .stApp .voyage-masthead-kicker,.stApp .voyage-masthead-sub,
+    .stApp .kicker,.stApp .section-title,.stApp .section-copy,
+    .stApp .destination-name,.stApp .destination-copy,.stApp .destination-meta,
+    .stApp .hero-image-caption,.stApp .category-name,.stApp .category-copy{
+        color:#FFFFFF!important
+    }
+    .stApp .masthead-divider,.stApp .hero-image-caption span:first-child{color:#FFFFFF!important}
+    .stApp .category-letter{background:#FFFFFF!important;color:#000000!important}
+    .stApp .hero-note{border-left-color:#FFFFFF!important}
+    .stApp [data-testid="stImage"] img{border-color:#FFFFFF!important}
+    </style>
+    """, unsafe_allow_html=True)
+
 hero_asset = asset_manifest["assets"]["night_islamabad_cityscape"] if dark_mode else asset_manifest["assets"]["daytime_northern_pakistan"]
 hero_image = hero_asset["url"]
 hero_edition = "NIGHT EDITION" if dark_mode else "CITY EDITION"
