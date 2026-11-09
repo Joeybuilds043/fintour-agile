@@ -48,12 +48,12 @@ def test_religious_tourism_is_separated_by_tradition():
     from src.catalog import DESTINATIONS, EXPERIENCE_CATEGORIES
 
     categories = {item["name"] for item in EXPERIENCE_CATEGORIES}
-    assert {"Islamic & Sufi heritage", "Sikh pilgrimage", "Buddhist heritage", "Hindu heritage"} <= categories
+    assert {"Islamic & Sufi heritage", "Sikh pilgrimage", "Buddhist heritage", "Hinduism heritage"} <= categories
     assert "Nankana Sahib & Sikh Heritage" in DESTINATIONS
     assert "Swat Buddhist Heritage Circuit" in DESTINATIONS
     assert "Katas Raj Temples & Salt Range" in DESTINATIONS
     assert "Harappa & Indus Valley Archaeology" in DESTINATIONS
-    assert "Hindu heritage" not in DESTINATIONS["Harappa & Indus Valley Archaeology"]["experiences"]
+    assert "Hinduism heritage" not in DESTINATIONS["Harappa & Indus Valley Archaeology"]["experiences"]
 
 
 def test_upper_kalam_destinations_include_desan_and_gabral():
