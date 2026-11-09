@@ -3,6 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS
+from src.services.media import get_commons_image, get_display_image
 from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="Experience Collection | VoyagePK", page_icon=None, layout="wide")
@@ -162,6 +163,14 @@ for section_title, places in collection["sections"]:
                     name, detail, location = place
                 else:
                     name, location, detail = place
+                photo = get_commons_image(name)
+                if photo and not photo.get("illustrative"):
+                    required = {token for token in name.casefold().replace("&", " ").replace("-", " ").split() if len(token) > 2}
+                    found = {token for token in photo.get("title", "").casefold().replace("_", " ").replace("-", " ").split() if len(token) > 2}
+                    if len(required.intersection(found)) >= min(2, len(required)):
+                        rendered = get_display_image(photo["thumb_url"], aspect_ratio=(16, 9))
+                        st.image(rendered if rendered else photo["thumb_url"], use_container_width=True)
+                        st.caption(f'{photo["artist"]} · {photo["license"]} · [Image source]({photo["page_url"]})')
                 st.markdown(f"**{name}**")
                 st.caption(location)
                 st.write(detail)
