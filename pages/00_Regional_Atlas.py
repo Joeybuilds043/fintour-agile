@@ -3,6 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS, PROVINCE_ORDER
+from src.destination_gallery import DESTINATION_IMAGE_BATCHES, get_destination_gallery_image
 from src.research_register import DISCOVERY_LEADS, EVENT_RECORDS, IMAGE_CANDIDATES, RESEARCH_DESTINATIONS
 from src.services.media import get_commons_image, get_display_image
 from src.ui import apply_visitor_theme
@@ -68,7 +69,7 @@ def find_catalog_record(record):
 
 def show_photo(query: str, allow_lookup: bool = True):
     # Only the first few cards in each section trigger remote image discovery.
-    image = get_commons_image(query) if allow_lookup else None
+    image = get_destination_gallery_image(query) or (get_commons_image(query) if allow_lookup else None)
     if image and image.get("thumb_url"):
         rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
         st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
@@ -202,7 +203,23 @@ for start in range(0, len(event_matches), 2):
                         st.link_button("Open event source", event["source"])
 
 st.divider()
-st.markdown('<div class="atlas-eyebrow">04 · VISUAL REFERENCE LIBRARY</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-eyebrow">04 · DESTINATION IMAGE GALLERY</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-heading">Pakistan, through the places themselves.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">The following destination photographs are displayed from the exact URLs supplied for batches 1–8. The original URLs are preserved; source and reuse rights should be checked before commercial or promotional reuse.</div>', unsafe_allow_html=True)
+for batch_name, batch_images in DESTINATION_IMAGE_BATCHES.items():
+    st.markdown(f'<div class="atlas-card-meta">{batch_name}</div>', unsafe_allow_html=True)
+    for start in range(0, len(batch_images), 3):
+        row = st.columns(3, gap="medium")
+        for col, image_record in zip(row, batch_images[start:start + 3]):
+            with col:
+                with st.container(border=True):
+                    st.image(image_record["image_url"], use_container_width=True)
+                    st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
+                    st.caption("Supplied image URL · original link preserved")
+                    st.link_button("Open original image", image_record["image_url"])
+
+st.divider()
+st.markdown('<div class="atlas-eyebrow">05 · VISUAL REFERENCE LIBRARY</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">Images, with their source context.</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-subheading">Image candidates are displayed as framed subject cards. A source-page candidate is not automatically a cleared production asset; review the creator and licence before reuse.</div>', unsafe_allow_html=True)
 image_query = st.text_input("Search image subjects", placeholder="Faisal Mosque, Astola Island, Makli...")
