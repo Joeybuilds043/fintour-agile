@@ -3,7 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS, PROVINCE_ORDER
-from src.destination_gallery import DESTINATION_IMAGE_BATCHES, get_destination_gallery_image
+from src.destination_gallery import DESTINATION_IMAGE_BATCHES
 from src.research_register import DISCOVERY_LEADS, EVENT_RECORDS, IMAGE_CANDIDATES, RESEARCH_DESTINATIONS
 from src.services.media import get_commons_image, get_display_image
 from src.ui import apply_visitor_theme
@@ -33,7 +33,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padd
 .atlas-record-note{padding:10px 12px;border-left:2px solid #C7A35B;background:var(--voyage-surface);border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;color:var(--voyage-muted)}
 div[data-testid="stVerticalBlockBorderWrapper"]{border-color:var(--voyage-line);border-radius:17px}
 div[data-testid="stImage"] img{border-radius:10px;object-fit:contain;box-shadow:0 8px 20px rgba(8,25,20,.10)}
-.st-key-batch-gallery-card{height:100%;min-height:330px;padding:13px!important;border:1px solid rgba(23,92,67,.22)!important;border-radius:18px!important;background:linear-gradient(145deg,#F3E8D0 0%,#E5F0E8 52%,#DCEAF0 100%)!important;box-shadow:0 12px 30px rgba(13,55,42,.09)!important}
+[class*="st-key-batch-gallery-card-"]{height:100%;min-height:330px;padding:13px!important;border:1px solid rgba(23,92,67,.22)!important;border-radius:18px!important;background:linear-gradient(145deg,#F3E8D0 0%,#E5F0E8 52%,#DCEAF0 100%)!important;box-shadow:0 12px 30px rgba(13,55,42,.09)!important}
 .st-key-batch-gallery-card [data-testid="stImage"]{height:224px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:13px;background:linear-gradient(135deg,#D7C59F,#C8E0D5 55%,#B8D6DF);padding:7px}
 .st-key-batch-gallery-card [data-testid="stImage"] img{width:100%;height:210px;object-fit:contain!important;object-position:center;background:transparent;border:0!important;border-radius:9px;box-shadow:none!important}
 .st-key-batch-gallery-card .atlas-card-title{min-height:54px;margin-top:12px}
@@ -214,13 +214,13 @@ st.divider()
 st.markdown('<div class="atlas-eyebrow">04 · DESTINATION IMAGE GALLERY</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">Pakistan, through the places themselves.</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-subheading">The following destination photographs are displayed from the exact URLs supplied for batches 1–8. The original URLs are preserved; source and reuse rights should be checked before commercial or promotional reuse.</div>', unsafe_allow_html=True)
-for batch_name, batch_images in DESTINATION_IMAGE_BATCHES.items():
+for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCHES.items()):
     st.markdown(f'<div class="atlas-card-meta">{batch_name}</div>', unsafe_allow_html=True)
     for start in range(0, len(batch_images), 3):
         row = st.columns(3, gap="medium")
         for offset, (col, image_record) in enumerate(zip(row, batch_images[start:start + 3])):
             with col:
-                with st.container(border=False, key=f"batch-gallery-card-{batch_name}-{start + offset}"):
+                with st.container(border=False, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
                     st.image(image_record["image_url"], use_container_width=True)
                     st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
                     st.caption("Original supplied photograph · full frame preserved")
