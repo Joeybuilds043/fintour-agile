@@ -3,15 +3,15 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS
-from src.services.grok import GroqAPIError, generate_text, get_api_key
+from src.services.groq import GroqAPIError, generate_text, get_api_key
 from src.ui import apply_visitor_theme
 
 st.set_page_config(page_title="AI Travel Concierge | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
 st.title("AI travel concierge")
-st.markdown("Plan with destination context, local culture using the selected destination context.")
+st.markdown("Plan with destination context and local knowledge.")
 st.write(
-    "Ask for destination ideas and itinerary help. Answers use VoyagePK's destination catalogue "
+    "Ask for destination ideas and itinerary help using VoyagePK's destination catalogue. "
     "This is not a live booking or road-information service."
 )
 
@@ -42,9 +42,9 @@ if st.button("Ask VoyagePK", type="primary", disabled=not bool(api_key and quest
     system = (
         "You are VoyagePK's Pakistan travel concierge. Be practical, precise and locally respectful. "
         "Use supplied destination context for catalogue facts. Do not invent prices, hotel availability, "
-        "road status, opening hours, permits, safety conditions or exact journey times. If live research "
-        "is enabled, use it for current facts and cite sources, prioritising official authorities and "
-        "clearly distinguishing official information from travel blogs or user-generated content. "
+        "road status, opening hours, permits, safety conditions or exact journey times. This model call "
+        "does not perform live web research, so identify current facts that travellers must verify "
+        "with official authorities. "
         "State assumptions and data gaps. Provide a useful itinerary with realistic pacing and responsible "
         "local experiences. Never imply that a destination listing confirms it is safe or open today."
     )
@@ -56,7 +56,7 @@ if st.button("Ask VoyagePK", type="primary", disabled=not bool(api_key and quest
                 user_prompt=f"{context}\nVisitor request: {question}",
                 temperature=0.7,
                 max_output_tokens=1500,
-                timeout=(10, 180),
+                timeout=180,
             )
             st.markdown(answer)
         except GroqAPIError as exc:
