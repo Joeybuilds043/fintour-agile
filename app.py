@@ -4,6 +4,7 @@ import json
 import streamlit as st
 
 from src.catalog import DESTINATIONS
+from src.destination_gallery import get_destination_gallery_image
 from src.services.media import get_commons_image, get_display_image
 from src.services.weather import get_weather
 from src.ui import apply_visitor_theme
@@ -141,7 +142,7 @@ for start in range(0, len(featured), 3):
             st.warning(f"Destination profile temporarily unavailable: {name}. The rest of the atlas can still be used.")
             continue
         with col:
-            image = get_commons_image(item["image_query"])
+            image = get_destination_gallery_image(name) or get_commons_image(item["image_query"])
             if image:
                 st.image(get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5)) or image["thumb_url"], use_container_width=True)
                 st.caption(f'{image["artist"]} · {image["license"]} · [Image details]({image["page_url"]})' + (' · Illustrative regional reference' if image.get('illustrative') else ''))
