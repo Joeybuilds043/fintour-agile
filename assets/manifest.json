@@ -9,10 +9,7 @@
       "caption": "Shangrila Resort with lake and mountains in Skardu, Pakistan",
       "author": "Arif Esapzai",
       "license": "Pexels License",
-      "focal_point": [
-        0.5,
-        0.5
-      ],
+      "focal_point": [0.5, 0.5],
       "usage": "Homepage light-theme hero; destination-specific daytime landscape."
     },
     "night_islamabad_cityscape": {
@@ -21,10 +18,7 @@
       "page_url": "https://www.pexels.com/photo/illuminated-city-in-mountains-landscape-at-night-15817300/",
       "caption": "Illuminated city in a mountain landscape at night",
       "license": "Pexels License",
-      "focal_point": [
-        0.5,
-        0.5
-      ],
+      "focal_point": [0.5, 0.5],
       "usage": "Homepage dark-theme hero; night cityscape selected by the user. The scene is not independently verified as Pakistan."
     },
     "passu_cones_landmark": {
@@ -57,10 +51,7 @@
       "page_url": "https://pixabay.com/photos/tree-lake-pakistan-nature-2366664/",
       "author": "Abdullah_Shakoor",
       "license": "Pixabay Content License",
-      "focal_point": [
-        0.5,
-        0.5
-      ],
+      "focal_point": [0.5, 0.5],
       "key": "northern_landscapes"
     },
     {
@@ -71,24 +62,18 @@
       "page_url": "https://www.pexels.com/photo/scenic-view-of-mosque-during-nighttime-5487986/",
       "author": "Aitizaz Naqvi",
       "license": "Pexels License",
-      "focal_point": [
-        0.5,
-        0.55
-      ],
+      "focal_point": [0.5, 0.55],
       "key": "islamic_sufi"
     },
     {
       "title": "Sikhism Sites",
       "category": "Sikh pilgrimage",
       "description": "Gurdwaras and pilgrimage places connected with Guru Nanak and Sikh history in Pakistan.",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gurdwara%20Darbar%20Sahib%20Kartarpur.jpg?width=1600",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Gurdwara_Darbar_Sahib_Kartarpur.jpg",
-      "author": "Shahzaib Damn Cruze",
-      "license": "CC BY-SA 4.0",
-      "focal_point": [
-        0.5,
-        0.5
-      ],
+      "url": "https://media.assettype.com/outlooktraveller/import/outlooktraveller/public/uploads/articles/see/Kartarpur3.jpg?w=1200&h=675&auto=format%2Ccompress&fit=max&enlarge=true",
+      "page_url": "https://media.assettype.com/outlooktraveller/import/outlooktraveller/public/uploads/articles/see/Kartarpur3.jpg?w=1200&h=675&auto=format%2Ccompress&fit=max&enlarge=true",
+      "author": "Outlook Traveller image credit not confirmed",
+      "license": "Usage rights not independently verified",
+      "focal_point": [0.5, 0.5],
       "key": "sikhism_sites"
     },
     {
@@ -99,10 +84,7 @@
       "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNKYbPE--eiBoUzeIcJaTlg8pvqgV8NGUOKxI0oc5tA&s=10",
       "author": "Source attribution not provided",
       "license": "Original image licence unverified",
-      "focal_point": [
-        0.5,
-        0.5
-      ],
+      "focal_point": [0.5, 0.5],
       "key": "hinduism_sites"
     },
     {
@@ -113,10 +95,7 @@
       "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0pIuFwjevBzpBfZnwXc9CvwOZ2djUGOt5tFmuxfjXww&s=10",
       "author": "Source attribution not provided",
       "license": "Original image licence unverified",
-      "focal_point": [
-        0.5,
-        0.5
-      ],
+      "focal_point": [0.5, 0.5],
       "key": "buddhist_heritage"
     },
     {
@@ -127,10 +106,7 @@
       "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMsz7xShUFaZJcesVRFqxSp3vIcjDJOAUcXhzwy8pvgg&s=10",
       "author": "Source attribution not provided",
       "license": "Original image licence unverified",
-      "focal_point": [
-        0.5,
-        0.5
-      ],
+      "focal_point": [0.5, 0.5],
       "key": "ancient_civilizations"
     }
   ]
