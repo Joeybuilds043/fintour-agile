@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import html
 import streamlit as st
 
 from src.catalog import DESTINATIONS
@@ -67,6 +68,19 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .destination-copy{font-size:13px;line-height:1.65;color:var(--voyage-body-ink)!important;opacity:1!important;min-height:64px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .hero-note{border-left:2px solid #C7A35B;padding:6px 0 6px 14px;color:var(--voyage-body-ink)!important;font-size:11px;line-height:1.8;margin-top:14px;letter-spacing:.25px}.hero-image-caption{display:flex;justify-content:space-between;gap:12px;padding:10px 4px 0;color:var(--voyage-body-ink);font-family:"Manrope",sans-serif;font-size:9px;letter-spacing:1.8px;font-weight:800}.hero-image-caption span:first-child{color:#C39B50}
 .weather-chip{display:inline-block;margin:6px 0 2px;padding:6px 10px;border-radius:20px;background:rgba(24,89,60,.14);color:var(--voyage-ink);font-size:11px;font-weight:600}
+.featured-image-frame{height:190px;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:13px;background:linear-gradient(135deg,#E8E2D6,#D8E6DF,#D7E3E9);color:#31564A;font:600 11px Manrope,sans-serif;letter-spacing:1.2px}
+.featured-image-frame img{width:100%;height:190px;object-fit:cover;border-radius:13px}
+.featured-image-credit{height:34px;min-height:34px;max-height:34px;overflow:hidden;font-size:9px;line-height:1.4;color:var(--voyage-muted,#657875);padding:6px 2px 0}
+.featured-image-credit a{font-weight:700}
+.featured-region{height:22px;min-height:22px;overflow:hidden;font-size:9px;letter-spacing:1.35px;text-transform:uppercase;color:#657875;padding-top:3px}
+.featured-title{height:62px;min-height:62px;max-height:62px;display:flex;align-items:center;overflow:hidden;color:var(--voyage-ink);font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:700;line-height:1.1;margin:2px 0 5px}
+.featured-description{height:70px;min-height:70px;max-height:70px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;font-size:12px;line-height:1.55;color:var(--voyage-body-ink)}
+.featured-weather{height:38px;min-height:38px;max-height:38px;display:flex;align-items:center;overflow:hidden;font-size:10px;line-height:1.35;color:var(--voyage-body-ink);margin:5px 0}
+[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"]{height:570px;min-height:570px;display:flex;flex-direction:column}
+[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"]{height:100%;display:flex;flex-direction:column}
+[class*="st-key-featured-destination-"] [data-testid="stButton"]{margin-top:auto}
+[class*="st-key-featured-destination-"] [data-testid="stButton"] button{min-height:42px}
+@media(max-width:900px){[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0}.featured-image-frame,.featured-image-frame img{height:190px}}
 @media(max-width:700px){.display-title{font-size:36px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
 </style>
 """, unsafe_allow_html=True)
@@ -166,28 +180,45 @@ st.markdown('<div class="section-copy">A cross-section of Pakistan’s mountain,
 featured = ["Hunza Valley", "Skardu", "Naran–Kaghan Valley", "Lahore", "K2 & Concordia Expedition", "Swat Valley"]
 for start in range(0, len(featured), 3):
     cols = st.columns(3, gap="large")
-    for col, name in zip(cols, featured[start:start+3]):
+    for offset, (col, name) in enumerate(zip(cols, featured[start:start + 3])):
         item = DESTINATIONS.get(name)
         if item is None:
-            st.warning(f"Destination profile temporarily unavailable: {name}. The rest of the atlas can still be used.")
+            with col:
+                st.warning(f"Destination profile temporarily unavailable: {name}. The rest of the atlas can still be used.")
             continue
         with col:
-            image = get_destination_gallery_image(name) or get_commons_image(item["image_query"])
-            if image:
-                st.image(get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5)) or image["thumb_url"], use_container_width=True)
-                st.caption(f'{image["artist"]} · {image["license"]} · [Image details]({image["page_url"]})' + (' · Illustrative regional reference' if image.get('illustrative') else ''))
-            else:
-                st.markdown('<div style="height:190px;border-radius:17px;background:linear-gradient(135deg,#EEE9DF,#D9C8B7);display:flex;align-items:center;justify-content:center;color:#183B3B;font-family:Georgia,serif">A place worth discovering</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="destination-meta">{item["region"]}</div><div class="destination-name">{name}</div><div class="destination-copy">{item["tagline"]}</div>', unsafe_allow_html=True)
-            weather = get_weather(item["lat"], item["lon"])
-            if weather and weather.get("current"):
-                current = weather["current"]
-                st.markdown(f'<div class="weather-chip">Current forecast · {current.get("temperature_2m", "—")}°C · Wind {current.get("wind_speed_10m", "—")} km/h</div>', unsafe_allow_html=True)
-            else:
-                st.caption("Live weather temporarily unavailable")
-            if st.button("Explore this place", key=f"home_guide_{name}", use_container_width=True):
-                st.session_state["selected_destination"] = name
-                st.switch_page("pages/02_Destination_Guide.py")
+            with st.container(border=False, key=f"featured-destination-{start + offset}"):
+                with st.container(border=True):
+                    image = get_destination_gallery_image(name) or get_commons_image(item["image_query"])
+                    if image:
+                        image_url = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5)) or image["thumb_url"]
+                        st.markdown(
+                            f'<div class="featured-image-frame"><img src="{html.escape(image_url, quote=True)}" alt="{html.escape(name, quote=True)}"></div>',
+                            unsafe_allow_html=True,
+                        )
+                        image_credit = f'{image.get("artist", "Image contributor")} · {image.get("license", "Licence details")} · <a href="{html.escape(image.get("page_url", "#"), quote=True)}" target="_blank" rel="noopener">Image details</a>'
+                        if image.get("illustrative"):
+                            image_credit += " · Illustrative regional reference"
+                    else:
+                        st.markdown('<div class="featured-image-frame">DESTINATION IMAGE UNAVAILABLE</div>', unsafe_allow_html=True)
+                        image_credit = "Image reference temporarily unavailable"
+                    st.markdown(f'<div class="featured-image-credit">{image_credit}</div>', unsafe_allow_html=True)
+                    st.markdown(
+                        f'<div class="featured-region">{html.escape(str(item.get("region", "Pakistan")))}</div>'
+                        f'<div class="featured-title">{html.escape(name)}</div>'
+                        f'<div class="featured-description">{html.escape(str(item.get("tagline", "")))}</div>',
+                        unsafe_allow_html=True,
+                    )
+                    weather = get_weather(item["lat"], item["lon"])
+                    if weather and weather.get("current"):
+                        current = weather["current"]
+                        weather_text = f'Current forecast · {current.get("temperature_2m", "—")}°C · Wind {current.get("wind_speed_10m", "—")} km/h'
+                    else:
+                        weather_text = "Live weather temporarily unavailable"
+                    st.markdown(f'<div class="featured-weather">{html.escape(weather_text)}</div>', unsafe_allow_html=True)
+                    if st.button("Explore this place", key=f"home_guide_{name}", use_container_width=True):
+                        st.session_state["selected_destination"] = name
+                        st.switch_page("pages/02_Destination_Guide.py")
 
 st.write("")
 a, b, c = st.columns([1, 1, 1], gap="large")
