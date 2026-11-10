@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import html
+import base64
 import streamlit as st
 
 from src.catalog import DESTINATIONS
@@ -191,9 +192,13 @@ for start in range(0, len(featured), 3):
                 with st.container(border=True):
                     image = get_destination_gallery_image(name) or get_commons_image(item["image_query"])
                     if image:
-                        image_url = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5)) or image["thumb_url"]
+                        image_data = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
+                        if isinstance(image_data, (bytes, bytearray)):
+                            image_src = "data:image/jpeg;base64," + base64.b64encode(image_data).decode("ascii")
+                        else:
+                            image_src = str(image["thumb_url"])
                         st.markdown(
-                            f'<div class="featured-image-frame"><img src="{html.escape(image_url, quote=True)}" alt="{html.escape(name, quote=True)}"></div>',
+                            f'<div class="featured-image-frame"><img src="{html.escape(image_src, quote=True)}" alt="{html.escape(str(name), quote=True)}"></div>',
                             unsafe_allow_html=True,
                         )
                         image_credit = f'{image.get("artist", "Image contributor")} · {image.get("license", "Licence details")} · <a href="{html.escape(image.get("page_url", "#"), quote=True)}" target="_blank" rel="noopener">Image details</a>'
