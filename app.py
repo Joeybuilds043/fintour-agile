@@ -160,6 +160,29 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 @media(max-width:900px){.bottom-feature-card{height:auto;min-height:190px;max-height:none}.bottom-feature-card .bottom-card-title{height:auto;min-height:54px}.bottom-feature-card .bottom-card-copy{height:auto;min-height:50px}}
 @media(max-width:900px){[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0}.featured-image-frame,.featured-image-frame img{height:190px}}
 @media(max-width:700px){.display-title{font-size:36px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
+/* Featured destination cards use the same white-panel / dark-type treatment as the closing cards. */
+[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"]{
+    background:#FFFFFF!important;
+    border:1px solid #D8D4C6!important;
+    box-shadow:0 12px 28px rgba(10,25,15,.08)!important;
+}
+[class*="st-key-featured-destination-"] .featured-image-credit,
+[class*="st-key-featured-destination-"] .featured-image-credit *,
+[class*="st-key-featured-destination-"] .featured-region,
+[class*="st-key-featured-destination-"] .featured-title,
+[class*="st-key-featured-destination-"] .featured-description,
+[class*="st-key-featured-destination-"] .featured-weather{
+    color:#17251B!important;
+    -webkit-text-fill-color:#17251B!important;
+    opacity:1!important;
+}
+[class*="st-key-featured-destination-"] .featured-region{color:#267348!important;-webkit-text-fill-color:#267348!important}
+[class*="st-key-featured-destination-"] .featured-title{color:#101A13!important;-webkit-text-fill-color:#101A13!important}
+[class*="st-key-featured-destination-"] [data-testid="stButton"] button,
+[class*="st-key-featured-destination-"] [data-testid="stButton"] button *{
+    color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;
+}
+
 /* Explicit contrast for the six experience collection cards and their green actions. */
 [class*="st-key-experience-collection-"] [data-testid="stButton"] button,
 [class*="st-key-experience-collection-"] [data-testid="stButton"] button *{
