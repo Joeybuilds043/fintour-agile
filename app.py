@@ -107,30 +107,58 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button span{color:#FFFFFF!important}
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button:hover{background:#219653!important}
 /* Three closing action panels share the same geometry and typography */
+/* Closing action panels: clean white cards with concise, high-contrast copy. */
 .bottom-feature-card{
-    height:238px;min-height:238px;max-height:238px;box-sizing:border-box;
+    height:208px;min-height:208px;max-height:208px;box-sizing:border-box;
     display:flex;flex-direction:column;justify-content:flex-start;
-    padding:22px 22px 20px;border-radius:18px;
-    background:linear-gradient(150deg,#111915 0%,#080D0A 100%);
-    border:1px solid #34483A;box-shadow:0 12px 28px rgba(0,0,0,.14);
+    padding:20px 22px;border-radius:18px;
+    background:#FFFFFF!important;
+    border:1px solid #D8D4C6;box-shadow:0 12px 28px rgba(10,25,15,.08);
     overflow:hidden;
 }
 .bottom-feature-card .bottom-card-kicker{
-    color:#83C99A;font:800 9px/1.4 Manrope,sans-serif;letter-spacing:2px;
-    text-transform:uppercase;margin:0 0 12px;min-height:14px;
+    color:#267348!important;font:800 9px/1.4 Manrope,sans-serif;letter-spacing:2px;
+    text-transform:uppercase;margin:0 0 10px;min-height:14px;
 }
 .bottom-feature-card .bottom-card-title{
-    color:#FFFFFF;font:700 27px/1.08 "Cormorant Garamond",Georgia,serif;
-    min-height:60px;height:60px;margin:0 0 10px;display:flex;align-items:center;
+    color:#101A13!important;font:700 26px/1.08 "Cormorant Garamond",Georgia,serif;
+    min-height:58px;height:58px;margin:0 0 8px;display:flex;align-items:center;
 }
 .bottom-feature-card .bottom-card-copy{
-    color:#E5ECE7;font:500 12px/1.65 Manrope,sans-serif;
-    min-height:78px;height:78px;margin:0;overflow:hidden;
-    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+    color:#17251B!important;font:750 12px/1.55 Manrope,sans-serif;
+    min-height:56px;height:56px;margin:0;overflow:hidden;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
 }
-@media(max-width:900px){.bottom-feature-card{height:auto;min-height:220px;max-height:none}.bottom-feature-card .bottom-card-title{height:auto;min-height:54px}.bottom-feature-card .bottom-card-copy{height:auto;min-height:72px}}
+@media(max-width:900px){.bottom-feature-card{height:auto;min-height:190px;max-height:none}.bottom-feature-card .bottom-card-title{height:auto;min-height:54px}.bottom-feature-card .bottom-card-copy{height:auto;min-height:50px}}
 @media(max-width:900px){[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0}.featured-image-frame,.featured-image-frame img{height:190px}}
 @media(max-width:700px){.display-title{font-size:36px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
+/* Explicit contrast for the six experience collection cards and their green actions. */
+[class*="st-key-experience-collection-"] [data-testid="stButton"] button,
+[class*="st-key-experience-collection-"] [data-testid="stButton"] button *{
+    color:#FFFFFF!important;
+    opacity:1!important;
+    -webkit-text-fill-color:#FFFFFF!important;
+}
+[class*="st-key-experience-collection-"] [data-testid="stButton"] button{
+    background:#167A43!important;border-color:#219653!important;
+}
+[class*="st-key-experience-collection-"] [data-testid="stButton"] button:hover{
+    background:#219653!important;
+}
+[class*="st-key-featured-destination-"] .featured-image-credit,
+[class*="st-key-featured-destination-"] .featured-image-credit *,
+[class*="st-key-featured-destination-"] .featured-region,
+[class*="st-key-featured-destination-"] .featured-title,
+[class*="st-key-featured-destination-"] .featured-description,
+[class*="st-key-featured-destination-"] .featured-weather{
+    color:#F5F8F5!important;opacity:1!important;
+}
+.bottom-feature-card,.bottom-feature-card *{
+    color:#17251B!important;
+}
+.bottom-feature-card .bottom-card-kicker{color:#267348!important}
+.bottom-feature-card .bottom-card-title{color:#101A13!important}
+.bottom-feature-card .bottom-card-copy{color:#17251B!important;font-weight:750!important}
 </style>
 """, unsafe_allow_html=True)
 
@@ -276,13 +304,13 @@ for start in range(0, len(featured), 3):
 st.write("")
 a, b, c = st.columns([1, 1, 1], gap="large")
 with a:
-    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">PLAN WITH CONTEXT</div><div class="bottom-card-title">Make the journey yours.</div><p class="bottom-card-copy">Shape a trip around your time, interests and budget. Use destination guides to understand seasons, access and responsible travel considerations before you go.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">PLAN WITH CONTEXT</div><div class="bottom-card-title">Make the journey yours.</div><p class="bottom-card-copy">Plan around your time, interests and budget. Check seasons, access and local guidance before you go.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/03_Trip_Planner.py", label="Build a trip plan")
 with b:
-    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">REGIONAL DISCOVERY</div><div class="bottom-card-title">Explore the full atlas.</div><p class="bottom-card-copy">Search detailed attractions, regional destination clusters, festivals, image sources and the next places being researched.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">REGIONAL DISCOVERY</div><div class="bottom-card-title">Explore the full atlas.</div><p class="bottom-card-copy">Browse regional destinations, attractions and festivals. Discover the places shaping Pakistan’s travel story.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/00_Regional_Atlas.py", label="Open regional atlas")
 with c:
-    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">SEE THE BIGGER PICTURE</div><div class="bottom-card-title">Travel is also an economy.</div><p class="bottom-card-copy">Explore the tourism intelligence workspace: destination evidence, investment scenarios, local value and the data gaps that matter for better decisions.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">SEE THE BIGGER PICTURE</div><div class="bottom-card-title">Travel is also an economy.</div><p class="bottom-card-copy">Explore tourism data, local value and investment scenarios. See where evidence can guide better decisions.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
 
 st.caption("VoyagePK is an independent prototype, not an official government tourism service. Destination descriptions and approximate map anchors require local review. Verify travel, safety, access, permits and booking details with responsible local authorities and providers.")
