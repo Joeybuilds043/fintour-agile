@@ -95,7 +95,7 @@ if dark_mode:
 
 hero_asset = asset_manifest["assets"]["night_islamabad_cityscape"] if dark_mode else asset_manifest["assets"]["daytime_northern_pakistan"]
 hero_image = hero_asset["url"]
-hero_edition = "NIGHT TOURISM EDITION" if dark_mode else "NORTHERN LANDSCAPE EDITION"
+hero_edition = "ILLUMINATED MOUNTAIN CITYSCAPE" if dark_mode else "SHANGRILA RESORT · SKARDU"
 st.markdown(
     '<div class="voyage-masthead"><svg viewBox="0 0 92 56" role="img" aria-label="Flag of Pakistan" class="pakistan-flag"><rect width="92" height="56" rx="4" fill="#01411C"/><rect width="20" height="56" fill="#FFFFFF"/><circle cx="57" cy="27" r="17" fill="#FFFFFF"/><circle cx="63" cy="22" r="14" fill="#01411C"/><path d="M70 7l3.2 7.4 8 .7-6.1 5.2 1.8 7.8-6.9-4.1-6.9 4.1 1.8-7.8-6.1-5.2 8-.7z" fill="#FFFFFF"/></svg><div><div class="voyage-masthead-kicker">VOYAGEPK <span class="masthead-divider">/</span> PAKISTAN UNBOUND</div><div class="voyage-masthead-sub">LANDSCAPES · LIVING CULTURES · HERITAGE · PLACE-BASED TRAVEL</div></div></div><div class="kicker">A FIELD GUIDE TO THE EXTRAORDINARY</div>',
     unsafe_allow_html=True,
@@ -110,7 +110,7 @@ with right:
     hero_rendered = get_display_image(hero_image, aspect_ratio=(16, 10), focal_point=tuple(hero_asset.get("focal_point", [0.52, 0.72])))
     st.image(hero_rendered if hero_rendered else hero_image, use_container_width=True)
     st.markdown(
-        f'<div class="hero-image-caption"><span>{hero_edition}</span><span>{hero_asset["author"]} · PEXELS</span><span>PAKISTAN · UNBOUND</span></div>',
+        f'<div class="hero-image-caption"><span>{hero_edition}</span><span>{hero_asset.get("author", "PEXELS CONTRIBUTOR")} · PEXELS</span><span>PAKISTAN · UNBOUND</span></div>',
         unsafe_allow_html=True,
     )
 st.markdown('<div class="kicker">EXPLORE THE COUNTRY THROUGH DISTINCTIVE JOURNEYS</div>', unsafe_allow_html=True)
