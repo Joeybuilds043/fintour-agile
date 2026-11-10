@@ -231,6 +231,19 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .bottom-feature-card .bottom-card-kicker{color:#267348!important}
 .bottom-feature-card .bottom-card-title{color:#101A13!important}
 .bottom-feature-card .bottom-card-copy{color:#17251B!important;font-weight:750!important}
+
+/* Hero copy sits on a deep-green surface: preserve clear white contrast. */
+.hero-copy-panel .lede,
+.hero-copy-panel .hero-note{
+    color:#FFFFFF!important;
+    -webkit-text-fill-color:#FFFFFF!important;
+    opacity:1!important;
+    font-family:Manrope,Arial,sans-serif!important;
+    font-weight:650!important;
+}
+.hero-copy-panel .hero-note{
+    border-left-color:#D7C58F!important;
+}
 </style>
 """, unsafe_allow_html=True)
 
