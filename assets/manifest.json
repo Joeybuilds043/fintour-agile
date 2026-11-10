@@ -4,29 +4,28 @@
   "assets": {
     "daytime_northern_pakistan": {
       "provider": "Pexels",
-      "url": "https://images.pexels.com/photos/35171324/pexels-photo-35171324.jpeg?auto=compress&cs=tinysrgb&w=2000",
-      "page_url": "https://www.pexels.com/photo/scenic-autumn-view-of-hunza-valley-pakistan-35171324/",
-      "caption": "Autumn landscape in Hunza Valley, Pakistan",
-      "author": "Asad Ali",
-      "license": "Pexels License",
-      "focal_point": [
-        0.52,
-        0.48
-      ],
-      "usage": "Homepage daytime hero; wide landscape composition selected for destination-led travel discovery."
-    },
-    "night_islamabad_cityscape": {
-      "provider": "Pexels",
-      "url": "https://images.pexels.com/photos/5487986/pexels-photo-5487986.jpeg?auto=compress&cs=tinysrgb&w=2000",
-      "page_url": "https://www.pexels.com/photo/scenic-view-of-mosque-during-nighttime-5487986/",
-      "caption": "Badshahi Mosque illuminated at night, Lahore",
-      "author": "Aitizaz Naqvi",
+      "url": "https://images.pexels.com/photos/35302567/pexels-photo-35302567.jpeg?auto=compress&cs=tinysrgb&w=2000",
+      "page_url": "https://www.pexels.com/photo/scenic-view-of-shangrila-resort-in-skardu-pakistan-35302567/",
+      "caption": "Shangrila Resort with lake and mountains in Skardu, Pakistan",
+      "author": "Arif Esapzai",
       "license": "Pexels License",
       "focal_point": [
         0.5,
         0.5
       ],
-      "usage": "Homepage dark-theme hero; actual Pakistan night-tourism photography."
+      "usage": "Homepage light-theme hero; destination-specific daytime landscape."
+    },
+    "night_islamabad_cityscape": {
+      "provider": "Pexels",
+      "url": "https://images.pexels.com/photos/15817300/pexels-photo-15817300.jpeg?auto=compress&cs=tinysrgb&w=2000",
+      "page_url": "https://www.pexels.com/photo/illuminated-city-in-mountains-landscape-at-night-15817300/",
+      "caption": "Illuminated city in a mountain landscape at night",
+      "license": "Pexels License",
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "usage": "Homepage dark-theme hero; night cityscape selected by the user. The scene is not independently verified as Pakistan."
     },
     "passu_cones_landmark": {
       "provider": "Wikimedia Commons",
