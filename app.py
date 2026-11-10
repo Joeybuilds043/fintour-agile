@@ -108,6 +108,27 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button p,
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button span{color:#FFFFFF!important}
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button:hover{background:#219653!important}
+/* Unified homepage typography: use the closing-panel title and body styles consistently. */
+.featured-title,.destination-name,.category-name,.section-title,
+.experience-collection-card .destination-name{
+    color:#101A13!important;
+    -webkit-text-fill-color:#101A13!important;
+    font-family:"Cormorant Garamond",Georgia,serif!important;
+    font-size:26px!important;
+    font-weight:700!important;
+    line-height:1.08!important;
+}
+.featured-description,.destination-copy,.category-copy,.section-copy,
+.experience-credit,.featured-image-credit,.featured-weather,.destination-meta,
+.featured-region,.hero-note,.hero-copy-panel .lede{
+    color:#17251B!important;
+    -webkit-text-fill-color:#17251B!important;
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:12px!important;
+    font-weight:750!important;
+    line-height:1.55!important;
+    opacity:1!important;
+}
 /* Three closing action panels share the same geometry and typography */
 /* Strong contrast for the Journeys section heading on the light page surface. */
 
