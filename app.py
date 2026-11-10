@@ -34,6 +34,18 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .soft-panel{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:20px;padding:20px;height:100%}
 .category-tile{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:15px;padding:16px 14px;min-height:105px}
 .category-letter{width:27px;height:27px;border-radius:50%;background:#E8E1D5;color:#173B3A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
+.experience-collection-card{height:100%;min-height:455px;display:flex;flex-direction:column}
+.experience-collection-card [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:455px;display:flex;flex-direction:column}
+.experience-collection-card [data-testid="stImage"]{height:auto}
+.experience-collection-card [data-testid="stImage"] img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.experience-credit{height:38px;min-height:38px;max-height:38px;overflow:hidden;font-size:10px;line-height:1.45;color:var(--voyage-muted);margin:7px 1px 4px}
+.experience-credit a{font-weight:750}
+.experience-collection-card .destination-name{min-height:58px;max-height:58px;overflow:hidden;align-items:center;margin:5px 0 6px}
+.experience-collection-card .destination-copy{min-height:66px;max-height:66px}
+.experience-collection-card [data-testid="stButton"]{margin-top:auto}
+.category-letter{background:#167A43;color:#FFFFFF}
+.weather-chip{background:#167A43;color:#FFFFFF!important;border:1px solid #219653}
+@media(max-width:900px){.experience-collection-card,.experience-collection-card [data-testid="stVerticalBlockBorderWrapper"]{min-height:0}}
 .category-name{font-weight:700;font-size:14px;color:var(--voyage-ink)}
 .category-copy{font-size:11px;color:#657875;line-height:1.5;margin-top:4px}
 .destination-name{color:var(--voyage-ink);font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:25px;line-height:1.12;min-height:58px;display:flex;align-items:flex-end;margin:8px 0 6px}
@@ -121,14 +133,18 @@ for start_index in range(0, len(photo_collections), 3):
     cols = st.columns(3, gap="large")
     for col, asset in zip(cols, photo_collections[start_index:start_index + 3]):
         with col:
-            with st.container(border=True):
-                rendered = get_display_image(asset["url"], aspect_ratio=(16, 9), focal_point=tuple(asset.get("focal_point", [0.5, 0.48])))
-                st.image(rendered if rendered else asset["url"], use_container_width=True)
-                st.caption(f'{asset["author"]} · {asset["license"]} · [Image source]({asset["page_url"]})')
-                st.markdown(f'<div class="destination-name">{asset["title"]}</div><div class="destination-copy">{asset["description"]}</div>', unsafe_allow_html=True)
-                if st.button(f'Explore {asset["title"]}', key=f'collection_{asset["key"]}', use_container_width=True):
-                    st.session_state["selected_experience_collection"] = asset["key"]
-                    st.switch_page("pages/11_Experience_Collection.py")
+            with st.container(border=False, key=f'experience-collection-{asset["key"]}'):
+                with st.container(border=True):
+                    rendered = get_display_image(asset["url"], aspect_ratio=(16, 9), focal_point=tuple(asset.get("focal_point", [0.5, 0.48])))
+                    st.image(rendered if rendered else asset["url"], use_container_width=True)
+                    st.markdown(
+                        f'<div class="experience-credit">{asset["author"]} · {asset["license"]} · <a href="{asset["page_url"]}" target="_blank">Image source</a></div>',
+                        unsafe_allow_html=True,
+                    )
+                    st.markdown(f'<div class="destination-name">{asset["title"]}</div><div class="destination-copy">{asset["description"]}</div>', unsafe_allow_html=True)
+                    if st.button(f'Explore {asset["title"]}', key=f'collection_{asset["key"]}', use_container_width=True):
+                        st.session_state["selected_experience_collection"] = asset["key"]
+                        st.switch_page("pages/11_Experience_Collection.py")
 st.write("")
 st.markdown('<div class="kicker">EDITORIAL DESTINATION SELECTION</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Journeys worth discovering</div>', unsafe_allow_html=True)
