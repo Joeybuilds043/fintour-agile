@@ -53,13 +53,13 @@
       "title": "Northern landscapes",
       "category": "Northern landscapes",
       "description": "High peaks, glaciers, valleys, rivers, alpine lakes, protected areas, plateaus and cold deserts across northern Pakistan.",
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Passu_Cones_and_the_Hunza_River.jpg/1280px-Passu_Cones_and_the_Hunza_River.jpg",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
-      "author": "Aly Ahmad1991",
-      "license": "CC BY-SA 4.0",
+      "url": "https://cdn.pixabay.com/photo/2017/06/02/15/44/tree-2366664_1280.jpg",
+      "page_url": "https://pixabay.com/photos/tree-lake-pakistan-nature-2366664/",
+      "author": "Abdullah_Shakoor",
+      "license": "Pixabay Content License",
       "focal_point": [
-        0.618,
-        0.382
+        0.5,
+        0.5
       ],
       "key": "northern_landscapes"
     },
@@ -67,13 +67,13 @@
       "title": "Islamic & Sufi Heritage",
       "category": "Islamic & Sufi heritage",
       "description": "Famous mosques, Sufi shrines, sacred architecture and religious gatherings across Punjab, Sindh and beyond.",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Shrine%20of%20Shah%20Rukn-e-Alam%20Multan.jpg?width=1600",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Shrine_of_Shah_Rukn-e-Alam_Multan.jpg",
-      "author": "Mhtoori",
-      "license": "CC BY-SA 4.0",
+      "url": "https://images.pexels.com/photos/5487986/pexels-photo-5487986.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "page_url": "https://www.pexels.com/photo/scenic-view-of-mosque-during-nighttime-5487986/",
+      "author": "Aitizaz Naqvi",
+      "license": "Pexels License",
       "focal_point": [
         0.5,
-        0.5
+        0.55
       ],
       "key": "islamic_sufi"
     },
@@ -81,13 +81,13 @@
       "title": "Sikhism Sites",
       "category": "Sikh pilgrimage",
       "description": "Gurdwaras and pilgrimage places connected with Guru Nanak and Sikh history in Pakistan.",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gurdwara%20Nankana%20Sahib%20Janam%20Asthan.jpg?width=1600",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Gurdwara_Nankana_Sahib_Janam_Asthan.jpg",
-      "author": "Harvinder Chandigarh",
-      "license": "CC BY 4.0",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gurdwara%20Darbar%20Sahib%20Kartarpur.jpg?width=1600",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Gurdwara_Darbar_Sahib_Kartarpur.jpg",
+      "author": "Shahzaib Damn Cruze",
+      "license": "CC BY-SA 4.0",
       "focal_point": [
         0.5,
-        0.45
+        0.5
       ],
       "key": "sikhism_sites"
     },
@@ -95,10 +95,10 @@
       "title": "Hinduism Sites",
       "category": "Hinduism sites",
       "description": "Hindu temples, sacred landscapes and pilgrimage places, including Katas Raj and Hinglaj.",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Katas%20Raj%20Temple%20Pakistan.jpg?width=1600",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Katas_Raj_Temple_Pakistan.jpg",
-      "author": "Asham Shahzad",
-      "license": "CC BY-SA 4.0",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNKYbPE--eiBoUzeIcJaTlg8pvqgV8NGUOKxI0oc5tA&s=10",
+      "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNKYbPE--eiBoUzeIcJaTlg8pvqgV8NGUOKxI0oc5tA&s=10",
+      "author": "Source attribution not provided",
+      "license": "Original image licence unverified",
       "focal_point": [
         0.5,
         0.5
@@ -109,10 +109,10 @@
       "title": "Buddhist Heritage",
       "category": "Buddhist heritage",
       "description": "Gandharan monasteries, stupas, archaeological landscapes and Buddhist heritage sites.",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmarajika%20stupa%2CTaxila.jpg?width=1600",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Dharmarajika_stupa,Taxila.jpg",
-      "author": "Sasha Isachenko",
-      "license": "CC BY-SA 3.0",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0pIuFwjevBzpBfZnwXc9CvwOZ2djUGOt5tFmuxfjXww&s=10",
+      "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0pIuFwjevBzpBfZnwXc9CvwOZ2djUGOt5tFmuxfjXww&s=10",
+      "author": "Source attribution not provided",
+      "license": "Original image licence unverified",
       "focal_point": [
         0.5,
         0.5
@@ -123,10 +123,10 @@
       "title": "Ancient Civilizations",
       "category": "Ancient civilizations",
       "description": "Indus Valley and other ancient settlements, archaeological remains and historic urban centres.",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Archaeological%20site%20of%20Harappa.jpg?width=1600",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Archaeological_site_of_Harappa.jpg",
-      "author": "M.sohailtariq",
-      "license": "CC BY-SA 3.0",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMsz7xShUFaZJcesVRFqxSp3vIcjDJOAUcXhzwy8pvgg&s=10",
+      "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMsz7xShUFaZJcesVRFqxSp3vIcjDJOAUcXhzwy8pvgg&s=10",
+      "author": "Source attribution not provided",
+      "license": "Original image licence unverified",
       "focal_point": [
         0.5,
         0.5
