@@ -32,7 +32,9 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 .voyage-masthead-sub{color:#FFFFFF!important;font-size:10px;letter-spacing:1.7px;font-weight:700}
 .kicker{font-size:10px;letter-spacing:2.3px;text-transform:uppercase;color:#C7A35B;font-weight:700}
 .section-title{color:var(--voyage-ink)!important;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(32px,3.2vw,44px);line-height:1.02;margin:4px 0 9px}
-.section-copy{color:var(--voyage-body-ink)!important;opacity:1!important;font-size:14px;line-height:1.8;max-width:720px}
+.section-copy{color:#26352C!important;-webkit-text-fill-color:#26352C!important;opacity:1!important;font-size:14px;line-height:1.8;max-width:720px;font-weight:550}
+.section-title{color:#14251B!important;-webkit-text-fill-color:#14251B!important}
+
 .soft-panel{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:20px;padding:20px;height:100%}
 .category-tile{background:var(--voyage-surface);border:1px solid var(--voyage-line);border-radius:15px;padding:16px 14px;min-height:105px}
 .category-letter{width:27px;height:27px;border-radius:50%;background:#E8E1D5;color:#173B3A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px}
@@ -107,6 +109,32 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button span{color:#FFFFFF!important}
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button:hover{background:#219653!important}
 /* Three closing action panels share the same geometry and typography */
+/* Strong contrast for the Journeys section heading on the light page surface. */
+
+/* Equal, prominent green navigation actions beneath all three closing panels. */
+[class*="st-key-bottom-action-link-"] [data-testid="stPageLink-NavLink"]{
+    min-height:52px;height:52px;width:100%;box-sizing:border-box;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    padding:10px 14px!important;margin-top:12px!important;
+    background:#167A43!important;border:1px solid #219653!important;
+    border-radius:12px!important;text-decoration:none!important;
+    box-shadow:0 8px 18px rgba(13,75,42,.16)!important;
+    transition:background .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+[class*="st-key-bottom-action-link-"] [data-testid="stPageLink-NavLink"]:hover{
+    background:#219653!important;transform:translateY(-2px);
+    box-shadow:0 11px 22px rgba(13,75,42,.22)!important;
+}
+[class*="st-key-bottom-action-link-"] [data-testid="stPageLink-NavLink"] p,
+[class*="st-key-bottom-action-link-"] [data-testid="stPageLink-NavLink"] span{
+    color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;
+    font-family:Manrope,Arial,sans-serif!important;font-size:12px!important;
+    font-weight:800!important;letter-spacing:.25px!important;text-align:center!important;
+    line-height:1.25!important;margin:0!important;
+}
+
+.kicker + .section-title{color:#14251B!important;-webkit-text-fill-color:#14251B!important}
+.kicker + .section-title + .section-copy{color:#26352C!important;-webkit-text-fill-color:#26352C!important;opacity:1!important}
 /* Closing action panels: clean white cards with concise, high-contrast copy. */
 .bottom-feature-card{
     height:208px;min-height:208px;max-height:208px;box-sizing:border-box;
@@ -305,12 +333,15 @@ st.write("")
 a, b, c = st.columns([1, 1, 1], gap="large")
 with a:
     st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">PLAN WITH CONTEXT</div><div class="bottom-card-title">Make the journey yours.</div><p class="bottom-card-copy">Plan around your time, interests and budget. Check seasons, access and local guidance before you go.</p></div>', unsafe_allow_html=True)
-    st.page_link("pages/03_Trip_Planner.py", label="Build a trip plan")
+    with st.container(border=False, key="bottom-action-link-plan"):
+        st.page_link("pages/03_Trip_Planner.py", label="Build a trip plan")
 with b:
     st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">REGIONAL DISCOVERY</div><div class="bottom-card-title">Explore the full atlas.</div><p class="bottom-card-copy">Browse regional destinations, attractions and festivals. Discover the places shaping Pakistan’s travel story.</p></div>', unsafe_allow_html=True)
-    st.page_link("pages/00_Regional_Atlas.py", label="Open regional atlas")
+    with st.container(border=False, key="bottom-action-link-atlas"):
+        st.page_link("pages/00_Regional_Atlas.py", label="Open regional atlas")
 with c:
     st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">SEE THE BIGGER PICTURE</div><div class="bottom-card-title">Travel is also an economy.</div><p class="bottom-card-copy">Explore tourism data, local value and investment scenarios. See where evidence can guide better decisions.</p></div>', unsafe_allow_html=True)
-    st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
+    with st.container(border=False, key="bottom-action-link-intelligence"):
+        st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
 
 st.caption("VoyagePK is an independent prototype, not an official government tourism service. Destination descriptions and approximate map anchors require local review. Verify travel, safety, access, permits and booking details with responsible local authorities and providers.")
