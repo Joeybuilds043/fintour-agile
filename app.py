@@ -81,6 +81,54 @@ div[data-testid="stImage"] img{border:1px solid rgba(199,163,91,.32);border-radi
 [class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"]{height:100%;display:flex;flex-direction:column}
 [class*="st-key-featured-destination-"] [data-testid="stButton"]{margin-top:auto}
 [class*="st-key-featured-destination-"] [data-testid="stButton"] button{min-height:42px}
+/* Featured destination cards: dark, high-contrast editorial panels */
+[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"]{
+    background:linear-gradient(155deg,#101713 0%,#080D0A 100%)!important;
+    border:1px solid #314438!important;
+    border-radius:18px!important;
+    padding:12px!important;
+    box-shadow:0 12px 28px rgba(0,0,0,.16)!important;
+}
+[class*="st-key-featured-destination-"] .featured-image-credit,
+[class*="st-key-featured-destination-"] .featured-image-credit a,
+[class*="st-key-featured-destination-"] .featured-region,
+[class*="st-key-featured-destination-"] .featured-title,
+[class*="st-key-featured-destination-"] .featured-description,
+[class*="st-key-featured-destination-"] .featured-weather{
+    color:#F5F8F5!important;
+}
+[class*="st-key-featured-destination-"] .featured-region{color:#B8D5C1!important}
+[class*="st-key-featured-destination-"] .featured-image-credit{opacity:.88}
+[class*="st-key-featured-destination-"] [data-testid="stButton"] button{
+    color:#FFFFFF!important;background:#167A43!important;border:1px solid #35A765!important;
+    font-weight:750!important;border-radius:10px!important;
+}
+[class*="st-key-featured-destination-"] [data-testid="stButton"] button p,
+[class*="st-key-featured-destination-"] [data-testid="stButton"] button span{color:#FFFFFF!important}
+[class*="st-key-featured-destination-"] [data-testid="stButton"] button:hover{background:#219653!important}
+/* Three closing action panels share the same geometry and typography */
+.bottom-feature-card{
+    height:238px;min-height:238px;max-height:238px;box-sizing:border-box;
+    display:flex;flex-direction:column;justify-content:flex-start;
+    padding:22px 22px 20px;border-radius:18px;
+    background:linear-gradient(150deg,#111915 0%,#080D0A 100%);
+    border:1px solid #34483A;box-shadow:0 12px 28px rgba(0,0,0,.14);
+    overflow:hidden;
+}
+.bottom-feature-card .bottom-card-kicker{
+    color:#83C99A;font:800 9px/1.4 Manrope,sans-serif;letter-spacing:2px;
+    text-transform:uppercase;margin:0 0 12px;min-height:14px;
+}
+.bottom-feature-card .bottom-card-title{
+    color:#FFFFFF;font:700 27px/1.08 "Cormorant Garamond",Georgia,serif;
+    min-height:60px;height:60px;margin:0 0 10px;display:flex;align-items:center;
+}
+.bottom-feature-card .bottom-card-copy{
+    color:#E5ECE7;font:500 12px/1.65 Manrope,sans-serif;
+    min-height:78px;height:78px;margin:0;overflow:hidden;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+}
+@media(max-width:900px){.bottom-feature-card{height:auto;min-height:220px;max-height:none}.bottom-feature-card .bottom-card-title{height:auto;min-height:54px}.bottom-feature-card .bottom-card-copy{height:auto;min-height:72px}}
 @media(max-width:900px){[class*="st-key-featured-destination-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0}.featured-image-frame,.featured-image-frame img{height:190px}}
 @media(max-width:700px){.display-title{font-size:36px}.section-title{font-size:31px}.voyage-masthead-kicker{font-size:18px}.hero-image-caption{font-size:8px;letter-spacing:1.1px}}
 </style>
@@ -228,13 +276,13 @@ for start in range(0, len(featured), 3):
 st.write("")
 a, b, c = st.columns([1, 1, 1], gap="large")
 with a:
-    st.markdown('<div class="soft-panel"><div class="kicker">PLAN WITH CONTEXT</div><div class="section-title">Make the journey yours.</div><p>Shape a trip around your time, interests and budget. Use destination guides to understand seasons, access and responsible travel considerations before you go.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">PLAN WITH CONTEXT</div><div class="bottom-card-title">Make the journey yours.</div><p class="bottom-card-copy">Shape a trip around your time, interests and budget. Use destination guides to understand seasons, access and responsible travel considerations before you go.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/03_Trip_Planner.py", label="Build a trip plan")
 with b:
-    st.markdown('<div class="soft-panel"><div class="kicker">REGIONAL DISCOVERY</div><div class="section-title">Explore the full atlas.</div><p>Search detailed attractions, regional destination clusters, festivals, image sources and the next places being researched.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">REGIONAL DISCOVERY</div><div class="bottom-card-title">Explore the full atlas.</div><p class="bottom-card-copy">Search detailed attractions, regional destination clusters, festivals, image sources and the next places being researched.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/00_Regional_Atlas.py", label="Open regional atlas")
 with c:
-    st.markdown('<div class="soft-panel"><div class="kicker">SEE THE BIGGER PICTURE</div><div class="section-title">Travel is also an economy.</div><p>Explore the tourism intelligence workspace: destination evidence, investment scenarios, local value and the data gaps that matter for better decisions.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="bottom-feature-card"><div class="bottom-card-kicker">SEE THE BIGGER PICTURE</div><div class="bottom-card-title">Travel is also an economy.</div><p class="bottom-card-copy">Explore the tourism intelligence workspace: destination evidence, investment scenarios, local value and the data gaps that matter for better decisions.</p></div>', unsafe_allow_html=True)
     st.page_link("pages/05_Destination_Intelligence.py", label="Explore tourism intelligence")
 
 st.caption("VoyagePK is an independent prototype, not an official government tourism service. Destination descriptions and approximate map anchors require local review. Verify travel, safety, access, permits and booking details with responsible local authorities and providers.")
