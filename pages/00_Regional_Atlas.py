@@ -86,6 +86,59 @@ if st.session_state.get("voyage_theme", "Light") == "Dark":
     </style>
     """, unsafe_allow_html=True)
 
+# Exact, destination-matched photography. Broad regional photos are used only on
+# their matching destination-cluster cards, never on unrelated landmark/event cards.
+ATLAS_DESTINATION_IMAGES = {
+    "Hunza Valley": {
+        "thumb_url": "https://images.pexels.com/photos/9401114/pexels-photo-9401114.jpeg",
+        "page_url": "https://images.pexels.com/photos/9401114/pexels-photo-9401114.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+    },
+    "Skardu": {
+        "thumb_url": "https://images.pexels.com/photos/19442073/pexels-photo-19442073.jpeg",
+        "page_url": "https://images.pexels.com/photos/19442073/pexels-photo-19442073.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+    },
+    "Naran–Kaghan Valley": {
+        "thumb_url": "https://images.pexels.com/photos/10059879/pexels-photo-10059879.jpeg",
+        "page_url": "https://images.pexels.com/photos/10059879/pexels-photo-10059879.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+    },
+    "Lahore": {
+        "thumb_url": "https://images.pexels.com/photos/13659051/pexels-photo-13659051.jpeg",
+        "page_url": "https://images.pexels.com/photos/13659051/pexels-photo-13659051.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+    },
+    "K2 & Concordia Expedition": {
+        "thumb_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+        "page_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+    },
+    "Swat Valley": {
+        "thumb_url": "https://images.pexels.com/photos/37673127/pexels-photo-37673127.jpeg",
+        "page_url": "https://images.pexels.com/photos/37673127/pexels-photo-37673127.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+    },
+    "Concordia and K2 Base Camp": {
+        "thumb_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+        "page_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+    },
+    "Katas Raj Temples": {
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Katas_Raj_temples_Pakistan.jpg/960px-Katas_Raj_temples_Pakistan.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Katas_Raj_temples_Pakistan.jpg",
+        "artist": "Khadim Hussain",
+        "license": "CC BY-SA 4.0",
+    },
+}
+
 # Match detailed records to the existing catalogue so imagery and cluster names stay consistent.
 catalog_by_name = {name.casefold(): (name, item) for name, item in DESTINATIONS.items()}
 
@@ -93,15 +146,15 @@ def find_catalog_record(record):
     cluster = record.get("cluster", "")
     return catalog_by_name.get(cluster.casefold())
 
-def show_photo(query: str, allow_lookup: bool = True):
-    # Only the first few cards in each section trigger remote image discovery.
-    image = get_commons_image(query) if allow_lookup else None
+def show_photo(query: str, allow_lookup: bool = True, image_override: dict | None = None):
+    # Explicit destination matches take priority; otherwise use the existing Commons lookup.
+    image = image_override or (get_commons_image(query) if allow_lookup else None)
     if image and image.get("thumb_url"):
         rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
         st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
         credit = f'{image.get("artist", "Creator not listed")} · {image.get("license", "Licence not listed")}'
         if image.get("page_url"):
-            st.markdown(f'<div class="atlas-credit"><a href="{image["page_url"]}" target="_blank">Image source</a> · {credit}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="atlas-credit"><a href="{image["page_url"]}" target="_blank" rel="noopener">Image source</a> · {credit}</div>', unsafe_allow_html=True)
         else:
             st.markdown(f'<div class="atlas-credit">{credit}</div>', unsafe_allow_html=True)
     else:
@@ -111,10 +164,14 @@ def render_destination_card(record, index: int, detailed: bool = True):
     if detailed:
         catalog = find_catalog_record(record)
         image_query = catalog[1].get("image_query") if catalog else record.get("name", "Pakistan destination")
+        # Only exact attraction names receive a destination-specific override.
+        image_override = ATLAS_DESTINATION_IMAGES.get(record.get("name", ""))
     else:
         image_query = record[1].get("image_query") or record[0]
+        # Cluster cards use only an exact cluster-name match.
+        image_override = ATLAS_DESTINATION_IMAGES.get(record[0])
     with st.container(border=True):
-        show_photo(image_query or record.get("name", "Pakistan destination"), allow_lookup=index < 9)
+        show_photo(image_query or record.get("name", "Pakistan destination"), allow_lookup=index < 9, image_override=image_override)
         if detailed:
             st.markdown(f'<div class="atlas-card-meta">{record.get("region","")} · {record.get("type","")}</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="atlas-card-title">{record.get("name","")}</div>', unsafe_allow_html=True)
@@ -264,7 +321,11 @@ for start in range(0, len(image_matches), 3):
         with col:
             with st.container(border=True):
                 if item.get("page") and start + offset < 6:
-                    show_photo(item["subject"])
+                    show_photo(
+                        item["subject"],
+                        image_override=ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples")
+                        if item.get("id") == "IMG-PB-003" else None,
+                    )
                 else:
                     st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE SOURCE PENDING</div></div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-meta">{item.get("region","")} · {item.get("id") or item.get("intake_ref","Candidate")}</div>', unsafe_allow_html=True)
