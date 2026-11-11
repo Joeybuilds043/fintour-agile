@@ -66,12 +66,12 @@ EVENT_RECORDS = [
 ]
 
 IMAGE_CANDIDATES = [
-    {"id":"IMG-PB-001","subject":"Lahore Fort — Sheesh Mahal / Naulakha","region":"Punjab","page":"https://commons.wikimedia.org/wiki/File:Sheesh_Mahal_Lahore_Fort_Pakistan.jpg"},
-    {"id":"IMG-PB-002","subject":"Derawar Fort","region":"Punjab","page":"https://commons.wikimedia.org/wiki/File:Derawar_Fort_Cholistan_Desert.jpg"},
+    {"id":"IMG-PB-001","subject":"Lahore Fort — Sheesh Mahal / Naulakha","region":"Punjab","page":"https://images.pexels.com/photos/13023314/pexels-photo-13023314.jpeg","creator":"User-supplied image URL","licence":"Not independently verified"},
+    {"id":"IMG-PB-002","subject":"Derawar Fort","region":"Punjab","page":"https://preview.redd.it/derawar-fort-in-the-cholistan-desert-bahawalpur-panjab-v0-213ndupt6k7e1.jpg?width=701&format=pjpg&auto=webp&s=3eac5df28f9c7f66929324f254f019179eff9e62","creator":"User-supplied image URL","licence":"Not independently verified"},
     {"id":"IMG-PB-003","subject":"Katas Raj Temples","region":"Punjab","page":"https://commons.wikimedia.org/wiki/File:Katas_Raj_temples_Pakistan.jpg","creator":"Khadim Hussain","licence":"CC BY-SA 4.0"},
     {"id":"IMG-SD-001","subject":"Mohenjo-daro stupa","region":"Sindh","page":"https://commons.wikimedia.org/wiki/File:Mohenjo-daro_stupa.jpg"},
-    {"id":"IMG-SD-002","subject":"Tomb of Isa Khan Tarkhan II, Makli","region":"Sindh","page":"https://commons.wikimedia.org/wiki/File:Tomb_of_Isa_Khan_Tarkhan_II,_Makli_Hill.jpg"},
-    {"id":"IMG-SD-003","subject":"Shrine of Lal Shahbaz Qalandar","region":"Sindh","page":"https://commons.wikimedia.org/wiki/File:Shrine_of_Lal_Shahbaz_Qalandar.jpg"},
+    {"id":"IMG-SD-002","subject":"Tomb of Isa Khan Tarkhan II, Makli","region":"Sindh","page":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv2-4qjze3TFcyk5-tVlhnY39VSnlusTyH_ut-OB9o9A&s=10","creator":"User-supplied image URL","licence":"Not independently verified"},
+    {"id":"IMG-SD-003","subject":"Shrine of Lal Shahbaz Qalandar","region":"Sindh","page":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUWWsZ983bMFDAktwElCH7nyembgys-Yjn8X0f8vk4CA&s=10","creator":"User-supplied image URL","licence":"Not independently verified"},
     {"id":"IMG-BA-001","subject":"Princess of Hope — original candidate","region":"Balochistan","page":"https://commons.wikimedia.org/"},
     {"id":"IMG-BA-001A","subject":"Princess of Hope — alternative credited file","region":"Balochistan","page":"https://commons.wikimedia.org/"},
     {"id":"IMG-BA-002","subject":"Ziarat Residency in winter","region":"Balochistan","page":"https://commons.wikimedia.org/"},
@@ -93,6 +93,12 @@ IMAGE_CANDIDATES = [
     {"id":None,"intake_ref":"Batch 6 / image 1","subject":"Ratti Gali Lake","region":"Azad Jammu & Kashmir","page":None,"note":"Original image source metadata not retained in the structured import."},
     {"id":None,"intake_ref":"Batch 6 / image 2","subject":"Arang Kel","region":"Azad Jammu & Kashmir","page":None,"note":"Original image source metadata not retained in the structured import."},
     {"id":None,"intake_ref":"Batch 6 / image 3","subject":"Pir Chinasi shrine","region":"Azad Jammu & Kashmir","page":None,"note":"Original image source metadata not retained in the structured import."},
+
+    {"id":"IMG-PB-004","subject":"Gurdwara Janam Asthan","region":"Punjab","page":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtXfew74_od9kDJLFiBbPG3d0qXVujcfdIy-cTzoiKGPnhlDIYUg4fLXI&s=10","creator":"User-supplied image URL","licence":"Not independently verified"},
+    {"id":"IMG-PB-005","subject":"Soon Valley and Uchali Wetlands","region":"Punjab","page":"https://dialogue.earth/content/uploads/2021/01/Uc-8.jpg","creator":"User-supplied image URL","licence":"Not independently verified"},
+    {"id":"IMG-SD-004","subject":"Karoonjhar Mountains and Jain Temples","region":"Sindh","page":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQV1fw-uzbpSsXbQfk_FVbKwnSyWmPROiIcC32YEHEfMS7hrcxci7EaaE&s=10","creator":"User-supplied image URL","licence":"Not independently verified"},
+    {"id":"IMG-SD-005","subject":"Gorakh Hill Station","region":"Sindh","page":"https://guidetourismpakistan.com/wp-content/uploads/2024/09/Gorakh-Hill-Header.png","creator":"User-supplied image URL","licence":"Not independently verified"},
+    {"id":"IMG-SD-006","subject":"Churna Island","region":"Sindh","page":"https://i.pinimg.com/736x/6b/33/0b/6b330ba3edc5491f0e33a80ad294e7da.jpg","creator":"User-supplied image URL","licence":"Not independently verified"},
 ]
 
 DISCOVERY_LEADS = {
