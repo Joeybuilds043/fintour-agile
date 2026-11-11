@@ -143,6 +143,72 @@ ATLAS_DESTINATION_IMAGES = {
         "artist": "Khadim Hussain",
         "license": "CC BY-SA 4.0",
     },
+    "Lahore Fort (Shahi Qila)": {
+        "thumb_url": "https://images.pexels.com/photos/13023314/pexels-photo-13023314.jpeg",
+        "page_url": "https://images.pexels.com/photos/13023314/pexels-photo-13023314.jpeg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Tomb of Shah Rukn-e-Alam": {
+        "thumb_url": "https://sacredsites.com/images/asia/pakistan/Multan-Shah-Rukn-e-Alam-01.webp",
+        "page_url": "https://sacredsites.com/images/asia/pakistan/Multan-Shah-Rukn-e-Alam-01.webp",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Derawar Fort": {
+        "thumb_url": "https://preview.redd.it/derawar-fort-in-the-cholistan-desert-bahawalpur-panjab-v0-213ndupt6k7e1.jpg?width=701&format=pjpg&auto=webp&s=3eac5df28f9c7f66929324f254f019179eff9e62",
+        "page_url": "https://preview.redd.it/derawar-fort-in-the-cholistan-desert-bahawalpur-panjab-v0-213ndupt6k7e1.jpg?width=701&format=pjpg&auto=webp&s=3eac5df28f9c7f66929324f254f019179eff9e62",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Gurdwara Janam Asthan": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtXfew74_od9kDJLFiBbPG3d0qXVujcfdIy-cTzoiKGPnhlDIYUg4fLXI&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtXfew74_od9kDJLFiBbPG3d0qXVujcfdIy-cTzoiKGPnhlDIYUg4fLXI&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Soon Valley and Uchali Wetlands": {
+        "thumb_url": "https://dialogue.earth/content/uploads/2021/01/Uc-8.jpg",
+        "page_url": "https://dialogue.earth/content/uploads/2021/01/Uc-8.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Mohenjo-daro": {
+        "thumb_url": "https://media.istockphoto.com/id/1485086382/photo/mohenjo-daro-main-city-indus-civilization.jpg?s=612x612&w=0&k=20&c=9iD3wruG-RsPlbi8Z_2n4XiF-WwwYmUpqkJ67PJF-Uw=",
+        "page_url": "https://media.istockphoto.com/id/1485086382/photo/mohenjo-daro-main-city-indus-civilization.jpg?s=612x612&w=0&k=20&c=9iD3wruG-RsPlbi8Z_2n4XiF-WwwYmUpqkJ67PJF-Uw=",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Makli Necropolis": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv2-4qjze3TFcyk5-tVlhnY39VSnlusTyH_ut-OB9o9A&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv2-4qjze3TFcyk5-tVlhnY39VSnlusTyH_ut-OB9o9A&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Shrine of Lal Shahbaz Qalandar": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUWWsZ983bMFDAktwElCH7nyembgys-Yjn8X0f8vk4CA&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUWWsZ983bMFDAktwElCH7nyembgys-Yjn8X0f8vk4CA&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Karoonjhar Mountains and Jain Temples": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQV1fw-uzbpSsXbQfk_FVbKwnSyWmPROiIcC32YEHEfMS7hrcxci7EaaE&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQV1fw-uzbpSsXbQfk_FVbKwnSyWmPROiIcC32YEHEfMS7hrcxci7EaaE&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Gorakh Hill Station": {
+        "thumb_url": "https://guidetourismpakistan.com/wp-content/uploads/2024/09/Gorakh-Hill-Header.png",
+        "page_url": "https://guidetourismpakistan.com/wp-content/uploads/2024/09/Gorakh-Hill-Header.png",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Churna Island": {
+        "thumb_url": "https://i.pinimg.com/736x/6b/33/0b/6b330ba3edc5491f0e33a80ad294e7da.jpg",
+        "page_url": "https://i.pinimg.com/736x/6b/33/0b/6b330ba3edc5491f0e33a80ad294e7da.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
 }
 
 # Match detailed records to the existing catalogue so imagery and cluster names stay consistent.
