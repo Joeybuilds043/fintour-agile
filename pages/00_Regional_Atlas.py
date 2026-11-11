@@ -80,6 +80,24 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 [class*="st-key-batch-gallery-card-"] [data-testid="stCaptionContainer"]{height:34px;min-height:34px;overflow:hidden;color:#26352C!important;opacity:1!important}
 @media(max-width:700px){[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0;max-height:none}[class*="st-key-atlas-destination-card-"] .atlas-card-copy{height:auto;min-height:70px;max-height:90px}}
 
+/* Final Atlas polish: consistent card shells, controlled text rhythm and framed photography. */
+[class*="st-key-atlas-destination-card-"]{height:640px!important;min-height:640px!important;max-height:640px!important;box-sizing:border-box!important}
+[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:640px!important;min-height:640px!important;max-height:640px!important;box-sizing:border-box!important;overflow:hidden!important;border:1px solid rgba(199,163,91,.62)!important;border-radius:20px!important;box-shadow:0 12px 30px rgba(13,55,42,.10),inset 0 0 0 3px rgba(255,255,255,.42)!important;background:linear-gradient(155deg,#FFFEF9 0%,#F4F7F1 100%)!important;padding:12px!important}
+[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlock"]{height:100%!important;min-height:0!important;max-height:100%!important;display:flex!important;flex-direction:column!important;gap:5px!important}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"]{box-sizing:border-box!important;flex:0 0 210px!important;height:210px!important;min-height:210px!important;max-height:210px!important;padding:7px!important;border:1px solid rgba(199,163,91,.78)!important;border-radius:16px!important;background:linear-gradient(135deg,#E8D9B8 0%,#E1EEE5 52%,#D8E8EC 100%)!important;box-shadow:0 7px 18px rgba(16,52,38,.12)!important;overflow:hidden!important}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"] img{width:100%!important;height:194px!important;min-height:194px!important;max-height:194px!important;object-fit:contain!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:10px!important;box-shadow:0 2px 8px rgba(13,40,28,.12)!important;background:rgba(255,255,255,.30)!important}
+[class*="st-key-atlas-destination-card-"] .atlas-card-meta{flex:0 0 24px!important;height:24px!important;min-height:24px!important;max-height:24px!important;margin:4px 0 0!important}
+[class*="st-key-atlas-destination-card-"] .atlas-card-title{flex:0 0 52px!important;height:52px!important;min-height:52px!important;max-height:52px!important;margin:0 0 3px!important;line-height:1.08!important}
+[class*="st-key-atlas-destination-card-"] .atlas-card-copy{flex:0 0 76px!important;height:76px!important;min-height:76px!important;max-height:76px!important;line-height:1.5!important;-webkit-line-clamp:4!important}
+[class*="st-key-atlas-destination-card-"] .atlas-tag-row{flex:0 0 48px!important;height:48px!important;min-height:48px!important;max-height:48px!important}
+[class*="st-key-atlas-destination-card-"] [data-testid="stCaptionContainer"]{flex:0 0 30px!important;height:30px!important;min-height:30px!important;max-height:30px!important;overflow:hidden!important}
+[class*="st-key-atlas-destination-card-"] [data-testid="stExpander"]{margin-top:auto!important;flex:0 0 auto!important}
+[class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlockBorderWrapper"],[class*="st-key-batch-gallery-card-"]{box-sizing:border-box!important;border:1px solid rgba(199,163,91,.68)!important;border-radius:19px!important;box-shadow:0 10px 26px rgba(13,55,42,.10),inset 0 0 0 3px rgba(255,255,255,.35)!important}
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"],[class*="st-key-batch-gallery-card-"] [data-testid="stImage"],div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"]{box-sizing:border-box!important;padding:7px!important;border:1px solid rgba(199,163,91,.72)!important;border-radius:16px!important;background:linear-gradient(135deg,#E8D9B8 0%,#E1EEE5 52%,#D8E8EC 100%)!important;box-shadow:0 8px 20px rgba(16,52,38,.12)!important;overflow:hidden!important}
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img,[class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img,div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{border:1px solid rgba(255,255,255,.92)!important;border-radius:10px!important;box-shadow:0 2px 8px rgba(13,40,28,.12)!important;object-fit:contain!important}
+@media(max-width:700px){[class*="st-key-atlas-destination-card-"],[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto!important;min-height:0!important;max-height:none!important}[class*="st-key-atlas-destination-card-"] .atlas-card-copy{height:auto!important;min-height:64px!important;max-height:96px!important;flex-basis:auto!important}}
+
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -150,8 +168,8 @@ ATLAS_DESTINATION_IMAGES = {
     "Concordia and K2 Base Camp": {
         "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
         "page_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
-        "artist": "Pexels",
-        "license": "Pexels License",
+        "artist": "User-supplied image URL (Vecteezy)",
+        "license": "Source and reuse licence not independently verified",
     },
     "K2 from Concordia": {
         "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
