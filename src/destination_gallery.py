@@ -23,7 +23,7 @@ DESTINATION_IMAGE_BATCHES = {
         {"destination": "Ziarat Residency", "image_url": "https://realpakistan.com.pk/wp-content/uploads/2025/08/Quaid-Residency-scaled-1920x1080.webp"},
     ],
     "Gilgit-Baltistan · Batch 5": [
-        {"destination": "Concordia (K2 Base Camp)", "image_url": "https://trangoadventure.com/wp-content/uploads/2018/10/k2-8611-meters-scaled.jpeg"},
+        {"destination": "Concordia (K2 Base Camp)", "image_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg"},
         {"destination": "Attabad Lake, Hunza", "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Attabad.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"},
         {"destination": "Khunjerab Pass", "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/China_Border%2C_Pakistan.jpg/1280px-China_Border%2C_Pakistan.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail"},
         {"destination": "Deosai National Park", "image_url": "https://i.dawn.com/primary/2019/12/5df769a3a7d69.jpg"},
