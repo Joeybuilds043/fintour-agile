@@ -340,6 +340,45 @@ st.markdown('<div class="kicker">EDITORIAL DESTINATION SELECTION</div>', unsafe_
 st.markdown('<div class="section-title">Journeys worth discovering</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-copy">A cross-section of Pakistan’s mountain, coastal, cultural and urban experiences. This is an editorial selection, not a popularity ranking.</div>', unsafe_allow_html=True)
 featured = ["Hunza Valley", "Skardu", "Naran–Kaghan Valley", "Lahore", "K2 & Concordia Expedition", "Swat Valley"]
+# User-selected Pexels photography takes priority over catalogue/Commons fallbacks.
+featured_image_overrides = {
+    "Hunza Valley": {
+        "thumb_url": "https://images.pexels.com/photos/9401114/pexels-photo-9401114.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+        "page_url": "https://images.pexels.com/photos/9401114/pexels-photo-9401114.jpeg",
+    },
+    "Skardu": {
+        "thumb_url": "https://images.pexels.com/photos/19442073/pexels-photo-19442073.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+        "page_url": "https://images.pexels.com/photos/19442073/pexels-photo-19442073.jpeg",
+    },
+    "Naran–Kaghan Valley": {
+        "thumb_url": "https://images.pexels.com/photos/10059879/pexels-photo-10059879.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+        "page_url": "https://images.pexels.com/photos/10059879/pexels-photo-10059879.jpeg",
+    },
+    "Lahore": {
+        "thumb_url": "https://images.pexels.com/photos/13659051/pexels-photo-13659051.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+        "page_url": "https://images.pexels.com/photos/13659051/pexels-photo-13659051.jpeg",
+    },
+    "K2 & Concordia Expedition": {
+        "thumb_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+        "page_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+    },
+    "Swat Valley": {
+        "thumb_url": "https://images.pexels.com/photos/37673127/pexels-photo-37673127.jpeg",
+        "artist": "Pexels",
+        "license": "Pexels License",
+        "page_url": "https://images.pexels.com/photos/37673127/pexels-photo-37673127.jpeg",
+    },
+}
 for start in range(0, len(featured), 3):
     cols = st.columns(3, gap="large")
     for offset, (col, name) in enumerate(zip(cols, featured[start:start + 3])):
@@ -351,7 +390,7 @@ for start in range(0, len(featured), 3):
         with col:
             with st.container(border=False, key=f"featured-destination-{start + offset}"):
                 with st.container(border=True):
-                    image = get_destination_gallery_image(name) or get_commons_image(item["image_query"])
+                    image = featured_image_overrides.get(name) or get_destination_gallery_image(name) or get_commons_image(item["image_query"])
                     if image:
                         image_data = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
                         if isinstance(image_data, (bytes, bytearray)):
