@@ -153,6 +153,18 @@ ATLAS_DESTINATION_IMAGES = {
         "artist": "Pexels",
         "license": "Pexels License",
     },
+    "K2 from Concordia": {
+        "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "page_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Concordia (K2 Base Camp)": {
+        "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "page_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
     "Katas Raj Temples": {
         "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Katas_Raj_temples_Pakistan.jpg/960px-Katas_Raj_temples_Pakistan.jpg",
         "page_url": "https://commons.wikimedia.org/wiki/File:Katas_Raj_temples_Pakistan.jpg",
