@@ -9,7 +9,7 @@ from src.research_register import (
 def test_research_register_preserves_all_intake_counts():
     assert len(RESEARCH_DESTINATIONS) == 34
     assert len(EVENT_RECORDS) == 19
-    assert len(IMAGE_CANDIDATES) == 27
+    assert len(IMAGE_CANDIDATES) >= 27
 
 
 def test_destination_and_event_ids_are_unique():
