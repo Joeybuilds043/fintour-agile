@@ -46,7 +46,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padd
 .atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#34483B!important;font-weight:850;min-height:28px;max-height:28px;overflow:hidden;opacity:1!important}
 .atlas-card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;line-height:1.08;font-weight:700;color:#111A14!important;margin:5px 0 7px;height:52px;min-height:52px;max-height:52px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;opacity:1!important}
 .atlas-card-copy{font-size:12px;line-height:1.55;color:#26352C!important;height:78px;min-height:78px;max-height:78px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;opacity:1!important}
-.atlas-tag{display:inline-block;padding:4px 8px;margin:3px 3px 0 0;border:1px solid #C7D1C9;border-radius:30px;font-size:9px;color:#26352C!important;opacity:1!important}
+.atlas-tag-row{height:52px;min-height:52px;max-height:52px;overflow:hidden;display:block}.atlas-tag{display:inline-block;padding:4px 8px;margin:3px 3px 0 0;border:1px solid #C7D1C9;border-radius:30px;font-size:9px;color:#26352C!important;opacity:1!important}
 .atlas-credit{font-size:9px;line-height:1.45;color:#26352C!important;margin:5px 2px 8px;opacity:1!important}
 .atlas-record-note{padding:10px 12px;border-left:2px solid #C7A35B;background:var(--voyage-surface);border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;color:var(--voyage-muted)}
 div[data-testid="stVerticalBlockBorderWrapper"]{border-color:var(--voyage-line);border-radius:17px}
@@ -403,7 +403,7 @@ def render_destination_card(record, index: int, detailed: bool = True):
             st.markdown(f'<div class="atlas-card-meta">{record.get("region","")} · {record.get("type","")}</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="atlas-card-title">{record.get("name","")}</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="atlas-card-copy">{record.get("summary","")}</div>', unsafe_allow_html=True)
-            tags = "".join(f'<span class="atlas-tag">{tag}</span>' for tag in record.get("categories", [])[:4])
+            tags = '<div class="atlas-tag-row">' + "".join(f'<span class="atlas-tag">{tag}</span>' for tag in record.get("categories", [])[:4]) + '</div>'
             st.markdown(tags, unsafe_allow_html=True)
             st.caption("Catalogue cluster: " + record.get("cluster", "Not assigned"))
             with st.expander("Research notes and source"):
@@ -416,7 +416,7 @@ def render_destination_card(record, index: int, detailed: bool = True):
             st.markdown(f'<div class="atlas-card-meta">{item.get("region","")}</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="atlas-card-title">{name}</div>', unsafe_allow_html=True)
             st.markdown(f'<div class="atlas-card-copy">{item.get("tagline", item.get("overview",""))}</div>', unsafe_allow_html=True)
-            st.markdown("".join(f'<span class="atlas-tag">{tag}</span>' for tag in item.get("experiences", [])[:4]), unsafe_allow_html=True)
+            st.markdown('<div class="atlas-tag-row">' + "".join(f'<span class="atlas-tag">{tag}</span>' for tag in item.get("experiences", [])[:4]) + '</div>', unsafe_allow_html=True)
 
 st.markdown('<div class="atlas-eyebrow">VOYAGEPK · PAKISTAN UNBOUND</div>', unsafe_allow_html=True)
 st.title("Regional Atlas")
