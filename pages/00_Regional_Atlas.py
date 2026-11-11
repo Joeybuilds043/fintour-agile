@@ -546,19 +546,18 @@ for start in range(0, len(image_matches), 3):
     row = st.columns(3, gap="medium")
     for offset, (col, item) in enumerate(zip(row, image_matches[start:start + 3])):
         with col:
-            with st.container(border=True):
+            with st.container(border=True, key=f"atlas-reference-card-{start + offset}"):
                 if item.get("page"):
-                    with st.container(border=False, key=f"atlas-reference-card-{start + offset}"):
-                        show_photo(
-                            item["subject"],
-                            image_override=ATLAS_DESTINATION_IMAGES.get(item.get("subject")) or {
-                                "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
-                                "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
-                                "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
-                                "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
-                                "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
-                            }.get(item.get("id")),
-                        )
+                    show_photo(
+                        item["subject"],
+                        image_override=ATLAS_DESTINATION_IMAGES.get(item.get("subject")) or {
+                            "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
+                            "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
+                            "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
+                            "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
+                            "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
+                        }.get(item.get("id")),
+                    )
                 else:
                     st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE SOURCE PENDING</div></div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-meta">{item.get("region","")} · {item.get("id") or item.get("intake_ref","Candidate")}</div>', unsafe_allow_html=True)
