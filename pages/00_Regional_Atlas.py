@@ -395,8 +395,13 @@ for start in range(0, len(image_matches), 3):
                 if item.get("page") and start + offset < 6:
                     show_photo(
                         item["subject"],
-                        image_override=ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples")
-                        if item.get("id") == "IMG-PB-003" else None,
+                        image_override={
+                            "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
+                            "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
+                            "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
+                            "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
+                            "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
+                        }.get(item.get("id")),
                     )
                 else:
                     st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE SOURCE PENDING</div></div>', unsafe_allow_html=True)
