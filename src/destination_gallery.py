@@ -36,6 +36,21 @@ DESTINATION_IMAGE_BATCHES = {
         {"destination": "Faisal Mosque", "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Ali_Mujtaba_WLM2017_FAISAL_MOSQUE_019.jpg/1280px-Ali_Mujtaba_WLM2017_FAISAL_MOSQUE_019.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail"},
         {"destination": "Pakistan Monument", "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Blue_Hour_at_Pakistan_Monument.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"},
     ],
+    "Punjab · Batch 9": [
+        {"destination": "Lahore Fort (Shahi Qila)", "image_url": "https://images.pexels.com/photos/13023314/pexels-photo-13023314.jpeg"},
+        {"destination": "Tomb of Shah Rukn-e-Alam", "image_url": "https://sacredsites.com/images/asia/pakistan/Multan-Shah-Rukn-e-Alam-01.webp"},
+        {"destination": "Derawar Fort", "image_url": "https://preview.redd.it/derawar-fort-in-the-cholistan-desert-bahawalpur-panjab-v0-213ndupt6k7e1.jpg?width=701&format=pjpg&auto=webp&s=3eac5df28f9c7f66929324f254f019179eff9e62"},
+        {"destination": "Gurdwara Janam Asthan", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtXfew74_od9kDJLFiBbPG3d0qXVujcfdIy-cTzoiKGPnhlDIYUg4fLXI&s=10"},
+        {"destination": "Soon Valley and Uchali Wetlands", "image_url": "https://dialogue.earth/content/uploads/2021/01/Uc-8.jpg"},
+    ],
+    "Sindh · Batch 10": [
+        {"destination": "Mohenjo-daro", "image_url": "https://media.istockphoto.com/id/1485086382/photo/mohenjo-daro-main-city-indus-civilization.jpg?s=612x612&w=0&k=20&c=9iD3wruG-RsPlbi8Z_2n4XiF-WwwYmUpqkJ67PJF-Uw="},
+        {"destination": "Makli Necropolis", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv2-4qjze3TFcyk5-tVlhnY39VSnlusTyH_ut-OB9o9A&s=10"},
+        {"destination": "Shrine of Lal Shahbaz Qalandar", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUWWsZ983bMFDAktwElCH7nyembgys-Yjn8X0f8vk4CA&s=10"},
+        {"destination": "Karoonjhar Mountains and Jain Temples", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQV1fw-uzbpSsXbQfk_FVbKwnSyWmPROiIcC32YEHEfMS7hrcxci7EaaE&s=10"},
+        {"destination": "Gorakh Hill Station", "image_url": "https://guidetourismpakistan.com/wp-content/uploads/2024/09/Gorakh-Hill-Header.png"},
+        {"destination": "Churna Island", "image_url": "https://i.pinimg.com/736x/6b/33/0b/6b330ba3edc5491f0e33a80ad294e7da.jpg"},
+    ],
     "Khyber Pakhtunkhwa · Batch 8": [
         {"destination": "Malam Jabba Ski Resort, Swat", "image_url": "https://malamjabbaskiresort.com/wp-content/uploads/2025/11/PC-Hotel-Winter.webp"},
         {"destination": "Katora Lake, Kumrat Valley", "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Katora_lake_dir.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"},
