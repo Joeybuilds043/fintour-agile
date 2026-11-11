@@ -68,7 +68,7 @@ EVENT_RECORDS = [
 IMAGE_CANDIDATES = [
     {"id":"IMG-PB-001","subject":"Lahore Fort — Sheesh Mahal / Naulakha","region":"Punjab","page":"https://commons.wikimedia.org/wiki/File:Sheesh_Mahal_Lahore_Fort_Pakistan.jpg"},
     {"id":"IMG-PB-002","subject":"Derawar Fort","region":"Punjab","page":"https://commons.wikimedia.org/wiki/File:Derawar_Fort_Cholistan_Desert.jpg"},
-    {"id":"IMG-PB-003","subject":"Katas Raj Temples","region":"Punjab","page":"https://commons.wikimedia.org/wiki/File:Katas_Raj_Temples_Complex.jpg"},
+    {"id":"IMG-PB-003","subject":"Katas Raj Temples","region":"Punjab","page":"https://commons.wikimedia.org/wiki/File:Katas_Raj_temples_Pakistan.jpg","creator":"Khadim Hussain","licence":"CC BY-SA 4.0"},
     {"id":"IMG-SD-001","subject":"Mohenjo-daro stupa","region":"Sindh","page":"https://commons.wikimedia.org/wiki/File:Mohenjo-daro_stupa.jpg"},
     {"id":"IMG-SD-002","subject":"Tomb of Isa Khan Tarkhan II, Makli","region":"Sindh","page":"https://commons.wikimedia.org/wiki/File:Tomb_of_Isa_Khan_Tarkhan_II,_Makli_Hill.jpg"},
     {"id":"IMG-SD-003","subject":"Shrine of Lal Shahbaz Qalandar","region":"Sindh","page":"https://commons.wikimedia.org/wiki/File:Shrine_of_Lal_Shahbaz_Qalandar.jpg"},
