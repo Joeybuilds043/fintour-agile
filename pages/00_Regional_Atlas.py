@@ -82,6 +82,36 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 
 
 
+/* Atlas card alignment: consistent image boxes and left-aligned text rhythm */
+.atlas-credit{display:none!important}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"]{
+    box-sizing:border-box!important;width:100%!important;height:218px!important;
+    min-height:218px!important;max-height:218px!important;padding:6px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    overflow:hidden!important;border-radius:12px!important;
+}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"] img{
+    display:block!important;width:100%!important;height:206px!important;
+    min-height:206px!important;max-height:206px!important;object-fit:contain!important;
+    object-position:center!important;margin:0 auto!important;
+}
+[class*="st-key-atlas-destination-card-"] .atlas-card-meta,
+[class*="st-key-atlas-destination-card-"] .atlas-card-title,
+[class*="st-key-atlas-destination-card-"] .atlas-card-copy{
+    box-sizing:border-box!important;width:100%!important;text-align:left!important;
+    margin-left:0!important;margin-right:0!important;padding-left:0!important;
+    padding-right:0!important;align-self:stretch!important;
+}
+[class*="st-key-atlas-destination-card-"] .atlas-card-title{
+    height:52px!important;min-height:52px!important;max-height:52px!important;
+    display:-webkit-box!important;-webkit-line-clamp:2!important;
+    -webkit-box-orient:vertical!important;overflow:hidden!important;
+}
+[class*="st-key-atlas-destination-card-"] .atlas-card-copy{
+    height:78px!important;min-height:78px!important;max-height:78px!important;
+    display:-webkit-box!important;-webkit-line-clamp:4!important;
+    -webkit-box-orient:vertical!important;overflow:hidden!important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -306,9 +336,9 @@ ATLAS_DESTINATION_IMAGES = {
         "license": "Source and reuse licence not independently verified",
     },
     "Concordia and K2 Base Camp": {
-        "thumb_url": "https://cdn.shopify.com/s/files/1/1652/2575/files/000-trekking-to-k2-base-camp.jpg?8344584697786751152",
-        "page_url": "https://cdn.shopify.com/s/files/1/1652/2575/files/000-trekking-to-k2-base-camp.jpg?8344584697786751152",
-        "artist": "User-supplied image URL",
+        "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "page_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "artist": "User-supplied image URL (Vecteezy)",
         "license": "Source and reuse licence not independently verified",
     },
     "Attabad Lake": {
