@@ -43,11 +43,11 @@ st.markdown("""
 .atlas-photo-frame img{display:block;width:100%;height:210px;object-fit:contain;border-radius:10px;background:linear-gradient(135deg,#E9D9B6 0%,#D7E7DE 48%,#C9DFE5 100%);padding:10px}
 div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padding:4px;border:1px solid rgba(199,163,91,.7);border-radius:14px;background:rgba(199,163,91,.10);box-shadow:0 10px 24px rgba(8,25,20,.12)}
 .atlas-photo-placeholder{height:178px;border-radius:9px;background:linear-gradient(135deg,#123D2D,#355D62 62%,#C7A35B);display:flex;align-items:center;justify-content:center;color:#F6F2E8;font-size:10px;font-weight:800;letter-spacing:2px}
-.atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--voyage-muted);font-weight:850}
-.atlas-card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;line-height:1.08;font-weight:700;color:var(--voyage-ink);margin:5px 0 7px;min-height:48px}
-.atlas-card-copy{font-size:12px;line-height:1.65;color:var(--voyage-body-ink);min-height:60px}
-.atlas-tag{display:inline-block;padding:4px 8px;margin:3px 3px 0 0;border:1px solid var(--voyage-line);border-radius:30px;font-size:9px;color:var(--voyage-muted)}
-.atlas-credit{font-size:9px;line-height:1.45;color:var(--voyage-muted);margin:5px 2px 8px}
+.atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#34483B!important;font-weight:850;min-height:28px;max-height:28px;overflow:hidden;opacity:1!important}
+.atlas-card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;line-height:1.08;font-weight:700;color:#111A14!important;margin:5px 0 7px;height:52px;min-height:52px;max-height:52px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;opacity:1!important}
+.atlas-card-copy{font-size:12px;line-height:1.55;color:#26352C!important;height:78px;min-height:78px;max-height:78px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;opacity:1!important}
+.atlas-tag{display:inline-block;padding:4px 8px;margin:3px 3px 0 0;border:1px solid #C7D1C9;border-radius:30px;font-size:9px;color:#26352C!important;opacity:1!important}
+.atlas-credit{font-size:9px;line-height:1.45;color:#26352C!important;margin:5px 2px 8px;opacity:1!important}
 .atlas-record-note{padding:10px 12px;border-left:2px solid #C7A35B;background:var(--voyage-surface);border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;color:var(--voyage-muted)}
 div[data-testid="stVerticalBlockBorderWrapper"]{border-color:var(--voyage-line);border-radius:17px}
 div[data-testid="stImage"] img{border-radius:10px;object-fit:contain;box-shadow:0 8px 20px rgba(8,25,20,.10)}
@@ -58,6 +58,28 @@ div[data-testid="stImage"] img{border-radius:10px;object-fit:contain;box-shadow:
 .st-key-batch-gallery-card [data-testid="stCaptionContainer"]{min-height:34px}
 div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height:39px}
 @media(max-width:700px){.atlas-card-title{font-size:21px}.atlas-lede{font-size:14px}.atlas-photo-frame img,.atlas-photo-placeholder{height:150px}}
+
+/* Consistent destination-card geometry and readable, high-contrast copy */
+[class*="st-key-atlas-destination-card-"]{height:100%}
+[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:680px;display:flex}
+[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlock"]{height:100%;gap:.45rem}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"]{height:218px;min-height:218px;max-height:218px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED);padding:6px}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"] img{width:100%;height:206px;max-height:206px;object-fit:contain!important;object-position:center;background:transparent;border:0!important;box-shadow:none!important}
+[class*="st-key-atlas-destination-card-"] .atlas-card-meta{height:28px;min-height:28px}
+[class*="st-key-atlas-destination-card-"] .atlas-card-title{height:52px;min-height:52px}
+[class*="st-key-atlas-destination-card-"] .atlas-card-copy{height:78px;min-height:78px}
+[class*="st-key-atlas-destination-card-"] .atlas-tag{line-height:1.25}
+[class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:450px;display:flex}
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"]{height:218px;min-height:218px;display:flex;align-items:center;justify-content:center;background:#E4EAE4;border-radius:12px;padding:6px}
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img{width:100%;height:206px;object-fit:contain!important;background:transparent;border:0!important;box-shadow:none!important}
+[class*="st-key-atlas-reference-card-"] .atlas-card-title{height:54px;min-height:54px}
+[class*="st-key-batch-gallery-card-"]{height:100%;min-height:365px;padding:13px!important;border:1px solid rgba(23,92,67,.22)!important;border-radius:18px!important;background:linear-gradient(145deg,#F3E8D0 0%,#E5F0E8 52%,#DCEAF0 100%)!important;box-shadow:0 12px 30px rgba(13,55,42,.09)!important}
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"]{height:224px;min-height:224px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:13px;background:linear-gradient(135deg,#D7C59F,#C8E0D5 55%,#B8D6DF);padding:7px}
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img{width:100%;height:210px;object-fit:contain!important;object-position:center;background:transparent;border:0!important;border-radius:9px;box-shadow:none!important}
+[class*="st-key-batch-gallery-card-"] .atlas-card-title{height:54px;min-height:54px;margin-top:12px}
+[class*="st-key-batch-gallery-card-"] [data-testid="stCaptionContainer"]{height:34px;min-height:34px;overflow:hidden;color:#26352C!important;opacity:1!important}
+@media(max-width:700px){[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{min-height:0}[class*="st-key-atlas-destination-card-"] .atlas-card-copy{height:auto;min-height:70px;max-height:90px}}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -209,6 +231,139 @@ ATLAS_DESTINATION_IMAGES = {
         "artist": "User-supplied image URL",
         "license": "Source and reuse licence not independently verified",
     },
+    "Takht-i-Bahi and Sahr-i-Bahlol": {
+        "thumb_url": "https://www.pakistanhc.lk/wp-content/uploads/2018/10/Takht-e-Bahi-960x640.jpg",
+        "page_url": "https://www.pakistanhc.lk/wp-content/uploads/2018/10/Takht-e-Bahi-960x640.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Kalash Valleys: Bumburet, Rumbur and Birir": {
+        "thumb_url": "https://kalashtours.com/__l5e/assets-v1/5b909362-cf4c-4fe9-a584-6828f0e2845d/dest-rumbur.webp",
+        "page_url": "https://kalashtours.com/__l5e/assets-v1/5b909362-cf4c-4fe9-a584-6828f0e2845d/dest-rumbur.webp",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Kumrat Valley": {
+        "thumb_url": "https://images.pexels.com/photos/15826125/pexels-photo-15826125.jpeg",
+        "page_url": "https://images.pexels.com/photos/15826125/pexels-photo-15826125.jpeg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Mahodand Lake": {
+        "thumb_url": "https://images.pexels.com/photos/4990600/pexels-photo-4990600.jpeg",
+        "page_url": "https://images.pexels.com/photos/4990600/pexels-photo-4990600.jpeg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Shandur Pass and Polo Ground": {
+        "thumb_url": "https://img.rezdy.com/PRODUCT_IMAGE/13699/Shandur_Polo_1_By_Shakir_Hussain_Yash___Own_work__CC_BY_SA_4.0__https___commons.wikimedia.org_w_index.php_curid_48504447.jpg",
+        "page_url": "https://img.rezdy.com/PRODUCT_IMAGE/13699/Shandur_Polo_1_By_Shakir_Hussain_Yash___Own_work__CC_BY_SA_4.0__https___commons.wikimedia.org_w_index.php_curid_48504447.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Hingol National Park": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrKqVotrH6yUZVqvqk2EQG2n_89RBH8FXao3LiMT9VNXOpKkTzcrarCTWW&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrKqVotrH6yUZVqvqk2EQG2n_89RBH8FXao3LiMT9VNXOpKkTzcrarCTWW&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Astola Island": {
+        "thumb_url": "https://i.pinimg.com/736x/40/bf/65/40bf65c7ce1e83ee3adcf120cede568d.jpg",
+        "page_url": "https://i.pinimg.com/736x/40/bf/65/40bf65c7ce1e83ee3adcf120cede568d.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Ziarat Juniper Forest": {
+        "thumb_url": "https://cdn-blog.zameen.com/blog/wp-content/uploads/2020/10/Your-Guide-to-Ziarat-Juniper-Forest-B-12-10-1024x640.jpg",
+        "page_url": "https://cdn-blog.zameen.com/blog/wp-content/uploads/2020/10/Your-Guide-to-Ziarat-Juniper-Forest-B-12-10-1024x640.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Ziarat Residency": {
+        "thumb_url": "https://tripplannerpk.com/_next/image?url=http%3A%2F%2Fapi.tripplannerpk.com%2Fimages%2Ftemp%2F47720.png&w=3840&q=75",
+        "page_url": "https://tripplannerpk.com/_next/image?url=http%3A%2F%2Fapi.tripplannerpk.com%2Fimages%2Ftemp%2F47720.png&w=3840&q=75",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Moola Chotok": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfqMGmjqyJNdARhs78cIMGG5Wuif_xPzckRM0hR_cez6EUW9wQ8_4vkns&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfqMGmjqyJNdARhs78cIMGG5Wuif_xPzckRM0hR_cez6EUW9wQ8_4vkns&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Concordia and K2 Base Camp": {
+        "thumb_url": "https://cdn.shopify.com/s/files/1/1652/2575/files/000-trekking-to-k2-base-camp.jpg?8344584697786751152",
+        "page_url": "https://cdn.shopify.com/s/files/1/1652/2575/files/000-trekking-to-k2-base-camp.jpg?8344584697786751152",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Attabad Lake": {
+        "thumb_url": "https://guidetourismpakistan.com/wp-content/uploads/2024/09/Atabad-Lake-Header.png",
+        "page_url": "https://guidetourismpakistan.com/wp-content/uploads/2024/09/Atabad-Lake-Header.png",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Khunjerab Pass": {
+        "thumb_url": "https://ik.imagekit.io/traversepakistan/packages/northern-pakistan-grand-tour/cover.jpg?tr=w-3840,q-70,f-auto",
+        "page_url": "https://ik.imagekit.io/traversepakistan/packages/northern-pakistan-grand-tour/cover.jpg?tr=w-3840,q-70,f-auto",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Deosai National Park": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS244N-i7BGH5ps3A3f9jKdQq-7meGz_nFROvG_ANg31uKeOEhXiMp8GZvx&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS244N-i7BGH5ps3A3f9jKdQq-7meGz_nFROvG_ANg31uKeOEhXiMp8GZvx&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Ratti Gali Lake": {
+        "thumb_url": "https://dtvt.pk/wp-content/uploads/2023/01/Ratti-Gali-@KashifJaved.jpg",
+        "page_url": "https://dtvt.pk/wp-content/uploads/2023/01/Ratti-Gali-@KashifJaved.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Arang Kel": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSraxWAWMVS1K_t7hODyc2caG97tt5THJ9rZ4u2QTuE4qaWIKsLXaIgxvE&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSraxWAWMVS1K_t7hODyc2caG97tt5THJ9rZ4u2QTuE4qaWIKsLXaIgxvE&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Pir Chinasi": {
+        "thumb_url": "https://www.pakistanhc.lk/wp-content/uploads/2019/01/places-to-visit-in-Muzaffarabad-pir-chinasi-min-5-960x640.jpg",
+        "page_url": "https://www.pakistanhc.lk/wp-content/uploads/2019/01/places-to-visit-in-Muzaffarabad-pir-chinasi-min-5-960x640.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Banjosa Lake": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8rN7oSrU65agFak34SU-KGl1RzxyRnisjcr-YIqiKnIfXTbc3j8ppfVq4&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8rN7oSrU65agFak34SU-KGl1RzxyRnisjcr-YIqiKnIfXTbc3j8ppfVq4&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Faisal Mosque": {
+        "thumb_url": "https://www.pakistanhc.lk/wp-content/uploads/2018/10/0f58350048b1b544393b5651242e7eb5-shah-faisal-mosque-960x640.jpg",
+        "page_url": "https://www.pakistanhc.lk/wp-content/uploads/2018/10/0f58350048b1b544393b5651242e7eb5-shah-faisal-mosque-960x640.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Pakistan Monument and Museum": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlH-L0Q8pG970bUCci3spF5S24vip9Rt4jTLEYPLBChQ&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlH-L0Q8pG970bUCci3spF5S24vip9Rt4jTLEYPLBChQ&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Margalla Hills National Park — Trail 5": {
+        "thumb_url": "https://tourismguidebook.com/wp-content/uploads/2026/07/Margalla-Hills-National-Park.webp",
+        "page_url": "https://tourismguidebook.com/wp-content/uploads/2026/07/Margalla-Hills-National-Park.webp",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Saidpur Village": {
+        "thumb_url": "https://external-preview.redd.it/saidpur-village-5-minutes-away-from-the-heart-of-islamabad-v0-XF_L4gLEWF92hxiT_TuWpCgns_C0bv5OqWpqYmrnvug.jpg?auto=webp&s=32729fc475db5638a6812a3f0d7ffa3af4152802",
+        "page_url": "https://external-preview.redd.it/saidpur-village-5-minutes-away-from-the-heart-of-islamabad-v0-XF_L4gLEWF92hxiT_TuWpCgns_C0bv5OqWpqYmrnvug.jpg?auto=webp&s=32729fc475db5638a6812a3f0d7ffa3af4152802",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+
 }
 
 # Match detailed records to the existing catalogue so imagery and cluster names stay consistent.
@@ -242,7 +397,7 @@ def render_destination_card(record, index: int, detailed: bool = True):
         image_query = record[1].get("image_query") or record[0]
         # Cluster cards use only an exact cluster-name match.
         image_override = ATLAS_DESTINATION_IMAGES.get(record[0])
-    with st.container(border=True):
+    with st.container(border=True, key=f"atlas-destination-card-{int(detailed)}-{index}"):
         show_photo(image_query or record.get("name", "Pakistan destination"), allow_lookup=index < 9, image_override=image_override)
         if detailed:
             st.markdown(f'<div class="atlas-card-meta">{record.get("region","")} · {record.get("type","")}</div>', unsafe_allow_html=True)
@@ -392,17 +547,18 @@ for start in range(0, len(image_matches), 3):
     for offset, (col, item) in enumerate(zip(row, image_matches[start:start + 3])):
         with col:
             with st.container(border=True):
-                if item.get("page") and start + offset < 6:
-                    show_photo(
-                        item["subject"],
-                        image_override={
-                            "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
-                            "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
-                            "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
-                            "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
-                            "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
-                        }.get(item.get("id")),
-                    )
+                if item.get("page"):
+                    with st.container(border=False, key=f"atlas-reference-card-{start + offset}"):
+                        show_photo(
+                            item["subject"],
+                            image_override=ATLAS_DESTINATION_IMAGES.get(item.get("subject")) or {
+                                "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
+                                "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
+                                "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
+                                "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
+                                "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
+                            }.get(item.get("id")),
+                        )
                 else:
                     st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE SOURCE PENDING</div></div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-meta">{item.get("region","")} · {item.get("id") or item.get("intake_ref","Candidate")}</div>', unsafe_allow_html=True)
