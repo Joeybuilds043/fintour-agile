@@ -61,14 +61,14 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 
 /* Consistent destination-card geometry and readable, high-contrast copy */
 [class*="st-key-atlas-destination-card-"]{height:100%}
-[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:680px;display:flex}
-[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlock"]{height:100%;gap:.45rem}
+[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{box-sizing:border-box;height:700px;min-height:700px;max-height:700px;display:flex;overflow:hidden}
+[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlock"]{box-sizing:border-box;height:100%;min-height:0;flex:1;display:flex;flex-direction:column;gap:.45rem}
 [class*="st-key-atlas-destination-card-"] [data-testid="stImage"]{height:218px;min-height:218px;max-height:218px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED);padding:6px}
 [class*="st-key-atlas-destination-card-"] [data-testid="stImage"] img{width:100%;height:206px;max-height:206px;object-fit:contain!important;object-position:center;background:transparent;border:0!important;box-shadow:none!important}
 [class*="st-key-atlas-destination-card-"] .atlas-card-meta{height:28px;min-height:28px}
 [class*="st-key-atlas-destination-card-"] .atlas-card-title{height:52px;min-height:52px}
 [class*="st-key-atlas-destination-card-"] .atlas-card-copy{height:78px;min-height:78px}
-[class*="st-key-atlas-destination-card-"] .atlas-tag{line-height:1.25}
+[class*="st-key-atlas-destination-card-"] .atlas-tag{line-height:1.25}\n[class*="st-key-atlas-destination-card-"] [data-testid="stExpander"]{margin-top:auto;flex-shrink:0}\n[class*="st-key-atlas-destination-card-"] .stCaption{min-height:34px;max-height:34px;overflow:hidden}
 [class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:450px;display:flex}
 [class*="st-key-atlas-reference-card-"] [data-testid="stImage"]{height:218px;min-height:218px;display:flex;align-items:center;justify-content:center;background:#E4EAE4;border-radius:12px;padding:6px}
 [class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img{width:100%;height:206px;object-fit:contain!important;background:transparent;border:0!important;box-shadow:none!important}
@@ -78,7 +78,7 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 [class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img{width:100%;height:210px;object-fit:contain!important;object-position:center;background:transparent;border:0!important;border-radius:9px;box-shadow:none!important}
 [class*="st-key-batch-gallery-card-"] .atlas-card-title{height:54px;min-height:54px;margin-top:12px}
 [class*="st-key-batch-gallery-card-"] [data-testid="stCaptionContainer"]{height:34px;min-height:34px;overflow:hidden;color:#26352C!important;opacity:1!important}
-@media(max-width:700px){[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{min-height:0}[class*="st-key-atlas-destination-card-"] .atlas-card-copy{height:auto;min-height:70px;max-height:90px}}
+@media(max-width:700px){[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0;max-height:none}[class*="st-key-atlas-destination-card-"] .atlas-card-copy{height:auto;min-height:70px;max-height:90px}}
 
 </style>
 """, unsafe_allow_html=True)
@@ -136,8 +136,8 @@ ATLAS_DESTINATION_IMAGES = {
         "license": "Pexels License",
     },
     "K2 & Concordia Expedition": {
-        "thumb_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
-        "page_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+        "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "page_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
         "artist": "Pexels",
         "license": "Pexels License",
     },
@@ -148,8 +148,8 @@ ATLAS_DESTINATION_IMAGES = {
         "license": "Pexels License",
     },
     "Concordia and K2 Base Camp": {
-        "thumb_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
-        "page_url": "https://images.pexels.com/photos/31410274/pexels-photo-31410274.jpeg",
+        "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
+        "page_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
         "artist": "Pexels",
         "license": "Pexels License",
     },
@@ -286,8 +286,8 @@ ATLAS_DESTINATION_IMAGES = {
         "license": "Source and reuse licence not independently verified",
     },
     "Moola Chotok": {
-        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfqMGmjqyJNdARhs78cIMGG5Wuif_xPzckRM0hR_cez6EUW9wQ8_4vkns&s=10",
-        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfqMGmjqyJNdARhs78cIMGG5Wuif_xPzckRM0hR_cez6EUW9wQ8_4vkns&s=10",
+        "thumb_url": "https://i.aaj.tv/english/wp-content/uploads/2019/09/moola-chotok.jpg",
+        "page_url": "https://i.aaj.tv/english/wp-content/uploads/2019/09/moola-chotok.jpg",
         "artist": "User-supplied image URL",
         "license": "Source and reuse licence not independently verified",
     },
@@ -298,8 +298,8 @@ ATLAS_DESTINATION_IMAGES = {
         "license": "Source and reuse licence not independently verified",
     },
     "Attabad Lake": {
-        "thumb_url": "https://guidetourismpakistan.com/wp-content/uploads/2024/09/Atabad-Lake-Header.png",
-        "page_url": "https://guidetourismpakistan.com/wp-content/uploads/2024/09/Atabad-Lake-Header.png",
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxBRSE94ks3zoq-17aZ_UkAU_xV6x8MZVf2aZdXA56lg&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxBRSE94ks3zoq-17aZ_UkAU_xV6x8MZVf2aZdXA56lg&s=10",
         "artist": "User-supplied image URL",
         "license": "Source and reuse licence not independently verified",
     },
