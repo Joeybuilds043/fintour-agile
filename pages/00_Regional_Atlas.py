@@ -137,6 +137,12 @@ ATLAS_DESTINATION_IMAGES = {
         "artist": "Khadim Hussain",
         "license": "CC BY-SA 4.0",
     },
+    "Katas Raj Temples & Salt Range": {
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Katas_Raj_temples_Pakistan.jpg/960px-Katas_Raj_temples_Pakistan.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Katas_Raj_temples_Pakistan.jpg",
+        "artist": "Khadim Hussain",
+        "license": "CC BY-SA 4.0",
+    },
 }
 
 # Match detailed records to the existing catalogue so imagery and cluster names stay consistent.
