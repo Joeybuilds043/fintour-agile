@@ -90,16 +90,21 @@ div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padd
     border-radius:9px!important;
     padding:9px 13px!important;
     color:#FFFFFF!important;
-    font-family:Inter,Arial,sans-serif!important;
+    font-family:'Inter','Montserrat',Arial,sans-serif!important;
     font-size:12px!important;
-    font-weight:800!important;
-    letter-spacing:.25px!important;
+    font-weight:850!important;
+    letter-spacing:.35px!important;
+    text-shadow:0 1px 1px rgba(0,0,0,.12)!important;
     box-shadow:0 3px 9px rgba(23,75,53,.14)!important;
 }
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary,
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary *,
 [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p,
 [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary span{
     color:#FFFFFF!important;
-    font-weight:800!important;
+    -webkit-text-fill-color:#FFFFFF!important;
+    font-family:'Inter','Montserrat',Arial,sans-serif!important;
+    font-weight:850!important;
 }
 [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary:hover{
     background:#2B704F!important;
