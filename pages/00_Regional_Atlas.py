@@ -1323,7 +1323,45 @@ event_matches = [
     if (event_region == "All regions" or event.get("region") == event_region)
     and event_query.casefold() in (str(event.get("name","")) + " " + str(event.get("location","")) + " " + str(event.get("note",""))).casefold()
 ]
-st.caption(f"{len(event_matches)} event records.")
+
+# Editorial prominence order: nationwide observances first, followed by widely
+# recognised cultural, religious and major tourism events, then local/specialist events.
+# This is a curated display order, not a claim of measured attendance figures.
+EVENT_DISPLAY_ORDER = [
+    "Eid-ul-Fitr",
+    "Eid-ul-Adha",
+    "Eid Milad-un-Nabi (12 Rabi-ul-Awwal)",
+    "Independence Day (Jashn-e-Azadi)",
+    "Shandur Polo Festival",
+    "Cholistan Desert Jeep Rally",
+    "Jashn-e-Baharan & Basant",
+    "Urs of Data Ganj Bakhsh",
+    "Urs of Lal Shahbaz Qalandar",
+    "Lok Virsa Folk Festival (Lok Mela)",
+    "Sindhi Cultural Day (Ekta Day)",
+    "Mela Chiraghan",
+    "Sibi Mela",
+    "Vaisakhi Mela and Sikh Pilgrimage",
+    "Hinglaj Mata Yatra",
+    "Chilam Joshi Festival",
+    "Choimus (Chaumos) Festival",
+    "Urs of Shah Abdul Latif Bhittai",
+    "National Horse & Cattle Show",
+    "Waris Shah Mela",
+    "Thal Desert Rally & Cultural Festival",
+    "Kalam Summer Festival",
+    "Malam Jabba Winter Sports Festival",
+    "Ginani Harvest Festival",
+    "Uchal Festival",
+    "Lohri",
+    "Islamabad Marathon",
+    "Punjab Paragliding Championship",
+    "Leepa Valley Mela",
+    "Mangla Water Festival",
+]
+_event_rank = {name: rank for rank, name in enumerate(EVENT_DISPLAY_ORDER)}
+event_matches.sort(key=lambda event: _event_rank.get(event.get("name", ""), len(EVENT_DISPLAY_ORDER)))
+st.caption(f"{len(event_matches)} event records · ordered by national prominence, cultural significance and visitor recognition.")
 for start in range(0, len(event_matches), 3):
     row = st.columns(3, gap="medium")
     for offset, (col, event) in enumerate(zip(row, event_matches[start:start + 3])):
