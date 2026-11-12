@@ -230,18 +230,21 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
     line-height:1.25!important;margin:0!important;padding:5px 8px!important;
 }
 
-/* Festival cards: same photo frame as the destination and landscape cards. */
+/* Festival cards: fixed shared geometry, compact readable copy, no clipped summaries. */
 [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
-    height:510px!important;min-height:510px!important;max-height:510px!important;
-    box-sizing:border-box!important;display:flex!important;overflow:hidden!important;
-    padding:13px!important;border:1px solid var(--voyage-line)!important;
-    border-radius:17px!important;background:var(--voyage-surface)!important;
-    box-shadow:0 9px 24px rgba(8,25,20,.075)!important;
+    box-sizing:border-box!important;height:510px!important;min-height:510px!important;max-height:510px!important;
+    display:flex!important;overflow:hidden!important;padding:13px!important;
+    border:1px solid var(--voyage-line)!important;border-radius:17px!important;
+    background:var(--voyage-surface)!important;box-shadow:0 9px 24px rgba(8,25,20,.075)!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlock"]{
+    box-sizing:border-box!important;height:100%!important;min-height:0!important;
+    display:flex!important;flex-direction:column!important;gap:.38rem!important;flex:1!important;
 }
 [class*="st-key-atlas-event-card-"] [data-testid="stImage"]{
-    width:100%!important;height:218px!important;min-height:218px!important;max-height:218px!important;
-    box-sizing:border-box!important;padding:6px!important;display:flex!important;
-    align-items:center!important;justify-content:center!important;overflow:hidden!important;
+    box-sizing:border-box!important;width:100%!important;height:218px!important;
+    min-height:218px!important;max-height:218px!important;padding:6px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;
     border-radius:12px!important;background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED)!important;
     border:1px solid rgba(199,163,91,.48)!important;
 }
@@ -252,20 +255,25 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
     border-radius:9px!important;box-shadow:none!important;background:transparent!important;
 }
 [class*="st-key-atlas-event-card-"] .atlas-card-meta{
-    color:#59695F!important;opacity:1!important;font-size:9px!important;font-weight:800!important;
-    letter-spacing:1.15px!important;line-height:1.35!important;display:flex!important;align-items:center!important;
+    box-sizing:border-box!important;height:34px!important;min-height:34px!important;max-height:34px!important;
+    overflow:hidden!important;text-align:left!important;color:#59695F!important;opacity:1!important;
+    font-size:9px!important;font-weight:800!important;letter-spacing:.8px!important;line-height:1.25!important;
+    display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;
 }
 [class*="st-key-atlas-event-card-"] .atlas-card-title{
-    color:#17251D!important;opacity:1!important;font-family:'Cormorant Garamond',Georgia,serif!important;
-    font-size:24px!important;font-weight:700!important;line-height:1.08!important;
-    height:54px!important;min-height:54px!important;max-height:54px!important;
+    box-sizing:border-box!important;height:54px!important;min-height:54px!important;max-height:54px!important;
+    overflow:hidden!important;text-align:left!important;margin:2px 0!important;color:#17251D!important;opacity:1!important;
+    font-family:'Cormorant Garamond',Georgia,serif!important;font-size:22px!important;font-weight:700!important;line-height:1.1!important;
     display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;
 }
 [class*="st-key-atlas-event-card-"] .atlas-card-copy{
     box-sizing:border-box!important;height:82px!important;min-height:82px!important;max-height:82px!important;
     overflow:hidden!important;text-align:left!important;color:#34463B!important;opacity:1!important;
-    font-size:12.5px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:.05px!important;
+    font-size:12.5px!important;font-weight:500!important;line-height:1.42!important;letter-spacing:.02px!important;
     display:-webkit-box!important;-webkit-line-clamp:4!important;-webkit-box-orient:vertical!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"]{
+    margin-top:auto!important;flex-shrink:0!important;
 }
 .stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] summary,
 .stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] summary p{
@@ -279,8 +287,11 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
     [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
         height:auto!important;min-height:0!important;max-height:none!important;
     }
+    [class*="st-key-atlas-event-card-"] .atlas-card-meta,
+    [class*="st-key-atlas-event-card-"] .atlas-card-title,
     [class*="st-key-atlas-event-card-"] .atlas-card-copy{
-        height:auto!important;min-height:0!important;max-height:110px!important;
+        height:auto!important;min-height:0!important;max-height:none!important;
+        display:block!important;overflow:visible!important;
     }
 }
 </style>
@@ -1111,6 +1122,24 @@ st.divider()
 st.markdown('<div class="atlas-eyebrow">03 · FESTIVALS & MAJOR EVENTS</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">A calendar of culture, sport and shared traditions.</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-subheading">From Sufi gatherings and harvest celebrations to mountain polo, desert rallies and community festivals, these events offer a closer look at the places and people behind Pakistan’s travel stories.</div>', unsafe_allow_html=True)
+def event_card_summary(event: dict, limit: int = 132) -> str:
+    """Return a complete, compact card summary; preserve the full note in the expander."""
+    raw = str(event.get("card_note") or event.get("note") or "").strip()
+    compact = " ".join(raw.split())
+    if len(compact) <= limit:
+        return compact
+    shortened = compact[: limit - 1].rsplit(" ", 1)[0].rstrip(" ,;:-")
+    return shortened + "…"
+
+
+def event_card_date(event: dict, limit: int = 52) -> str:
+    """Keep the card metadata to two readable lines; full dates remain in the details."""
+    raw = " ".join(str(event.get("date") or "").split())
+    if len(raw) <= limit:
+        return raw
+    return raw[: limit - 1].rsplit(" ", 1)[0].rstrip(" ,;:-") + "…"
+
+
 event_query = st.text_input("Search festivals and events", placeholder="Try Urs, Polo, Lok Mela, Vaisakhi...")
 event_regions = ["All regions"] + sorted({event.get("region", "") for event in EVENT_RECORDS})
 event_region = st.selectbox("Event region", event_regions, key="atlas_event_region")
@@ -1140,10 +1169,20 @@ for start in range(0, len(event_matches), 3):
                     },
                     image_override=ATLAS_EVENT_IMAGES.get(event_name),
                 )
-                st.markdown(f'<div class="atlas-card-meta">{event.get("region","")} · {event.get("date","")}</div>', unsafe_allow_html=True)
+                st.markdown(
+                    f'<div class="atlas-card-meta">{event.get("region","")} · {event_card_date(event)}</div>',
+                    unsafe_allow_html=True,
+                )
                 st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="atlas-card-copy">{event.get("card_note", event.get("note",""))}</div>', unsafe_allow_html=True)
-                with st.expander("About this event · location and details"):
+                st.markdown(
+                    f'<div class="atlas-card-copy">{event_card_summary(event)}</div>',
+                    unsafe_allow_html=True,
+                )
+                with st.expander("Event details · full description and location"):
+                    if event.get("date"):
+                        st.markdown(f'**When:** {event.get("date","")}')
+                    if event.get("date_status"):
+                        st.caption(event.get("date_status",""))
                     if event.get("note"):
                         st.markdown(f'<div class="atlas-record-note">{event.get("note","")}</div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="atlas-record-note">{event.get("location","")}</div>', unsafe_allow_html=True)
