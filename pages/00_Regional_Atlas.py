@@ -319,7 +319,92 @@ if st.session_state.get("voyage_theme", "Light") == "Dark":
     .stApp .atlas-tag{border-color:#45C477!important;color:#BFE8CD!important}
     .stApp .atlas-record-note{border-left-color:#45C477!important}
     .stApp .atlas-eyebrow{color:#45C477!important}
-    </style>
+    
+/* Post-festival visual collections: consistent frames, readable labels and stable card rhythm. */
+[class*="st-key-batch-gallery-card-"] ,
+[class*="st-key-atlas-reference-card-"]{
+    box-sizing:border-box!important;height:470px!important;min-height:470px!important;max-height:470px!important;
+    display:flex!important;flex-direction:column!important;overflow:hidden!important;
+    padding:13px!important;border:1px solid var(--voyage-line)!important;
+    border-radius:17px!important;background:var(--voyage-surface)!important;
+    box-shadow:0 8px 22px rgba(8,25,20,.065)!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stVerticalBlock"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlock"]{
+    box-sizing:border-box!important;height:100%!important;min-height:0!important;
+    display:flex!important;flex-direction:column!important;flex:1!important;gap:.4rem!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"]{
+    box-sizing:border-box!important;width:100%!important;height:218px!important;
+    min-height:218px!important;max-height:218px!important;padding:6px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    overflow:hidden!important;border-radius:12px!important;
+    background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED)!important;
+    border:1px solid rgba(199,163,91,.42)!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img,
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img{
+    display:block!important;width:100%!important;height:206px!important;
+    min-height:206px!important;max-height:206px!important;object-fit:contain!important;
+    object-position:center!important;margin:0 auto!important;border:0!important;
+    border-radius:9px!important;box-shadow:none!important;background:transparent!important;
+}
+[class*="st-key-batch-gallery-card-"] .atlas-card-title,
+[class*="st-key-atlas-reference-card-"] .atlas-card-title{
+    box-sizing:border-box!important;width:100%!important;height:56px!important;
+    min-height:56px!important;max-height:56px!important;overflow:hidden!important;
+    display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;
+    text-align:left!important;margin:3px 0!important;color:#17251D!important;
+    font-size:21px!important;font-weight:700!important;line-height:1.16!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stCaptionContainer"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stCaptionContainer"]{
+    box-sizing:border-box!important;height:38px!important;min-height:38px!important;
+    max-height:38px!important;overflow:hidden!important;text-align:left!important;
+    color:#34463B!important;opacity:1!important;font-size:11px!important;line-height:1.35!important;
+}
+[class*="st-key-atlas-reference-card-"] [data-testid="stLinkButton"],
+[class*="st-key-batch-gallery-card-"] [data-testid="stLinkButton"]{
+    margin-top:auto!important;flex-shrink:0!important;
+}
+[class*="st-key-atlas-next-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
+    box-sizing:border-box!important;height:132px!important;min-height:132px!important;max-height:132px!important;
+    display:flex!important;overflow:hidden!important;padding:13px!important;
+    border:1px solid var(--voyage-line)!important;border-radius:15px!important;
+    background:var(--voyage-surface)!important;
+}
+[class*="st-key-atlas-next-card-"] [data-testid="stVerticalBlock"]{
+    box-sizing:border-box!important;min-height:0!important;height:100%!important;
+    display:flex!important;flex-direction:column!important;justify-content:center!important;gap:.25rem!important;
+}
+[class*="st-key-atlas-next-card-"] .atlas-card-title{
+    box-sizing:border-box!important;height:58px!important;min-height:0!important;max-height:58px!important;
+    display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;
+    overflow:hidden!important;margin:0!important;color:#17251D!important;
+    font-size:19px!important;font-weight:700!important;line-height:1.18!important;
+}
+[class*="st-key-atlas-next-card-"] [data-testid="stCaptionContainer"]{
+    height:28px!important;min-height:28px!important;max-height:28px!important;
+    overflow:hidden!important;color:#59695F!important;opacity:1!important;
+}
+@media(max-width:700px){
+    [class*="st-key-batch-gallery-card-"],
+    [class*="st-key-atlas-reference-card-"]{
+        height:auto!important;min-height:0!important;max-height:none!important;
+    }
+    [class*="st-key-batch-gallery-card-"] .atlas-card-title,
+    [class*="st-key-atlas-reference-card-"] .atlas-card-title{
+        height:auto!important;min-height:0!important;max-height:none!important;
+        display:block!important;overflow:visible!important;
+    }
+    [class*="st-key-batch-gallery-card-"] [data-testid="stCaptionContainer"],
+    [class*="st-key-atlas-reference-card-"] [data-testid="stCaptionContainer"]{
+        height:auto!important;min-height:0!important;max-height:none!important;
+    }
+}
+
+</style>
     """, unsafe_allow_html=True)
 
 # Exact, destination-matched photography. Broad regional photos are used only on
