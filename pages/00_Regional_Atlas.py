@@ -78,9 +78,11 @@ st.markdown("""
 div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padding:4px;border:1px solid rgba(199,163,91,.7);border-radius:14px;background:rgba(199,163,91,.10);box-shadow:0 10px 24px rgba(8,25,20,.12)}
 .atlas-photo-placeholder{height:178px;border-radius:9px;background:linear-gradient(135deg,#123D2D,#355D62 62%,#C7A35B);display:flex;align-items:center;justify-content:center;color:#F6F2E8;font-size:10px;font-weight:800;letter-spacing:2px}
 .atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#111A14!important;font-weight:850;min-height:28px;max-height:28px;overflow:hidden;opacity:1!important}
-.atlas-event-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;min-height:38px;margin:10px 0 4px;color:#111A14!important}
-.atlas-event-region{font-size:9px;line-height:1.35;letter-spacing:1.15px;text-transform:uppercase;font-weight:850;color:#111A14!important}
-.atlas-event-date{display:inline-flex;align-items:center;max-width:100%;padding:5px 9px;border:1px solid #C7A35B;border-radius:999px;background:#F5EBD6;color:#111A14!important;font-size:10px;line-height:1.35;font-weight:850;letter-spacing:.1px}
+.atlas-event-meta{display:block;width:100%;height:34px;min-height:34px;max-height:34px;margin:10px 0 8px;overflow:hidden}
+.atlas-event-date{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;height:34px;min-height:34px;max-height:34px;padding:0 11px;border:1px solid #A9C5B0;border-radius:8px;background:#E8F1E9;color:#174B35!important;font-family:Inter,Arial,sans-serif;font-size:10px;line-height:1;font-weight:750;letter-spacing:.15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.atlas-record-note{padding:13px 14px;border:1px solid #285D45;border-left:4px solid #A9C5B0;border-radius:9px;background:#174B35!important;color:#FFFFFF!important;font-family:Inter,Arial,sans-serif;font-size:12px;line-height:1.65;font-weight:450}
+.atlas-record-location{margin-top:9px;padding:10px 13px;border:1px solid #B8CFBD;border-radius:8px;background:#EAF2EB;color:#174B35!important;font-size:12px;line-height:1.5;font-weight:800}
+.atlas-record-location strong{color:#174B35!important}
 [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:470px;display:flex}
 [class*="st-key-atlas-event-card-"] [data-testid="stImage"]{height:210px;min-height:210px;max-height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#E9E2D4;border-radius:12px;padding:6px}
 [class*="st-key-atlas-event-card-"] [data-testid="stImage"] img{width:100%;height:198px;object-fit:contain!important;background:transparent;border:0!important;box-shadow:none!important}
@@ -1255,12 +1257,37 @@ def event_card_summary(event: dict, limit: int = 132) -> str:
     return shortened + "…"
 
 
-def event_card_date(event: dict, limit: int = 76) -> str:
-    """Keep the complete seasonal or lunar date visible on the event card."""
+def event_card_date(event: dict) -> str:
+    """Return a concise one-line date label; full date context remains in the event details."""
     raw = " ".join(str(event.get("date") or "").split())
-    if len(raw) <= limit:
-        return raw
-    return raw[: limit - 1].rsplit(" ", 1)[0].rstrip(" ,;:-") + "…"
+    compact = raw
+    replacements = (
+        (" (Hijri calendar; Gregorian dates shift annually)", " · Hijri dates vary"),
+        (" (Hijri calendar; moon-sighting dependent)", " · Moon sighting"),
+        ("; exact dates announced by Lok Virsa each year", " · Dates vary yearly"),
+        ("; exact dates announced locally", " · Dates vary yearly"),
+        ("; dates follow the Punjabi calendar", " · Punjabi calendar"),
+        ("; pilgrimage schedules announced annually", " · Pilgrimage dates vary"),
+        ("; dates follow the Hindu calendar and organiser schedule", " · Hindu calendar"),
+        ("; dates follow the Kalash community calendar", " · Kalash calendar"),
+        ("; exact timing follows the community calendar", " · Community calendar"),
+        ("; programme dates vary by edition", " · Dates vary by edition"),
+        ("; dates vary", " · Dates vary"),
+        ("; 2026 expected 6 December", " · 2026: 6 Dec (expected)"),
+        (" (TDCP listing); future dates announced by organiser", " · TDCP listing"),
+        (" (TDCP listing)", " · TDCP listing"),
+        ("; 2026 observance reported 6–8 February", " · 2026: 6–8 Feb"),
+        ("; 2026 dates were 29–31 July", " · 2026: 29–31 Jul"),
+        ("; Basant 2026 was held 6–8 February", " · 2026: 6–8 Feb"),
+    )
+    for old, new in replacements:
+        compact = compact.replace(old, new)
+    compact = compact.replace("Usually ", "").replace("each year", "yearly")
+    compact = compact.replace("Annual fair; ", "")
+    compact = compact.replace("Edition dates vary; 2025 dates supplied were ", "Dates vary · 2025: ")
+    if len(compact) > 46:
+        compact = compact[:45].rsplit(" ", 1)[0].rstrip(" ,;:-") + "…"
+    return compact
 
 
 event_query = st.text_input("Search festivals and events", placeholder="Try Urs, Polo, Lok Mela, Vaisakhi...")
@@ -1292,7 +1319,7 @@ for start in range(0, len(event_matches), 3):
                     image_override=ATLAS_EVENT_IMAGES.get(event_name),
                 )
                 st.markdown(
-                    f'<div class="atlas-event-meta"><span class="atlas-event-region">{event.get("region","")}</span><span class="atlas-event-date">{event_card_date(event)}</span></div>',
+                    f'<div class="atlas-event-meta"><span class="atlas-event-date">{event_card_date(event)}</span></div>',
                     unsafe_allow_html=True,
                 )
                 st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
@@ -1300,14 +1327,14 @@ for start in range(0, len(event_matches), 3):
                     f'<div class="atlas-card-copy">{event_card_summary(event)}</div>',
                     unsafe_allow_html=True,
                 )
-                with st.expander("Event details · full description and location"):
+                with st.expander("Explore event"):
                     if event.get("date"):
                         st.markdown(f'**When:** {event.get("date","")}')
                     if event.get("date_status"):
                         st.caption(event.get("date_status",""))
                     if event.get("note"):
                         st.markdown(f'<div class="atlas-record-note">{event.get("note","")}</div>', unsafe_allow_html=True)
-                    st.markdown(f'<div class="atlas-record-note">{event.get("location","")}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="atlas-record-location"><strong>Location</strong> · {event.get("location","")}</div>', unsafe_allow_html=True)
                     if event.get("source"):
                         st.link_button("Official / reference information", event["source"])
 
