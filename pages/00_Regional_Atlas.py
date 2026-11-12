@@ -198,10 +198,10 @@ ATLAS_DESTINATION_IMAGES = {
         "license": "CC BY-SA 3.0",
     },
     "Karachi & Makli–Thatta": {
-        "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Makli_hills_thatta_sindh_-_UNESCO_World_Heritage_Site.jpg?width=2000",
-        "page_url": "https://commons.wikimedia.org/wiki/File:Makli_hills_thatta_sindh_-_UNESCO_World_Heritage_Site.jpg",
-        "artist": "Yasir Dora",
-        "license": "CC BY-SA 4.0",
+        "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Makli_Necropolis-11.jpg?width=2000",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Makli_Necropolis-11.jpg",
+        "artist": "Muhammad Saqib Khan",
+        "license": "CC BY-SA 3.0",
     },
     "Bahawalpur & Cholistan": {
         "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Derawar_Fort_Cholistan_Bahawalpur.jpg?width=2000",
