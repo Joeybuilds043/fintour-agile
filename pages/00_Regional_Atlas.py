@@ -135,47 +135,85 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
     -webkit-box-orient:vertical!important;overflow:hidden!important;
 }
 
-/* Festival cards reuse the destination image frame and balanced card rhythm. */
-[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
-    box-sizing:border-box!important;height:590px!important;min-height:590px!important;
-    max-height:590px!important;display:flex!important;overflow:hidden!important;
+/* Lower atlas sections: compact, three-column cards with one shared image rhythm.
+   Destination landscapes and clusters above remain deliberately untouched. */
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+[class*="st-key-batch-gallery-card-"]{
+    box-sizing:border-box!important;height:470px!important;min-height:470px!important;
+    max-height:470px!important;display:flex!important;overflow:hidden!important;
+    padding:12px!important;border:1px solid var(--voyage-line)!important;
+    border-radius:16px!important;background:var(--voyage-surface)!important;
+    box-shadow:0 7px 18px rgba(8,25,20,.055)!important;
 }
-[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlock"]{
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlock"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlock"],
+[class*="st-key-batch-gallery-card-"] [data-testid="stVerticalBlock"]{
     box-sizing:border-box!important;height:100%!important;min-height:0!important;
-    flex:1!important;display:flex!important;flex-direction:column!important;gap:.45rem!important;
+    flex:1!important;display:flex!important;flex-direction:column!important;gap:.38rem!important;
 }
-[class*="st-key-atlas-event-card-"] [data-testid="stImage"]{
-    box-sizing:border-box!important;width:100%!important;height:218px!important;
-    min-height:218px!important;max-height:218px!important;padding:6px!important;
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"],
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"]{
+    box-sizing:border-box!important;width:100%!important;height:184px!important;
+    min-height:184px!important;max-height:184px!important;padding:5px!important;
     display:flex!important;align-items:center!important;justify-content:center!important;
     overflow:hidden!important;border-radius:12px!important;
+    background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED)!important;
+    border:1px solid rgba(199,163,91,.35)!important;
 }
-[class*="st-key-atlas-event-card-"] [data-testid="stImage"] img{
-    display:block!important;width:100%!important;height:206px!important;
-    min-height:206px!important;max-height:206px!important;object-fit:contain!important;
-    object-position:center!important;margin:0 auto!important;border:0!important;box-shadow:none!important;
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"] img,
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img,
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img{
+    display:block!important;width:100%!important;height:172px!important;
+    min-height:172px!important;max-height:172px!important;object-fit:cover!important;
+    object-position:center!important;margin:0 auto!important;border:0!important;
+    border-radius:9px!important;box-shadow:none!important;
 }
-[class*="st-key-atlas-event-card-"] .atlas-card-meta{
-    box-sizing:border-box!important;height:42px!important;min-height:42px!important;
-    max-height:42px!important;overflow:hidden!important;text-align:left!important;
+[class*="st-key-atlas-event-card-"] .atlas-card-meta,
+[class*="st-key-atlas-reference-card-"] .atlas-card-meta{
+    box-sizing:border-box!important;height:34px!important;min-height:34px!important;
+    max-height:34px!important;overflow:hidden!important;text-align:left!important;
 }
-[class*="st-key-atlas-event-card-"] .atlas-card-title{
-    box-sizing:border-box!important;height:52px!important;min-height:52px!important;
-    max-height:52px!important;overflow:hidden!important;text-align:left!important;
+[class*="st-key-atlas-event-card-"] .atlas-card-title,
+[class*="st-key-atlas-reference-card-"] .atlas-card-title,
+[class*="st-key-batch-gallery-card-"] .atlas-card-title{
+    box-sizing:border-box!important;height:54px!important;min-height:54px!important;
+    max-height:54px!important;overflow:hidden!important;text-align:left!important;
+    margin:4px 0!important;
 }
 [class*="st-key-atlas-event-card-"] .atlas-card-copy{
-    box-sizing:border-box!important;height:104px!important;min-height:104px!important;
-    max-height:104px!important;overflow:hidden!important;text-align:left!important;
-    display:-webkit-box!important;-webkit-line-clamp:5!important;-webkit-box-orient:vertical!important;
+    box-sizing:border-box!important;height:88px!important;min-height:88px!important;
+    max-height:88px!important;overflow:hidden!important;text-align:left!important;
+    display:-webkit-box!important;-webkit-line-clamp:4!important;-webkit-box-orient:vertical!important;
 }
 [class*="st-key-atlas-event-card-"] [data-testid="stExpander"]{margin-top:auto!important;flex-shrink:0!important}
+[class*="st-key-atlas-reference-card-"] [data-testid="stCaptionContainer"],
+[class*="st-key-batch-gallery-card-"] [data-testid="stCaptionContainer"]{
+    height:34px!important;min-height:34px!important;max-height:34px!important;
+    overflow:hidden!important;text-align:left!important;
+}
+[class*="st-key-atlas-reference-card-"] [data-testid="stLinkButton"],
+[class*="st-key-batch-gallery-card-"] [data-testid="stLinkButton"]{margin-top:auto!important}
+[class*="st-key-atlas-next-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
+    box-sizing:border-box!important;min-height:112px!important;height:112px!important;
+    padding:12px!important;border:1px solid var(--voyage-line)!important;
+    border-radius:14px!important;background:var(--voyage-surface)!important;
+}
+[class*="st-key-atlas-next-card-"] .atlas-card-title{
+    height:auto!important;min-height:0!important;max-height:60px!important;
+    margin:0!important;font-size:19px!important;
+}
+@media(max-width:900px){
+    [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+    [class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+    [class*="st-key-batch-gallery-card-"]{height:450px!important;min-height:450px!important;max-height:450px!important}
+}
 @media(max-width:700px){
-    [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
-        height:auto!important;min-height:0!important;max-height:none!important;
-    }
-    [class*="st-key-atlas-event-card-"] .atlas-card-copy{
-        height:auto!important;min-height:90px!important;max-height:130px!important;
-    }
+    [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+    [class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+    [class*="st-key-batch-gallery-card-"]{height:auto!important;min-height:0!important;max-height:none!important}
+    [class*="st-key-atlas-event-card-"] .atlas-card-copy{height:auto!important;min-height:76px!important;max-height:120px!important}
 }
 
 /* Cluster-only spacing: keep experience/category chips clear of the card edge. */
@@ -1028,9 +1066,9 @@ event_matches = [
     and event_query.casefold() in (str(event.get("name","")) + " " + str(event.get("location","")) + " " + str(event.get("note",""))).casefold()
 ]
 st.caption(f"{len(event_matches)} event records.")
-for start in range(0, len(event_matches), 2):
-    row = st.columns(2, gap="medium")
-    for offset, (col, event) in enumerate(zip(row, event_matches[start:start + 2])):
+for start in range(0, len(event_matches), 3):
+    row = st.columns(3, gap="medium")
+    for offset, (col, event) in enumerate(zip(row, event_matches[start:start + 3])):
         with col:
             with st.container(border=True, key=f"atlas-event-card-{event.get('id', start + offset)}"):
                 event_name = event.get("name", "")
@@ -1127,7 +1165,7 @@ for region_name in lead_regions:
             row = st.columns(3, gap="small")
             for col, lead in zip(row, leads[start:start + 3]):
                 with col:
-                    with st.container(border=True):
+                    with st.container(border=True, key=f"atlas-next-card-{lead_regions.index(region_name)}-{start + leads.index(lead)}"):
                         st.markdown(f'<div class="atlas-card-title">{lead}</div>', unsafe_allow_html=True)
                         st.caption("Discovery lead · " + region_name)
 
