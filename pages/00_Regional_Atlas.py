@@ -18,10 +18,14 @@ ATLAS_EVENT_IMAGES = {
     "Thal Desert Rally & Cultural Festival": {"thumb_url":"https://i.dawn.com/primary/2017/11/5a11fcf144249.jpg","page_url":"https://i.dawn.com/primary/2017/11/5a11fcf144249.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Punjab Paragliding Championship": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa1bStxoKLtg7Rm8ob87NPVRT0RgkKVG9DtWFeiMruZcUqEBpXb4EXuFw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa1bStxoKLtg7Rm8ob87NPVRT0RgkKVG9DtWFeiMruZcUqEBpXb4EXuFw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Sindhi Cultural Day (Ekta Day)": {"thumb_url":"https://www.geo.tv/assets/uploads/updates/2022-12-04/456571_9046172_updates.jpg","page_url":"https://www.geo.tv/assets/uploads/updates/2022-12-04/456571_9046172_updates.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
-    "Punjab Sufi Urs Circuit": {"thumb_url":"https://i.dawn.com/primary/2018/10/5bd60e6a0032d.jpg","page_url":"https://i.dawn.com/primary/2018/10/5bd60e6a0032d.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Urs of Data Ganj Bakhsh": {"thumb_url":"https://i.dawn.com/primary/2018/10/5bd60e6a0032d.jpg","page_url":"https://i.dawn.com/primary/2018/10/5bd60e6a0032d.jpg","artist":"Existing Data Ganj Bakhsh Urs image retained","license":"Source and reuse licence not independently verified"},
     "Waris Shah Mela": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBdID3hVjkfD6W8q3K9NH--gqF30hpHPxIdR9LrAQaUVGe7EFjE8Ohv4aR&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBdID3hVjkfD6W8q3K9NH--gqF30hpHPxIdR9LrAQaUVGe7EFjE8Ohv4aR&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Jashn-e-Baharan & Basant": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkKj7cQ7RJzJ5QNOjV3wX7W7XHbVvLPe4Zek2zAEYl6l2UfaZzd-9Dn8N&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkKj7cQ7RJzJ5QNOjV3wX7W7XHbVvLPe4Zek2zAEYl6l2UfaZzd-9Dn8N&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Lohri": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYTuAa4j5h0XGGETyg9gCH_tFyqZsRG3InuWnwhIjH5UwMxlqlRLCK4tE&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYTuAa4j5h0XGGETyg9gCH_tFyqZsRG3InuWnwhIjH5UwMxlqlRLCK4tE&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "National Horse & Cattle Show": {"thumb_url":"https://www.urdunews.com/sites/default/files/pictures/February/36496/2025/480693352_1209120447237906_4919564687668903105_n.jpg","page_url":"https://www.urdunews.com/node/886386","artist":"Urdu News","license":"Copyright and reuse permission not independently verified"},
+    "Eid-ul-Fitr": {"thumb_url":"https://www.geo.tv/assets/uploads/updates/2017-06-26/0_3_094219_album.jpg","page_url":"https://www.geo.tv/latest/147030-shawwal-moon-sighting-ruet-e-hilal-committee-to-meet-today","artist":"Geo News","license":"Copyright and reuse permission not independently verified"},
+    "Eid-ul-Adha": {"thumb_url":"https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2025/06/07/4609523-1305273017.jpg?itok=GpMMYiKL","page_url":"https://www.arabnews.com/node/2603699/pakistan","artist":"Arab News","license":"Copyright and reuse permission not independently verified"},
+    "Eid Milad-un-Nabi (12 Rabi-ul-Awwal)": {"thumb_url":"https://images.samaa.tv/images/eid-milad-nabi-pakistan.jpg","page_url":"https://www.samaa.tv/2087338857-pakistan-celebrates-eid-milad-un-nabi-with-religious-zeal","artist":"Samaa TV","license":"Copyright and reuse permission not independently verified"},
     "Urs of Shah Abdul Latif Bhittai": {"thumb_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","page_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Shandur Polo Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Chilam Joshi Festival": {"thumb_url":"https://www.youngpioneertours.com/wp-content/uploads/2025/10/Pakistan-kalash-valley-chilam-Joshi-Festival-women.jpg","page_url":"https://www.youngpioneertours.com/wp-content/uploads/2025/10/Pakistan-kalash-valley-chilam-Joshi-Festival-women.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
@@ -31,7 +35,7 @@ ATLAS_EVENT_IMAGES = {
     "Ginani Harvest Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1OAXcJvWhp6lgXUBD7tKWnb5T4M4vzj8PZHFYU-z9gi65AWRizDTjei50&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1OAXcJvWhp6lgXUBD7tKWnb5T4M4vzj8PZHFYU-z9gi65AWRizDTjei50&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Mangla Water Festival": {"thumb_url":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/05/35/d6/caption.jpg?w=800&h=800&s=1","page_url":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/05/35/d6/caption.jpg?w=800&h=800&s=1","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Leepa Valley Mela": {"thumb_url":"https://lh3.googleusercontent.com/d/13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-=w1800","page_url":"https://drive.google.com/file/d/13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-/view?usp=drive_link","artist":"User-supplied Google Drive image","license":"User-provided; sharing access and reuse rights not independently verified"},
-    "Lok Mela": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9vyUwRwiXUJn6Htob9DXrVS5dbRWvW88agIJOE2sHw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9vyUwRwiXUJn6Htob9DXrVS5dbRWvW88agIJOE2sHw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Lok Virsa Folk Festival (Lok Mela)": {"thumb_url":"https://www.youlinmagazine.com/articles/lok-mela-2017-at-lok-virsa-islamabad.jpg","page_url":"https://www.youlinmagazine.com/story/lok-mela-2017-at-lok-virsa-islamabad/ODEz","artist":"Youlin Magazine","license":"Copyright and reuse permission not independently verified"},
     "Islamabad Marathon": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuspr_nrWU6nPfb4pUIxnr0NzoW_W2m1-6MdfbjHhKfw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuspr_nrWU6nPfb4pUIxnr0NzoW_W2m1-6MdfbjHhKfw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Uchal Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAUYvuxwVTFGP_H60trf_tvtWjxNwu1qi67lr4IgctgHwSZhkWrXPeqrU&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAUYvuxwVTFGP_H60trf_tvtWjxNwu1qi67lr4IgctgHwSZhkWrXPeqrU&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Choimus (Chaumos) Festival": {"thumb_url":"https://i.dawn.com/primary/2016/11/58295b3c48a18.jpg","page_url":"https://i.dawn.com/primary/2016/11/58295b3c48a18.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
@@ -72,7 +76,17 @@ st.markdown("""
 .atlas-photo-frame img{display:block;width:100%;height:210px;object-fit:contain;border-radius:10px;background:linear-gradient(135deg,#E9D9B6 0%,#D7E7DE 48%,#C9DFE5 100%);padding:10px}
 div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padding:4px;border:1px solid rgba(199,163,91,.7);border-radius:14px;background:rgba(199,163,91,.10);box-shadow:0 10px 24px rgba(8,25,20,.12)}
 .atlas-photo-placeholder{height:178px;border-radius:9px;background:linear-gradient(135deg,#123D2D,#355D62 62%,#C7A35B);display:flex;align-items:center;justify-content:center;color:#F6F2E8;font-size:10px;font-weight:800;letter-spacing:2px}
-.atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#34483B!important;font-weight:850;min-height:28px;max-height:28px;overflow:hidden;opacity:1!important}
+.atlas-card-meta{margin-top:12px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#111A14!important;font-weight:850;min-height:28px;max-height:28px;overflow:hidden;opacity:1!important}
+.atlas-event-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;min-height:38px;margin:10px 0 4px;color:#111A14!important}
+.atlas-event-region{font-size:9px;line-height:1.35;letter-spacing:1.15px;text-transform:uppercase;font-weight:850;color:#111A14!important}
+.atlas-event-date{display:inline-flex;align-items:center;max-width:100%;padding:5px 9px;border:1px solid #C7A35B;border-radius:999px;background:#F5EBD6;color:#111A14!important;font-size:10px;line-height:1.35;font-weight:850;letter-spacing:.1px}
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:470px;display:flex}
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"]{height:210px;min-height:210px;max-height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#E9E2D4;border-radius:12px;padding:6px}
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"] img{width:100%;height:198px;object-fit:contain!important;background:transparent;border:0!important;box-shadow:none!important}
+[class*="st-key-atlas-event-card-"] .atlas-card-title{height:54px;min-height:54px;max-height:54px;color:#111A14!important}
+[class*="st-key-atlas-event-card-"] .atlas-card-copy{height:78px;min-height:78px;max-height:78px;color:#111A14!important}
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"]{margin-top:auto;flex-shrink:0}
+@media(max-width:700px){[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0}[class*="st-key-atlas-event-card-"] .atlas-card-copy{height:auto;min-height:70px;max-height:95px}}
 .atlas-card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;line-height:1.08;font-weight:700;color:#111A14!important;margin:5px 0 7px;height:52px;min-height:52px;max-height:52px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;opacity:1!important}
 .atlas-card-copy{font-size:12px;line-height:1.55;color:#26352C!important;height:78px;min-height:78px;max-height:78px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;opacity:1!important}
 .atlas-tag-row{height:52px;min-height:52px;max-height:52px;overflow:hidden;display:block}.atlas-tag{display:inline-block;padding:4px 8px;margin:3px 3px 0 0;border:1px solid #C7D1C9;border-radius:30px;font-size:9px;color:#26352C!important;opacity:1!important}
@@ -1240,8 +1254,8 @@ def event_card_summary(event: dict, limit: int = 132) -> str:
     return shortened + "…"
 
 
-def event_card_date(event: dict, limit: int = 52) -> str:
-    """Keep the card metadata to two readable lines; full dates remain in the details."""
+def event_card_date(event: dict, limit: int = 76) -> str:
+    """Keep the complete seasonal or lunar date visible on the event card."""
     raw = " ".join(str(event.get("date") or "").split())
     if len(raw) <= limit:
         return raw
@@ -1269,16 +1283,15 @@ for start in range(0, len(event_matches), 3):
                         "Jashn-e-Baharan & Basant",
                         "Lohri",
                         "National Horse & Cattle Show",
-                        "Punjab Sufi Urs Circuit",
+                        "Urs of Data Ganj Bakhsh",
                         "Waris Shah Mela",
-                        "Heer Ranjha Fair",
                         "Thal Desert Rally & Cultural Festival",
                         "Punjab Paragliding Championship",
                     },
                     image_override=ATLAS_EVENT_IMAGES.get(event_name),
                 )
                 st.markdown(
-                    f'<div class="atlas-card-meta">{event.get("region","")} · {event_card_date(event)}</div>',
+                    f'<div class="atlas-event-meta"><span class="atlas-event-region">{event.get("region","")}</span><span class="atlas-event-date">{event_card_date(event)}</span></div>',
                     unsafe_allow_html=True,
                 )
                 st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
