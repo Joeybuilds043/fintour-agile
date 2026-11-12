@@ -84,27 +84,16 @@ div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padd
 .atlas-record-location{margin-top:9px;padding:10px 13px;border:1px solid #B8CFBD;border-radius:8px;background:#EAF2EB;color:#174B35!important;font-size:12px;line-height:1.5;font-weight:800}
 .atlas-record-location strong{color:#174B35!important}
 /* Festival card: keep the date directly below the event title and make the expander a clear action */
+/* Keep the expander label native; only style its surface to avoid distorted glyphs. */
 [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary{
     background:linear-gradient(135deg,#174B35 0%,#246447 100%)!important;
     border:1px solid #174B35!important;
     border-radius:9px!important;
     padding:9px 13px!important;
-    color:#FFFFFF!important;
-    font-family:'Inter','Montserrat',Arial,sans-serif!important;
-    font-size:12px!important;
-    font-weight:850!important;
-    letter-spacing:.35px!important;
-    text-shadow:0 1px 1px rgba(0,0,0,.12)!important;
     box-shadow:0 3px 9px rgba(23,75,53,.14)!important;
 }
-[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary,
-[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary *,
-[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p,
-[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary span{
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p{
     color:#FFFFFF!important;
-    -webkit-text-fill-color:#FFFFFF!important;
-    font-family:'Inter','Montserrat',Arial,sans-serif!important;
-    font-weight:850!important;
 }
 [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary:hover{
     background:#2B704F!important;
@@ -342,10 +331,7 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 [class*="st-key-atlas-event-card-"] [data-testid="stExpander"]{
     margin-top:auto!important;flex-shrink:0!important;
 }
-.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] summary,
-.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] summary p{
-    color:var(--voyage-ink)!important;opacity:1!important;font-weight:700!important;
-}
+/* Do not override expander typography here; native Streamlit text remains legible. */
 .stApp [class*="st-key-atlas-event-card-"] .atlas-record-note{
     color:var(--voyage-body-ink)!important;opacity:1!important;
     background:var(--voyage-surface)!important;font-size:12px!important;line-height:1.55!important;
@@ -363,25 +349,15 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 }
 
 /* Final festival-detail overrides: keep the green/cream/gold palette consistent. */
-.atlas-record-note{padding:13px 14px!important;border:1px solid #285D45!important;border-left:4px solid #A9C5B0!important;border-radius:9px!important;background:#174B35!important;color:#FFFFFF!important;font-family:Inter,Arial,sans-serif!important;font-size:12px!important;line-height:1.65!important;font-weight:450!important}
+.atlas-record-note{margin-bottom:18px!important;padding:13px 14px!important;border:1px solid #285D45!important;border-left:4px solid #A9C5B0!important;border-radius:9px!important;background:#174B35!important;color:#FFFFFF!important;font-family:inherit!important;font-size:12px!important;line-height:1.65!important;font-weight:450!important}
 .atlas-record-note *{color:#FFFFFF!important}
-.atlas-record-location{margin-top:9px!important;padding:10px 13px!important;border:1px solid #B8CFBD!important;border-radius:8px!important;background:#EAF2EB!important;color:#174B35!important;font-size:12px!important;line-height:1.5!important;font-weight:800!important}
+.atlas-record-location{display:block!important;position:relative!important;clear:both!important;box-sizing:border-box!important;width:100%!important;margin-top:18px!important;padding:11px 13px!important;border:1px solid #B8CFBD!important;border-radius:8px!important;background:#EAF2EB!important;color:#174B35!important;font-size:12px!important;line-height:1.55!important;font-weight:800!important}
 .atlas-record-location strong{color:#174B35!important}
 .atlas-event-meta{display:block!important;width:100%!important;height:34px!important;min-height:34px!important;max-height:34px!important;margin:10px 0 8px!important;overflow:hidden!important}
 .atlas-event-date{display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:100%!important;height:34px!important;min-height:34px!important;max-height:34px!important;padding:0 11px!important;border:1px solid #A9C5B0!important;border-radius:8px!important;background:#E8F1E9!important;color:#174B35!important;font-family:Inter,Arial,sans-serif!important;font-size:10px!important;line-height:1!important;font-weight:750!important;letter-spacing:.15px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-/* Final expander label override: use Streamlit's native font metrics to prevent clipped or distorted text. */
-.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary,
-.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p,
-.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary span{
+/* White label only; leave font family, sizing and glyph rendering to Streamlit. */
+.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p{
     color:#FFFFFF!important;
-    -webkit-text-fill-color:#FFFFFF!important;
-    font-family:inherit!important;
-    font-size:13px!important;
-    font-weight:750!important;
-    letter-spacing:normal!important;
-    line-height:1.35!important;
-    text-shadow:none!important;
-    opacity:1!important;
 }
 </style>
 """, unsafe_allow_html=True)
