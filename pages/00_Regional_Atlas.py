@@ -1043,6 +1043,8 @@ for start in range(0, len(event_matches), 2):
                         "Punjab Sufi Urs Circuit",
                         "Waris Shah Mela",
                         "Heer Ranjha Fair",
+                        "Thal Desert Rally & Cultural Festival",
+                        "Punjab Paragliding Championship",
                     },
                     image_override=ATLAS_EVENT_IMAGES.get(event_name),
                 )
