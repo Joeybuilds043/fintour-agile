@@ -14,7 +14,14 @@ ATLAS_EVENT_IMAGES = {
     "Cholistan Desert Jeep Rally": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJet6WvzbSBfI0ZB0DXtovyVZXpqLmtRjgtxJaRCiysVr7PWtvQcrImw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJet6WvzbSBfI0ZB0DXtovyVZXpqLmtRjgtxJaRCiysVr7PWtvQcrImw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Mela Chiraghan": {"thumb_url":"https://apnaorg.com/articles/news-60/dailytimes_clip_image001.jpg","page_url":"https://apnaorg.com/articles/news-60/dailytimes_clip_image001.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Vaisakhi Mela and Sikh Pilgrimage": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZDXAO1C6rYNZv73FHe8RyQAoFUX1tBQskaL4ItF6iyjBMDlHGMSxK3Ks&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZDXAO1C6rYNZv73FHe8RyQAoFUX1tBQskaL4ItF6iyjBMDlHGMSxK3Ks&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
-    "Urs of Lal Shahbaz Qalandar": {"thumb_url":"https://i.tribune.com.pk/media/images/1112454-Pic-1464530635/1112454-Pic-1464530635-640x480.web","page_url":"https://i.tribune.com.pk/media/images/1112454-Pic-1464530635/1112454-Pic-1464530635-640x480.web","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Urs of Lal Shahbaz Qalandar": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8fShZd9Z4WUaQPOg2Qf15MBxttmf5jO6UA10o0EwjMt63s5IKcFmyK3Bm&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8fShZd9Z4WUaQPOg2Qf15MBxttmf5jO6UA10o0EwjMt63s5IKcFmyK3Bm&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Thal Desert Rally & Cultural Festival": {"thumb_url":"https://i.dawn.com/primary/2017/11/5a11fcf144249.jpg","page_url":"https://i.dawn.com/primary/2017/11/5a11fcf144249.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Punjab Paragliding Championship": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa1bStxoKLtg7Rm8ob87NPVRT0RgkKVG9DtWFeiMruZcUqEBpXb4EXuFw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa1bStxoKLtg7Rm8ob87NPVRT0RgkKVG9DtWFeiMruZcUqEBpXb4EXuFw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Sindhi Cultural Day (Ekta Day)": {"thumb_url":"https://www.geo.tv/assets/uploads/updates/2022-12-04/456571_9046172_updates.jpg","page_url":"https://www.geo.tv/assets/uploads/updates/2022-12-04/456571_9046172_updates.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Punjab Sufi Urs Circuit": {"thumb_url":"https://i.dawn.com/primary/2018/10/5bd60e6a0032d.jpg","page_url":"https://i.dawn.com/primary/2018/10/5bd60e6a0032d.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Waris Shah Mela": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBdID3hVjkfD6W8q3K9NH--gqF30hpHPxIdR9LrAQaUVGe7EFjE8Ohv4aR&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBdID3hVjkfD6W8q3K9NH--gqF30hpHPxIdR9LrAQaUVGe7EFjE8Ohv4aR&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Jashn-e-Baharan & Basant": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkKj7cQ7RJzJ5QNOjV3wX7W7XHbVvLPe4Zek2zAEYl6l2UfaZzd-9Dn8N&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkKj7cQ7RJzJ5QNOjV3wX7W7XHbVvLPe4Zek2zAEYl6l2UfaZzd-9Dn8N&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Lohri": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYTuAa4j5h0XGGETyg9gCH_tFyqZsRG3InuWnwhIjH5UwMxlqlRLCK4tE&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYTuAa4j5h0XGGETyg9gCH_tFyqZsRG3InuWnwhIjH5UwMxlqlRLCK4tE&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Urs of Shah Abdul Latif Bhittai": {"thumb_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","page_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Shandur Polo Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Chilam Joshi Festival": {"thumb_url":"https://www.youngpioneertours.com/wp-content/uploads/2025/10/Pakistan-kalash-valley-chilam-Joshi-Festival-women.jpg","page_url":"https://www.youngpioneertours.com/wp-content/uploads/2025/10/Pakistan-kalash-valley-chilam-Joshi-Festival-women.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
@@ -166,9 +173,9 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 [class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img,
 [class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img{
     display:block!important;width:100%!important;height:172px!important;
-    min-height:172px!important;max-height:172px!important;object-fit:cover!important;
+    min-height:172px!important;max-height:172px!important;object-fit:contain!important;
     object-position:center!important;margin:0 auto!important;border:0!important;
-    border-radius:9px!important;box-shadow:none!important;
+    border-radius:9px!important;box-shadow:none!important;background:transparent!important;
 }
 [class*="st-key-atlas-event-card-"] .atlas-card-meta,
 [class*="st-key-atlas-reference-card-"] .atlas-card-meta{
@@ -216,6 +223,22 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
     [class*="st-key-atlas-event-card-"] .atlas-card-copy{height:auto!important;min-height:76px!important;max-height:120px!important}
 }
 
+
+/* Gallery cards keep the same footprint even when a batch has only two images.
+   Images are fully visible rather than cropped; titles, captions and links align. */
+[class*="st-key-batch-gallery-card-"]{
+    width:100%!important;min-width:0!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img{
+    object-fit:contain!important;object-position:center!important;
+}
+[class*="st-key-batch-gallery-card-"] .atlas-card-title{
+    display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;
+    white-space:normal!important;overflow:hidden!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stCaptionContainer"]{
+    display:block!important;line-height:1.4!important;
+}
 /* Cluster-only spacing: keep experience/category chips clear of the card edge. */
 [class*="st-key-atlas-destination-card-0-"] .atlas-tag-row{
     box-sizing:border-box!important;
