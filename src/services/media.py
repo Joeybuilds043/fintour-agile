@@ -266,33 +266,49 @@ def get_display_image(
     """
     if not image_url or os.getenv("HORIZON_DISABLE_REMOTE_MEDIA") == "1":
         return None
-    try:
-        response = requests.get(
-            image_url, headers={"User-Agent": "HorizonTourism/1.0"},
-            timeout=(4, 9),
-        )
-        response.raise_for_status()
-        image = ImageOps.exif_transpose(Image.open(BytesIO(response.content))).convert("RGB")
-        width, height = image.size
-        ratio = max(0.2, aspect_ratio[0] / max(aspect_ratio[1], 1))
-        if width / max(height, 1) > ratio:
-            crop_width = int(height * ratio)
-            left = int(width * min(max(focal_point[0], 0), 1) - crop_width / 2)
-            left = min(max(left, 0), width - crop_width)
-            image = image.crop((left, 0, left + crop_width, height))
-        else:
-            crop_height = int(width / ratio)
-            top = int(height * min(max(focal_point[1], 0), 1) - crop_height / 2)
-            top = min(max(top, 0), height - crop_height)
-            image = image.crop((0, top, width, top + crop_height))
-        image.thumbnail((1800, 1100), Image.Resampling.LANCZOS)
-        image = ImageOps.autocontrast(image, cutoff=0.35)
-        image = ImageEnhance.Color(image).enhance(1.045)
-        image = ImageEnhance.Contrast(image).enhance(1.035)
-        image = ImageEnhance.Brightness(image).enhance(1.005)
-        image = image.filter(ImageFilter.UnsharpMask(radius=1.1, percent=105, threshold=3))
-        output = BytesIO()
-        image.save(output, format="JPEG", quality=92, optimize=True, progressive=True)
-        return output.getvalue()
-    except (requests.RequestException, OSError, ValueError):
+    candidate_urls = [image_url]
+    # Google Drive has several delivery endpoints; try the public thumbnail
+    # and download URLs when the direct image endpoint cannot be decoded.
+    if "googleusercontent.com/d/" in image_url or "drive.google.com/" in image_url:
+        file_id = image_url.split("/d/", 1)[-1].split("?", 1)[0].split("=", 1)[0]
+        if file_id and "/" not in file_id:
+            candidate_urls.extend([
+                f"https://drive.google.com/thumbnail?id={file_id}&sz=w1800",
+                f"https://drive.google.com/uc?export=view&id={file_id}",
+                f"https://drive.google.com/uc?export=download&id={file_id}",
+            ])
+    image = None
+    for candidate_url in candidate_urls:
+        try:
+            response = requests.get(
+                candidate_url, headers={"User-Agent": "Mozilla/5.0 VoyagePK/1.0"},
+                timeout=(4, 9), allow_redirects=True,
+            )
+            response.raise_for_status()
+            image = ImageOps.exif_transpose(Image.open(BytesIO(response.content))).convert("RGB")
+            break
+        except (requests.RequestException, OSError, ValueError):
+            continue
+    if image is None:
         return None
+    width, height = image.size
+    ratio = max(0.2, aspect_ratio[0] / max(aspect_ratio[1], 1))
+    if width / max(height, 1) > ratio:
+        crop_width = int(height * ratio)
+        left = int(width * min(max(focal_point[0], 0), 1) - crop_width / 2)
+        left = min(max(left, 0), width - crop_width)
+        image = image.crop((left, 0, left + crop_width, height))
+    else:
+        crop_height = int(width / ratio)
+        top = int(height * min(max(focal_point[1], 0), 1) - crop_height / 2)
+        top = min(max(top, 0), height - crop_height)
+        image = image.crop((0, top, width, top + crop_height))
+    image.thumbnail((1800, 1100), Image.Resampling.LANCZOS)
+    image = ImageOps.autocontrast(image, cutoff=0.35)
+    image = ImageEnhance.Color(image).enhance(1.045)
+    image = ImageEnhance.Contrast(image).enhance(1.035)
+    image = ImageEnhance.Brightness(image).enhance(1.005)
+    image = image.filter(ImageFilter.UnsharpMask(radius=1.1, percent=105, threshold=3))
+    output = BytesIO()
+    image.save(output, format="JPEG", quality=92, optimize=True, progressive=True)
+    return output.getvalue()
