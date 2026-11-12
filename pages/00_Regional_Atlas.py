@@ -25,7 +25,7 @@ ATLAS_EVENT_IMAGES = {
     "National Horse & Cattle Show": {"thumb_url":"https://www.urdunews.com/sites/default/files/pictures/February/36496/2025/480693352_1209120447237906_4919564687668903105_n.jpg","page_url":"https://www.urdunews.com/node/886386","artist":"Urdu News","license":"Copyright and reuse permission not independently verified"},
     "Eid-ul-Fitr": {"thumb_url":"https://i.tribune.com.pk/media/images/618938-LahoreBadshahimosqueEidMuslimsREUTERS-1381912038/618938-LahoreBadshahimosqueEidMuslimsREUTERS-1381912038.jpg","page_url":"https://i.tribune.com.pk/media/images/618938-LahoreBadshahimosqueEidMuslimsREUTERS-1381912038/618938-LahoreBadshahimosqueEidMuslimsREUTERS-1381912038.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Eid-ul-Adha": {"thumb_url":"https://www.globaltimes.cn/Portals/0/attachment/2021/2021-05-14/7adf0b02-86d4-4088-afac-610f0328cca5.jpeg","page_url":"https://www.globaltimes.cn/Portals/0/attachment/2021/2021-05-14/7adf0b02-86d4-4088-afac-610f0328cca5.jpeg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
-    "Eid Milad-un-Nabi": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4gRxYVmSPWepziqOGO-0scE7KmMj8hzWxktNHMTH8fIDRDKm_isYwvJI&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4gRxYVmSPWepziqOGO-0scE7KmMj8hzWxktNHMTH8fIDRDKm_isYwvJI&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Eid Milad-un-Nabi": {"thumb_url":"https://i.tribune.com.pk/media/images/EId-Miladun-Nabi-main1634658140-0/EId-Miladun-Nabi-main1634658140-0.png","page_url":"https://i.tribune.com.pk/media/images/EId-Miladun-Nabi-main1634658140-0/EId-Miladun-Nabi-main1634658140-0.png","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Independence Day (Jashn-e-Azadi)": {"thumb_url":"https://i.dawn.com/primary/2025/08/141420424c6c1f6.png","page_url":"https://www.dawn.com/news/1930834","artist":"Dawn","license":"Copyright and reuse permission not independently verified"},
     "Urs of Shah Abdul Latif Bhittai": {"thumb_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","page_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Shandur Polo Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
@@ -113,8 +113,10 @@ div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padd
 .atlas-record-note{padding:10px 12px;border-left:2px solid #C7A35B;background:var(--voyage-surface);border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;color:var(--voyage-muted)}
 div[data-testid="stVerticalBlockBorderWrapper"]{border-color:var(--voyage-line);border-radius:17px}
 div[data-testid="stImage"] img{border-radius:10px;object-fit:contain;box-shadow:0 8px 20px rgba(8,25,20,.10)}
-[class*="st-key-batch-gallery-card-"]{height:100%;min-height:330px;padding:13px!important;border:1px solid rgba(23,92,67,.22)!important;border-radius:18px!important;background:linear-gradient(145deg,#F3E8D0 0%,#E5F0E8 52%,#DCEAF0 100%)!important;box-shadow:0 12px 30px rgba(13,55,42,.09)!important}
-.st-key-batch-gallery-card [data-testid="stImage"]{height:224px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:13px;background:linear-gradient(135deg,#D7C59F,#C8E0D5 55%,#B8D6DF);padding:7px}
+[class*="st-key-batch-gallery-card-"]{height:100%;min-height:360px;padding:13px!important;border:1px solid rgba(23,92,67,.22)!important;border-radius:18px!important;background:linear-gradient(145deg,#F3E8D0 0%,#E5F0E8 52%,#DCEAF0 100%)!important;box-shadow:0 12px 30px rgba(13,55,42,.09)!important;display:flex;flex-direction:column}
+.st-key-batch-gallery-card [data-testid="stImage"]{height:224px;min-height:224px;max-height:224px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:13px;background:linear-gradient(135deg,#D7C59F,#C8E0D5 55%,#B8D6DF);padding:7px}
+.atlas-gallery-image-slot{height:224px;min-height:224px;max-height:224px;width:100%;box-sizing:border-box;border:1px dashed rgba(23,92,67,.35);border-radius:13px;background:linear-gradient(135deg,rgba(215,197,159,.28),rgba(200,224,213,.28) 55%,rgba(184,214,223,.28))}
+.atlas-gallery-image-slot--unavailable{background:linear-gradient(135deg,rgba(215,197,159,.18),rgba(200,224,213,.18) 55%,rgba(184,214,223,.18))}
 .st-key-batch-gallery-card [data-testid="stImage"] img{width:100%;height:210px;object-fit:contain!important;object-position:center;background:transparent;border:0!important;border-radius:9px;box-shadow:none!important}
 .st-key-batch-gallery-card .atlas-card-title{min-height:54px;margin-top:12px}
 .st-key-batch-gallery-card [data-testid="stCaptionContainer"]{min-height:34px}
@@ -1408,14 +1410,22 @@ for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCH
         for offset, (col, image_record) in enumerate(zip(row, batch_images[start:start + 3])):
             with col:
                 with st.container(border=False, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
-                    gallery_image = fetch_gallery_image(image_record["image_url"])
-                    if gallery_image:
-                        st.image(gallery_image, use_container_width=True)
+                    # Balochistan Batch 4 keeps its image slots intentionally empty
+                    # so the owner can add approved photographs later.
+                    if batch_name == "Balochistan · Batch 4":
+                        st.markdown('<div class="atlas-gallery-image-slot" aria-label="Image slot reserved"></div>', unsafe_allow_html=True)
                     else:
-                        st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE TEMPORARILY UNAVAILABLE</div></div>', unsafe_allow_html=True)
+                        gallery_image = fetch_gallery_image(image_record["image_url"])
+                        if gallery_image:
+                            st.image(gallery_image, use_container_width=True)
+                        else:
+                            st.markdown('<div class="atlas-gallery-image-slot atlas-gallery-image-slot--unavailable"></div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
-                    st.caption("Original supplied photograph · full frame preserved")
-                    st.link_button("Open original image", image_record["image_url"])
+                    if batch_name == "Balochistan · Batch 4":
+                        st.caption("Image space reserved")
+                    else:
+                        st.caption("Original supplied photograph · full frame preserved")
+                        st.link_button("Open original image", image_record["image_url"])
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">05 · VISUAL REFERENCE LIBRARY</div>', unsafe_allow_html=True)
