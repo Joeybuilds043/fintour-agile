@@ -1412,7 +1412,7 @@ for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCH
                 with st.container(border=False, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
                     # Balochistan Batch 4 keeps its image slots intentionally empty
                     # so the owner can add approved photographs later.
-                    if batch_name == "Balochistan · Batch 4":
+                    if batch_name == "Sindh · Batch 1":
                         st.markdown('<div class="atlas-gallery-image-slot" aria-label="Image slot reserved"></div>', unsafe_allow_html=True)
                     else:
                         gallery_image = fetch_gallery_image(image_record["image_url"])
@@ -1421,7 +1421,7 @@ for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCH
                         else:
                             st.markdown('<div class="atlas-gallery-image-slot atlas-gallery-image-slot--unavailable"></div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
-                    if batch_name == "Balochistan · Batch 4":
+                    if batch_name == "Sindh · Batch 1":
                         st.caption("Image space reserved")
                     else:
                         st.caption("Original supplied photograph · full frame preserved")
