@@ -539,8 +539,8 @@ ATLAS_CLUSTER_IMAGES = {
         "license": "Source and reuse licence not independently verified",
     },
     "Shogran & Siri Paye": {
-        "thumb_url": "https://blizin.com/public/images/uploads/articles/siripaye-anadventurouswonderlandinpakistan-A-1564045295.webp",
-        "page_url": "https://blizin.com/public/images/uploads/articles/siripaye-anadventurouswonderlandinpakistan-A-1564045295.webp",
+        "thumb_url": "https://www.apricottours.pk/wp-content/uploads/photo-gallery/Shogran_Siri_Paye_Tour/Paye-Meadows-and-Makra-Peak.jpeg?bwg=1728646856",
+        "page_url": "https://www.apricottours.pk/wp-content/uploads/photo-gallery/Shogran_Siri_Paye_Tour/Paye-Meadows-and-Makra-Peak.jpeg?bwg=1728646856",
         "artist": "User-supplied image URL",
         "license": "Source and reuse licence not independently verified",
     },
