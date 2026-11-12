@@ -23,7 +23,7 @@ ATLAS_EVENT_IMAGES = {
     "Sibi Mela": {"thumb_url":"https://www.geo.tv/assets/uploads/updates/2019-02-21/0_4_035119_album.jpg","page_url":"https://www.geo.tv/assets/uploads/updates/2019-02-21/0_4_035119_album.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Ginani Harvest Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1OAXcJvWhp6lgXUBD7tKWnb5T4M4vzj8PZHFYU-z9gi65AWRizDTjei50&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1OAXcJvWhp6lgXUBD7tKWnb5T4M4vzj8PZHFYU-z9gi65AWRizDTjei50&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Mangla Water Festival": {"thumb_url":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/05/35/d6/caption.jpg?w=800&h=800&s=1","page_url":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/05/35/d6/caption.jpg?w=800&h=800&s=1","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
-    "Leepa Valley Mela": {"thumb_url":"https://drive.google.com/uc?export=view&id=13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-","page_url":"https://drive.google.com/file/d/13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-/view?usp=drive_link","artist":"User-supplied Google Drive image","license":"User-provided; sharing access and reuse rights not independently verified"},
+    "Leepa Valley Mela": {"thumb_url":"https://lh3.googleusercontent.com/d/13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-=w1800","page_url":"https://drive.google.com/file/d/13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-/view?usp=drive_link","artist":"User-supplied Google Drive image","license":"User-provided; sharing access and reuse rights not independently verified"},
     "Lok Mela": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9vyUwRwiXUJn6Htob9DXrVS5dbRWvW88agIJOE2sHw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9vyUwRwiXUJn6Htob9DXrVS5dbRWvW88agIJOE2sHw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Islamabad Marathon": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuspr_nrWU6nPfb4pUIxnr0NzoW_W2m1-6MdfbjHhKfw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuspr_nrWU6nPfb4pUIxnr0NzoW_W2m1-6MdfbjHhKfw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
     "Uchal Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAUYvuxwVTFGP_H60trf_tvtWjxNwu1qi67lr4IgctgHwSZhkWrXPeqrU&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAUYvuxwVTFGP_H60trf_tvtWjxNwu1qi67lr4IgctgHwSZhkWrXPeqrU&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
@@ -228,6 +228,60 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 [class*="st-key-atlas-destination-card-0-"] .atlas-tag{
     box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;
     line-height:1.25!important;margin:0!important;padding:5px 8px!important;
+}
+
+/* Festival cards: same photo frame as the destination and landscape cards. */
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
+    height:510px!important;min-height:510px!important;max-height:510px!important;
+    box-sizing:border-box!important;display:flex!important;overflow:hidden!important;
+    padding:13px!important;border:1px solid var(--voyage-line)!important;
+    border-radius:17px!important;background:var(--voyage-surface)!important;
+    box-shadow:0 9px 24px rgba(8,25,20,.075)!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"]{
+    width:100%!important;height:218px!important;min-height:218px!important;max-height:218px!important;
+    box-sizing:border-box!important;padding:6px!important;display:flex!important;
+    align-items:center!important;justify-content:center!important;overflow:hidden!important;
+    border-radius:12px!important;background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED)!important;
+    border:1px solid rgba(199,163,91,.48)!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"] img{
+    display:block!important;width:100%!important;height:206px!important;
+    min-height:206px!important;max-height:206px!important;object-fit:contain!important;
+    object-position:center!important;margin:0 auto!important;border:0!important;
+    border-radius:9px!important;box-shadow:none!important;background:transparent!important;
+}
+[class*="st-key-atlas-event-card-"] .atlas-card-meta{
+    color:#59695F!important;opacity:1!important;font-size:9px!important;font-weight:800!important;
+    letter-spacing:1.15px!important;line-height:1.35!important;display:flex!important;align-items:center!important;
+}
+[class*="st-key-atlas-event-card-"] .atlas-card-title{
+    color:#17251D!important;opacity:1!important;font-family:'Cormorant Garamond',Georgia,serif!important;
+    font-size:24px!important;font-weight:700!important;line-height:1.08!important;
+    height:54px!important;min-height:54px!important;max-height:54px!important;
+    display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;
+}
+[class*="st-key-atlas-event-card-"] .atlas-card-copy{
+    box-sizing:border-box!important;height:82px!important;min-height:82px!important;max-height:82px!important;
+    overflow:hidden!important;text-align:left!important;color:#34463B!important;opacity:1!important;
+    font-size:12.5px!important;font-weight:500!important;line-height:1.5!important;letter-spacing:.05px!important;
+    display:-webkit-box!important;-webkit-line-clamp:4!important;-webkit-box-orient:vertical!important;
+}
+.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] summary,
+.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] summary p{
+    color:var(--voyage-ink)!important;opacity:1!important;font-weight:700!important;
+}
+.stApp [class*="st-key-atlas-event-card-"] .atlas-record-note{
+    color:var(--voyage-body-ink)!important;opacity:1!important;
+    background:var(--voyage-surface)!important;font-size:12px!important;line-height:1.55!important;
+}
+@media(max-width:700px){
+    [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
+        height:auto!important;min-height:0!important;max-height:none!important;
+    }
+    [class*="st-key-atlas-event-card-"] .atlas-card-copy{
+        height:auto!important;min-height:0!important;max-height:110px!important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -1088,8 +1142,10 @@ for start in range(0, len(event_matches), 3):
                 )
                 st.markdown(f'<div class="atlas-card-meta">{event.get("region","")} · {event.get("date","")}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="atlas-card-copy">{event.get("note","")}</div>', unsafe_allow_html=True)
-                with st.expander("Location and event details"):
+                st.markdown(f'<div class="atlas-card-copy">{event.get("card_note", event.get("note",""))}</div>', unsafe_allow_html=True)
+                with st.expander("About this event · location and details"):
+                    if event.get("note"):
+                        st.markdown(f'<div class="atlas-record-note">{event.get("note","")}</div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="atlas-record-note">{event.get("location","")}</div>', unsafe_allow_html=True)
                     if event.get("source"):
                         st.link_button("Official / reference information", event["source"])
