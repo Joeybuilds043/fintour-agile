@@ -179,6 +179,42 @@ ATLAS_DESTINATION_IMAGES = {
         "artist": "Pexels",
         "license": "Pexels License",
     },
+    "Chitral & Kalash Valleys": {
+        "thumb_url": "https://kalashtours.com/__l5e/assets-v1/5b909362-cf4c-4fe9-a584-6828f0e2845d/dest-rumbur.webp",
+        "page_url": "https://kalashtours.com/__l5e/assets-v1/5b909362-cf4c-4fe9-a584-6828f0e2845d/dest-rumbur.webp",
+        "artist": "User-supplied image URL (Kalash Tours)",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Neelum Valley": {
+        "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Beautiful_Neelum_Valley_Kashmir_Pakistan.jpg?width=2000",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Beautiful_Neelum_Valley_Kashmir_Pakistan.jpg",
+        "artist": "Azmat akbar",
+        "license": "CC BY-SA 4.0",
+    },
+    "Taxila": {
+        "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmarajika%20stupa%2CTaxila.jpg?width=2000",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Dharmarajika_stupa,Taxila.jpg",
+        "artist": "Sasha Isachenko",
+        "license": "CC BY-SA 3.0",
+    },
+    "Karachi & Makli–Thatta": {
+        "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Makli_hills_thatta_sindh_-_UNESCO_World_Heritage_Site.jpg?width=2000",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Makli_hills_thatta_sindh_-_UNESCO_World_Heritage_Site.jpg",
+        "artist": "Yasir Dora",
+        "license": "CC BY-SA 4.0",
+    },
+    "Bahawalpur & Cholistan": {
+        "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Derawar_Fort_Cholistan_Bahawalpur.jpg?width=2000",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Derawar_Fort_Cholistan_Bahawalpur.jpg",
+        "artist": "Mhtoori",
+        "license": "CC BY-SA 4.0",
+    },
+    "Hingol & Gwadar Coast": {
+        "thumb_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Kund_Malir_Beach%2C_Hingol_National_Park%2C_Balochistan.jpg?width=2000",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Kund_Malir_Beach,_Hingol_National_Park,_Balochistan.jpg",
+        "artist": "Furqanlw",
+        "license": "CC BY-SA 4.0",
+    },
     "Concordia and K2 Base Camp": {
         "thumb_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
         "page_url": "https://static.vecteezy.com/system/resources/thumbnails/058/177/333/small/mountaineers-ascending-k2-the-second-highest-mountain-on-earth-photo.jpg",
