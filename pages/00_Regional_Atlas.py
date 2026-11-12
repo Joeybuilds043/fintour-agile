@@ -112,6 +112,20 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
     display:-webkit-box!important;-webkit-line-clamp:4!important;
     -webkit-box-orient:vertical!important;overflow:hidden!important;
 }
+
+/* Cluster-only spacing: keep experience/category chips clear of the card edge. */
+[class*="st-key-atlas-destination-card-0-"] .atlas-tag-row{
+    box-sizing:border-box!important;
+    height:64px!important;min-height:64px!important;max-height:64px!important;
+    display:flex!important;flex-wrap:wrap!important;align-content:flex-start!important;
+    align-items:flex-start!important;gap:5px!important;
+    margin:0 0 12px!important;padding:2px 0 10px!important;
+    overflow:hidden!important;
+}
+[class*="st-key-atlas-destination-card-0-"] .atlas-tag{
+    box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;
+    line-height:1.25!important;margin:0!important;padding:5px 8px!important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -449,6 +463,377 @@ ATLAS_DESTINATION_IMAGES = {
 # Match detailed records to the existing catalogue so imagery and cluster names stay consistent.
 catalog_by_name = {name.casefold(): (name, item) for name, item in DESTINATIONS.items()}
 
+# User-provided overrides for destination-cluster cards only.
+# Kept separate from ATLAS_DESTINATION_IMAGES so detailed attraction cards remain unchanged.
+ATLAS_CLUSTER_IMAGES = {
+    "Hunza Valley": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ24iX1ykpCxicbbLUFsWO4Od6HwDEkN3-ObCjriOBGxG5yYbK1THFcS_u&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ24iX1ykpCxicbbLUFsWO4Od6HwDEkN3-ObCjriOBGxG5yYbK1THFcS_u&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Skardu": {
+        "thumb_url": "https://www.imusafir.pk/blog/wp-content/uploads/2022/09/skardu-tour-pacages.jpg",
+        "page_url": "https://www.imusafir.pk/blog/wp-content/uploads/2022/09/skardu-tour-pacages.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Chitral & Kalash Valleys": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRakc0-x3ZbxNe5JvOWjibAxvk3rgMijapz-yQaV5QsSA&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRakc0-x3ZbxNe5JvOWjibAxvk3rgMijapz-yQaV5QsSA&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Neelum Valley": {
+        "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Neelum_Valley%2C_Azad_Jammu_%26_Kashmir%2C_Pakistan.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+        "page_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Neelum_Valley%2C_Azad_Jammu_%26_Kashmir%2C_Pakistan.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Lahore": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-TKQwaOdJWQuBg8_0IIRP74wZDZZD6jZDcncmzt6fRFwrUEv4zGKmvsKn&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-TKQwaOdJWQuBg8_0IIRP74wZDZZD6jZDcncmzt6fRFwrUEv4zGKmvsKn&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Taxila": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7GBZXR17OHVDiV3Qf2Jeq1VSxqafg1E_Xx1VlVVSQ1g&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7GBZXR17OHVDiV3Qf2Jeq1VSxqafg1E_Xx1VlVVSQ1g&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Karachi & Makli–Thatta": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK6k2eWVHsRG-ob3NGAnY02iCJo1xyZicIftLO9pOLkH3rJ09gqxFt1DRO&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK6k2eWVHsRG-ob3NGAnY02iCJo1xyZicIftLO9pOLkH3rJ09gqxFt1DRO&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Bahawalpur & Cholistan": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJDbZQeDs7kWlBjSgmTMBCZ5YiiHH5eSKq9o3laxPMwAPluXDZczgBMGkJ&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJDbZQeDs7kWlBjSgmTMBCZ5YiiHH5eSKq9o3laxPMwAPluXDZczgBMGkJ&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Hingol & Gwadar Coast": {
+        "thumb_url": "https://i.dawn.com/primary/2019/02/5c7261319261b.jpg",
+        "page_url": "https://i.dawn.com/primary/2019/02/5c7261319261b.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Islamabad & Margalla Hills": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNWTxmBeoqYjwE86aZj8u4nczm--1RWc53MR8Ue51gyC8HIguK-Q0DxQQ0&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNWTxmBeoqYjwE86aZj8u4nczm--1RWc53MR8Ue51gyC8HIguK-Q0DxQQ0&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Murree & Galiyat": {
+        "thumb_url": "https://i0.wp.com/kumrattourism.com/wp-content/uploads/Shogran-Family-Private-Tour-Package-1-1.jpg?fit=800%2C530&ssl=1",
+        "page_url": "https://i0.wp.com/kumrattourism.com/wp-content/uploads/Shogran-Family-Private-Tour-Package-1-1.jpg?fit=800%2C530&ssl=1",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Naran–Kaghan Valley": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbjQKATJ8T-V6ZRVdHAoliwoay8l2pTk8noBhN7CrcwPHftqgsa-YQ_HA&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbjQKATJ8T-V6ZRVdHAoliwoay8l2pTk8noBhN7CrcwPHftqgsa-YQ_HA&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Shogran & Siri Paye": {
+        "thumb_url": "https://blizin.com/public/images/uploads/articles/siripaye-anadventurouswonderlandinpakistan-A-1564045295.webp",
+        "page_url": "https://blizin.com/public/images/uploads/articles/siripaye-anadventurouswonderlandinpakistan-A-1564045295.webp",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Fairy Meadows & Raikot": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlu8yd0eOacmpuR0nmg83cc_Ho9Qizlzig49ECvCgrBPlqI4COj9wqVw9z&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlu8yd0eOacmpuR0nmg83cc_Ho9Qizlzig49ECvCgrBPlqI4COj9wqVw9z&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Astore & Rama Valley": {
+        "thumb_url": "https://i.dawn.com/primary/2015/05/554b52d120a92.jpg?r=1342314181",
+        "page_url": "https://i.dawn.com/primary/2015/05/554b52d120a92.jpg?r=1342314181",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Phander & Ghizer": {
+        "thumb_url": "https://alpastravels.com/wp-content/uploads/2024/05/Ghizer-Phandar-Alpas-Travels-Pakistan-Slider.jpg.webp",
+        "page_url": "https://alpastravels.com/wp-content/uploads/2024/05/Ghizer-Phandar-Alpas-Travels-Pakistan-Slider.jpg.webp",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Khunjerab & Upper Hunza": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnBICfpOSMNurxJLjsAhVUCfUE20VgtpqICips82ZamYDGQk05T9ifqE8&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnBICfpOSMNurxJLjsAhVUCfUE20VgtpqICips82ZamYDGQk05T9ifqE8&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Khaplu & Shyok Valley": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdt1LVAI5evwQMqscDiXe3UKMTQ9H45BEkVfdgiLRqyEcVVhMnHc1u9ng&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdt1LVAI5evwQMqscDiXe3UKMTQ9H45BEkVfdgiLRqyEcVVhMnHc1u9ng&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Ratti Gali & Dowarian": {
+        "thumb_url": "https://beautyofpakistan.com/location/1000x500/Ratti-Gali-Lake-796x459-1494192289.jpeg.webp",
+        "page_url": "https://beautyofpakistan.com/location/1000x500/Ratti-Gali-Lake-796x459-1494192289.jpeg.webp",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Rawalakot & Banjosa": {
+        "thumb_url": "https://seepakistantours.com/wp-content/uploads/2022/04/Banjosa-Lake-480x300.jpg",
+        "page_url": "https://seepakistantours.com/wp-content/uploads/2022/04/Banjosa-Lake-480x300.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Multan": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ExNGc3MKxqDoUyT6ehf0VY2HdBbssDYeEf003UTIqePHJ63BxsCazfvE&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ExNGc3MKxqDoUyT6ehf0VY2HdBbssDYeEf003UTIqePHJ63BxsCazfvE&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Faisalabad": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYgnHrvBt8OcnBZZ9CGS4ERh-lMo3hX7RyUvDpu0sawmXBmHQtq_3UTc1L&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYgnHrvBt8OcnBZZ9CGS4ERh-lMo3hX7RyUvDpu0sawmXBmHQtq_3UTc1L&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Peshawar": {
+        "thumb_url": "https://discoveringpakistan.com/wp-content/uploads/2025/07/pexels-raqeebkhan-5838446-1-1024x663.jpg",
+        "page_url": "https://discoveringpakistan.com/wp-content/uploads/2025/07/pexels-raqeebkhan-5838446-1-1024x663.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Mohenjo-daro": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIYIWla2wE9w_xvq-_jUZ_dA1VCwIcdTv_DLK_olOHbArrJ3dOQQtJZtI&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIYIWla2wE9w_xvq-_jUZ_dA1VCwIcdTv_DLK_olOHbArrJ3dOQQtJZtI&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Ranikot Fort": {
+        "thumb_url": "https://cdn-blog.zameen.com/blog/wp-content/uploads/2020/02/Ranikot-Fort-in-Sindh-Cover-25-02.jpg",
+        "page_url": "https://cdn-blog.zameen.com/blog/wp-content/uploads/2020/02/Ranikot-Fort-in-Sindh-Cover-25-02.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Keenjhar Lake & Thatta": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHiNmHd2E-tdJTONY6TnjcS3Siu7Ed-90PPEen7_58xMfXzw8ub4fef3ys&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHiNmHd2E-tdJTONY6TnjcS3Siu7Ed-90PPEen7_58xMfXzw8ub4fef3ys&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Khewra & Salt Range": {
+        "thumb_url": "https://i.dawn.com/primary/2019/09/5d8b97a36920b.jpg",
+        "page_url": "https://i.dawn.com/primary/2019/09/5d8b97a36920b.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Rohtas Fort & Jhelum": {
+        "thumb_url": "https://webapi.tdcp.gop.pk/uploads/1776329744610-60043146.webp",
+        "page_url": "https://webapi.tdcp.gop.pk/uploads/1776329744610-60043146.webp",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Ziarat & Quetta": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd9sxXHuuCahW8_YEoneewiyByTS04ZdqsE-cnKcXvgzQPWTd7LUiTIY0f&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd9sxXHuuCahW8_YEoneewiyByTS04ZdqsE-cnKcXvgzQPWTd7LUiTIY0f&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Ormara & Kund Malir": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgHS-oTvIgByZ8acEqVXKh074584AJEB0Jr7fCJvCfmX0xT29byVIF2n4&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgHS-oTvIgByZ8acEqVXKh074584AJEB0Jr7fCJvCfmX0xT29byVIF2n4&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Uch Sharif & Bahawalpur Heritage": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEfA97cdxRIVbpkIZh3P65unq0ORuQu0hnsPMGWWBxOQBzlYsohLN_gmTY&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEfA97cdxRIVbpkIZh3P65unq0ORuQu0hnsPMGWWBxOQBzlYsohLN_gmTY&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Malam Jabba": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW_WEmSQaUaxl0W4ZNNmtJDm51P8HINyL7R7KAq6dfdwpuXd5Tn7QJcIqO&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW_WEmSQaUaxl0W4ZNNmtJDm51P8HINyL7R7KAq6dfdwpuXd5Tn7QJcIqO&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Kalam & Ushu Forest": {
+        "thumb_url": "https://www.imusafir.pk/blog/wp-content/uploads/2024/04/Ushu-Forest.jpg",
+        "page_url": "https://www.imusafir.pk/blog/wp-content/uploads/2024/04/Ushu-Forest.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Gorakh Hill Station": {
+        "thumb_url": "https://i.pinimg.com/736x/fc/5d/9e/fc5d9e2eb7b22a03aa113a2e51266fe3.jpg",
+        "page_url": "https://i.pinimg.com/736x/fc/5d/9e/fc5d9e2eb7b22a03aa113a2e51266fe3.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Makran Coast & Pasni": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaunfeJB0MuqspjwrJcFz-s-BkLTcjJFUd6bFc55Kl6Wr2mvgySdlyKT0&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaunfeJB0MuqspjwrJcFz-s-BkLTcjJFUd6bFc55Kl6Wr2mvgySdlyKT0&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Sukkur & Rohri": {
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Lansdowne_Rohri%2C_Sukkur.jpg/3840px-Lansdowne_Rohri%2C_Sukkur.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail",
+        "page_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Lansdowne_Rohri%2C_Sukkur.jpg/3840px-Lansdowne_Rohri%2C_Sukkur.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Kundian & Chashma Wetlands": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3tYDOuNBcUTofa6Sp4D_NR3O5a6hIxmit5fH3q79P8C9V7Ys4wTR5P4SI&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3tYDOuNBcUTofa6Sp4D_NR3O5a6hIxmit5fH3q79P8C9V7Ys4wTR5P4SI&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Nankana Sahib & Sikh Heritage": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRamxr0E5VzmKalA2bENKQ-s5wD9wSDiamgr_0v02JsvTeOEGLJq3pAghAp&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRamxr0E5VzmKalA2bENKQ-s5wD9wSDiamgr_0v02JsvTeOEGLJq3pAghAp&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Kartarpur Sahib & Narowal": {
+        "thumb_url": "https://www.tribuneindia.com/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhldHJpYnVuZS1zb3J0ZC1wcm8tcHJvZC1zb3J0ZC9tZWRpYTJkODY5NGMwLTc3NDgtMTFlZi1hZjA3LTliZDRjMmZlZGU4Yi5qcGc=",
+        "page_url": "https://www.tribuneindia.com/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhldHJpYnVuZS1zb3J0ZC1wcm8tcHJvZC1zb3J0ZC9tZWRpYTJkODY5NGMwLTc3NDgtMTFlZi1hZjA3LTliZDRjMmZlZGU4Yi5qcGc=",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Hasan Abdal & Panja Sahib": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk8-m8vD0t8GPKbbhps4Uvxb4vbhepVcs8INFsQ3SAyHmu3ACAKVEypKM&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk8-m8vD0t8GPKbbhps4Uvxb4vbhepVcs8INFsQ3SAyHmu3ACAKVEypKM&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Swat Buddhist Heritage Circuit": {
+        "thumb_url": "https://www.imusafir.pk/blog/wp-content/uploads/2024/04/shingardar_stupa_swat.jpg",
+        "page_url": "https://www.imusafir.pk/blog/wp-content/uploads/2024/04/shingardar_stupa_swat.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Takht-i-Bahi & Sahr-i-Bahlol": {
+        "thumb_url": "https://fsn1.your-objectstorage.com/worldheritagesite/media/images/original_images53380119151_2689a28.2e16d0ba.fill-800x450.jpg",
+        "page_url": "https://fsn1.your-objectstorage.com/worldheritagesite/media/images/original_images53380119151_2689a28.2e16d0ba.fill-800x450.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Katas Raj Temples & Salt Range": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3prrsmtVBt1jPQDrc6ro0TX3g5pKg0borZBFhF5QQg&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3prrsmtVBt1jPQDrc6ro0TX3g5pKg0borZBFhF5QQg&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Hinglaj Mata & Hingol": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe9oo2cuc5SIFH3wZY-kyVlBAU3ecnQh7jMKVx4eMphDMsxyIoQMRke8Q9&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe9oo2cuc5SIFH3wZY-kyVlBAU3ecnQh7jMKVx4eMphDMsxyIoQMRke8Q9&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Harappa & Indus Valley Archaeology": {
+        "thumb_url": "https://sc0.blr1.digitaloceanspaces.com/large/891655-84125-grvbnkdkkb-1523855275.jpg",
+        "page_url": "https://sc0.blr1.digitaloceanspaces.com/large/891655-84125-grvbnkdkkb-1523855275.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Desan Meadows & Upper Kalam": {
+        "thumb_url": "https://i.pinimg.com/736x/3a/76/de/3a76de1dc6a370d6ee4814d108a92090.jpg",
+        "page_url": "https://i.pinimg.com/736x/3a/76/de/3a76de1dc6a370d6ee4814d108a92090.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Utror & Gabral Valleys": {
+        "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Utror_Valley%2C_Swat%2C_Khyber_Pakhtunkhwa.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+        "page_url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Utror_Valley%2C_Swat%2C_Khyber_Pakhtunkhwa.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Matiltan & Mahodand Lake": {
+        "thumb_url": "https://naturehikepakistan.pk/wp-content/uploads/2024/03/mahudand-lake-c-min.jpeg",
+        "page_url": "https://naturehikepakistan.pk/wp-content/uploads/2024/03/mahudand-lake-c-min.jpeg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Andrab Lake & Anakar Valley": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3-RkiPzT99hV1XaoKYO6pgGCCryegpCdWqbPiZfSPXQ&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3-RkiPzT99hV1XaoKYO6pgGCCryegpCdWqbPiZfSPXQ&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Izmis Lake & Utror Meadows": {
+        "thumb_url": "https://i.dawn.com/primary/2019/06/5d0bcd49be788.jpg",
+        "page_url": "https://i.dawn.com/primary/2019/06/5d0bcd49be788.jpg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Spinkhor Lake & Upper Utror": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYWdd08GzoOmDuhz4E8RgpEZckTdcFUOv7Nro0MMlkWsbLHXMcBhPPlbkh&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYWdd08GzoOmDuhz4E8RgpEZckTdcFUOv7Nro0MMlkWsbLHXMcBhPPlbkh&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Gilgit City & Karakoram Gateway": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDPNY5483pQYwecWKeKInBlKNYCk90sua0kiI5WKYpUw&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDPNY5483pQYwecWKeKInBlKNYCk90sua0kiI5WKYpUw&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "K2 & Concordia Expedition": {
+        "thumb_url": "https://trangoadventure.com/wp-content/uploads/2018/10/k2-at-night-time-scaled.jpeg",
+        "page_url": "https://trangoadventure.com/wp-content/uploads/2018/10/k2-at-night-time-scaled.jpeg",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Abbottabad & Thandiani": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZXO1gc3rc8-At-IsrMQhnEDnAKQIJYl0tvnt2nVQZzWgIYORJ-MHTpTU&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZXO1gc3rc8-At-IsrMQhnEDnAKQIJYl0tvnt2nVQZzWgIYORJ-MHTpTU&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Mansehra & Kaghan Gateway": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPfQEvyaj1bj8YBSQHekrpRJB-RHcxoqQ33XIXB6NDJVHJlca5jPh-gzo&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPfQEvyaj1bj8YBSQHekrpRJB-RHcxoqQ33XIXB6NDJVHJlca5jPh-gzo&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Hyderabad & Bhit Shah": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSewDb4_sODWQ3HuuzoZ5aQIW0G6zFobMlaBIln2dig3r4VbtksmxPV4syP&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSewDb4_sODWQ3HuuzoZ5aQIW0G6zFobMlaBIln2dig3r4VbtksmxPV4syP&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Larkana & Mohenjo-daro Gateway": {
+        "thumb_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/a5/dd/08/caption.jpg?w=500&h=400&s=1",
+        "page_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/a5/dd/08/caption.jpg?w=500&h=400&s=1",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Sialkot": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6b-3JTKpSC7iWLt5K5exIgrDGHTEGLYZTSXZ9SQAwsDm90gvwgDAZDTKN&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6b-3JTKpSC7iWLt5K5exIgrDGHTEGLYZTSXZ9SQAwsDm90gvwgDAZDTKN&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Gujranwala": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScdXQZVvzdfJqnesbiIAsCdpBPECeGXdYgwujENZoY26FZax8lvfgC2Bpi&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScdXQZVvzdfJqnesbiIAsCdpBPECeGXdYgwujENZoY26FZax8lvfgC2Bpi&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Quetta & Hanna Lake": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW6d9IFHAC84y1hbaI0rUwqu2jIMOa8c69MMjh9kRjqBPwqSq1KV0kLcJn&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW6d9IFHAC84y1hbaI0rUwqu2jIMOa8c69MMjh9kRjqBPwqSq1KV0kLcJn&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+    "Kumrat Valley": {
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3nwIX5ngHm7u3-ol3EgxhYAH3bBR5pWYlmpq9P_efMQ&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3nwIX5ngHm7u3-ol3EgxhYAH3bBR5pWYlmpq9P_efMQ&s=10",
+        "artist": "User-supplied image URL",
+        "license": "Source and reuse licence not independently verified",
+    },
+}
+
 def find_catalog_record(record):
     cluster = record.get("cluster", "")
     return catalog_by_name.get(cluster.casefold())
@@ -476,7 +861,7 @@ def render_destination_card(record, index: int, detailed: bool = True):
     else:
         image_query = record[1].get("image_query") or record[0]
         # Cluster cards use only an exact cluster-name match.
-        image_override = ATLAS_DESTINATION_IMAGES.get(record[0])
+        image_override = ATLAS_CLUSTER_IMAGES.get(record[0]) or ATLAS_DESTINATION_IMAGES.get(record[0])
     with st.container(border=True, key=f"atlas-destination-card-{int(detailed)}-{index}"):
         show_photo(image_query or record.get("name", "Pakistan destination"), allow_lookup=index < 9, image_override=image_override)
         if detailed:
