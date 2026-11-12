@@ -83,6 +83,28 @@ div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stImage"] img{padd
 .atlas-record-note{padding:13px 14px;border:1px solid #285D45;border-left:4px solid #A9C5B0;border-radius:9px;background:#174B35!important;color:#FFFFFF!important;font-family:Inter,Arial,sans-serif;font-size:12px;line-height:1.65;font-weight:450}
 .atlas-record-location{margin-top:9px;padding:10px 13px;border:1px solid #B8CFBD;border-radius:8px;background:#EAF2EB;color:#174B35!important;font-size:12px;line-height:1.5;font-weight:800}
 .atlas-record-location strong{color:#174B35!important}
+/* Festival card: keep the date directly below the event title and make the expander a clear action */
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary{
+    background:linear-gradient(135deg,#174B35 0%,#246447 100%)!important;
+    border:1px solid #174B35!important;
+    border-radius:9px!important;
+    padding:9px 13px!important;
+    color:#FFFFFF!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:12px!important;
+    font-weight:800!important;
+    letter-spacing:.25px!important;
+    box-shadow:0 3px 9px rgba(23,75,53,.14)!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p,
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary span{
+    color:#FFFFFF!important;
+    font-weight:800!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary:hover{
+    background:#2B704F!important;
+    border-color:#2B704F!important;
+}
 [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:100%;min-height:470px;display:flex}
 [class*="st-key-atlas-event-card-"] [data-testid="stImage"]{height:210px;min-height:210px;max-height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#E9E2D4;border-radius:12px;padding:6px}
 [class*="st-key-atlas-event-card-"] [data-testid="stImage"] img{width:100%;height:198px;object-fit:contain!important;background:transparent;border:0!important;box-shadow:none!important}
@@ -1326,25 +1348,21 @@ for start in range(0, len(event_matches), 3):
                     },
                     image_override=ATLAS_EVENT_IMAGES.get(event_name),
                 )
+                st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
                 st.markdown(
                     f'<div class="atlas-event-meta"><span class="atlas-event-date">{event_card_date(event)}</span></div>',
                     unsafe_allow_html=True,
                 )
-                st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
                 st.markdown(
                     f'<div class="atlas-card-copy">{event_card_summary(event)}</div>',
                     unsafe_allow_html=True,
                 )
                 with st.expander("Explore event"):
-                    if event.get("date"):
-                        st.markdown(f'**When:** {event.get("date","")}')
                     if event.get("date_status"):
                         st.caption(event.get("date_status",""))
                     if event.get("note"):
                         st.markdown(f'<div class="atlas-record-note">{event.get("note","")}</div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="atlas-record-location"><strong>Location</strong> · {event.get("location","")}</div>', unsafe_allow_html=True)
-                    if event.get("source"):
-                        st.link_button("Official / reference information", event["source"])
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">04 · DESTINATION IMAGE GALLERY</div>', unsafe_allow_html=True)
