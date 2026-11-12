@@ -1033,10 +1033,18 @@ for start in range(0, len(event_matches), 2):
     for offset, (col, event) in enumerate(zip(row, event_matches[start:start + 2])):
         with col:
             with st.container(border=True, key=f"atlas-event-card-{event.get('id', start + offset)}"):
+                event_name = event.get("name", "")
                 show_photo(
-                    event.get("name", "Pakistan festival"),
-                    allow_lookup=False,
-                    image_override=ATLAS_EVENT_IMAGES.get(event.get("name", "")),
+                    event_name or "Pakistan festival",
+                    allow_lookup=event_name in {
+                        "Jashn-e-Baharan & Basant",
+                        "Lohri",
+                        "National Horse & Cattle Show",
+                        "Punjab Sufi Urs Circuit",
+                        "Waris Shah Mela",
+                        "Heer Ranjha Fair",
+                    },
+                    image_override=ATLAS_EVENT_IMAGES.get(event_name),
                 )
                 st.markdown(f'<div class="atlas-card-meta">{event.get("region","")} · {event.get("date","")}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
