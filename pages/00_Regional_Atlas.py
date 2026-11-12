@@ -9,6 +9,28 @@ from src.research_register import DISCOVERY_LEADS, EVENT_RECORDS, IMAGE_CANDIDAT
 from src.services.media import get_commons_image, get_display_image
 from src.ui import apply_visitor_theme
 
+# Festival/event images supplied for this section only.
+ATLAS_EVENT_IMAGES = {
+    "Cholistan Desert Jeep Rally": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJet6WvzbSBfI0ZB0DXtovyVZXpqLmtRjgtxJaRCiysVr7PWtvQcrImw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJet6WvzbSBfI0ZB0DXtovyVZXpqLmtRjgtxJaRCiysVr7PWtvQcrImw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Mela Chiraghan": {"thumb_url":"https://apnaorg.com/articles/news-60/dailytimes_clip_image001.jpg","page_url":"https://apnaorg.com/articles/news-60/dailytimes_clip_image001.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Vaisakhi Mela and Sikh Pilgrimage": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZDXAO1C6rYNZv73FHe8RyQAoFUX1tBQskaL4ItF6iyjBMDlHGMSxK3Ks&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZDXAO1C6rYNZv73FHe8RyQAoFUX1tBQskaL4ItF6iyjBMDlHGMSxK3Ks&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Urs of Lal Shahbaz Qalandar": {"thumb_url":"https://i.tribune.com.pk/media/images/1112454-Pic-1464530635/1112454-Pic-1464530635-640x480.web","page_url":"https://i.tribune.com.pk/media/images/1112454-Pic-1464530635/1112454-Pic-1464530635-640x480.web","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Urs of Shah Abdul Latif Bhittai": {"thumb_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","page_url":"https://www.nation.com.pk/digital_images/large/2023-09-01/annual-urs-of-shah-abdul-latif-bhittai-begins-1693548662-5559.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Shandur Polo Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQ1WJQLOE34fQwTFZg3DkiQrgtR9HZxiR6Hf1Uj3dSZko-8Lg2Z2QXYrO&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Chilam Joshi Festival": {"thumb_url":"https://www.youngpioneertours.com/wp-content/uploads/2025/10/Pakistan-kalash-valley-chilam-Joshi-Festival-women.jpg","page_url":"https://www.youngpioneertours.com/wp-content/uploads/2025/10/Pakistan-kalash-valley-chilam-Joshi-Festival-women.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Kalam Summer Festival": {"thumb_url":"https://greenpaktourism.com/_next/image?url=%2Fimages%2Flicensed%2Fqaqlasht-festival-polo.jpg&w=1920&q=75","page_url":"https://greenpaktourism.com/_next/image?url=%2Fimages%2Flicensed%2Fqaqlasht-festival-polo.jpg&w=1920&q=75","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Hinglaj Mata Yatra": {"thumb_url":"https://i.redd.it/mg4pb37tifya1.png","page_url":"https://i.redd.it/mg4pb37tifya1.png","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Sibi Mela": {"thumb_url":"https://www.geo.tv/assets/uploads/updates/2019-02-21/0_4_035119_album.jpg","page_url":"https://www.geo.tv/assets/uploads/updates/2019-02-21/0_4_035119_album.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Ginani Harvest Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1OAXcJvWhp6lgXUBD7tKWnb5T4M4vzj8PZHFYU-z9gi65AWRizDTjei50&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1OAXcJvWhp6lgXUBD7tKWnb5T4M4vzj8PZHFYU-z9gi65AWRizDTjei50&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Mangla Water Festival": {"thumb_url":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/05/35/d6/caption.jpg?w=800&h=800&s=1","page_url":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/05/35/d6/caption.jpg?w=800&h=800&s=1","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Leepa Valley Mela": {"thumb_url":"https://drive.google.com/uc?export=view&id=13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-","page_url":"https://drive.google.com/file/d/13mHWrQvLvKvmSpPBmY7p-osfgKGHnOE-/view?usp=drive_link","artist":"User-supplied Google Drive image","license":"User-provided; sharing access and reuse rights not independently verified"},
+    "Lok Mela": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9vyUwRwiXUJn6Htob9DXrVS5dbRWvW88agIJOE2sHw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9vyUwRwiXUJn6Htob9DXrVS5dbRWvW88agIJOE2sHw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Islamabad Marathon": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuspr_nrWU6nPfb4pUIxnr0NzoW_W2m1-6MdfbjHhKfw&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuspr_nrWU6nPfb4pUIxnr0NzoW_W2m1-6MdfbjHhKfw&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Uchal Festival": {"thumb_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAUYvuxwVTFGP_H60trf_tvtWjxNwu1qi67lr4IgctgHwSZhkWrXPeqrU&s=10","page_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAUYvuxwVTFGP_H60trf_tvtWjxNwu1qi67lr4IgctgHwSZhkWrXPeqrU&s=10","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Choimus (Chaumos) Festival": {"thumb_url":"https://i.dawn.com/primary/2016/11/58295b3c48a18.jpg","page_url":"https://i.dawn.com/primary/2016/11/58295b3c48a18.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+    "Malam Jabba Winter Sports Festival": {"thumb_url":"https://cdn-blog.zameen.com/blog/wp-content/uploads/2020/01/Cover-20-20-1.jpg","page_url":"https://cdn-blog.zameen.com/blog/wp-content/uploads/2020/01/Cover-20-20-1.jpg","artist":"User-supplied image URL","license":"Source and reuse licence not independently verified"},
+}
+
 st.set_page_config(page_title="Regional Atlas | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
 
@@ -111,6 +133,49 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
     height:78px!important;min-height:78px!important;max-height:78px!important;
     display:-webkit-box!important;-webkit-line-clamp:4!important;
     -webkit-box-orient:vertical!important;overflow:hidden!important;
+}
+
+/* Festival cards reuse the destination image frame and balanced card rhythm. */
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
+    box-sizing:border-box!important;height:590px!important;min-height:590px!important;
+    max-height:590px!important;display:flex!important;overflow:hidden!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlock"]{
+    box-sizing:border-box!important;height:100%!important;min-height:0!important;
+    flex:1!important;display:flex!important;flex-direction:column!important;gap:.45rem!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"]{
+    box-sizing:border-box!important;width:100%!important;height:218px!important;
+    min-height:218px!important;max-height:218px!important;padding:6px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    overflow:hidden!important;border-radius:12px!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"] img{
+    display:block!important;width:100%!important;height:206px!important;
+    min-height:206px!important;max-height:206px!important;object-fit:contain!important;
+    object-position:center!important;margin:0 auto!important;border:0!important;box-shadow:none!important;
+}
+[class*="st-key-atlas-event-card-"] .atlas-card-meta{
+    box-sizing:border-box!important;height:42px!important;min-height:42px!important;
+    max-height:42px!important;overflow:hidden!important;text-align:left!important;
+}
+[class*="st-key-atlas-event-card-"] .atlas-card-title{
+    box-sizing:border-box!important;height:52px!important;min-height:52px!important;
+    max-height:52px!important;overflow:hidden!important;text-align:left!important;
+}
+[class*="st-key-atlas-event-card-"] .atlas-card-copy{
+    box-sizing:border-box!important;height:104px!important;min-height:104px!important;
+    max-height:104px!important;overflow:hidden!important;text-align:left!important;
+    display:-webkit-box!important;-webkit-line-clamp:5!important;-webkit-box-orient:vertical!important;
+}
+[class*="st-key-atlas-event-card-"] [data-testid="stExpander"]{margin-top:auto!important;flex-shrink:0!important}
+@media(max-width:700px){
+    [class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
+        height:auto!important;min-height:0!important;max-height:none!important;
+    }
+    [class*="st-key-atlas-event-card-"] .atlas-card-copy{
+        height:auto!important;min-height:90px!important;max-height:130px!important;
+    }
 }
 
 /* Cluster-only spacing: keep experience/category chips clear of the card edge. */
@@ -951,8 +1016,9 @@ for start in range(0, len(cluster_matches), 3):
             render_destination_card(record, start + offset, detailed=False)
 
 st.divider()
-st.markdown('<div class="atlas-eyebrow">03 · FESTIVAL SEASONS</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-heading">Culture has its own calendar.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-eyebrow">03 · FESTIVALS & MAJOR EVENTS</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-heading">A calendar of culture, sport and shared traditions.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">From Sufi gatherings and harvest celebrations to mountain polo, desert rallies and community festivals, these events offer a closer look at the places and people behind Pakistan’s travel stories.</div>', unsafe_allow_html=True)
 event_query = st.text_input("Search festivals and events", placeholder="Try Urs, Polo, Lok Mela, Vaisakhi...")
 event_regions = ["All regions"] + sorted({event.get("region", "") for event in EVENT_RECORDS})
 event_region = st.selectbox("Event region", event_regions, key="atlas_event_region")
@@ -966,16 +1032,19 @@ for start in range(0, len(event_matches), 2):
     row = st.columns(2, gap="medium")
     for offset, (col, event) in enumerate(zip(row, event_matches[start:start + 2])):
         with col:
-            with st.container(border=True):
-                show_photo(event.get("name", "Pakistan festival"), allow_lookup=start + offset < 6)
-                st.markdown(f'<div class="atlas-card-meta">{event.get("region","")} · {event.get("id","")}</div>', unsafe_allow_html=True)
+            with st.container(border=True, key=f"atlas-event-card-{event.get('id', start + offset)}"):
+                show_photo(
+                    event.get("name", "Pakistan festival"),
+                    allow_lookup=False,
+                    image_override=ATLAS_EVENT_IMAGES.get(event.get("name", "")),
+                )
+                st.markdown(f'<div class="atlas-card-meta">{event.get("region","")} · {event.get("date","")}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-title">{event.get("name","")}</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="atlas-card-copy">{event.get("location","")} · {event.get("date","")}</div>', unsafe_allow_html=True)
-                st.info(event.get("date_status", "Date information is retained from the research intake."))
-                with st.expander("Event context and source"):
-                    st.markdown(f'<div class="atlas-record-note">{event.get("note","")}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="atlas-card-copy">{event.get("note","")}</div>', unsafe_allow_html=True)
+                with st.expander("Location and event details"):
+                    st.markdown(f'<div class="atlas-record-note">{event.get("location","")}</div>', unsafe_allow_html=True)
                     if event.get("source"):
-                        st.link_button("Open event source", event["source"])
+                        st.link_button("Official / reference information", event["source"])
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">04 · DESTINATION IMAGE GALLERY</div>', unsafe_allow_html=True)
