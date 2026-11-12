@@ -369,6 +369,20 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 .atlas-record-location strong{color:#174B35!important}
 .atlas-event-meta{display:block!important;width:100%!important;height:34px!important;min-height:34px!important;max-height:34px!important;margin:10px 0 8px!important;overflow:hidden!important}
 .atlas-event-date{display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:100%!important;height:34px!important;min-height:34px!important;max-height:34px!important;padding:0 11px!important;border:1px solid #A9C5B0!important;border-radius:8px!important;background:#E8F1E9!important;color:#174B35!important;font-family:Inter,Arial,sans-serif!important;font-size:10px!important;line-height:1!important;font-weight:750!important;letter-spacing:.15px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+/* Final expander label override: use Streamlit's native font metrics to prevent clipped or distorted text. */
+.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary,
+.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p,
+.stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary span{
+    color:#FFFFFF!important;
+    -webkit-text-fill-color:#FFFFFF!important;
+    font-family:inherit!important;
+    font-size:13px!important;
+    font-weight:750!important;
+    letter-spacing:normal!important;
+    line-height:1.35!important;
+    text-shadow:none!important;
+    opacity:1!important;
+}
 </style>
 """, unsafe_allow_html=True)
 
