@@ -361,6 +361,45 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 .stApp [class*="st-key-atlas-event-card-"] [data-testid="stExpander"] details>summary p{
     color:#FFFFFF!important;
 }
+
+/* Destination gallery: match the compact visual rhythm of the destination clusters. */
+[class*="st-key-batch-gallery-card-"]{
+    box-sizing:border-box!important;width:100%!important;height:300px!important;
+    min-height:300px!important;max-height:300px!important;padding:12px!important;
+    display:flex!important;flex-direction:column!important;overflow:hidden!important;
+    border:1px solid var(--voyage-line)!important;border-radius:17px!important;
+    background:var(--voyage-surface)!important;box-shadow:0 8px 22px rgba(8,25,20,.065)!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stVerticalBlock"]{
+    box-sizing:border-box!important;height:100%!important;min-height:0!important;
+    display:flex!important;flex-direction:column!important;flex:1!important;gap:.35rem!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"]{
+    box-sizing:border-box!important;width:100%!important;height:184px!important;
+    min-height:184px!important;max-height:184px!important;padding:5px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    overflow:hidden!important;border-radius:12px!important;
+    background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED)!important;
+    border:1px solid rgba(199,163,91,.42)!important;
+}
+[class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img{
+    display:block!important;width:100%!important;height:172px!important;
+    min-height:172px!important;max-height:172px!important;object-fit:contain!important;
+    object-position:center!important;margin:0 auto!important;border:0!important;
+    border-radius:9px!important;box-shadow:none!important;background:transparent!important;
+}
+[class*="st-key-batch-gallery-card-"] .atlas-card-title{
+    box-sizing:border-box!important;width:100%!important;height:54px!important;
+    min-height:54px!important;max-height:54px!important;overflow:hidden!important;
+    display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;
+    text-align:left!important;margin:7px 0 0!important;color:#17251D!important;
+    font-family:'Cormorant Garamond',Georgia,serif!important;font-size:22px!important;
+    font-weight:700!important;line-height:1.12!important;
+}
+@media(max-width:700px){
+    [class*="st-key-batch-gallery-card-"]{height:auto!important;min-height:0!important;max-height:none!important}
+    [class*="st-key-batch-gallery-card-"] .atlas-card-title{height:auto!important;min-height:0!important;max-height:none!important;display:block!important}
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -382,6 +421,11 @@ if st.session_state.get("voyage_theme", "Light") == "Dark":
     .stApp .st-key-batch-gallery-card{background:linear-gradient(145deg,#10251B 0%,#142D2D 52%,#182A3B 100%)!important;border-color:rgba(69,196,119,.45)!important;box-shadow:0 14px 34px rgba(0,0,0,.32)!important}
     .stApp .st-key-batch-gallery-card [data-testid="stImage"]{background:linear-gradient(135deg,#173D2D,#234A4C 58%,#273A4C)!important;border:1px solid rgba(69,196,119,.48)!important}
     .stApp .st-key-batch-gallery-card [data-testid="stImage"] img{background:transparent!important;border:0!important}
+    .stApp [class*="st-key-batch-gallery-card-"]{height:300px!important;min-height:300px!important;max-height:300px!important;background:#080D09!important;border-color:#26372C!important;box-shadow:none!important}
+    .stApp [class*="st-key-batch-gallery-card-"] [data-testid="stImage"]{height:184px!important;min-height:184px!important;max-height:184px!important;background:linear-gradient(135deg,#173D2D,#234A4C 58%,#273A4C)!important;border-color:rgba(69,196,119,.48)!important}
+    .stApp [class*="st-key-batch-gallery-card-"] [data-testid="stImage"] img{height:172px!important;min-height:172px!important;max-height:172px!important}
+    .stApp [class*="st-key-batch-gallery-card-"] .atlas-card-title{color:#E6EEE8!important}
+
     .stApp .atlas-photo-placeholder{background:#080D09!important;color:#FFFFFF!important;border:1px solid #45C477!important}
     .stApp .atlas-tag{border-color:#45C477!important;color:#BFE8CD!important}
     .stApp .atlas-record-note{border-left-color:#45C477!important}
@@ -1402,35 +1446,34 @@ for start in range(0, len(event_matches), 3):
 st.divider()
 st.markdown('<div class="atlas-eyebrow">04 · DESTINATION IMAGE GALLERY</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">Pakistan, through the places themselves.</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-subheading">The following destination photographs are displayed from the exact URLs supplied for batches 1–8. The original URLs are preserved; source and reuse rights should be checked before commercial or promotional reuse.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">A visual journey through Pakistan’s landmarks, landscapes and heritage.</div>', unsafe_allow_html=True)
 for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCHES.items()):
     st.markdown(f'<div class="atlas-card-meta">{batch_name}</div>', unsafe_allow_html=True)
     for start in range(0, len(batch_images), 3):
-        row = st.columns(3, gap="medium")
-        for offset, (col, image_record) in enumerate(zip(row, batch_images[start:start + 3])):
+        image_row = batch_images[start:start + 3]
+        if len(image_row) == 2:
+            row = st.columns([1, 2, 2, 1], gap="medium")
+            card_columns = row[1:3]
+        elif len(image_row) == 1:
+            row = st.columns([1, 2, 1], gap="medium")
+            card_columns = [row[1]]
+        else:
+            row = st.columns(3, gap="medium")
+            card_columns = row
+        for offset, (col, image_record) in enumerate(zip(card_columns, image_row)):
             with col:
-                with st.container(border=False, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
-                    # Balochistan Batch 4 keeps its image slots intentionally empty
-                    # so the owner can add approved photographs later.
-                    if batch_name == "Sindh · Batch 1":
-                        st.markdown('<div class="atlas-gallery-image-slot" aria-label="Image slot reserved"></div>', unsafe_allow_html=True)
+                with st.container(border=True, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
+                    gallery_image = fetch_gallery_image(image_record["image_url"])
+                    if gallery_image:
+                        st.image(gallery_image, use_container_width=True)
                     else:
-                        gallery_image = fetch_gallery_image(image_record["image_url"])
-                        if gallery_image:
-                            st.image(gallery_image, use_container_width=True)
-                        else:
-                            st.markdown('<div class="atlas-gallery-image-slot atlas-gallery-image-slot--unavailable"></div>', unsafe_allow_html=True)
+                        st.markdown('<div class="atlas-gallery-image-slot atlas-gallery-image-slot--unavailable"></div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
-                    if batch_name == "Sindh · Batch 1":
-                        st.caption("Image space reserved")
-                    else:
-                        st.caption("Original supplied photograph · full frame preserved")
-                        st.link_button("Open original image", image_record["image_url"])
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">05 · VISUAL REFERENCE LIBRARY</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">Images, with their source context.</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-subheading">Image candidates are displayed as framed subject cards. A source-page candidate is not automatically a cleared production asset; review the creator and licence before reuse.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">A curated visual reference collection for places across Pakistan.</div>', unsafe_allow_html=True)
 image_query = st.text_input("Search image subjects", placeholder="Faisal Mosque, Astola Island, Makli...")
 image_matches = [
     item for item in IMAGE_CANDIDATES
@@ -1483,4 +1526,4 @@ for region_name in lead_regions:
                         st.caption("Discovery lead · " + region_name)
 
 st.divider()
-st.caption("VoyagePK is an independent tourism discovery prototype. Listings do not guarantee current access, event schedules, permits, safety conditions or image reuse rights. Confirm time-sensitive details with the responsible authority and local community before travel.")
+st.caption("Check local access, schedules, permits and image permissions before travel or reuse.")
