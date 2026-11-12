@@ -8,7 +8,7 @@ from src.research_register import (
 
 def test_research_register_preserves_all_intake_counts():
     assert len(RESEARCH_DESTINATIONS) == 34
-    assert len(EVENT_RECORDS) == 27
+    assert len(EVENT_RECORDS) == 30
     assert len(IMAGE_CANDIDATES) >= 27
 
 
