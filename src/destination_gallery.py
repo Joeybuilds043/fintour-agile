@@ -6,16 +6,16 @@ licences were not supplied for every image, so the UI labels them accordingly.
 
 DESTINATION_IMAGE_BATCHES = {
     "Sindh · Batch 1": [
-        {"destination": "Mohenjo Daro", "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Mohenjo-daro_RV.jpg"},
-        {"destination": "Mazar-e-Quaid, Karachi", "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Mazar-e-Quaid_Karachi.jpg"},
+        {"destination": "Mohenjo Daro", "image_url": "https://res.cloudinary.com/jerrick/image/upload/v1718552381/666f073cb4cdca001ca17f64.jpg"},
+        {"destination": "Mazar-e-Quaid, Karachi", "image_url": "https://greenpaktourism.com/_next/image?url=%2Fimages%2Flicensed%2Fgallery%2Fmazar-e-quaid%2F01-mazar-e-quaid-karachi.jpg&w=1920&q=75"},
     ],
     "Punjab · Batch 2": [
-        {"destination": "Badshahi Mosque, Lahore", "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Badshahi_Mosque_July_1_2005_pic32_by_Ali_Imran.jpg"},
-        {"destination": "Minar-e-Pakistan, Lahore", "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Minar_e_Pakistan_Lahore.jpg"},
+        {"destination": "Badshahi Mosque, Lahore", "image_url": "https://img.atlasobscura.com/PF68Vef8tZ_blSboIWoRVFF0Dyn8s0n_kX-cCpLB3kk/rt:fit/h:400/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy84NWFh/NDQzOS0xMTE4LTQ3/YzMtOTcxYi0yOTYw/MjM1NmRlOGEwYjQ2/NWU4ZjkyMDY5MjM0/ZjJfMTIwMHB4LUJh/ZHNoYWhpX01vc3F1/ZV9FdmVuaW5nX1ZpZXcuanBn.jpg"},
+        {"destination": "Minar-e-Pakistan, Lahore", "image_url": "https://greenpaktourism.com/images/licensed/independence-day-festival-photo.jpg"},
     ],
     "Cholistan & South Punjab · Batch 3": [
-        {"destination": "Derawar Fort", "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Derawar_Fort_Cholistan_Desert_Bahawalpur.jpg"},
-        {"destination": "Noor Mahal, Bahawalpur", "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Noor_Mahal_Bahawalpur_Pakistan.jpg"},
+        {"destination": "Derawar Fort", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN3NbHuOo6EWxeEk9TV_c9gXt4A9-lcXYlQkJ6EiJ0Kw&s=10"},
+        {"destination": "Noor Mahal, Bahawalpur", "image_url": "https://static.where-e.com/Pakistan/Punjab_Province/Bahawalpur/Noor-Mahal_cc2b4b6ff2b4e4f9cd8ce40601dbd55d.jpg"},
     ],
     "Balochistan · Batch 4": [
         {"destination": "Hingol National Park (Princess of Hope)", "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Princess_of_hope_Balochistan.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"},
