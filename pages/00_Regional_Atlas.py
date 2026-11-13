@@ -1244,9 +1244,27 @@ for _gallery_batch in DESTINATION_IMAGE_BATCHES.values():
             })
 
 
+_IMAGE_NAME_ALIASES = {
+    "Lahore Fort — Sheesh Mahal / Naulakha": "Lahore Fort (Shahi Qila)",
+    "Mohenjo-daro stupa": "Mohenjo-daro",
+    "Tomb of Isa Khan Tarkhan II, Makli": "Makli Necropolis",
+    "Princess of Hope — original candidate": "Hingol National Park (Princess of Hope)",
+    "Princess of Hope — alternative credited file": "Hingol National Park (Princess of Hope)",
+    "Ziarat Residency in winter": "Ziarat Residency",
+    "Faisal Mosque at dusk": "Faisal Mosque",
+    "Saidpur Village temple and streets": "Saidpur Village",
+    "Pir Chinasi shrine": "Pir Chinasi",
+}
+
+
 def find_matching_destination_image(name: str):
-    return (ATLAS_DESTINATION_IMAGES.get(name) or ATLAS_CLUSTER_IMAGES.get(name)
-            or _GALLERY_IMAGE_INDEX.get(_normalise_place_name(name)))
+    lookup_name = _IMAGE_NAME_ALIASES.get(name, name)
+    return (
+        ATLAS_DESTINATION_IMAGES.get(lookup_name)
+        or ATLAS_CLUSTER_IMAGES.get(lookup_name)
+        or ATLAS_EVENT_IMAGES.get(lookup_name)
+        or _GALLERY_IMAGE_INDEX.get(_normalise_place_name(lookup_name))
+    )
 
 
 def find_catalog_record(record):
