@@ -3,6 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from src.catalog import DESTINATIONS
+from src.destination_gallery import get_destination_gallery_image
 from src.services.media import get_commons_image, get_display_image
 from src.ui import apply_visitor_theme
 
@@ -144,7 +145,7 @@ COLLECTIONS = {
             ("Archaeological sites & ancient settlements", [
                 ("Mohenjo-daro", "Larkana, Sindh", "A major urban centre of the Indus Civilization, known for planned streets, drainage and baked-brick architecture."),
                 ("Harappa", "Sahiwal, Punjab", "A principal Indus Civilization site with extensive archaeological remains and an associated museum."),
-                ("Taxila", "Rawalpindi region, Punjab", "A multi-period archaeological landscape shaped by trade, urban settlement and Buddhist learning."),
+                ("Taxila", "Taxila, Punjab", "A multi-period archaeological landscape shaped by trade, urban settlement and Buddhist learning."),
                 ("Mehrgarh", "Bolan region, Balochistan", "A key Neolithic and Chalcolithic archaeological site informing the early history of settled communities in South Asia."),
                 ("Makli Necropolis", "Thatta, Sindh", "A vast funerary landscape containing monuments from several centuries of Sindh’s history."),
                 ("Rohtas Fort", "Jhelum, Punjab", "A 16th-century fortified complex built under Sher Shah Suri and recognised as a UNESCO World Heritage Site."),
@@ -156,55 +157,120 @@ COLLECTIONS = {
 key = st.session_state.get("selected_experience_collection", "northern_landscapes")
 collection = COLLECTIONS.get(key, COLLECTIONS["northern_landscapes"])
 
+st.markdown("""
+<style>
+.experience-hero{padding:26px 30px;border:1px solid rgba(185,151,91,.34);border-radius:22px;background:linear-gradient(115deg,#102D22 0%,#1D4B38 58%,#304D50 100%);margin:4px 0 20px;box-shadow:0 16px 38px rgba(8,35,25,.13)}
+.experience-kicker{font:800 10px Manrope,Arial,sans-serif;letter-spacing:2.5px;color:#D8C18D;text-transform:uppercase}
+.experience-hero h1{font:700 clamp(32px,3.4vw,46px) 'Cormorant Garamond',Georgia,serif;color:#FFF;margin:8px 0 6px;line-height:1.05}
+.experience-hero p{font:500 14px/1.75 Manrope,Arial,sans-serif;color:#F1F4EC;margin:0;max-width:900px}
+.experience-filter-note{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#8A7652;font-weight:800;margin:8px 0}
+[class*="st-key-experience-atlas-card-"]{height:100%}
+[class*="st-key-experience-atlas-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:560px;min-height:560px;max-height:560px;display:flex;overflow:hidden;border:1px solid rgba(23,92,67,.22)!important;border-radius:18px!important;background:linear-gradient(145deg,#F7F1E5 0%,#E8F0E9 58%,#E5EEF0 100%)!important;padding:13px!important;box-shadow:0 12px 28px rgba(13,55,42,.08)!important}
+[class*="st-key-experience-atlas-card-"] [data-testid="stVerticalBlock"]{height:100%;min-height:0;display:flex;flex-direction:column;gap:.35rem}
+[class*="st-key-experience-atlas-card-"] [data-testid="stImage"]{height:210px;min-height:210px;max-height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:linear-gradient(135deg,#D7C59F,#C8E0D5 55%,#B8D6DF);padding:6px}
+[class*="st-key-experience-atlas-card-"] [data-testid="stImage"] img{width:100%;height:198px;max-height:198px;object-fit:contain!important;object-position:center;border:0!important;box-shadow:none!important;border-radius:8px}
+.experience-card-meta{font:800 9px/1.4 Manrope,Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#537063;min-height:25px}
+.experience-card-title{font:700 24px/1.08 'Cormorant Garamond',Georgia,serif;color:#14251B;min-height:54px;max-height:54px;overflow:hidden}
+.experience-card-location{font:800 10px/1.4 Manrope,Arial,sans-serif;letter-spacing:.7px;color:#765D34;min-height:28px}
+.experience-card-copy{font:500 12px/1.6 Manrope,Arial,sans-serif;color:#26352C;height:82px;max-height:82px;overflow:hidden}
+.experience-card-credit{font:500 9px/1.35 Manrope,Arial,sans-serif;color:#62756B;height:31px;max-height:31px;overflow:hidden}
+.experience-tag{display:inline-block;margin:2px 4px 2px 0;padding:4px 8px;border-radius:999px;background:#DCE9DE;color:#23523A;font:800 9px Manrope,Arial,sans-serif;letter-spacing:.3px}
+@media(max-width:850px){[class*="st-key-experience-atlas-card-"] [data-testid="stVerticalBlockBorderWrapper"]{height:auto;min-height:0;max-height:none}.experience-card-copy{height:auto;max-height:100px}}
+</style>
+""", unsafe_allow_html=True)
+
 if st.button("← Back to VoyagePK home"):
     st.switch_page("app.py")
 
-st.markdown('<div class="atlas-kicker">VOYAGEPK · PLACE-BASED COLLECTION</div>', unsafe_allow_html=True)
-st.title(collection["title"])
-st.write(collection["intro"])
+st.markdown(
+    f'<div class="experience-hero"><div class="experience-kicker">VOYAGEPK · CURATED DESTINATION ATLAS</div>'
+    f'<h1>{collection["title"]}</h1><p>{collection["intro"]}</p></div>',
+    unsafe_allow_html=True,
+)
 
+def _place_fields(place):
+    if key == "northern_landscapes":
+        name, detail, location = place
+    else:
+        name, location, detail = place
+    return name, location, detail
+
+def _city_name(location):
+    parts = [part.strip() for part in location.split(",") if part.strip()]
+    first = parts[0] if parts else "Unclassified"
+    if first.casefold() in {"walled city", "lahore fort area"}:
+        return "Lahore"
+    if first.casefold() == "multan region":
+        return "Multan"
+    if first.casefold() == "rawalpindi region":
+        return "Taxila / Rawalpindi region"
+    if first.casefold() == "hingol national park":
+        return "Hingol / Lasbela"
+    if first.casefold() == "bolan region":
+        return "Bolan / Kachhi"
+    return first
+
+records = []
 for section_title, places in collection["sections"]:
-    st.subheader(section_title)
-    cols = st.columns(2, gap="large")
-    for index, place in enumerate(places):
-        with cols[index % 2]:
-            with st.container(border=True):
-                if key == "northern_landscapes":
-                    name, detail, location = place
-                else:
-                    name, location, detail = place
-                photo = get_commons_image(name)
-                if photo and not photo.get("illustrative"):
-                    required = {token for token in name.casefold().replace("&", " ").replace("-", " ").split() if len(token) > 2}
-                    found = {token for token in photo.get("title", "").casefold().replace("_", " ").replace("-", " ").split() if len(token) > 2}
-                    if len(required.intersection(found)) >= min(2, len(required)):
-                        rendered = get_display_image(photo["thumb_url"], aspect_ratio=(16, 9))
-                        st.image(rendered if rendered else photo["thumb_url"], use_container_width=True)
-                        st.caption(f'{photo["artist"]} · {photo["license"]} · [Image source]({photo["page_url"]})')
-                st.markdown(f"**{name}**")
-                st.caption(location)
-                st.write(detail)
+    for place in places:
+        name, location, detail = _place_fields(place)
+        records.append({
+            "name": name, "location": location, "city": _city_name(location),
+            "detail": detail, "category": section_title,
+        })
 
-if key == "northern_landscapes":
-    st.divider()
-    st.subheader("Browse the destination catalogue")
-    candidates = [
-        (name, item) for name, item in DESTINATIONS.items()
-        if any(tag in item.get("experiences", []) for tag in ("Nature & wildlife", "Adventure", "Camping & outdoors"))
-    ]
-    candidates.sort(key=lambda pair: pair[0])
-    st.caption(f"{len(candidates)} destination clusters tagged for nature, adventure or outdoor travel.")
-    for start in range(0, len(candidates), 3):
-        cols = st.columns(3)
-        for col, (name, item) in zip(cols, candidates[start:start + 3]):
-            with col:
-                with st.container(border=True):
-                    st.markdown(f"**{name}**")
-                    st.caption(item.get("province", item["region"]))
-                    st.write(item["tagline"])
-                    if st.button("Open destination guide", key=f"north_{name}"):
-                        st.session_state["selected_destination"] = name
-                        st.switch_page("pages/02_Destination_Guide.py")
+cities = ["All cities"] + sorted({item["city"] for item in records})
+categories = ["All tourism themes"] + [title for title, _ in collection["sections"]]
+filter_cols = st.columns([1.1, 1.1, 1.6], gap="medium")
+with filter_cols[0]:
+    selected_city = st.selectbox("Browse by city / area", cities, key=f"exp_city_{key}")
+with filter_cols[1]:
+    selected_category = st.selectbox("Tourism category", categories, key=f"exp_category_{key}")
+with filter_cols[2]:
+    search_text = st.text_input("Find a destination", placeholder="Search a place, city or experience…", key=f"exp_search_{key}")
+
+matches = [
+    item for item in records
+    if (selected_city == "All cities" or item["city"] == selected_city)
+    and (selected_category == "All tourism themes" or item["category"] == selected_category)
+    and search_text.casefold() in f'{item["name"]} {item["location"]} {item["detail"]} {item["category"]}'.casefold()
+]
+st.markdown(
+    f'<div class="experience-filter-note">{len(matches)} curated places · grouped by tourism theme · filterable by city</div>',
+    unsafe_allow_html=True,
+)
+
+for section_title, _ in collection["sections"]:
+    section_matches = [item for item in matches if item["category"] == section_title]
+    if not section_matches:
+        continue
+    st.subheader(section_title)
+    for start_index in range(0, len(section_matches), 3):
+        columns = st.columns(3, gap="large")
+        for offset, (column, item) in enumerate(zip(columns, section_matches[start_index:start_index + 3])):
+            with column:
+                card_index = start_index + offset
+                with st.container(border=True, key=f"experience-atlas-card-{key}-{section_title[:10]}-{card_index}"):
+                    supplied = get_destination_gallery_image(item["name"] + " " + item["location"])
+                    photo = supplied or get_commons_image(item["name"] + " " + item["location"])
+                    if photo and photo.get("thumb_url"):
+                        rendered = get_display_image(photo["thumb_url"], aspect_ratio=(16, 9))
+                        if rendered:
+                            st.image(rendered, use_container_width=True)
+                        else:
+                            st.image(photo["thumb_url"], use_container_width=True)
+                        credit = (
+                            f'{photo.get("artist", "Image source")} · {photo.get("license", "Attribution unavailable")}'
+                            + (f' · [Source]({photo["page_url"]})' if photo.get("page_url") else "")
+                        )
+                    else:
+                        st.markdown('<div style="height:198px;border-radius:10px;background:linear-gradient(135deg,#D7C59F,#C8E0D5 55%,#B8D6DF);display:flex;align-items:center;justify-content:center;color:#31564A;font-size:11px;font-weight:800;letter-spacing:1.5px">VOYAGEPK DESTINATION</div>', unsafe_allow_html=True)
+                        credit = "Photography reference not yet assigned"
+                    st.markdown(f'<div class="experience-card-meta">{item["category"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="experience-card-title">{item["name"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="experience-card-location">{item["city"]} · {item["location"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="experience-card-copy">{item["detail"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="experience-card-credit">{credit}</div>', unsafe_allow_html=True)
 
 st.divider()
 st.subheader("Reference sources")
