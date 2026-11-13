@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import streamlit as st
-import requests
+import html
 
 from src.catalog import DESTINATIONS, PROVINCE_ORDER
 from src.destination_gallery import DESTINATION_IMAGE_BATCHES
@@ -46,22 +46,6 @@ ATLAS_EVENT_IMAGES = {
 st.set_page_config(page_title="Regional Atlas | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
 
-
-@st.cache_data(ttl=86400, show_spinner=False)
-def fetch_gallery_image(url: str):
-    """Fetch supplied remote images server-side so the gallery does not depend on browser hotlinking."""
-    try:
-        response = requests.get(
-            url,
-            headers={"User-Agent": "VoyagePK/1.0 (destination image gallery)"},
-            timeout=18,
-        )
-        response.raise_for_status()
-        if not response.headers.get("content-type", "").lower().startswith("image/"):
-            return None
-        return response.content
-    except requests.RequestException:
-        return None
 
 st.markdown("""
 <style>
@@ -1463,12 +1447,20 @@ for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCH
         for offset, (col, image_record) in enumerate(zip(card_columns, image_row)):
             with col:
                 with st.container(border=True, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
-                    gallery_image = fetch_gallery_image(image_record["image_url"])
-                    if gallery_image:
-                        st.image(gallery_image, use_container_width=True)
+                    image_url = str(image_record.get("image_url", "")).strip()
+                    destination_name = str(image_record.get("destination", "Destination")).strip()
+                    if image_url:
+                        safe_url = html.escape(image_url, quote=True)
+                        safe_name = html.escape(destination_name, quote=True)
+                        st.markdown(
+                            f'<div style="width:100%;height:218px;min-height:218px;max-height:218px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(199,163,91,.42);border-radius:12px;padding:6px;background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED)">'
+                            f'<img src="{safe_url}" alt="{safe_name}" loading="lazy" style="display:block;width:100%;height:206px;max-height:206px;object-fit:contain;object-position:center;border:0;border-radius:9px;background:transparent">'
+                            f'</div>',
+                            unsafe_allow_html=True,
+                        )
                     else:
                         st.markdown('<div class="atlas-gallery-image-slot atlas-gallery-image-slot--unavailable"></div>', unsafe_allow_html=True)
-                    st.markdown(f'<div class="atlas-card-title">{image_record["destination"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="atlas-card-title">{html.escape(destination_name)}</div>', unsafe_allow_html=True)
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">05 · VISUAL REFERENCE LIBRARY</div>', unsafe_allow_html=True)
