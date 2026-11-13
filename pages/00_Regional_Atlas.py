@@ -1554,19 +1554,15 @@ for start in range(0, len(image_matches), 3):
     for offset, (col, item) in enumerate(zip(row, image_matches[start:start + 3])):
         with col:
             with st.container(border=True, key=f"atlas-reference-card-{start + offset}"):
-                if item.get("page"):
-                    show_photo(
-                        item["subject"],
-                        image_override=ATLAS_DESTINATION_IMAGES.get(item.get("subject")) or {
-                            "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
-                            "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
-                            "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
-                            "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
-                            "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
-                        }.get(item.get("id")),
-                    )
-                else:
-                    st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE SOURCE PENDING</div></div>', unsafe_allow_html=True)
+                image_override = find_matching_destination_image(item.get("subject", "")) or {
+                    "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
+                    "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
+                    "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
+                    "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
+                    "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
+                }.get(item.get("id"))
+                # An absent source-page field must not suppress an image already stored elsewhere.
+                show_photo(item.get("subject", "Pakistan destination"), image_override=image_override)
                 st.markdown(f'<div class="atlas-card-meta">{item.get("region","")}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-title">{item.get("subject","")}</div>', unsafe_allow_html=True)
 
