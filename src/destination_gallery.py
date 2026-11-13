@@ -10,7 +10,7 @@ DESTINATION_IMAGE_BATCHES = {
         {"destination": "Mazar-e-Quaid, Karachi", "image_url": "https://greenpaktourism.com/_next/image?url=%2Fimages%2Flicensed%2Fgallery%2Fmazar-e-quaid%2F01-mazar-e-quaid-karachi.jpg&w=1920&q=75"},
     ],
     "Punjab · Batch 2": [
-        {"destination": "Badshahi Mosque, Lahore", "image_url": "https://img.atlasobscura.com/PF68Vef8tZ_blSboIWoRVFF0Dyn8s0n_kX-cCpLB3kk/rt:fit/h:400/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy84NWFh/NDQzOS0xMTE4LTQ3/YzMtOTcxYi0yOTYw/MjM1NmRlOGEwYjQ2/NWU4ZjkyMDY5MjM0/ZjJfMTIwMHB4LUJh/ZHNoYWhpX01vc3F1/ZV9FdmVuaW5nX1ZpZXcuanBn.jpg"},
+        {"destination": "Badshahi Mosque, Lahore", "image_url": "https://www.worldhistory.org/img/c/p/1600x900/17858.jpg"},
         {"destination": "Minar-e-Pakistan, Lahore", "image_url": "https://greenpaktourism.com/images/licensed/independence-day-festival-photo.jpg"},
     ],
     "Cholistan & South Punjab · Batch 3": [
