@@ -893,8 +893,8 @@ ATLAS_CLUSTER_IMAGES = {
         "license": "Source and reuse licence not independently verified",
     },
     "Fairy Meadows & Raikot": {
-        "thumb_url": "https://hellosalam.pk/wp-content/uploads/2025/11/image-5.jpeg",
-        "page_url": "https://hellosalam.pk/wp-content/uploads/2025/11/image-5.jpeg",
+        "thumb_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGpWcn_BZ-5c6Gn-3V1LfqotVc6b6im3l1-KIQOj0nHQ&s=10",
+        "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGpWcn_BZ-5c6Gn-3V1LfqotVc6b6im3l1-KIQOj0nHQ&s=10",
         "artist": "User-supplied image URL",
         "license": "Source and reuse licence not independently verified",
     },
