@@ -1327,7 +1327,20 @@ for col, (value, label) in zip(cols, stats):
 st.markdown("")
 st.markdown('<div class="atlas-eyebrow">01 · START EXPLORING</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">Find a place worth the journey.</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-subheading">Browse places by province and travel interest. Each listing uses a concise destination overview and a consistent photo card.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">Browse destinations by province and travel interest. Select a category to narrow the places shown below.</div>', unsafe_allow_html=True)
+experience_categories = sorted(
+    {tag for item in DESTINATIONS.values() for tag in item.get("experiences", [])}
+    | {tag for record in RESEARCH_DESTINATIONS for tag in record.get("categories", [])}
+)
+category_options = ["All categories"] + experience_categories
+for category_start in range(0, len(category_options), 4):
+    category_cols = st.columns(4, gap="small")
+    for category_col, category_name in zip(category_cols, category_options[category_start:category_start + 4]):
+        with category_col:
+            is_selected = st.session_state.get("atlas_experience_filter", "All categories") == category_name
+            if st.button(category_name, key="atlas_category_" + _normalise_place_name(category_name), use_container_width=True, type="primary" if is_selected else "secondary"):
+                st.session_state["atlas_experience_filter"] = category_name
+                st.rerun()
 
 f1, f2 = st.columns([1.5, 1])
 with f1:
@@ -1343,7 +1356,12 @@ for record in RESEARCH_DESTINATIONS:
         str(record.get("type", "")), str(record.get("summary", "")),
         " ".join(record.get("categories", [])), str(record.get("note", "")),
     ]).casefold()
-    if (selected_region == "All regions" or record["region"] == selected_region) and search_text.casefold() in haystack:
+    selected_category = st.session_state.get("atlas_experience_filter", "All categories")
+    if (
+        (selected_region == "All regions" or record["region"] == selected_region)
+        and search_text.casefold() in haystack
+        and (selected_category == "All categories" or selected_category in record.get("categories", []))
+    ):
         destination_matches.append(record)
 
 st.caption(f"{len(destination_matches)} detailed records match your search.")
@@ -1360,26 +1378,15 @@ cluster_search = st.text_input("Search the wider destination catalogue", placeho
 cluster_region_options = ["All regions"] + PROVINCE_ORDER
 cluster_region = st.selectbox("Province / region", cluster_region_options, key="atlas_cluster_region")
 
-experience_categories = sorted({tag for item in DESTINATIONS.values() for tag in item.get("experiences", [])})
-category_options = ["All experiences"] + experience_categories
-st.markdown('<div class="atlas-subheading">Choose the kind of place you want to visit.</div>', unsafe_allow_html=True)
-for category_start in range(0, len(category_options), 4):
-    category_cols = st.columns(4, gap="small")
-    for category_col, category_name in zip(category_cols, category_options[category_start:category_start + 4]):
-        with category_col:
-            is_selected = st.session_state.get("atlas_experience_filter", "All experiences") == category_name
-            if st.button(category_name, key="atlas_category_" + _normalise_place_name(category_name), use_container_width=True, type="primary" if is_selected else "secondary"):
-                st.session_state["atlas_experience_filter"] = category_name
-                st.rerun()
 cluster_matches = []
 for name, item in DESTINATIONS.items():
     item_region = item.get("region", "")
     searchable = (name + " " + item.get("tagline", "") + " " + item.get("overview", "")).casefold()
     if (cluster_region == "All regions" or cluster_region in item_region) and cluster_search.casefold() in searchable:
         cluster_matches.append((name, item))
-selected_experience = st.session_state.get("atlas_experience_filter", "All experiences")
-if selected_experience != "All experiences":
-    cluster_matches = [(name, item) for name, item in cluster_matches if selected_experience in item.get("experiences", [])]
+selected_category = st.session_state.get("atlas_experience_filter", "All categories")
+if selected_category != "All categories":
+    cluster_matches = [(name, item) for name, item in cluster_matches if selected_category in item.get("experiences", [])]
 st.caption(f"{len(cluster_matches)} destination clusters.")
 for start in range(0, len(cluster_matches), 3):
     row = st.columns(3, gap="medium")
