@@ -1292,7 +1292,7 @@ st.markdown('<div class="atlas-eyebrow">VOYAGEPK · PAKISTAN UNBOUND</div>', uns
 st.title("Regional Atlas")
 st.markdown(
     '<div class="atlas-lede">Explore Pakistan region by region. Discover signature destinations, detailed attractions, '
-    'living heritage, seasonal festivals and visual references in one organised atlas.</div>',
+    'living heritage, seasonal festivals and destination photography in one organised atlas.</div>',
     unsafe_allow_html=True,
 )
 
