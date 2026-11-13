@@ -124,7 +124,7 @@ DESTINATION_IMAGE_BATCHES = {
         {"destination": "Shrine of Musa Pak Shaheed, Multan", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzrZ38X78ScldgnZhjwQrNkQQ3-aZjoTD9x-VJP9chjw&s=10"},
         {"destination": "Shrine of Muhammad Shah Yousaf Gardezi, Multan", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj9jZcV5JXsub_59DWSTMeqjPJrDPaF9PL5BcNpEFexw&s=10"},
         {"destination": "Hussain Agahi Bazaar, Multan", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4LE3z5Rdn__fniaCMnqAVFSNGphZfnC66rgKs3c6Ntc3lGN5HMMyOm78&s=10"},
-        {"destination": "Ghanta Ghar (Clock Tower), Multan", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQFPAI_FXGDl2wdNgkU4yi76KdDppxmC3_2omHTrhnHVEzR5v0aA1xyP4&s=10"},
+        {"destination": "Ghanta Ghar (Clock Tower), Multan", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzv3uc7BBL_smz4dpT7_WY2xHLP1x1F0XD5X8LjWCVqweEiqZ5sepWpCXQ&s=10"},
     ],
     "Bahawalpur & Uch Sharif · Heritage & Family Attractions · Batch 18": [
         {"destination": "SS World Family Park, Bahawalpur", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScNdS3bbv432q1kg4eiX88Ir9co9Sw1Z20_OGnXtd1_cJgWXjSrk_3N7Gv&s=10"},
