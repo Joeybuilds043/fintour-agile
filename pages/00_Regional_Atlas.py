@@ -428,6 +428,18 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
  [class*="st-key-atlas-event-card-"] [data-testid="stImage"] img,
  [class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img{height:168px!important}
 }
+
+/* Green category shortcut boxes with white, high-contrast labels. */
+[class*="st-key-atlas_category_"] [data-testid="stButton"]>button,
+[class*="st-key-atlas_category_"] button{
+ background:#174B35!important;color:#FFFFFF!important;border:1px solid #174B35!important;
+ border-radius:11px!important;font-weight:750!important;min-height:48px!important;
+}
+[class*="st-key-atlas_category_"] button p,
+[class*="st-key-atlas_category_"] button span{color:#FFFFFF!important}
+[class*="st-key-atlas_category_"] button:hover{
+ background:#236746!important;color:#FFFFFF!important;border-color:#236746!important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -1532,66 +1544,68 @@ for start in range(0, len(event_matches), 3):
                     st.markdown(f'<div class="atlas-record-location"><strong>Location</strong> · {event.get("location","")}</div>', unsafe_allow_html=True)
 
 st.divider()
-st.markdown('<div class="atlas-eyebrow">04 · DESTINATION IMAGE GALLERY</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-heading">Pakistan, through the places themselves.</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-subheading">A visual journey through Pakistan’s landmarks, landscapes and heritage.</div>', unsafe_allow_html=True)
-for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCHES.items()):
-    st.markdown(f'<div class="atlas-card-meta">{batch_name}</div>', unsafe_allow_html=True)
-    for start in range(0, len(batch_images), 3):
-        image_row = batch_images[start:start + 3]
-        if len(image_row) == 2:
-            row = st.columns([1, 2, 2, 1], gap="medium")
-            card_columns = row[1:3]
-        elif len(image_row) == 1:
-            row = st.columns([1, 2, 1], gap="medium")
-            card_columns = [row[1]]
-        else:
-            row = st.columns(3, gap="medium")
-            card_columns = row
-        for offset, (col, image_record) in enumerate(zip(card_columns, image_row)):
-            with col:
-                with st.container(border=True, key=f"batch-gallery-card-{batch_index}-{start + offset}"):
-                    image_url = str(image_record.get("image_url", "")).strip()
-                    destination_name = str(image_record.get("destination", "Destination")).strip()
-                    if image_url:
-                        safe_url = html.escape(image_url, quote=True)
-                        safe_name = html.escape(destination_name, quote=True)
+st.markdown('<div class="atlas-eyebrow">04 · DESTINATIONS BY TRAVEL TYPE</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-heading">Explore photos by the kind of journey you want.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">Choose a category to reveal its destinations. Photos stay hidden until you open a category.</div>', unsafe_allow_html=True)
+
+def _photo_travel_category(name: str) -> str:
+    value = str(name).casefold()
+    rules = [
+        ("Nature & Mountains", ("mountain", "valley", "meadow", "peak", "lake", "glacier", "waterfall", "forest", "hill", "pass", "fairy meadows", "arang kel", "shogran", "siri paye", "naltar", "deosai", "hunza", "skardu", "swat", "kumrat", "kaghan", "naran", "kalam", "ratti gali", "saif ul malook", "sheosar", "attabad", "rush lake", "minimarg", "shounter")),
+        ("Heritage & History", ("fort", "mosque", "tomb", "shrine", "museum", "archaeological", "ruins", "heritage", "old city", "walled city", "makli", "mohenjo", "harappa", "taxila", "rohtas", "derawar", "shahi qila", "shalamar", "library", "clock tower", "ghanta ghar", "andaroon", "andron", "uch sharif", "hiran minar")),
+        ("Religious & Spiritual", ("data darbar", "data ganj", "lal shahbaz", "sehwan", "bahauddin zakariya", "shah rukn", "sufi", "dargah", "darbar", "gurdwara", "temple", "church", "hindu", "sikh", "bibi pak", "mazar", "urs")),
+        ("Wildlife & Family", ("zoo", "safari", "wildlife", "national park", "park", "garden", "family", "aquarium", "bird", "reserve", "gulshan-e-iqbal", "ss world", "dha 360")),
+        ("Coasts & Deserts", ("beach", "coast", "island", "sea", "marine", "desert", "cholistan", "thar", "kund malir", "ormara", "gwadar", "hingol", "astola", "manora", "rann")),
+        ("Culture & Experiences", ("festival", "polo", "rally", "bazaar", "bazar", "craft", "village", "food", "market", "culture", "lok mela", "kalash", "chitral", "sibi mela")),
+    ]
+    for category, terms in rules:
+        if any(term in value for term in terms):
+            return category
+    return "Culture & Experiences"
+
+_photo_groups = {name: [] for name in (
+    "Nature & Mountains", "Heritage & History", "Religious & Spiritual",
+    "Wildlife & Family", "Coasts & Deserts", "Culture & Experiences"
+)}
+_seen_photo_names = set()
+for _batch_items in DESTINATION_IMAGE_BATCHES.values():
+    for _item in _batch_items:
+        _name = str(_item.get("destination", "Destination")).strip()
+        _key = _normalise_place_name(_name)
+        _url = str(_item.get("image_url", "")).strip()
+        if _key and _key not in _seen_photo_names and _url:
+            _photo_groups[_photo_travel_category(_name)].append({
+                "name": _name, "url": _url, "region": _item.get("region", "")
+            })
+            _seen_photo_names.add(_key)
+
+for _candidate in IMAGE_CANDIDATES:
+    _name = str(_candidate.get("subject", "Destination")).strip()
+    _key = _normalise_place_name(_name)
+    _override = find_matching_destination_image(_name)
+    if _key and _key not in _seen_photo_names and _override and _override.get("thumb_url"):
+        _photo_groups[_photo_travel_category(_name)].append({
+            "name": _name, "url": _override["thumb_url"], "region": _candidate.get("region", "")
+        })
+        _seen_photo_names.add(_key)
+
+for _category, _items in _photo_groups.items():
+    if not _items:
+        continue
+    with st.expander(f"{_category}  ·  {len(_items)} places", expanded=False):
+        for _start in range(0, len(_items), 3):
+            _photo_cols = st.columns(3, gap="medium")
+            for _col, _photo in zip(_photo_cols, _items[_start:_start + 3]):
+                with _col:
+                    with st.container(border=True):
                         st.markdown(
-                            f'<div style="width:100%;height:218px;min-height:218px;max-height:218px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(199,163,91,.42);border-radius:12px;padding:6px;background:linear-gradient(135deg,#E8E0CF,#DCEAE2 55%,#D8E8ED)">'
-                            f'<img src="{safe_url}" alt="{safe_name}" loading="lazy" style="display:block;width:100%;height:206px;max-height:206px;object-fit:contain;object-position:center;border:0;border-radius:9px;background:transparent">'
-                            f'</div>',
+                            f'<div style="width:100%;height:218px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;padding:6px;background:#E8E0CF">'
+                            f'<img src="{html.escape(_photo["url"], quote=True)}" alt="{html.escape(_photo["name"], quote=True)}" loading="lazy" style="width:100%;height:206px;object-fit:contain;object-position:center;border-radius:9px"></div>',
                             unsafe_allow_html=True,
                         )
-                    else:
-                        st.markdown('<div class="atlas-gallery-image-slot atlas-gallery-image-slot--unavailable"></div>', unsafe_allow_html=True)
-                    st.markdown(f'<div class="atlas-card-title">{html.escape(destination_name)}</div>', unsafe_allow_html=True)
-
-st.divider()
-st.markdown('<div class="atlas-eyebrow">05 · MORE DESTINATION PHOTOGRAPHY</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-heading">More places to explore.</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-subheading">Explore additional destination photography from across Pakistan.</div>', unsafe_allow_html=True)
-image_query = st.text_input("Search image subjects", placeholder="Faisal Mosque, Astola Island, Makli...")
-image_matches = [
-    item for item in IMAGE_CANDIDATES
-    if image_query.casefold() in (str(item.get("subject","")) + " " + str(item.get("region","")) + " " + str(item.get("id") or "")).casefold()
-]
-st.caption(f"{len(image_matches)} image candidates.")
-for start in range(0, len(image_matches), 3):
-    row = st.columns(3, gap="medium")
-    for offset, (col, item) in enumerate(zip(row, image_matches[start:start + 3])):
-        with col:
-            with st.container(border=True, key=f"atlas-reference-card-{start + offset}"):
-                image_override = find_matching_destination_image(item.get("subject", "")) or {
-                    "IMG-PB-001": ATLAS_DESTINATION_IMAGES.get("Lahore Fort (Shahi Qila)"),
-                    "IMG-PB-002": ATLAS_DESTINATION_IMAGES.get("Derawar Fort"),
-                    "IMG-PB-003": ATLAS_DESTINATION_IMAGES.get("Katas Raj Temples"),
-                    "IMG-SD-002": ATLAS_DESTINATION_IMAGES.get("Makli Necropolis"),
-                    "IMG-SD-003": ATLAS_DESTINATION_IMAGES.get("Shrine of Lal Shahbaz Qalandar"),
-                }.get(item.get("id"))
-                # An absent source-page field must not suppress an image already stored elsewhere.
-                show_photo(item.get("subject", "Pakistan destination"), image_override=image_override)
-                st.markdown(f'<div class="atlas-card-meta">{item.get("region","")}</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="atlas-card-title">{item.get("subject","")}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div class="atlas-card-title">{html.escape(_photo["name"])}</div>', unsafe_allow_html=True)
+                        if _photo.get("region"):
+                            st.caption(_photo["region"])
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">06 · THE NEXT DISCOVERIES</div>', unsafe_allow_html=True)
