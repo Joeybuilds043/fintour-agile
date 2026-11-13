@@ -73,7 +73,7 @@ _add("Fairy Meadows & Raikot", "Gilgit-Baltistan", 35.3830, 74.5900,
      "A dramatic alpine meadow beneath the Nanga Parbat massif.",
      ["Adventure","Nature & wildlife","Camping & outdoors","Ecotourism"],
      ["Fairy Meadows","Nanga Parbat viewpoints","Raikot Bridge access corridor","Guided mountain walks"],
-     "Fairy Meadows Nanga Parbat Pakistan", "A remote high-mountain destination requiring careful logistics, local guidance and physical preparation.")
+     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGpWcn_BZ-5c6Gn-3V1LfqotVc6b6im3l1-KIQOj0nHQ&s=10", "A remote high-mountain destination requiring careful logistics, local guidance and physical preparation.")
 _add("Astore & Rama Valley", "Gilgit-Baltistan", 35.3410, 74.8560,
      "Quiet mountain valleys, alpine lakes and forest landscapes.",
      ["Nature & wildlife","Adventure","Camping & outdoors","Ecotourism"],
