@@ -136,21 +136,21 @@ DESTINATION_IMAGE_BATCHES = {
         {"destination": "Gulzar Mahal, Bahawalpur", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbmxYHRwfe1lsMe8jHO0tm51mW_FdCG8nlyAHSffMAQQ&s=10"},
         {"destination": "Uch Sharif Historic Complex", "image_url": "https://images.squarespace-cdn.com/content/v1/5dfd1ed2eef73319397ce4fe/1630857380434-HGJBXFQY38DPDRSN0M6N/Jalaluddin%2BBukhari%2BTomb"},
         {"destination": "Tomb of Bibi Jawindi, Uch Sharif", "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp8GqRBYRAE5aSSjl6toQC06ZXkWPGnjBqCLv3yrPMFw&s=10"},
-        {"destination": "Shrine of Jalaluddin Surkh-Posh Bukhari, Uch Sharif", "image_url": ""},
-        {"destination": "Shrine of Channan Pir, Cholistan", "image_url": ""},
+        {"destination": "Shrine of Jalaluddin Surkh-Posh Bukhari, Uch Sharif", "image_url": "https://images.squarespace-cdn.com/content/v1/5dfd1ed2eef73319397ce4fe/1630857380434-HGJBXFQY38DPDRSN0M6N/Jalaluddin%2BBukhari%2BTomb"},
+        {"destination": "Shrine of Channan Pir, Cholistan", "image_url": "https://i.dawn.com/large/2017/07/595b7dead36f1.jpg"},
     ],
     "Punjab · Heritage & Sufi Routes · Batch 19": [
-        {"destination": "Rohtas Fort, Jhelum", "image_url": ""},
-        {"destination": "Hiran Minar, Sheikhupura", "image_url": ""},
-        {"destination": "Katas Raj Temples, Chakwal", "image_url": ""},
-        {"destination": "Khewra Salt Mine, Jhelum", "image_url": ""},
-        {"destination": "Harappa Archaeological Site, Sahiwal", "image_url": ""},
-        {"destination": "Taxila Archaeological Site and Museum", "image_url": ""},
+        {"destination": "Rohtas Fort, Jhelum", "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Sohail_Gate%2C_Rohtas_Fort%2C_Pakistan.jpg"},
+        {"destination": "Hiran Minar, Sheikhupura", "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Hiran_Minar_Sheikhupura_Punjab_-_2.jpg"},
+        {"destination": "Katas Raj Temples, Chakwal", "image_url": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/12/64/b5/1f.jpg"},
+        {"destination": "Khewra Salt Mine, Jhelum", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Khewra_Salt_Mine_-_Crystal_Deposits_on_the_mine_walls.jpg/3456px-Khewra_Salt_Mine_-_Crystal_Deposits_on_the_mine_walls.jpg"},
+        {"destination": "Harappa Archaeological Site, Sahiwal", "image_url": "https://images.mindtrip.ai/attractions/93ea/268b/fe31/884f/4b28/66af/1c6c/3eb1"},
+        {"destination": "Taxila Archaeological Site and Museum", "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmarajika%20Stupa%2C%20Taxila.jpg?width=1200"},
         {"destination": "Shrine of Baba Farid, Pakpattan", "image_url": "https://laaltain.pk/wp-content/uploads/2016/10/13.jpg"},
-        {"destination": "Shrine of Baba Bulleh Shah, Kasur", "image_url": ""},
-        {"destination": "Shrine of Sultan Bahu, Garh Maharaja", "image_url": ""},
-        {"destination": "Shrine of Sakhi Sarwar, Dera Ghazi Khan", "image_url": ""},
-        {"destination": "Shrine of Khawaja Ghulam Farid, Kot Mithan", "image_url": ""},
+        {"destination": "Shrine of Baba Bulleh Shah, Kasur", "image_url": "https://d3fphkxyf5o5bm.cloudfront.net/image-resize/format%3Dwebp%2Cw%3D720/QwRY54Li1HMwD7oNfqJFv7wWKSMG09w6DDIK7mvq33"},
+        {"destination": "Shrine of Sultan Bahu, Garh Maharaja", "image_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/cc/b5/74/shrine-of-sultan-bahu.jpg?h=-1&s=1&w=1200"},
+        {"destination": "Shrine of Sakhi Sarwar, Dera Ghazi Khan", "image_url": "https://mindtrip.ai/cdn-cgi/image/format%3Dwebp%2Cw%3D1200/https%3A/images.mindtrip.ai/attractions/8c0f/2ace/cfba/0972/7675/952d/7e28/f7d7"},
+        {"destination": "Shrine of Khawaja Ghulam Farid, Kot Mithan", "image_url": "https://www.mbilalm.com/blog/wp-content/uploads/2022/02/Khawaja-Ghulam-Farid-Shrine-Kot-Mithan-768x512.jpg"},
     ],
 }
 
@@ -262,7 +262,8 @@ def get_destination_gallery_image(query: str) -> dict | None:
     for batch, records in DESTINATION_IMAGE_BATCHES.items():
         for record in records:
             terms = aliases.get(record["destination"], ())
-            if any(term in q for term in terms):
+            # Empty placeholders must never shadow Commons fallback photography.
+            if record.get("image_url") and any(term in q for term in terms):
                 return {
                     "title": record["destination"],
                     "thumb_url": record["image_url"],
