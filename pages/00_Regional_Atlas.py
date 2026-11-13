@@ -1333,6 +1333,8 @@ experience_categories = sorted(
     | {tag for record in RESEARCH_DESTINATIONS for tag in record.get("categories", [])}
 )
 category_options = ["All categories"] + experience_categories
+if st.session_state.get("atlas_experience_filter") not in category_options:
+    st.session_state["atlas_experience_filter"] = "All categories"
 for category_start in range(0, len(category_options), 4):
     category_cols = st.columns(4, gap="small")
     for category_col, category_name in zip(category_cols, category_options[category_start:category_start + 4]):
