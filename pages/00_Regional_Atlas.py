@@ -1487,6 +1487,12 @@ for start in range(0, len(event_matches), 3):
                     f'<div class="atlas-event-meta"><span class="atlas-event-date">{event_card_date(event)}</span></div>',
                     unsafe_allow_html=True,
                 )
+                event_place = html.escape(str(event.get("location", "")))
+                event_region = html.escape(str(event.get("region", "")))
+                st.markdown(
+                    f'<div class="atlas-card-meta">{event_region} · {event_place}</div>',
+                    unsafe_allow_html=True,
+                )
                 st.markdown(
                     f'<div class="atlas-card-copy">{event_card_summary(event)}</div>',
                     unsafe_allow_html=True,
