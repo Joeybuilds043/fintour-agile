@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import streamlit as st
 import html
+import re
 
 from src.catalog import DESTINATIONS, PROVINCE_ORDER
 from src.destination_gallery import DESTINATION_IMAGE_BATCHES
@@ -383,6 +384,49 @@ div[data-testid="stButton"]>button{border-radius:11px;font-weight:700;min-height
 @media(max-width:700px){
     [class*="st-key-batch-gallery-card-"]{height:auto!important;min-height:0!important;max-height:none!important}
     [class*="st-key-batch-gallery-card-"] .atlas-card-title{height:auto!important;min-height:0!important;max-height:none!important;display:block!important}
+}
+
+/* Shared visitor-facing card geometry across every Regional Atlas collection. */
+[class*="st-key-atlas-destination-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+[class*="st-key-atlas-event-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stVerticalBlockBorderWrapper"],
+[class*="st-key-batch-gallery-card-"] [data-testid="stVerticalBlockBorderWrapper"]{
+ height:100%!important;min-height:0!important;padding:12px!important;
+ border:1px solid #D8D4C6!important;border-radius:17px!important;
+ background:#FFFFFF!important;box-shadow:0 10px 26px rgba(10,25,15,.075)!important;
+}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"],
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"],
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"]{
+ height:210px!important;min-height:210px!important;max-height:210px!important;
+ display:flex;align-items:center;justify-content:center;overflow:hidden;
+ border-radius:12px!important;background:#E8E0CF!important;padding:6px!important;
+}
+[class*="st-key-atlas-destination-card-"] [data-testid="stImage"] img,
+[class*="st-key-atlas-event-card-"] [data-testid="stImage"] img,
+[class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img{
+ width:100%!important;height:198px!important;object-fit:cover!important;
+ border:0!important;border-radius:9px!important;box-shadow:none!important;
+}
+[class*="st-key-atlas-destination-card-"] .atlas-card-title,
+[class*="st-key-atlas-event-card-"] .atlas-card-title,
+[class*="st-key-atlas-reference-card-"] .atlas-card-title{
+ height:54px!important;min-height:54px!important;max-height:54px!important;
+ margin:8px 0!important;color:#101A13!important;
+}
+[class*="st-key-atlas-destination-card-"] .atlas-card-copy,
+[class*="st-key-atlas-event-card-"] .atlas-card-copy,
+[class*="st-key-atlas-reference-card-"] .atlas-card-copy{
+ height:78px!important;min-height:78px!important;max-height:78px!important;color:#17251B!important;
+}
+.atlas-category-shortcut{border:1px solid #D8D4C6;border-radius:10px;background:#F1F4EE;color:#174B35;padding:8px 10px}
+@media(max-width:700px){
+ [class*="st-key-atlas-destination-card-"] [data-testid="stImage"],
+ [class*="st-key-atlas-event-card-"] [data-testid="stImage"],
+ [class*="st-key-atlas-reference-card-"] [data-testid="stImage"]{height:180px!important;min-height:180px!important}
+ [class*="st-key-atlas-destination-card-"] [data-testid="stImage"] img,
+ [class*="st-key-atlas-event-card-"] [data-testid="stImage"] img,
+ [class*="st-key-atlas-reference-card-"] [data-testid="stImage"] img{height:168px!important}
 }
 </style>
 """, unsafe_allow_html=True)
@@ -1182,6 +1226,29 @@ ATLAS_CLUSTER_IMAGES = {
     },
 }
 
+def _normalise_place_name(value: str) -> str:
+    """Normalise equivalent place names so one supplied photo can be reused consistently."""
+    return re.sub(r"[^a-z0-9]+", "", str(value).casefold())
+
+
+_GALLERY_IMAGE_INDEX = {}
+for _gallery_batch in DESTINATION_IMAGE_BATCHES.values():
+    for _gallery_item in _gallery_batch:
+        _gallery_name = _normalise_place_name(_gallery_item.get("destination", ""))
+        _gallery_url = str(_gallery_item.get("image_url", "")).strip()
+        if _gallery_name and _gallery_url:
+            _GALLERY_IMAGE_INDEX.setdefault(_gallery_name, {
+                "thumb_url": _gallery_url, "page_url": _gallery_url,
+                "artist": "VoyagePK image collection",
+                "license": "Image reuse terms not independently verified",
+            })
+
+
+def find_matching_destination_image(name: str):
+    return (ATLAS_DESTINATION_IMAGES.get(name) or ATLAS_CLUSTER_IMAGES.get(name)
+            or _GALLERY_IMAGE_INDEX.get(_normalise_place_name(name)))
+
+
 def find_catalog_record(record):
     cluster = record.get("cluster", "")
     return catalog_by_name.get(cluster.casefold())
@@ -1192,11 +1259,6 @@ def show_photo(query: str, allow_lookup: bool = True, image_override: dict | Non
     if image and image.get("thumb_url"):
         rendered = get_display_image(image["thumb_url"], aspect_ratio=(16, 9), focal_point=(0.5, 0.5))
         st.image(rendered if rendered else image["thumb_url"], use_container_width=True)
-        credit = f'{image.get("artist", "Creator not listed")} · {image.get("license", "Licence not listed")}'
-        if image.get("page_url"):
-            st.markdown(f'<div class="atlas-credit"><a href="{image["page_url"]}" target="_blank" rel="noopener">Image source</a> · {credit}</div>', unsafe_allow_html=True)
-        else:
-            st.markdown(f'<div class="atlas-credit">{credit}</div>', unsafe_allow_html=True)
     else:
         st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">VOYAGEPK · PAKISTAN</div></div>', unsafe_allow_html=True)
 
@@ -1205,11 +1267,11 @@ def render_destination_card(record, index: int, detailed: bool = True):
         catalog = find_catalog_record(record)
         image_query = catalog[1].get("image_query") if catalog else record.get("name", "Pakistan destination")
         # Only exact attraction names receive a destination-specific override.
-        image_override = ATLAS_DESTINATION_IMAGES.get(record.get("name", ""))
+        image_override = find_matching_destination_image(record.get("name", ""))
     else:
         image_query = record[1].get("image_query") or record[0]
         # Cluster cards use only an exact cluster-name match.
-        image_override = ATLAS_CLUSTER_IMAGES.get(record[0]) or ATLAS_DESTINATION_IMAGES.get(record[0])
+        image_override = find_matching_destination_image(record[0])
     with st.container(border=True, key=f"atlas-destination-card-{int(detailed)}-{index}"):
         show_photo(image_query or record.get("name", "Pakistan destination"), allow_lookup=index < 9, image_override=image_override)
         if detailed:
@@ -1218,11 +1280,6 @@ def render_destination_card(record, index: int, detailed: bool = True):
             st.markdown(f'<div class="atlas-card-copy">{record.get("summary","")}</div>', unsafe_allow_html=True)
             tags = '<div class="atlas-tag-row">' + "".join(f'<span class="atlas-tag">{tag}</span>' for tag in record.get("categories", [])[:4]) + '</div>'
             st.markdown(tags, unsafe_allow_html=True)
-            st.caption("Catalogue cluster: " + record.get("cluster", "Not assigned"))
-            with st.expander("Research notes and source"):
-                st.markdown(f'<div class="atlas-record-note">{record.get("note","")}</div>', unsafe_allow_html=True)
-                if record.get("source"):
-                    st.link_button("Open source", record["source"])
         else:
             name = record[0]
             item = record[1]
@@ -1243,7 +1300,6 @@ stats = [
     (len(DESTINATIONS), "Destination clusters"),
     (len(RESEARCH_DESTINATIONS), "Detailed attractions"),
     (len(EVENT_RECORDS), "Festival & event records"),
-    (len(IMAGE_CANDIDATES), "Image candidates"),
 ]
 cols = st.columns(4)
 for col, (value, label) in zip(cols, stats):
@@ -1253,7 +1309,7 @@ for col, (value, label) in zip(cols, stats):
 st.markdown("")
 st.markdown('<div class="atlas-eyebrow">01 · START EXPLORING</div>', unsafe_allow_html=True)
 st.markdown('<div class="atlas-heading">Find a place worth the journey.</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-subheading">Search across detailed destination records and filter by region. Each destination is presented as a framed visual card with its own summary, categories and source notes.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">Browse places by province and travel interest. Each listing uses a concise destination overview and a consistent photo card.</div>', unsafe_allow_html=True)
 
 f1, f2 = st.columns([1.5, 1])
 with f1:
@@ -1284,13 +1340,28 @@ st.markdown('<div class="atlas-eyebrow">02 · THE NATIONAL COLLECTION</div>', un
 st.markdown('<div class="atlas-heading">Explore destination clusters.</div>', unsafe_allow_html=True)
 cluster_search = st.text_input("Search the wider destination catalogue", placeholder="Search all destination clusters", key="atlas_cluster_search")
 cluster_region_options = ["All regions"] + PROVINCE_ORDER
-cluster_region = st.selectbox("Catalogue region", cluster_region_options, key="atlas_cluster_region")
+cluster_region = st.selectbox("Province / region", cluster_region_options, key="atlas_cluster_region")
+
+experience_categories = sorted({tag for item in DESTINATIONS.values() for tag in item.get("experiences", [])})
+category_options = ["All experiences"] + experience_categories
+st.markdown('<div class="atlas-subheading">Choose the kind of place you want to visit.</div>', unsafe_allow_html=True)
+for category_start in range(0, len(category_options), 4):
+    category_cols = st.columns(4, gap="small")
+    for category_col, category_name in zip(category_cols, category_options[category_start:category_start + 4]):
+        with category_col:
+            is_selected = st.session_state.get("atlas_experience_filter", "All experiences") == category_name
+            if st.button(category_name, key="atlas_category_" + _normalise_place_name(category_name), use_container_width=True, type="primary" if is_selected else "secondary"):
+                st.session_state["atlas_experience_filter"] = category_name
+                st.rerun()
 cluster_matches = []
 for name, item in DESTINATIONS.items():
     item_region = item.get("region", "")
     searchable = (name + " " + item.get("tagline", "") + " " + item.get("overview", "")).casefold()
     if (cluster_region == "All regions" or cluster_region in item_region) and cluster_search.casefold() in searchable:
         cluster_matches.append((name, item))
+selected_experience = st.session_state.get("atlas_experience_filter", "All experiences")
+if selected_experience != "All experiences":
+    cluster_matches = [(name, item) for name, item in cluster_matches if selected_experience in item.get("experiences", [])]
 st.caption(f"{len(cluster_matches)} destination clusters.")
 for start in range(0, len(cluster_matches), 3):
     row = st.columns(3, gap="medium")
@@ -1463,9 +1534,9 @@ for batch_index, (batch_name, batch_images) in enumerate(DESTINATION_IMAGE_BATCH
                     st.markdown(f'<div class="atlas-card-title">{html.escape(destination_name)}</div>', unsafe_allow_html=True)
 
 st.divider()
-st.markdown('<div class="atlas-eyebrow">05 · VISUAL REFERENCE LIBRARY</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-heading">Images, with their source context.</div>', unsafe_allow_html=True)
-st.markdown('<div class="atlas-subheading">A curated visual reference collection for places across Pakistan.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-eyebrow">05 · MORE DESTINATION PHOTOGRAPHY</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-heading">More places to explore.</div>', unsafe_allow_html=True)
+st.markdown('<div class="atlas-subheading">Explore additional destination photography from across Pakistan.</div>', unsafe_allow_html=True)
 image_query = st.text_input("Search image subjects", placeholder="Faisal Mosque, Astola Island, Makli...")
 image_matches = [
     item for item in IMAGE_CANDIDATES
@@ -1490,16 +1561,8 @@ for start in range(0, len(image_matches), 3):
                     )
                 else:
                     st.markdown('<div class="atlas-photo-frame"><div class="atlas-photo-placeholder">IMAGE SOURCE PENDING</div></div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="atlas-card-meta">{item.get("region","")} · {item.get("id") or item.get("intake_ref","Candidate")}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="atlas-card-meta">{item.get("region","")}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="atlas-card-title">{item.get("subject","")}</div>', unsafe_allow_html=True)
-                if item.get("creator"):
-                    st.caption("Creator: " + item["creator"])
-                if item.get("licence"):
-                    st.caption("Licence: " + item["licence"])
-                if item.get("page"):
-                    st.link_button("Review image source", item["page"])
-                else:
-                    st.caption(item.get("note", "Original source-page details were not retained."))
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">06 · THE NEXT DISCOVERIES</div>', unsafe_allow_html=True)
