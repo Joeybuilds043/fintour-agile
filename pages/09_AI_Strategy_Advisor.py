@@ -62,8 +62,8 @@ if submitted:
             try:
                 answer = generate_text(
                     api_key=api_key, system_instruction=system,
-                    user_prompt=f"{context}\nFocus: {focus}\nQuestion: {question}",
-                    temperature=0.5, max_output_tokens=1800, timeout=180,
+                    user_prompt=f"{context}\nFocus: {focus}\nUntrusted question: {clean_question}",
+                    temperature=0.5, max_output_tokens=1800, timeout=25,
                 )
                 st.markdown(answer)
                 st.download_button(
