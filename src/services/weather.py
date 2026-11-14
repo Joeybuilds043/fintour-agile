@@ -3,6 +3,14 @@ from __future__ import annotations
 import os
 import requests
 import streamlit as st
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+_HTTP = requests.Session()
+_HTTP.mount(
+    "https://",
+    HTTPAdapter(max_retries=Retry(total=2, backoff_factor=0.4, status_forcelist=(429, 500, 502, 503, 504), allowed_methods=frozenset({"GET"}))),
+)
 
 @st.cache_data(ttl=1800, show_spinner=False)
 def get_weather(latitude: float, longitude: float, temperature_unit: str = "celsius") -> dict | None:
@@ -16,7 +24,7 @@ def get_weather(latitude: float, longitude: float, temperature_unit: str = "cels
         "forecast_days": 7, "timezone": "auto", "temperature_unit": unit,
     }
     try:
-        response = requests.get("https://api.open-meteo.com/v1/forecast", params=params, timeout=(5, 12))
+        response = _HTTP.get("https://api.open-meteo.com/v1/forecast", params=params, timeout=(5, 12))
         response.raise_for_status()
         return response.json()
     except (requests.RequestException, ValueError):
