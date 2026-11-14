@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from src.provenance_report import provenance_summary
 from src.ui import apply_visitor_theme
-from src.provenance_report import review_csv, review_rows
 
 st.set_page_config(page_title="About VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
@@ -37,16 +37,19 @@ st.write(
 st.subheader("Version")
 st.write("Prototype version 1 (asset manifest version 1).")
 
-st.subheader("Records and photos for manual review")
-review = review_rows()
-st.write(f"{len(review)} provenance or photo-credit items need review. Existing photos remain in place.")
-if review:
-    st.dataframe(review, use_container_width=True, hide_index=True)
-    st.download_button(
-        "Download review report",
-        review_csv(),
-        file_name="voyagepk-provenance-review.csv",
-        mime="text/csv",
-    )
-else:
-    st.write("No missing provenance fields were found.")
+summary = provenance_summary()
+photo_col, record_col = st.columns(2)
+with photo_col:
+    st.metric("Photos with full source details", f"{summary['photos']['full_details']} / {summary['photos']['total']}")
+    st.caption(f"{summary['photos']['being_checked']} photo entries are still being checked.")
+with record_col:
+    st.metric("Records with source details", f"{summary['records']['full_details']} / {summary['records']['total']}")
+    st.caption(f"{summary['records']['being_checked']} records are still being checked.")
+
+st.caption(
+    "Counting logic: a photo needs an image URL, a source page, a named creator and a usable licence. "
+    "A destination, research or event record needs at least one HTTPS source link. Placeholder or "
+    "unverified credit text does not count as complete. These counts measure source completeness, "
+    "not factual verification or reuse permission. Photo entries are counted by catalogue reference "
+    "and are not deduplicated into unique image files. Full review lists are kept in docs/*.csv."
+)
