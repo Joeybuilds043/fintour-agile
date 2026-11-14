@@ -271,3 +271,14 @@ def get_destination_gallery_image(query: str) -> dict | None:
                     "provider": "User-supplied",
                 }
     return None
+
+
+# Preserve every supplied image URL and add empty provenance fields for owner review.
+for _batch_records in DESTINATION_IMAGE_BATCHES.values():
+    for _photo in _batch_records:
+        _photo.setdefault("source_link", "")
+        _photo.setdefault("last_checked", "")
+        _photo.setdefault("verified_by", "")
+        _photo.setdefault("note", "")
+        _photo.setdefault("creator", "")
+        _photo.setdefault("licence", "")

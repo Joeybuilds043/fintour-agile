@@ -9,8 +9,15 @@
       "caption": "Shangrila Resort with lake and mountains in Skardu, Pakistan",
       "author": "Arif Esapzai",
       "license": "Pexels License",
-      "focal_point": [0.5, 0.5],
-      "usage": "Homepage light-theme hero; destination-specific daytime landscape."
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "usage": "Homepage light-theme hero; destination-specific daytime landscape.",
+      "source_link": "https://www.pexels.com/photo/scenic-view-of-shangrila-resort-in-skardu-pakistan-35302567/",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     "night_islamabad_cityscape": {
       "provider": "Pexels",
@@ -18,18 +25,33 @@
       "page_url": "https://www.pexels.com/photo/illuminated-city-in-mountains-landscape-at-night-15817300/",
       "caption": "Illuminated city in a mountain landscape at night",
       "license": "Pexels License",
-      "focal_point": [0.5, 0.5],
-      "usage": "Homepage dark-theme hero; night cityscape selected by the user. The scene is not independently verified as Pakistan."
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "usage": "Homepage dark-theme hero; night cityscape selected by the user. The scene is not independently verified as Pakistan.",
+      "source_link": "https://www.pexels.com/photo/illuminated-city-in-mountains-landscape-at-night-15817300/",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     "passu_cones_landmark": {
       "provider": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Passu%20Cones%20and%20the%20Hunza%20River.jpg?width=1400",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg"
+      "page_url": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
+      "source_link": "https://commons.wikimedia.org/wiki/File:Passu_Cones_and_the_Hunza_River.jpg",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     "lahore_fort_landmark": {
       "provider": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort%20pakistan.jpg?width=1400",
-      "page_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lahore%20Fort.jpg"
+      "page_url": "https://commons.wikimedia.org/wiki/File:Lahore_Fort_pakistan.jpg",
+      "source_link": "https://commons.wikimedia.org/wiki/File:Lahore_Fort_pakistan.jpg",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     }
   },
   "palette": {
@@ -51,8 +73,15 @@
       "page_url": "https://pixabay.com/photos/tree-lake-pakistan-nature-2366664/",
       "author": "Abdullah_Shakoor",
       "license": "Pixabay Content License",
-      "focal_point": [0.5, 0.5],
-      "key": "northern_landscapes"
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "key": "northern_landscapes",
+      "source_link": "https://pixabay.com/photos/tree-lake-pakistan-nature-2366664/",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     {
       "title": "Islamic & Sufi Heritage",
@@ -62,8 +91,15 @@
       "page_url": "https://www.pexels.com/photo/scenic-view-of-mosque-during-nighttime-5487986/",
       "author": "Aitizaz Naqvi",
       "license": "Pexels License",
-      "focal_point": [0.5, 0.55],
-      "key": "islamic_sufi"
+      "focal_point": [
+        0.5,
+        0.55
+      ],
+      "key": "islamic_sufi",
+      "source_link": "https://www.pexels.com/photo/scenic-view-of-mosque-during-nighttime-5487986/",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     {
       "title": "Sikhism Sites",
@@ -73,8 +109,15 @@
       "page_url": "https://media.assettype.com/outlooktraveller/import/outlooktraveller/public/uploads/articles/see/Kartarpur3.jpg?w=1200&h=675&auto=format%2Ccompress&fit=max&enlarge=true",
       "author": "Outlook Traveller image credit not confirmed",
       "license": "Usage rights not independently verified",
-      "focal_point": [0.5, 0.5],
-      "key": "sikhism_sites"
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "key": "sikhism_sites",
+      "source_link": "https://media.assettype.com/outlooktraveller/import/outlooktraveller/public/uploads/articles/see/Kartarpur3.jpg?w=1200&h=675&auto=format%2Ccompress&fit=max&enlarge=true",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     {
       "title": "Hinduism Sites",
@@ -84,8 +127,15 @@
       "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNKYbPE--eiBoUzeIcJaTlg8pvqgV8NGUOKxI0oc5tA&s=10",
       "author": "Source attribution not provided",
       "license": "Original image licence unverified",
-      "focal_point": [0.5, 0.5],
-      "key": "hinduism_sites"
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "key": "hinduism_sites",
+      "source_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNKYbPE--eiBoUzeIcJaTlg8pvqgV8NGUOKxI0oc5tA&s=10",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     {
       "title": "Buddhist Heritage",
@@ -95,8 +145,15 @@
       "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0pIuFwjevBzpBfZnwXc9CvwOZ2djUGOt5tFmuxfjXww&s=10",
       "author": "Source attribution not provided",
       "license": "Original image licence unverified",
-      "focal_point": [0.5, 0.5],
-      "key": "buddhist_heritage"
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "key": "buddhist_heritage",
+      "source_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0pIuFwjevBzpBfZnwXc9CvwOZ2djUGOt5tFmuxfjXww&s=10",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     },
     {
       "title": "Ancient Civilizations",
@@ -106,8 +163,15 @@
       "page_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMsz7xShUFaZJcesVRFqxSp3vIcjDJOAUcXhzwy8pvgg&s=10",
       "author": "Source attribution not provided",
       "license": "Original image licence unverified",
-      "focal_point": [0.5, 0.5],
-      "key": "ancient_civilizations"
+      "focal_point": [
+        0.5,
+        0.5
+      ],
+      "key": "ancient_civilizations",
+      "source_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMsz7xShUFaZJcesVRFqxSp3vIcjDJOAUcXhzwy8pvgg&s=10",
+      "last_checked": "",
+      "verified_by": "",
+      "note": ""
     }
   ]
 }

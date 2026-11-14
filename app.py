@@ -14,6 +14,14 @@ from src.ui import apply_visitor_theme
 st.set_page_config(page_title="VoyagePK | Pakistan Unbound", page_icon=None, layout="wide")
 
 apply_visitor_theme()
+st.markdown("""<style>
+@media (max-width: 700px) {
+  .block-container { padding-left: 1rem !important; padding-right: 1rem !important; }
+  [data-testid="stHorizontalBlock"] { flex-wrap: wrap !important; gap: 0.75rem !important; }
+  [data-testid="column"] { min-width: min(100%, 280px) !important; flex: 1 1 100% !important; }
+  img { max-width: 100%; }
+}
+</style>""", unsafe_allow_html=True)
 st.markdown("""
 <style>
 .voyage-masthead{display:flex;align-items:center;gap:15px;padding:12px 16px;margin:0 0 18px;border-radius:16px;background:linear-gradient(110deg,#0B2E23 0%,#174D39 62%,#233B45 100%);box-shadow:0 12px 30px rgba(5,28,20,.2)}
@@ -327,10 +335,17 @@ for start_index in range(0, len(photo_collections), 3):
                 with st.container(border=True):
                     rendered = get_display_image(asset["url"], aspect_ratio=(16, 9), focal_point=tuple(asset.get("focal_point", [0.5, 0.48])))
                     st.image(rendered if rendered else asset["url"], use_container_width=True)
-                    st.markdown(
-                        f'<div class="experience-credit">{asset["author"]} · {asset["license"]} · <a href="{asset["page_url"]}" target="_blank">Image source</a></div>',
-                        unsafe_allow_html=True,
-                    )
+                    credit_author = str(asset.get("author") or "").strip()
+                    credit_license = str(asset.get("license") or "").strip()
+                    credit_page = str(asset.get("page_url") or "").strip()
+                    missing_credit = any(term in (credit_author + " " + credit_license).lower() for term in ("not provided", "not confirmed", "unverified", "not independently"))
+                    if credit_author and credit_license and credit_page and not missing_credit:
+                        st.markdown(
+                            f'<div class="experience-credit">{html.escape(credit_author)} · {html.escape(credit_license)} · <a href="{html.escape(credit_page, quote=True)}" target="_blank" rel="noopener">Image source</a></div>',
+                            unsafe_allow_html=True,
+                        )
+                    else:
+                        st.caption("Credit details to be added.")
                     st.markdown(f'<div class="destination-name">{asset["title"]}</div><div class="destination-copy">{asset["description"]}</div>', unsafe_allow_html=True)
                     if st.button(f'Explore {asset["title"]}', key=f'collection_{asset["key"]}', use_container_width=True):
                         st.session_state["selected_experience_collection"] = asset["key"]

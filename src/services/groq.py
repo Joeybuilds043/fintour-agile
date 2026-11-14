@@ -38,7 +38,7 @@ def generate_text(
     user_prompt: str,
     temperature: float = 0.7,
     max_output_tokens: int = 1400,
-    timeout: int = 180,
+    timeout: int = 25,
 ) -> str:
     """Generate a VoyagePK answer through Groq's OpenAI-compatible Responses API."""
     if not api_key:
@@ -51,7 +51,7 @@ def generate_text(
         client = OpenAI(
             api_key=api_key,
             base_url=GROQ_BASE_URL,
-            timeout=timeout,
+            timeout=min(max(int(timeout), 5), 30),
             max_retries=1,
         )
         response = client.responses.create(

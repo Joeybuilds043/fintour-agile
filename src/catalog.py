@@ -389,3 +389,11 @@ PROVINCE_ORDER = [
     "Khyber Pakhtunkhwa", "Punjab", "Punjab & Khyber Pakhtunkhwa",
     "Sindh", "Azad Jammu & Kashmir",
 ]
+
+
+# Provenance fields are additive. Existing catalogue content is left unchanged.
+for _destination in DESTINATIONS.values():
+    _destination.setdefault("source_link", "")
+    _destination.setdefault("last_checked", "")
+    _destination.setdefault("verified_by", "")
+    _destination.setdefault("note", "")
