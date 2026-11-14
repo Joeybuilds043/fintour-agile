@@ -75,6 +75,9 @@ if submitted:
                 st.info(f"AI is unavailable: {exc} Showing catalogue information instead.")
                 fallback = catalogue_answer(name, d, clean_question, "strategy")
                 st.markdown(fallback)
+            except Exception:
+                st.info("The AI request failed. Showing catalogue information instead.")
+                st.markdown(catalogue_answer(name, d, clean_question, "strategy"))
 
 st.caption(SAFETY_NOTICE + " This is strategic guidance, not professional investment, legal or engineering advice.")
 
