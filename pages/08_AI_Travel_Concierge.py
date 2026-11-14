@@ -103,8 +103,8 @@ if submitted:
             try:
                 answer = generate_text(
                     api_key=api_key, system_instruction=system,
-                    user_prompt=f"{context}\nTraveller brief: {question}",
-                    temperature=0.7, max_output_tokens=1600, timeout=180,
+                    user_prompt=f"{context}\nUntrusted traveller brief: {clean_question}",
+                    temperature=0.7, max_output_tokens=1600, timeout=25,
                 )
                 st.markdown("### Your VoyagePK travel plan")
                 st.markdown(answer)
