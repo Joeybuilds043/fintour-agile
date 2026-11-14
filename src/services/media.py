@@ -14,6 +14,14 @@ from urllib.parse import quote
 
 import requests
 import streamlit as st
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+_HTTP = requests.Session()
+_HTTP.mount(
+    "https://",
+    HTTPAdapter(max_retries=Retry(total=2, backoff_factor=0.4, status_forcelist=(429, 500, 502, 503, 504), allowed_methods=frozenset({"GET"}))),
+)
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 
@@ -207,7 +215,7 @@ def get_commons_image(query: str) -> dict | None:
         "Accept": "application/json",
     }
     try:
-        response = requests.get(
+        response = _HTTP.get(
             "https://commons.wikimedia.org/w/api.php", params=params,
             headers=headers, timeout=(4, 9),
         )
