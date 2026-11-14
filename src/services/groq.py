@@ -51,7 +51,7 @@ def generate_text(
         client = OpenAI(
             api_key=api_key,
             base_url=GROQ_BASE_URL,
-            timeout=timeout,
+            timeout=min(max(int(timeout), 5), 30),
             max_retries=1,
         )
         response = client.responses.create(
