@@ -335,10 +335,17 @@ for start_index in range(0, len(photo_collections), 3):
                 with st.container(border=True):
                     rendered = get_display_image(asset["url"], aspect_ratio=(16, 9), focal_point=tuple(asset.get("focal_point", [0.5, 0.48])))
                     st.image(rendered if rendered else asset["url"], use_container_width=True)
-                    st.markdown(
-                        f'<div class="experience-credit">{asset.get("author", "")} · {asset.get("license", "")} · <a href="{asset.get("page_url", "#")}" target="_blank" rel="noopener">Image source</a></div>',
-                        unsafe_allow_html=True,
-                    )
+                    credit_author = str(asset.get("author") or "").strip()
+                    credit_license = str(asset.get("license") or "").strip()
+                    credit_page = str(asset.get("page_url") or "").strip()
+                    missing_credit = any(term in (credit_author + " " + credit_license).lower() for term in ("not provided", "not confirmed", "unverified", "not independently"))
+                    if credit_author and credit_license and credit_page and not missing_credit:
+                        st.markdown(
+                            f'<div class="experience-credit">{html.escape(credit_author)} · {html.escape(credit_license)} · <a href="{html.escape(credit_page, quote=True)}" target="_blank" rel="noopener">Image source</a></div>',
+                            unsafe_allow_html=True,
+                        )
+                    else:
+                        st.caption("Credit details to be added.")
                     st.markdown(f'<div class="destination-name">{asset["title"]}</div><div class="destination-copy">{asset["description"]}</div>', unsafe_allow_html=True)
                     if st.button(f'Explore {asset["title"]}', key=f'collection_{asset["key"]}', use_container_width=True):
                         st.session_state["selected_experience_collection"] = asset["key"]
