@@ -3,6 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from src.ui import apply_visitor_theme
+from src.provenance_report import review_csv, review_rows
 
 st.set_page_config(page_title="About VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
@@ -35,3 +36,17 @@ st.write(
 
 st.subheader("Version")
 st.write("Prototype version 1 (asset manifest version 1).")
+
+st.subheader("Records and photos for manual review")
+review = review_rows()
+st.write(f"{len(review)} provenance or photo-credit items need review. Existing photos remain in place.")
+if review:
+    st.dataframe(review, use_container_width=True, hide_index=True)
+    st.download_button(
+        "Download review report",
+        review_csv(),
+        file_name="voyagepk-provenance-review.csv",
+        mime="text/csv",
+    )
+else:
+    st.write("No missing provenance fields were found.")
