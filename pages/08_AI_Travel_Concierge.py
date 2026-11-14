@@ -112,6 +112,9 @@ if submitted:
                 st.info(f"AI is unavailable: {exc} Showing catalogue information instead.")
                 st.markdown("### Catalogue-based travel guidance")
                 st.markdown(catalogue_answer(destination, d, clean_question, "travel"))
+            except Exception:
+                st.info("The AI request failed. Showing catalogue information instead.")
+                st.markdown(catalogue_answer(destination, d, clean_question, "travel"))
 
 st.markdown(
     f'<div class="voyage-concierge-footnote">{SAFETY_NOTICE} Confirm local details independently.</div>',
