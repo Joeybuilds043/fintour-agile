@@ -139,3 +139,12 @@ DISCOVERY_LEADS = {
     "Azad Jammu & Kashmir":["Leepa Valley","Toli Pir","Ganga Choti","Chitta Katha Lake","Shounter Valley","Sharda Peeth","Ramkot Fort","Historic temples and gurdwaras"],
     "Islamabad Capital Territory":["Shah Allah Ditta Caves","Daman-e-Koh","Pir Sohawa","Rawal Lake and Lake View Park","Lok Virsa Heritage Museum","Fatima Jinnah Park","Golra Sharif Railway Museum","Bari Imam Shrine","Pakistan National Council of the Arts"],
 }
+
+
+# Additive provenance metadata. Existing source, page, creator, licence and note
+# values are preserved exactly; no record is marked verified by inference.
+for _record in RESEARCH_DESTINATIONS + EVENT_RECORDS + IMAGE_CANDIDATES:
+    _record.setdefault("source_link", _record.get("source") or _record.get("page") or "")
+    _record.setdefault("last_checked", "")
+    _record.setdefault("verified_by", "")
+    _record.setdefault("note", "")
