@@ -39,8 +39,11 @@ if st.button("Run Monte Carlo simulation", type="primary"):
                                   float(capex), years=years, discount_rate_pct=float(discount))
         x, y, z = st.columns(3)
         x.metric("P50 project NPV", f"PKR {result['npv_p50']:,.0f}")
+        x.caption("Example numbers, not real data")
         y.metric("P10–P90 NPV range", f"{result['npv_p10']:,.0f} to {result['npv_p90']:,.0f}")
+        y.caption("Example numbers, not real data")
         z.metric("Probability of positive NPV", f"{result['positive_npv_probability']:.1f}%")
+        z.caption("Example numbers, not real data")
         st.metric("Median cumulative ROI proxy", f"{result['roi_p50_pct']:.1f}%")
         st.caption("Example numbers, not real data")
         frame = pd.DataFrame({"Year": list(range(1, years + 1)),
