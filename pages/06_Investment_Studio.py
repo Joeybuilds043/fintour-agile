@@ -42,6 +42,7 @@ if st.button("Run Monte Carlo simulation", type="primary"):
         y.metric("P10–P90 NPV range", f"{result['npv_p10']:,.0f} to {result['npv_p90']:,.0f}")
         z.metric("Probability of positive NPV", f"{result['positive_npv_probability']:.1f}%")
         st.metric("Median cumulative ROI proxy", f"{result['roi_p50_pct']:.1f}%")
+        st.caption("Example numbers, not real data")
         frame = pd.DataFrame({"Year": list(range(1, years + 1)),
                               "Median annual project cash flow (PKR)": result["annual_median_cashflow"]})
         cashflow_fig = px.area(frame, x="Year", y="Median annual project cash flow (PKR)",
