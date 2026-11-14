@@ -46,6 +46,7 @@ ATLAS_EVENT_IMAGES = {
 
 st.set_page_config(page_title="Regional Atlas | VoyagePK", page_icon=None, layout="wide")
 apply_visitor_theme()
+st.caption("Gilgit-Baltistan figures in this atlas are a partial snapshot. They are not yearly totals.")
 
 
 st.markdown("""
@@ -1606,6 +1607,7 @@ for _category, _items in _photo_groups.items():
                         st.markdown(f'<div class="atlas-card-title">{html.escape(_photo["name"])}</div>', unsafe_allow_html=True)
                         if _photo.get("region"):
                             st.caption(_photo["region"])
+                        st.caption("Credit details to be added.")
 
 st.divider()
 st.markdown('<div class="atlas-eyebrow">06 · THE NEXT DISCOVERIES</div>', unsafe_allow_html=True)
